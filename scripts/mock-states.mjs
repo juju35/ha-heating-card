@@ -7,21 +7,26 @@ export const states = {};
 export const entities = {};
 export const devices = {};
 export const areas = {};
+export const floors = {};
 
 // Screenshots are taken at this moment (UTC), so that the schedule's "now" line and next event never move.
 export const NOW = "2026-11-11T10:30:00Z";
 
-const area = (area_id, name) => (areas[area_id] = { area_id, name, icon: null });
+const floor = (floor_id, name, level) => (floors[floor_id] = { floor_id, name, level, icon: null, aliases: [] });
+const area = (area_id, name, floor_id = null) => (areas[area_id] = { area_id, name, icon: null, floor_id });
 const device = (id, name, model, area_id) => (devices[id] = { id, name, model, area_id, name_by_user: null });
 const entity = (entity_id, device_id, state, attributes = {}, extra = {}) => {
   entities[entity_id] = { entity_id, device_id, platform: extra.platform || "mqtt", translation_key: extra.translation_key || null, area_id: extra.area_id || null };
   states[entity_id] = { entity_id, state: String(state), attributes, last_changed: NOW, last_updated: NOW };
 };
 
-area("living_room", "Living room");
-area("bedroom", "Bedroom");
-area("office", "Office");
-area("bathroom", "Bathroom");
+// Two floors: the living room and the office downstairs, the bedroom and the bathroom upstairs.
+floor("ground_floor", "Ground floor", 0);
+floor("first_floor", "First floor", 1);
+area("living_room", "Living room", "ground_floor");
+area("bedroom", "Bedroom", "first_floor");
+area("office", "Office", "ground_floor");
+area("bathroom", "Bathroom", "first_floor");
 
 const PRESETS = ["none", "eco", "comfort", "away", "boost"];
 
@@ -122,6 +127,7 @@ export const mockHass = (overrides = {}, extra = {}) => {
     entities,
     devices,
     areas,
+    floors,
     language: "en",
     locale: { language: "en" },
     config: { unit_system: { temperature: "°C" } },

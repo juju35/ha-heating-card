@@ -67,7 +67,8 @@ export const load = () => {
     `${source}
     ({ STRINGS, ICONS, pilotMode, presetKey, presetIcon, isThermostat, isPilotSelect, discoverZones, zonesOf, weekOf, fetchWeek, guessVariant, lang, intlLocale,
        HeatingCard: customElements.get("heating-card"), HeatingMiniCard: customElements.get("heating-mini-card"),
-       HeatingCardEditor: customElements.get("heating-card-editor"), HeatingMiniCardEditor: customElements.get("heating-mini-card-editor"), window, SCHEDULES })`,
+       HeatingCardEditor: customElements.get("heating-card-editor"), HeatingMiniCardEditor: customElements.get("heating-mini-card-editor"),
+       HeatingOverviewCard: customElements.get("heating-overview-card"), HeatingOverviewCardEditor: customElements.get("heating-overview-card-editor"), window, SCHEDULES })`,
     sandbox,
   );
 };

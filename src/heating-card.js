@@ -7,7 +7,9 @@
  * eco, frost protection, off, comfort -1 / -2, or a `switch` relay) and their weekly `schedule` helpers, room by room.
  *
  * The thermostat part comes from the thermostat card of juju35/ha-climate-air-card (illustrations, device sensors
- * found through the registries, debounced target, presets, alerts), extended with zones, pilot wire and schedules.
+ * found through the registries, debounced target, presets, alerts), extended with zones, pilot wire and schedules;
+ * the overview card takes over the thermostats of that repository's overview: the whole home floor by floor, with its
+ * summary and quick actions for every zone.
  * Entities are resolved through the entity, device and area registries, so they work whatever the Home Assistant
  * language or entity ids.
  */
@@ -114,6 +116,43 @@ const STRINGS = {
     ed_collapsed: "Folded sections",
     ed_language: "Language",
     ed_language_auto: "Automatic (Home Assistant)",
+    ov_average: "Average",
+    ov_actions: "All zones",
+    ov_confirm: "Set the heating to {mode}?",
+    ov_skipped: "Not available in: {list}",
+    ov_cancel: "Cancel",
+    ov_apply: "Confirm",
+    ov_coldest: "Coldest: {name}",
+    ov_warmest: "Warmest: {name}",
+    ov_other: "Other areas",
+    ed_areas: "Areas",
+    ed_areas_helper: "Only the zones of these areas (every area when empty)",
+    ed_exclude_areas: "Areas to exclude",
+    ed_floors: "Floors",
+    ed_floors_helper: "Only the zones of these floors (every floor when empty)",
+    ed_exclude_floors: "Floors to exclude",
+    ed_include: "Entities to add",
+    ed_include_helper: "Thermostats or pilot wire radiators not found on their own (hidden ones, say)",
+    ed_exclude: "Entities to exclude",
+    ed_sort: "Sort",
+    ed_sort_area: "Area order",
+    ed_sort_name: "Name",
+    ed_sort_temperature: "Coldest first",
+    ed_sort_state: "Alerts and heating first",
+    ed_group_by: "Group by",
+    ed_group_floor: "Floor",
+    ed_group_none: "No grouping",
+    ed_columns: "Columns",
+    ed_columns_helper: "Automatic when empty",
+    ed_compact: "Compact tiles",
+    ed_show_summary: "Summary",
+    ed_show_actions: "Quick actions",
+    ed_actions: "Quick actions offered",
+    ed_detail: "Tap on a zone",
+    ed_detail_card: "Full card",
+    ed_detail_more_info: "More info dialog",
+    ed_detail_none: "Nothing",
+    ed_ov_zoom_helper: "Button at the top right that switches to the full card and back",
   },
   fr: {
     title: "Chauffage",
@@ -213,6 +252,43 @@ const STRINGS = {
     ed_collapsed: "Sections repliées",
     ed_language: "Langue",
     ed_language_auto: "Automatique (Home Assistant)",
+    ov_average: "Moyenne",
+    ov_actions: "Toutes les zones",
+    ov_confirm: "Passer le chauffage en {mode} ?",
+    ov_skipped: "Non disponible dans : {list}",
+    ov_cancel: "Annuler",
+    ov_apply: "Confirmer",
+    ov_coldest: "La plus froide : {name}",
+    ov_warmest: "La plus chaude : {name}",
+    ov_other: "Autres pièces",
+    ed_areas: "Pièces",
+    ed_areas_helper: "Seulement les zones de ces pièces (toutes si vide)",
+    ed_exclude_areas: "Pièces à exclure",
+    ed_floors: "Étages",
+    ed_floors_helper: "Seulement les zones de ces étages (tous si vide)",
+    ed_exclude_floors: "Étages à exclure",
+    ed_include: "Entités à ajouter",
+    ed_include_helper: "Thermostats ou radiateurs fil pilote non trouvés d'eux-mêmes (masqués, par exemple)",
+    ed_exclude: "Entités à exclure",
+    ed_sort: "Tri",
+    ed_sort_area: "Ordre des pièces",
+    ed_sort_name: "Nom",
+    ed_sort_temperature: "Les plus froides d'abord",
+    ed_sort_state: "Alertes et chauffe d'abord",
+    ed_group_by: "Regrouper par",
+    ed_group_floor: "Étage",
+    ed_group_none: "Sans regroupement",
+    ed_columns: "Colonnes",
+    ed_columns_helper: "Automatique si vide",
+    ed_compact: "Tuiles compactes",
+    ed_show_summary: "Résumé",
+    ed_show_actions: "Actions rapides",
+    ed_actions: "Actions rapides proposées",
+    ed_detail: "Appui sur une zone",
+    ed_detail_card: "Carte complète",
+    ed_detail_more_info: "Fenêtre d'informations",
+    ed_detail_none: "Rien",
+    ed_ov_zoom_helper: "Bouton en haut à droite qui bascule vers la carte complète et inversement",
   },
   de: {
     title: "Heizung",
@@ -312,6 +388,43 @@ const STRINGS = {
     ed_collapsed: "Eingeklappte Abschnitte",
     ed_language: "Sprache",
     ed_language_auto: "Automatisch (Home Assistant)",
+    ov_average: "Durchschnitt",
+    ov_actions: "Alle Zonen",
+    ov_confirm: "Heizung auf {mode} stellen?",
+    ov_skipped: "Nicht verfügbar in: {list}",
+    ov_cancel: "Abbrechen",
+    ov_apply: "Bestätigen",
+    ov_coldest: "Am kältesten: {name}",
+    ov_warmest: "Am wärmsten: {name}",
+    ov_other: "Weitere Bereiche",
+    ed_areas: "Bereiche",
+    ed_areas_helper: "Nur die Zonen dieser Bereiche (alle, wenn leer)",
+    ed_exclude_areas: "Auszuschließende Bereiche",
+    ed_floors: "Etagen",
+    ed_floors_helper: "Nur die Zonen dieser Etagen (alle, wenn leer)",
+    ed_exclude_floors: "Auszuschließende Etagen",
+    ed_include: "Hinzuzufügende Entitäten",
+    ed_include_helper: "Thermostate oder Steuerdraht-Heizkörper, die nicht von selbst gefunden werden (z. B. ausgeblendete)",
+    ed_exclude: "Auszuschließende Entitäten",
+    ed_sort: "Sortierung",
+    ed_sort_area: "Reihenfolge der Bereiche",
+    ed_sort_name: "Name",
+    ed_sort_temperature: "Kälteste zuerst",
+    ed_sort_state: "Warnungen und Heizen zuerst",
+    ed_group_by: "Gruppieren nach",
+    ed_group_floor: "Etage",
+    ed_group_none: "Keine Gruppierung",
+    ed_columns: "Spalten",
+    ed_columns_helper: "Automatisch, wenn leer",
+    ed_compact: "Kompakte Kacheln",
+    ed_show_summary: "Übersicht",
+    ed_show_actions: "Schnellaktionen",
+    ed_actions: "Angebotene Schnellaktionen",
+    ed_detail: "Tippen auf eine Zone",
+    ed_detail_card: "Ganze Karte",
+    ed_detail_more_info: "Infodialog",
+    ed_detail_none: "Nichts",
+    ed_ov_zoom_helper: "Schaltfläche oben rechts, die zur ganzen Karte umschaltet und zurück",
   },
   es: {
     title: "Calefacción",
@@ -411,6 +524,43 @@ const STRINGS = {
     ed_collapsed: "Secciones plegadas",
     ed_language: "Idioma",
     ed_language_auto: "Automático (Home Assistant)",
+    ov_average: "Media",
+    ov_actions: "Todas las zonas",
+    ov_confirm: "¿Poner la calefacción en {mode}?",
+    ov_skipped: "No disponible en: {list}",
+    ov_cancel: "Cancelar",
+    ov_apply: "Confirmar",
+    ov_coldest: "La más fría: {name}",
+    ov_warmest: "La más cálida: {name}",
+    ov_other: "Otras áreas",
+    ed_areas: "Áreas",
+    ed_areas_helper: "Solo las zonas de estas áreas (todas si está vacío)",
+    ed_exclude_areas: "Áreas a excluir",
+    ed_floors: "Plantas",
+    ed_floors_helper: "Solo las zonas de estas plantas (todas si está vacío)",
+    ed_exclude_floors: "Plantas a excluir",
+    ed_include: "Entidades a añadir",
+    ed_include_helper: "Termostatos o radiadores de hilo piloto que no se encuentran solos (ocultos, por ejemplo)",
+    ed_exclude: "Entidades a excluir",
+    ed_sort: "Orden",
+    ed_sort_area: "Orden de las áreas",
+    ed_sort_name: "Nombre",
+    ed_sort_temperature: "Las más frías primero",
+    ed_sort_state: "Alertas y calefacción primero",
+    ed_group_by: "Agrupar por",
+    ed_group_floor: "Planta",
+    ed_group_none: "Sin agrupar",
+    ed_columns: "Columnas",
+    ed_columns_helper: "Automático si está vacío",
+    ed_compact: "Mosaicos compactos",
+    ed_show_summary: "Resumen",
+    ed_show_actions: "Acciones rápidas",
+    ed_actions: "Acciones rápidas ofrecidas",
+    ed_detail: "Toque en una zona",
+    ed_detail_card: "Tarjeta completa",
+    ed_detail_more_info: "Diálogo de información",
+    ed_detail_none: "Nada",
+    ed_ov_zoom_helper: "Botón arriba a la derecha que cambia a la tarjeta completa y viceversa",
   },
   sr: {
     title: "Грејање",
@@ -510,6 +660,43 @@ const STRINGS = {
     ed_collapsed: "Скупљени одељци",
     ed_language: "Језик",
     ed_language_auto: "Аутоматски (Home Assistant)",
+    ov_average: "Просек",
+    ov_actions: "Све зоне",
+    ov_confirm: "Подесити грејање на {mode}?",
+    ov_skipped: "Није доступно у: {list}",
+    ov_cancel: "Откажи",
+    ov_apply: "Потврди",
+    ov_coldest: "Најхладнија: {name}",
+    ov_warmest: "Најтоплија: {name}",
+    ov_other: "Остале просторије",
+    ed_areas: "Просторије",
+    ed_areas_helper: "Само зоне ових просторија (све ако је празно)",
+    ed_exclude_areas: "Просторије за изостављање",
+    ed_floors: "Спратови",
+    ed_floors_helper: "Само зоне ових спратова (сви ако је празно)",
+    ed_exclude_floors: "Спратови за изостављање",
+    ed_include: "Ентитети за додавање",
+    ed_include_helper: "Термостати или радијатори са пилот жицом који се не проналазе сами (нпр. скривени)",
+    ed_exclude: "Ентитети за изостављање",
+    ed_sort: "Сортирање",
+    ed_sort_area: "Редослед просторија",
+    ed_sort_name: "Назив",
+    ed_sort_temperature: "Најхладније прво",
+    ed_sort_state: "Прво упозорења и грејање",
+    ed_group_by: "Групиши по",
+    ed_group_floor: "Спрат",
+    ed_group_none: "Без груписања",
+    ed_columns: "Колоне",
+    ed_columns_helper: "Аутоматски ако је празно",
+    ed_compact: "Компактне плочице",
+    ed_show_summary: "Резиме",
+    ed_show_actions: "Брзе радње",
+    ed_actions: "Понуђене брзе радње",
+    ed_detail: "Додир на зону",
+    ed_detail_card: "Цела картица",
+    ed_detail_more_info: "Дијалог са информацијама",
+    ed_detail_none: "Ништа",
+    ed_ov_zoom_helper: "Дугме горе десно које пребацује на целу картицу и назад",
   },
   "sr-Latn": {
     title: "Grejanje",
@@ -609,6 +796,43 @@ const STRINGS = {
     ed_collapsed: "Skupljeni odeljci",
     ed_language: "Jezik",
     ed_language_auto: "Automatski (Home Assistant)",
+    ov_average: "Prosek",
+    ov_actions: "Sve zone",
+    ov_confirm: "Podesiti grejanje na {mode}?",
+    ov_skipped: "Nije dostupno u: {list}",
+    ov_cancel: "Otkaži",
+    ov_apply: "Potvrdi",
+    ov_coldest: "Najhladnija: {name}",
+    ov_warmest: "Najtoplija: {name}",
+    ov_other: "Ostale prostorije",
+    ed_areas: "Prostorije",
+    ed_areas_helper: "Samo zone ovih prostorija (sve ako je prazno)",
+    ed_exclude_areas: "Prostorije za izostavljanje",
+    ed_floors: "Spratovi",
+    ed_floors_helper: "Samo zone ovih spratova (svi ako je prazno)",
+    ed_exclude_floors: "Spratovi za izostavljanje",
+    ed_include: "Entiteti za dodavanje",
+    ed_include_helper: "Termostati ili radijatori sa pilot žicom koji se ne pronalaze sami (npr. skriveni)",
+    ed_exclude: "Entiteti za izostavljanje",
+    ed_sort: "Sortiranje",
+    ed_sort_area: "Redosled prostorija",
+    ed_sort_name: "Naziv",
+    ed_sort_temperature: "Najhladnije prvo",
+    ed_sort_state: "Prvo upozorenja i grejanje",
+    ed_group_by: "Grupiši po",
+    ed_group_floor: "Sprat",
+    ed_group_none: "Bez grupisanja",
+    ed_columns: "Kolone",
+    ed_columns_helper: "Automatski ako je prazno",
+    ed_compact: "Kompaktne pločice",
+    ed_show_summary: "Rezime",
+    ed_show_actions: "Brze radnje",
+    ed_actions: "Ponuđene brze radnje",
+    ed_detail: "Dodir na zonu",
+    ed_detail_card: "Cela kartica",
+    ed_detail_more_info: "Dijalog sa informacijama",
+    ed_detail_none: "Ništa",
+    ed_ov_zoom_helper: "Dugme gore desno koje prebacuje na celu karticu i nazad",
   },
   it: {
     title: "Riscaldamento",
@@ -708,6 +932,43 @@ const STRINGS = {
     ed_collapsed: "Sezioni chiuse",
     ed_language: "Lingua",
     ed_language_auto: "Automatica (Home Assistant)",
+    ov_average: "Media",
+    ov_actions: "Tutte le zone",
+    ov_confirm: "Impostare il riscaldamento su {mode}?",
+    ov_skipped: "Non disponibile in: {list}",
+    ov_cancel: "Annulla",
+    ov_apply: "Conferma",
+    ov_coldest: "La più fredda: {name}",
+    ov_warmest: "La più calda: {name}",
+    ov_other: "Altre aree",
+    ed_areas: "Aree",
+    ed_areas_helper: "Solo le zone di queste aree (tutte se vuoto)",
+    ed_exclude_areas: "Aree da escludere",
+    ed_floors: "Piani",
+    ed_floors_helper: "Solo le zone di questi piani (tutti se vuoto)",
+    ed_exclude_floors: "Piani da escludere",
+    ed_include: "Entità da aggiungere",
+    ed_include_helper: "Termostati o radiatori a filo pilota non trovati da soli (nascosti, per esempio)",
+    ed_exclude: "Entità da escludere",
+    ed_sort: "Ordinamento",
+    ed_sort_area: "Ordine delle aree",
+    ed_sort_name: "Nome",
+    ed_sort_temperature: "Prima le più fredde",
+    ed_sort_state: "Prima avvisi e riscaldamento",
+    ed_group_by: "Raggruppa per",
+    ed_group_floor: "Piano",
+    ed_group_none: "Nessun raggruppamento",
+    ed_columns: "Colonne",
+    ed_columns_helper: "Automatico se vuoto",
+    ed_compact: "Riquadri compatti",
+    ed_show_summary: "Riepilogo",
+    ed_show_actions: "Azioni rapide",
+    ed_actions: "Azioni rapide proposte",
+    ed_detail: "Tocco su una zona",
+    ed_detail_card: "Scheda completa",
+    ed_detail_more_info: "Finestra informazioni",
+    ed_detail_none: "Niente",
+    ed_ov_zoom_helper: "Pulsante in alto a destra che passa alla scheda completa e viceversa",
   },
   nl: {
     title: "Verwarming",
@@ -807,6 +1068,43 @@ const STRINGS = {
     ed_collapsed: "Ingeklapte secties",
     ed_language: "Taal",
     ed_language_auto: "Automatisch (Home Assistant)",
+    ov_average: "Gemiddeld",
+    ov_actions: "Alle zones",
+    ov_confirm: "Verwarming op {mode} zetten?",
+    ov_skipped: "Niet beschikbaar in: {list}",
+    ov_cancel: "Annuleren",
+    ov_apply: "Bevestigen",
+    ov_coldest: "Koudste: {name}",
+    ov_warmest: "Warmste: {name}",
+    ov_other: "Overige ruimtes",
+    ed_areas: "Ruimtes",
+    ed_areas_helper: "Alleen de zones van deze ruimtes (alle als leeg)",
+    ed_exclude_areas: "Uit te sluiten ruimtes",
+    ed_floors: "Verdiepingen",
+    ed_floors_helper: "Alleen de zones van deze verdiepingen (alle als leeg)",
+    ed_exclude_floors: "Uit te sluiten verdiepingen",
+    ed_include: "Toe te voegen entiteiten",
+    ed_include_helper: "Thermostaten of stuurdraadradiatoren die niet vanzelf gevonden worden (verborgen, bijvoorbeeld)",
+    ed_exclude: "Uit te sluiten entiteiten",
+    ed_sort: "Sortering",
+    ed_sort_area: "Volgorde van de ruimtes",
+    ed_sort_name: "Naam",
+    ed_sort_temperature: "Koudste eerst",
+    ed_sort_state: "Waarschuwingen en verwarming eerst",
+    ed_group_by: "Groeperen op",
+    ed_group_floor: "Verdieping",
+    ed_group_none: "Niet groeperen",
+    ed_columns: "Kolommen",
+    ed_columns_helper: "Automatisch als leeg",
+    ed_compact: "Compacte tegels",
+    ed_show_summary: "Samenvatting",
+    ed_show_actions: "Snelle acties",
+    ed_actions: "Aangeboden snelle acties",
+    ed_detail: "Tik op een zone",
+    ed_detail_card: "Volledige kaart",
+    ed_detail_more_info: "Infovenster",
+    ed_detail_none: "Niets",
+    ed_ov_zoom_helper: "Knop rechtsboven die naar de volledige kaart wisselt en terug",
   },
   pt: {
     title: "Aquecimento",
@@ -906,6 +1204,43 @@ const STRINGS = {
     ed_collapsed: "Secções recolhidas",
     ed_language: "Idioma",
     ed_language_auto: "Automático (Home Assistant)",
+    ov_average: "Média",
+    ov_actions: "Todas as zonas",
+    ov_confirm: "Colocar o aquecimento em {mode}?",
+    ov_skipped: "Não disponível em: {list}",
+    ov_cancel: "Cancelar",
+    ov_apply: "Confirmar",
+    ov_coldest: "A mais fria: {name}",
+    ov_warmest: "A mais quente: {name}",
+    ov_other: "Outras divisões",
+    ed_areas: "Divisões",
+    ed_areas_helper: "Apenas as zonas destas divisões (todas se vazio)",
+    ed_exclude_areas: "Divisões a excluir",
+    ed_floors: "Pisos",
+    ed_floors_helper: "Apenas as zonas destes pisos (todos se vazio)",
+    ed_exclude_floors: "Pisos a excluir",
+    ed_include: "Entidades a adicionar",
+    ed_include_helper: "Termóstatos ou radiadores de fio piloto não encontrados sozinhos (ocultos, por exemplo)",
+    ed_exclude: "Entidades a excluir",
+    ed_sort: "Ordenação",
+    ed_sort_area: "Ordem das divisões",
+    ed_sort_name: "Nome",
+    ed_sort_temperature: "As mais frias primeiro",
+    ed_sort_state: "Alertas e aquecimento primeiro",
+    ed_group_by: "Agrupar por",
+    ed_group_floor: "Piso",
+    ed_group_none: "Sem agrupamento",
+    ed_columns: "Colunas",
+    ed_columns_helper: "Automático se vazio",
+    ed_compact: "Mosaicos compactos",
+    ed_show_summary: "Resumo",
+    ed_show_actions: "Ações rápidas",
+    ed_actions: "Ações rápidas propostas",
+    ed_detail: "Toque numa zona",
+    ed_detail_card: "Cartão completo",
+    ed_detail_more_info: "Diálogo de informações",
+    ed_detail_none: "Nada",
+    ed_ov_zoom_helper: "Botão no canto superior direito que alterna para o cartão completo e vice-versa",
   },
   pl: {
     title: "Ogrzewanie",
@@ -1005,6 +1340,43 @@ const STRINGS = {
     ed_collapsed: "Zwinięte sekcje",
     ed_language: "Język",
     ed_language_auto: "Automatyczny (Home Assistant)",
+    ov_average: "Średnia",
+    ov_actions: "Wszystkie strefy",
+    ov_confirm: "Ustawić ogrzewanie na {mode}?",
+    ov_skipped: "Niedostępne w: {list}",
+    ov_cancel: "Anuluj",
+    ov_apply: "Potwierdź",
+    ov_coldest: "Najzimniejsza: {name}",
+    ov_warmest: "Najcieplejsza: {name}",
+    ov_other: "Inne obszary",
+    ed_areas: "Obszary",
+    ed_areas_helper: "Tylko strefy tych obszarów (wszystkie, gdy puste)",
+    ed_exclude_areas: "Obszary do wykluczenia",
+    ed_floors: "Piętra",
+    ed_floors_helper: "Tylko strefy tych pięter (wszystkie, gdy puste)",
+    ed_exclude_floors: "Piętra do wykluczenia",
+    ed_include: "Encje do dodania",
+    ed_include_helper: "Termostaty lub grzejniki z przewodem sterującym, których nie znaleziono samodzielnie (np. ukryte)",
+    ed_exclude: "Encje do wykluczenia",
+    ed_sort: "Sortowanie",
+    ed_sort_area: "Kolejność obszarów",
+    ed_sort_name: "Nazwa",
+    ed_sort_temperature: "Najzimniejsze najpierw",
+    ed_sort_state: "Najpierw alerty i grzanie",
+    ed_group_by: "Grupuj według",
+    ed_group_floor: "Piętro",
+    ed_group_none: "Bez grupowania",
+    ed_columns: "Kolumny",
+    ed_columns_helper: "Automatycznie, gdy puste",
+    ed_compact: "Kompaktowe kafelki",
+    ed_show_summary: "Podsumowanie",
+    ed_show_actions: "Szybkie akcje",
+    ed_actions: "Oferowane szybkie akcje",
+    ed_detail: "Dotknięcie strefy",
+    ed_detail_card: "Pełna karta",
+    ed_detail_more_info: "Okno informacji",
+    ed_detail_none: "Nic",
+    ed_ov_zoom_helper: "Przycisk w prawym górnym rogu przełączający na pełną kartę i z powrotem",
   },
   ro: {
     title: "Încălzire",
@@ -1104,6 +1476,43 @@ const STRINGS = {
     ed_collapsed: "Secțiuni pliate",
     ed_language: "Limbă",
     ed_language_auto: "Automată (Home Assistant)",
+    ov_average: "Medie",
+    ov_actions: "Toate zonele",
+    ov_confirm: "Treceți încălzirea pe {mode}?",
+    ov_skipped: "Indisponibil în: {list}",
+    ov_cancel: "Anulare",
+    ov_apply: "Confirmare",
+    ov_coldest: "Cea mai rece: {name}",
+    ov_warmest: "Cea mai caldă: {name}",
+    ov_other: "Alte încăperi",
+    ed_areas: "Încăperi",
+    ed_areas_helper: "Doar zonele acestor încăperi (toate dacă e gol)",
+    ed_exclude_areas: "Încăperi excluse",
+    ed_floors: "Etaje",
+    ed_floors_helper: "Doar zonele acestor etaje (toate dacă e gol)",
+    ed_exclude_floors: "Etaje excluse",
+    ed_include: "Entități de adăugat",
+    ed_include_helper: "Termostate sau calorifere cu fir pilot care nu sunt găsite singure (ascunse, de exemplu)",
+    ed_exclude: "Entități excluse",
+    ed_sort: "Sortare",
+    ed_sort_area: "Ordinea încăperilor",
+    ed_sort_name: "Nume",
+    ed_sort_temperature: "Cele mai reci întâi",
+    ed_sort_state: "Întâi alertele și încălzirea",
+    ed_group_by: "Grupare după",
+    ed_group_floor: "Etaj",
+    ed_group_none: "Fără grupare",
+    ed_columns: "Coloane",
+    ed_columns_helper: "Automat dacă e gol",
+    ed_compact: "Dale compacte",
+    ed_show_summary: "Rezumat",
+    ed_show_actions: "Acțiuni rapide",
+    ed_actions: "Acțiuni rapide oferite",
+    ed_detail: "Atingere pe o zonă",
+    ed_detail_card: "Card complet",
+    ed_detail_more_info: "Dialog de informații",
+    ed_detail_none: "Nimic",
+    ed_ov_zoom_helper: "Buton din dreapta sus care comută la cardul complet și înapoi",
   },
   da: {
     title: "Varme",
@@ -1203,6 +1612,43 @@ const STRINGS = {
     ed_collapsed: "Sammenfoldede sektioner",
     ed_language: "Sprog",
     ed_language_auto: "Automatisk (Home Assistant)",
+    ov_average: "Gennemsnit",
+    ov_actions: "Alle zoner",
+    ov_confirm: "Sæt varmen til {mode}?",
+    ov_skipped: "Ikke tilgængelig i: {list}",
+    ov_cancel: "Annuller",
+    ov_apply: "Bekræft",
+    ov_coldest: "Koldest: {name}",
+    ov_warmest: "Varmest: {name}",
+    ov_other: "Andre områder",
+    ed_areas: "Områder",
+    ed_areas_helper: "Kun zonerne i disse områder (alle, hvis tom)",
+    ed_exclude_areas: "Områder, der udelades",
+    ed_floors: "Etager",
+    ed_floors_helper: "Kun zonerne på disse etager (alle, hvis tom)",
+    ed_exclude_floors: "Etager, der udelades",
+    ed_include: "Enheder, der tilføjes",
+    ed_include_helper: "Termostater eller radiatorer med styreledning, der ikke findes af sig selv (f.eks. skjulte)",
+    ed_exclude: "Enheder, der udelades",
+    ed_sort: "Sortering",
+    ed_sort_area: "Områdernes rækkefølge",
+    ed_sort_name: "Navn",
+    ed_sort_temperature: "Koldeste først",
+    ed_sort_state: "Advarsler og opvarmning først",
+    ed_group_by: "Gruppér efter",
+    ed_group_floor: "Etage",
+    ed_group_none: "Ingen gruppering",
+    ed_columns: "Kolonner",
+    ed_columns_helper: "Automatisk, hvis tom",
+    ed_compact: "Kompakte felter",
+    ed_show_summary: "Oversigt",
+    ed_show_actions: "Hurtige handlinger",
+    ed_actions: "Tilbudte hurtige handlinger",
+    ed_detail: "Tryk på en zone",
+    ed_detail_card: "Hele kortet",
+    ed_detail_more_info: "Informationsdialog",
+    ed_detail_none: "Intet",
+    ed_ov_zoom_helper: "Knap øverst til højre, der skifter til hele kortet og tilbage",
   },
   sv: {
     title: "Värme",
@@ -1302,6 +1748,43 @@ const STRINGS = {
     ed_collapsed: "Hopfällda avsnitt",
     ed_language: "Språk",
     ed_language_auto: "Automatiskt (Home Assistant)",
+    ov_average: "Medel",
+    ov_actions: "Alla zoner",
+    ov_confirm: "Ställ värmen på {mode}?",
+    ov_skipped: "Inte tillgängligt i: {list}",
+    ov_cancel: "Avbryt",
+    ov_apply: "Bekräfta",
+    ov_coldest: "Kallast: {name}",
+    ov_warmest: "Varmast: {name}",
+    ov_other: "Övriga områden",
+    ed_areas: "Områden",
+    ed_areas_helper: "Endast zonerna i dessa områden (alla om tomt)",
+    ed_exclude_areas: "Områden att utesluta",
+    ed_floors: "Våningar",
+    ed_floors_helper: "Endast zonerna på dessa våningar (alla om tomt)",
+    ed_exclude_floors: "Våningar att utesluta",
+    ed_include: "Entiteter att lägga till",
+    ed_include_helper: "Termostater eller radiatorer med styrtråd som inte hittas av sig själva (dolda, till exempel)",
+    ed_exclude: "Entiteter att utesluta",
+    ed_sort: "Sortering",
+    ed_sort_area: "Områdenas ordning",
+    ed_sort_name: "Namn",
+    ed_sort_temperature: "Kallaste först",
+    ed_sort_state: "Varningar och värme först",
+    ed_group_by: "Gruppera efter",
+    ed_group_floor: "Våning",
+    ed_group_none: "Ingen gruppering",
+    ed_columns: "Kolumner",
+    ed_columns_helper: "Automatiskt om tomt",
+    ed_compact: "Kompakta rutor",
+    ed_show_summary: "Sammanfattning",
+    ed_show_actions: "Snabbåtgärder",
+    ed_actions: "Erbjudna snabbåtgärder",
+    ed_detail: "Tryck på en zon",
+    ed_detail_card: "Hela kortet",
+    ed_detail_more_info: "Informationsdialog",
+    ed_detail_none: "Inget",
+    ed_ov_zoom_helper: "Knapp uppe till höger som växlar till hela kortet och tillbaka",
   },
   bg: {
     title: "Отопление",
@@ -1401,6 +1884,43 @@ const STRINGS = {
     ed_collapsed: "Свити секции",
     ed_language: "Език",
     ed_language_auto: "Автоматично (Home Assistant)",
+    ov_average: "Средно",
+    ov_actions: "Всички зони",
+    ov_confirm: "Да се превключи отоплението на {mode}?",
+    ov_skipped: "Не е налично в: {list}",
+    ov_cancel: "Отказ",
+    ov_apply: "Потвърждаване",
+    ov_coldest: "Най-студена: {name}",
+    ov_warmest: "Най-топла: {name}",
+    ov_other: "Други помещения",
+    ed_areas: "Помещения",
+    ed_areas_helper: "Само зоните на тези помещения (всички, ако е празно)",
+    ed_exclude_areas: "Изключени помещения",
+    ed_floors: "Етажи",
+    ed_floors_helper: "Само зоните на тези етажи (всички, ако е празно)",
+    ed_exclude_floors: "Изключени етажи",
+    ed_include: "Обекти за добавяне",
+    ed_include_helper: "Термостати или радиатори с пилотен проводник, които не се намират сами (например скрити)",
+    ed_exclude: "Обекти за пропускане",
+    ed_sort: "Сортиране",
+    ed_sort_area: "Ред на помещенията",
+    ed_sort_name: "Име",
+    ed_sort_temperature: "Първо най-студените",
+    ed_sort_state: "Първо предупрежденията и отоплението",
+    ed_group_by: "Групиране по",
+    ed_group_floor: "Етаж",
+    ed_group_none: "Без групиране",
+    ed_columns: "Колони",
+    ed_columns_helper: "Автоматично, ако е празно",
+    ed_compact: "Компактни плочки",
+    ed_show_summary: "Обобщение",
+    ed_show_actions: "Бързи действия",
+    ed_actions: "Предлагани бързи действия",
+    ed_detail: "Докосване на зона",
+    ed_detail_card: "Цялата карта",
+    ed_detail_more_info: "Диалог с информация",
+    ed_detail_none: "Нищо",
+    ed_ov_zoom_helper: "Бутон горе вдясно, който превключва към цялата карта и обратно",
   },
   ru: {
     title: "Отопление",
@@ -1500,6 +2020,43 @@ const STRINGS = {
     ed_collapsed: "Свёрнутые разделы",
     ed_language: "Язык",
     ed_language_auto: "Автоматически (Home Assistant)",
+    ov_average: "Среднее",
+    ov_actions: "Все зоны",
+    ov_confirm: "Перевести отопление в режим {mode}?",
+    ov_skipped: "Недоступно в: {list}",
+    ov_cancel: "Отмена",
+    ov_apply: "Подтвердить",
+    ov_coldest: "Самая холодная: {name}",
+    ov_warmest: "Самая тёплая: {name}",
+    ov_other: "Другие помещения",
+    ed_areas: "Помещения",
+    ed_areas_helper: "Только зоны этих помещений (все, если пусто)",
+    ed_exclude_areas: "Исключить помещения",
+    ed_floors: "Этажи",
+    ed_floors_helper: "Только зоны этих этажей (все, если пусто)",
+    ed_exclude_floors: "Исключить этажи",
+    ed_include: "Добавить объекты",
+    ed_include_helper: "Термостаты или радиаторы с пилотным проводом, которые не находятся сами (например, скрытые)",
+    ed_exclude: "Исключить объекты",
+    ed_sort: "Сортировка",
+    ed_sort_area: "Порядок помещений",
+    ed_sort_name: "Название",
+    ed_sort_temperature: "Сначала самые холодные",
+    ed_sort_state: "Сначала предупреждения и нагрев",
+    ed_group_by: "Группировать по",
+    ed_group_floor: "Этаж",
+    ed_group_none: "Без группировки",
+    ed_columns: "Столбцы",
+    ed_columns_helper: "Автоматически, если пусто",
+    ed_compact: "Компактные плитки",
+    ed_show_summary: "Сводка",
+    ed_show_actions: "Быстрые действия",
+    ed_actions: "Предлагаемые быстрые действия",
+    ed_detail: "Нажатие на зону",
+    ed_detail_card: "Полная карточка",
+    ed_detail_more_info: "Окно сведений",
+    ed_detail_none: "Ничего",
+    ed_ov_zoom_helper: "Кнопка вверху справа, переключающая на полную карточку и обратно",
   },
   uk: {
     title: "Опалення",
@@ -1599,6 +2156,43 @@ const STRINGS = {
     ed_collapsed: "Згорнуті розділи",
     ed_language: "Мова",
     ed_language_auto: "Автоматично (Home Assistant)",
+    ov_average: "Середнє",
+    ov_actions: "Усі зони",
+    ov_confirm: "Перевести опалення в режим {mode}?",
+    ov_skipped: "Недоступно в: {list}",
+    ov_cancel: "Скасувати",
+    ov_apply: "Підтвердити",
+    ov_coldest: "Найхолодніша: {name}",
+    ov_warmest: "Найтепліша: {name}",
+    ov_other: "Інші приміщення",
+    ed_areas: "Приміщення",
+    ed_areas_helper: "Лише зони цих приміщень (усі, якщо порожньо)",
+    ed_exclude_areas: "Виключити приміщення",
+    ed_floors: "Поверхи",
+    ed_floors_helper: "Лише зони цих поверхів (усі, якщо порожньо)",
+    ed_exclude_floors: "Виключити поверхи",
+    ed_include: "Додати сутності",
+    ed_include_helper: "Термостати або радіатори з пілотним проводом, які не знаходяться самі (наприклад, приховані)",
+    ed_exclude: "Виключити сутності",
+    ed_sort: "Сортування",
+    ed_sort_area: "Порядок приміщень",
+    ed_sort_name: "Назва",
+    ed_sort_temperature: "Спершу найхолодніші",
+    ed_sort_state: "Спершу попередження та нагрів",
+    ed_group_by: "Групувати за",
+    ed_group_floor: "Поверх",
+    ed_group_none: "Без групування",
+    ed_columns: "Стовпці",
+    ed_columns_helper: "Автоматично, якщо порожньо",
+    ed_compact: "Компактні плитки",
+    ed_show_summary: "Підсумок",
+    ed_show_actions: "Швидкі дії",
+    ed_actions: "Запропоновані швидкі дії",
+    ed_detail: "Натискання на зону",
+    ed_detail_card: "Повна картка",
+    ed_detail_more_info: "Вікно відомостей",
+    ed_detail_none: "Нічого",
+    ed_ov_zoom_helper: "Кнопка вгорі праворуч, що перемикає на повну картку і назад",
   },
   hu: {
     title: "Fűtés",
@@ -1698,6 +2292,43 @@ const STRINGS = {
     ed_collapsed: "Összecsukott szakaszok",
     ed_language: "Nyelv",
     ed_language_auto: "Automatikus (Home Assistant)",
+    ov_average: "Átlag",
+    ov_actions: "Minden zóna",
+    ov_confirm: "Fűtés átállítása erre: {mode}?",
+    ov_skipped: "Nem érhető el itt: {list}",
+    ov_cancel: "Mégse",
+    ov_apply: "Megerősítés",
+    ov_coldest: "Leghidegebb: {name}",
+    ov_warmest: "Legmelegebb: {name}",
+    ov_other: "Egyéb területek",
+    ed_areas: "Területek",
+    ed_areas_helper: "Csak ezen területek zónái (üresen mind)",
+    ed_exclude_areas: "Kihagyott területek",
+    ed_floors: "Szintek",
+    ed_floors_helper: "Csak ezen szintek zónái (üresen mind)",
+    ed_exclude_floors: "Kihagyott szintek",
+    ed_include: "Hozzáadott entitások",
+    ed_include_helper: "Magától nem talált termosztátok vagy vezérlővezetékes radiátorok (például rejtettek)",
+    ed_exclude: "Kihagyott entitások",
+    ed_sort: "Rendezés",
+    ed_sort_area: "Területek sorrendje",
+    ed_sort_name: "Név",
+    ed_sort_temperature: "Leghidegebbek elöl",
+    ed_sort_state: "Figyelmeztetések és fűtés elöl",
+    ed_group_by: "Csoportosítás",
+    ed_group_floor: "Szint",
+    ed_group_none: "Nincs csoportosítás",
+    ed_columns: "Oszlopok",
+    ed_columns_helper: "Üresen automatikus",
+    ed_compact: "Kompakt csempék",
+    ed_show_summary: "Összegzés",
+    ed_show_actions: "Gyors műveletek",
+    ed_actions: "Felkínált gyors műveletek",
+    ed_detail: "Koppintás egy zónára",
+    ed_detail_card: "Teljes kártya",
+    ed_detail_more_info: "Információs ablak",
+    ed_detail_none: "Semmi",
+    ed_ov_zoom_helper: "Jobb felső gomb, amely a teljes kártyára vált és vissza",
   },
   sk: {
     title: "Kúrenie",
@@ -1797,6 +2428,43 @@ const STRINGS = {
     ed_collapsed: "Zbalené sekcie",
     ed_language: "Jazyk",
     ed_language_auto: "Automaticky (Home Assistant)",
+    ov_average: "Priemer",
+    ov_actions: "Všetky zóny",
+    ov_confirm: "Prepnúť kúrenie na {mode}?",
+    ov_skipped: "Nedostupné v: {list}",
+    ov_cancel: "Zrušiť",
+    ov_apply: "Potvrdiť",
+    ov_coldest: "Najchladnejšia: {name}",
+    ov_warmest: "Najteplejšia: {name}",
+    ov_other: "Ostatné oblasti",
+    ed_areas: "Oblasti",
+    ed_areas_helper: "Len zóny týchto oblastí (všetky, ak je prázdne)",
+    ed_exclude_areas: "Vynechané oblasti",
+    ed_floors: "Podlažia",
+    ed_floors_helper: "Len zóny týchto podlaží (všetky, ak je prázdne)",
+    ed_exclude_floors: "Vynechané podlažia",
+    ed_include: "Pridané entity",
+    ed_include_helper: "Termostaty alebo radiátory s pilotným vodičom, ktoré sa nenájdu samy (napríklad skryté)",
+    ed_exclude: "Vynechané entity",
+    ed_sort: "Zoradenie",
+    ed_sort_area: "Poradie oblastí",
+    ed_sort_name: "Názov",
+    ed_sort_temperature: "Najchladnejšie najprv",
+    ed_sort_state: "Najprv upozornenia a kúrenie",
+    ed_group_by: "Zoskupiť podľa",
+    ed_group_floor: "Podlažie",
+    ed_group_none: "Bez zoskupenia",
+    ed_columns: "Stĺpce",
+    ed_columns_helper: "Automaticky, ak je prázdne",
+    ed_compact: "Kompaktné dlaždice",
+    ed_show_summary: "Prehľad",
+    ed_show_actions: "Rýchle akcie",
+    ed_actions: "Ponúkané rýchle akcie",
+    ed_detail: "Ťuknutie na zónu",
+    ed_detail_card: "Celá karta",
+    ed_detail_more_info: "Informačné okno",
+    ed_detail_none: "Nič",
+    ed_ov_zoom_helper: "Tlačidlo vpravo hore, ktoré prepne na celú kartu a späť",
   },
   cs: {
     title: "Topení",
@@ -1896,6 +2564,43 @@ const STRINGS = {
     ed_collapsed: "Sbalené sekce",
     ed_language: "Jazyk",
     ed_language_auto: "Automaticky (Home Assistant)",
+    ov_average: "Průměr",
+    ov_actions: "Všechny zóny",
+    ov_confirm: "Přepnout topení na {mode}?",
+    ov_skipped: "Nedostupné v: {list}",
+    ov_cancel: "Zrušit",
+    ov_apply: "Potvrdit",
+    ov_coldest: "Nejchladnější: {name}",
+    ov_warmest: "Nejteplejší: {name}",
+    ov_other: "Ostatní oblasti",
+    ed_areas: "Oblasti",
+    ed_areas_helper: "Jen zóny těchto oblastí (všechny, je-li prázdné)",
+    ed_exclude_areas: "Vynechané oblasti",
+    ed_floors: "Podlaží",
+    ed_floors_helper: "Jen zóny těchto podlaží (všechna, je-li prázdné)",
+    ed_exclude_floors: "Vynechaná podlaží",
+    ed_include: "Přidané entity",
+    ed_include_helper: "Termostaty nebo radiátory s pilotním vodičem, které se nenajdou samy (například skryté)",
+    ed_exclude: "Vynechané entity",
+    ed_sort: "Řazení",
+    ed_sort_area: "Pořadí oblastí",
+    ed_sort_name: "Název",
+    ed_sort_temperature: "Nejchladnější nejdříve",
+    ed_sort_state: "Nejdříve upozornění a topení",
+    ed_group_by: "Seskupit podle",
+    ed_group_floor: "Podlaží",
+    ed_group_none: "Bez seskupení",
+    ed_columns: "Sloupce",
+    ed_columns_helper: "Automaticky, je-li prázdné",
+    ed_compact: "Kompaktní dlaždice",
+    ed_show_summary: "Přehled",
+    ed_show_actions: "Rychlé akce",
+    ed_actions: "Nabízené rychlé akce",
+    ed_detail: "Klepnutí na zónu",
+    ed_detail_card: "Celá karta",
+    ed_detail_more_info: "Informační okno",
+    ed_detail_none: "Nic",
+    ed_ov_zoom_helper: "Tlačítko vpravo nahoře, které přepne na celou kartu a zpět",
   },
   sl: {
     title: "Ogrevanje",
@@ -1995,6 +2700,43 @@ const STRINGS = {
     ed_collapsed: "Strnjeni razdelki",
     ed_language: "Jezik",
     ed_language_auto: "Samodejno (Home Assistant)",
+    ov_average: "Povprečje",
+    ov_actions: "Vse cone",
+    ov_confirm: "Nastavim ogrevanje na {mode}?",
+    ov_skipped: "Ni na voljo v: {list}",
+    ov_cancel: "Prekliči",
+    ov_apply: "Potrdi",
+    ov_coldest: "Najhladnejša: {name}",
+    ov_warmest: "Najtoplejša: {name}",
+    ov_other: "Drugi prostori",
+    ed_areas: "Prostori",
+    ed_areas_helper: "Samo cone teh prostorov (vsi, če je prazno)",
+    ed_exclude_areas: "Izpuščeni prostori",
+    ed_floors: "Nadstropja",
+    ed_floors_helper: "Samo cone teh nadstropij (vsa, če je prazno)",
+    ed_exclude_floors: "Izpuščena nadstropja",
+    ed_include: "Dodane entitete",
+    ed_include_helper: "Termostati ali radiatorji s pilotno žico, ki niso najdeni sami (na primer skriti)",
+    ed_exclude: "Izpuščene entitete",
+    ed_sort: "Razvrščanje",
+    ed_sort_area: "Vrstni red prostorov",
+    ed_sort_name: "Ime",
+    ed_sort_temperature: "Najprej najhladnejše",
+    ed_sort_state: "Najprej opozorila in ogrevanje",
+    ed_group_by: "Združi po",
+    ed_group_floor: "Nadstropje",
+    ed_group_none: "Brez združevanja",
+    ed_columns: "Stolpci",
+    ed_columns_helper: "Samodejno, če je prazno",
+    ed_compact: "Kompaktne ploščice",
+    ed_show_summary: "Povzetek",
+    ed_show_actions: "Hitra dejanja",
+    ed_actions: "Ponujena hitra dejanja",
+    ed_detail: "Dotik cone",
+    ed_detail_card: "Celotna kartica",
+    ed_detail_more_info: "Okno s podatki",
+    ed_detail_none: "Nič",
+    ed_ov_zoom_helper: "Gumb zgoraj desno, ki preklopi na celotno kartico in nazaj",
   },
   lv: {
     title: "Apkure",
@@ -2094,6 +2836,43 @@ const STRINGS = {
     ed_collapsed: "Sakļautās sadaļas",
     ed_language: "Valoda",
     ed_language_auto: "Automātiski (Home Assistant)",
+    ov_average: "Vidēji",
+    ov_actions: "Visas zonas",
+    ov_confirm: "Pārslēgt apkuri uz {mode}?",
+    ov_skipped: "Nav pieejams: {list}",
+    ov_cancel: "Atcelt",
+    ov_apply: "Apstiprināt",
+    ov_coldest: "Aukstākā: {name}",
+    ov_warmest: "Siltākā: {name}",
+    ov_other: "Citi apgabali",
+    ed_areas: "Apgabali",
+    ed_areas_helper: "Tikai šo apgabalu zonas (visi, ja tukšs)",
+    ed_exclude_areas: "Izslēgtie apgabali",
+    ed_floors: "Stāvi",
+    ed_floors_helper: "Tikai šo stāvu zonas (visi, ja tukšs)",
+    ed_exclude_floors: "Izslēgtie stāvi",
+    ed_include: "Pievienojamās entītijas",
+    ed_include_helper: "Termostati vai radiatori ar vadības vadu, kas netiek atrasti paši (piemēram, slēptie)",
+    ed_exclude: "Izslēgtās entītijas",
+    ed_sort: "Kārtošana",
+    ed_sort_area: "Apgabalu secība",
+    ed_sort_name: "Nosaukums",
+    ed_sort_temperature: "Vispirms aukstākās",
+    ed_sort_state: "Vispirms brīdinājumi un apkure",
+    ed_group_by: "Grupēt pēc",
+    ed_group_floor: "Stāvs",
+    ed_group_none: "Bez grupēšanas",
+    ed_columns: "Kolonnas",
+    ed_columns_helper: "Automātiski, ja tukšs",
+    ed_compact: "Kompaktas flīzes",
+    ed_show_summary: "Kopsavilkums",
+    ed_show_actions: "Ātrās darbības",
+    ed_actions: "Piedāvātās ātrās darbības",
+    ed_detail: "Pieskāriens zonai",
+    ed_detail_card: "Pilnā karte",
+    ed_detail_more_info: "Informācijas logs",
+    ed_detail_none: "Nekas",
+    ed_ov_zoom_helper: "Poga augšā pa labi, kas pārslēdz uz pilno karti un atpakaļ",
   },
   el: {
     title: "Θέρμανση",
@@ -2193,6 +2972,43 @@ const STRINGS = {
     ed_collapsed: "Συμπτυγμένες ενότητες",
     ed_language: "Γλώσσα",
     ed_language_auto: "Αυτόματα (Home Assistant)",
+    ov_average: "Μέσος όρος",
+    ov_actions: "Όλες οι ζώνες",
+    ov_confirm: "Ρύθμιση της θέρμανσης σε {mode};",
+    ov_skipped: "Μη διαθέσιμο σε: {list}",
+    ov_cancel: "Ακύρωση",
+    ov_apply: "Επιβεβαίωση",
+    ov_coldest: "Η πιο κρύα: {name}",
+    ov_warmest: "Η πιο ζεστή: {name}",
+    ov_other: "Άλλοι χώροι",
+    ed_areas: "Χώροι",
+    ed_areas_helper: "Μόνο οι ζώνες αυτών των χώρων (όλοι αν είναι κενό)",
+    ed_exclude_areas: "Χώροι προς εξαίρεση",
+    ed_floors: "Όροφοι",
+    ed_floors_helper: "Μόνο οι ζώνες αυτών των ορόφων (όλοι αν είναι κενό)",
+    ed_exclude_floors: "Όροφοι προς εξαίρεση",
+    ed_include: "Οντότητες προς προσθήκη",
+    ed_include_helper: "Θερμοστάτες ή καλοριφέρ με πιλοτικό καλώδιο που δεν βρίσκονται μόνα τους (π.χ. κρυφά)",
+    ed_exclude: "Οντότητες προς εξαίρεση",
+    ed_sort: "Ταξινόμηση",
+    ed_sort_area: "Σειρά χώρων",
+    ed_sort_name: "Όνομα",
+    ed_sort_temperature: "Πρώτα οι πιο κρύες",
+    ed_sort_state: "Πρώτα ειδοποιήσεις και θέρμανση",
+    ed_group_by: "Ομαδοποίηση κατά",
+    ed_group_floor: "Όροφος",
+    ed_group_none: "Χωρίς ομαδοποίηση",
+    ed_columns: "Στήλες",
+    ed_columns_helper: "Αυτόματα αν είναι κενό",
+    ed_compact: "Συμπαγή πλακίδια",
+    ed_show_summary: "Σύνοψη",
+    ed_show_actions: "Γρήγορες ενέργειες",
+    ed_actions: "Προσφερόμενες γρήγορες ενέργειες",
+    ed_detail: "Πάτημα σε ζώνη",
+    ed_detail_card: "Πλήρης κάρτα",
+    ed_detail_more_info: "Παράθυρο πληροφοριών",
+    ed_detail_none: "Τίποτα",
+    ed_ov_zoom_helper: "Κουμπί πάνω δεξιά που αλλάζει στην πλήρη κάρτα και πίσω",
   },
 };
 
@@ -2269,6 +3085,8 @@ const ICONS = {
   lock: "M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z",
   pilot: "M16.5,21C13.5,21 12.31,16.76 11.05,12.28C10.14,9.04 9,5 7.5,5C4.11,5 4,11.93 4,12H2C2,11.63 2.06,3 7.5,3C10.5,3 11.71,7.25 12.97,11.74C13.83,14.8 15,19 16.5,19C19.94,19 20.03,12.07 20.03,12H22.03C22.03,12.37 21.97,21 16.5,21Z",
   alert: "M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z",
+  // A target (bullseye): the average target of the overview.
+  target: "M12 2A10 10 0 1 0 22 12 10 10 0 0 0 12 2m0 2a8 8 0 1 1-8 8 8 8 0 0 1 8-8m0 2a6 6 0 1 0 6 6 6 6 0 0 0-6-6m0 2a4 4 0 1 1-4 4 4 4 0 0 1 4-4m0 2a2 2 0 1 0 2 2 2 2 0 0 0-2-2z",
 };
 
 const svgIcon = (name, cls = "") => `<svg class="icon${cls ? ` ${cls}` : ""}" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONS[name] || ICONS.tune}"/></svg>`;
@@ -2462,6 +3280,18 @@ const isThermostat = (st) => {
 // A pilot wire radiator: a select offering at least three pilot wire orders.
 const isPilotSelect = (st) => new Set((st?.attributes?.options || []).map(pilotMode).filter(Boolean)).size >= 3;
 
+// The first temperature (indoor) or humidity sensor of an area, for a zone without thermostat.
+const areaSensor = (hass, area, cls) =>
+  Object.keys(hass.states).find(
+    (id) =>
+      id.startsWith("sensor.") &&
+      areaIdOf(hass, id) === area &&
+      dc(cls)(hass.states[id]) &&
+      !(cls === "temperature" && OUTDOOR.test(id)) &&
+      !hass.entities?.[id]?.hidden &&
+      !hass.entities?.[id]?.entity_category,
+  );
+
 const deviceName = (hass, id) => {
   const dev = hass.devices?.[deviceOf(hass, id)];
   return String(dev?.name_by_user || dev?.name || "").trim();
@@ -2511,8 +3341,8 @@ const discoverZones = (hass) =>
       const zone = { name, area, pilot_wire: pw };
       if (climates.length) zone.entity = climates[0];
       else {
-        zone.temperature = inArea(area, (id) => id.startsWith("sensor.") && dc("temperature")(hass.states[id]) && !OUTDOOR.test(id));
-        zone.humidity = inArea(area, (id) => id.startsWith("sensor.") && dc("humidity")(hass.states[id]));
+        zone.temperature = areaSensor(hass, area, "temperature");
+        zone.humidity = areaSensor(hass, area, "humidity");
       }
       zone.schedule = inArea(area, (id) => id.startsWith("schedule."));
       // A second thermostat of the area gets its own zone, named after its device (not the area again).
@@ -2940,6 +3770,142 @@ const MINI_STYLE = `
   }
 `;
 
+// The overview: the summary tiles, the quick actions, then the zones floor by floor, one tile each; the confirmation of a
+// quick action opens at the top of the card (as in ha-vacuum-card).
+const OVERVIEW_STYLE = `
+  :host { --hc-natural-width: 400px; }
+  ha-card.overview { position: relative; }
+  ha-card.dialog-open { min-height: 190px; }
+  .overview .header { margin-bottom: 0; }
+  :is(.tile, .act, .btn):focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 1px; }
+  /* Summary: zones heating, average temperature (coldest – warmest), average target. */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 6px; }
+  .stat { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 7px 9px; border-radius: 12px;
+          background: var(--secondary-background-color, rgba(128,128,128,.1)); }
+  .si { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+        background: color-mix(in srgb, var(--sc) 16%, transparent); color: var(--sc); }
+  .si .icon { width: 18px; height: 18px; }
+  .stat.heating .si .icon { animation: hc-flame 1.3s ease-in-out infinite; transform-origin: 50% 100%; }
+  .stat.boost .si .icon { animation-duration: .65s; }
+  .sv { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+  .sv small { font-size: 11px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sv b { font-size: 16px; font-weight: 500; color: var(--primary-text-color); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  /* Alerts and pilot wire orders of the whole home, a count each. */
+  .counts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .chip.pw { background: color-mix(in srgb, var(--pc) 14%, transparent); color: color-mix(in srgb, var(--pc) 60%, var(--primary-text-color)); }
+  .chip.pw .icon { color: var(--pc); }
+  /* An alert's icon pulses, wherever it shows. */
+  .overview .chip.warn .icon { animation: hc-pulse 2s ease-in-out infinite; }
+  /* Quick actions for every zone: smoked glass, the icon in the order's color, never filled. */
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .al { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; color: var(--secondary-text-color); margin-right: 2px; }
+  .act { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px 5px 7px; border-radius: 16px; font-size: 12px; font-weight: 500;
+         background: var(--secondary-background-color, rgba(128,128,128,.12)); color: var(--primary-text-color); border: 1px solid transparent; transition: background .2s, border-color .2s; }
+  .act .icon { width: 16px; height: 16px; color: var(--ac); }
+  .act:hover:not(:disabled) { background: color-mix(in srgb, var(--ac) 14%, var(--secondary-background-color, rgba(128,128,128,.12))); }
+  .act.on { border-color: color-mix(in srgb, var(--ac) 45%, transparent); background: color-mix(in srgb, var(--ac) 12%, transparent); }
+  /* The zones, floor by floor. */
+  .groups { display: flex; flex-direction: column; gap: 10px; }
+  .gtitle { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; font-size: 12px; font-weight: 500; text-transform: uppercase;
+            letter-spacing: .04em; color: var(--secondary-text-color); min-width: 0; }
+  .gtitle .icon { width: 16px; height: 16px; }
+  .gtitle > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .gmeta { margin-left: auto; flex: none; display: inline-flex; align-items: center; gap: 3px; text-transform: none; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+  .gmeta .icon { width: 14px; height: 14px; color: var(--gc, var(--secondary-text-color)); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+  .tiles.fixed { grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); }
+  /* A zone: its state icon, name, room temperature and target, state, and what needs a look. */
+  .tile { position: relative; isolation: isolate; overflow: hidden; box-sizing: border-box; min-width: 0; display: grid; grid-template-columns: 32px minmax(0, 1fr);
+          grid-template-areas: "ic name" "ic temp" "ic sub" "more more"; column-gap: 8px; align-items: center; align-content: start; padding: 8px;
+          border-radius: 12px; background: var(--secondary-background-color, rgba(128,128,128,.1)); border: 1px solid transparent; transition: background .2s, border-color .2s; }
+  .tile[role="button"] { cursor: pointer; }
+  .tile[role="button"]:hover { background: color-mix(in srgb, var(--zc) 10%, var(--secondary-background-color, rgba(128,128,128,.1))); }
+  .tile.on { border-color: color-mix(in srgb, var(--zc) 25%, transparent); }
+  .tile.alert { border-color: color-mix(in srgb, var(--hc-warn) 50%, transparent); }
+  .tile.na { opacity: .6; }
+  /* The warmth of a zone: a glow rising from the bottom of its tile, breathing while it heats. */
+  .tile::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .6s;
+                  background: linear-gradient(to top, color-mix(in srgb, var(--zc) 24%, transparent), transparent 75%); }
+  .tile.active::before { opacity: 1; animation: hc-glow 3.2s ease-in-out infinite; }
+  .tile.pw-eco::before { opacity: .6; animation: hc-breathe-glow 4s ease-in-out infinite; }
+  .tile.pw-frost::before { opacity: .3; }
+  .tbadge { grid-area: ic; align-self: start; position: relative; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+            background: color-mix(in srgb, var(--zc) 16%, transparent); color: var(--zc); }
+  .tbadge .icon { width: 18px; height: 18px; }
+  .tile.heating .tbadge .icon { animation: hc-flame 1.3s ease-in-out infinite; transform-origin: 50% 100%; }
+  .tile.boost .tbadge .icon { animation-duration: .65s; }
+  .tbadge .adot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--hc-warn);
+                  box-shadow: 0 0 0 2px var(--card-background-color, #fff); animation: hc-pulse 2s ease-in-out infinite; }
+  .tname { grid-area: name; font-size: 13px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ttemp { grid-area: temp; display: flex; align-items: baseline; gap: 6px; min-width: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .ttemp b { font-size: 17px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); }
+  .ttemp small { font-size: 11px; color: var(--secondary-text-color); overflow: hidden; text-overflow: ellipsis; }
+  .tsub { grid-area: sub; font-size: 11px; line-height: 1.3; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tile.on .tsub { color: var(--hc-text); }
+  .tile { --hc-text: color-mix(in srgb, var(--zc) 60%, var(--primary-text-color)); }
+  .tmore { grid-area: more; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 6px; min-width: 0; }
+  .tmore:empty { display: none; }
+  .tmore .chip { font-size: 10.5px; }
+  .tline { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: var(--secondary-text-color); min-width: 0; }
+  .tline .icon { width: 13px; height: 13px; }
+  .tline span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pws { display: inline-flex; gap: 1px; }
+  .pws .icon { width: 14px; height: 14px; color: var(--pc); }
+  /* Heat rising over a zone that heats (twice as fast on boost). */
+  .tile .heat { position: absolute; right: 6px; bottom: 4px; width: 30px; height: 44px; z-index: -1; fill: none; stroke: var(--zc); stroke-width: 1.6; stroke-linecap: round; overflow: visible; }
+  .tile .heat path { opacity: 0; animation: hc-rise 2.8s ease-in-out infinite; }
+  .tile .heat path:nth-child(2) { animation-delay: .9s; }
+  .tile .heat path:nth-child(3) { animation-delay: 1.8s; }
+  .tile.boost .heat path { animation-duration: 1.4s; }
+  .tile.boost .heat path:nth-child(2) { animation-delay: .45s; }
+  .tile.boost .heat path:nth-child(3) { animation-delay: .9s; }
+  /* Compact tiles: one line each, the temperature at the right, an alert as a dot on the icon. */
+  .tiles.compact { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .tiles.compact.fixed { grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); }
+  .compact .tile { grid-template-columns: 28px minmax(0, 1fr) auto; grid-template-areas: "ic name temp"; padding: 6px 8px 6px 6px; }
+  .compact .tbadge { width: 28px; height: 28px; align-self: center; }
+  .compact .tbadge .icon { width: 16px; height: 16px; }
+  .compact .ttemp b { font-size: 14px; }
+  .compact .ttemp small, .compact .tsub, .compact .tmore, .compact .heat { display: none; }
+  /* Confirmation of a quick action, at the top of the card. */
+  .backdrop { position: absolute; inset: 0; z-index: 9; display: flex; align-items: flex-start; justify-content: center; padding-top: 12px;
+              box-sizing: border-box; background: rgba(0,0,0,.45); border-radius: inherit; }
+  .modal { width: min(92%, 340px); max-height: calc(100% - 24px); overflow: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; padding: 16px;
+           border-radius: 14px; background: var(--card-background-color, #1c1c1c); color: var(--primary-text-color); box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+  .msg { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; line-height: 1.4; }
+  .msg .icon { width: 22px; height: 22px; color: var(--ac); }
+  .mzones { font-size: 13px; line-height: 1.4; color: var(--primary-text-color); }
+  .mskip { font-size: 12px; line-height: 1.4; color: var(--secondary-text-color); }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 2px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 0; padding: 6px 12px; border-radius: 18px; font-size: 13px; font-weight: 500;
+         background: var(--secondary-background-color, rgba(127,127,127,.12)); color: var(--primary-text-color); }
+  .btn .icon { width: 18px; height: 18px; }
+  .btn:hover { background: color-mix(in srgb, var(--ac) 12%, var(--secondary-background-color, rgba(127,127,127,.12))); }
+  .btn.primary { background: color-mix(in srgb, var(--ac) 16%, transparent); color: color-mix(in srgb, var(--ac) 60%, var(--primary-text-color)); }
+  .btn.primary .icon { color: var(--ac); }
+  .btn.primary:hover { background: color-mix(in srgb, var(--ac) 24%, transparent); }
+  /* Narrow: the quick actions keep their icon (their label stays in the tooltip and for screen readers), then the
+     summary stacks. */
+  @container (max-width: 360px) {
+    .act { padding: 6px 8px; }
+    .act .al2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  }
+  /* Narrow: the summary keeps one row, its icons and ranges left out (the range stays in the tooltip). */
+  @container (max-width: 300px) {
+    .stats { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; }
+    .stat { padding: 6px 7px; }
+    .si, .sv small + b + small { display: none; }
+    .sv b { font-size: 14px; }
+  }
+  @container (max-width: 230px) {
+    .al { flex-basis: 100%; }
+    .tile { grid-template-columns: 26px minmax(0, 1fr); column-gap: 6px; padding: 6px; }
+    .tbadge { width: 26px; height: 26px; }
+    .tbadge .icon { width: 15px; height: 15px; }
+  }
+`;
+
 // ── Cards ──────────────────────────────────────────────────────────────────────────────────────────────────────
 const DEFAULT_COLLAPSED = ["schedule"];
 const DIALOG_TAGS = new Set(["HA-MORE-INFO-DIALOG", "HA-DIALOG", "DIALOG"]);
@@ -3106,7 +4072,7 @@ class HeatingCard extends HTMLElement {
     const zones = this._zones();
     const h = this._hass;
     const ids = this._ids(zones);
-    const sig = [lang(h, this._config), h.entities, h.areas, h.themes?.darkMode, this._unit(), this._zoomed, this._zone, this._pending, this._toggled, this._weekVersion, ...ids.map((id) => h.states[id])];
+    const sig = [lang(h, this._config), h.entities, h.areas, h.floors, h.themes?.darkMode, this._unit(), this._zoomed, this._zone, this._pending, this._toggled, this._weekVersion, ...ids.map((id) => h.states[id])];
     if (this._sig && sig.length === this._sig.length && sig.every((v, i) => v === this._sig[i])) return;
     this._zonesNow = zones;
     for (const z of zones) if (z.schedule) this._loadWeek(z.schedule);
@@ -3571,9 +4537,9 @@ class HeatingCard extends HTMLElement {
     return `<div class="section">${this._sectionTitle("pilot_wire", "pilot", this._t("pilot_wire"))}${body}</div>`;
   }
 
-  _scheduleSection(m) {
-    const z = m.z;
-    const st = this._st(z.schedule);
+  // A schedule's state: on or off, until its next change (*On until 22:00*, a weekday when it is not today).
+  _scheduleState(id) {
+    const st = this._st(id);
     const loc = this._locale();
     const time = new Intl.DateTimeFormat(loc, { hour: "2-digit", minute: "2-digit" });
     const next = st.attributes.next_event ? new Date(st.attributes.next_event) : null;
@@ -3584,7 +4550,15 @@ class HeatingCard extends HTMLElement {
       when = sameDay ? time.format(next) : `${new Intl.DateTimeFormat(loc, { weekday: "short" }).format(next)} ${time.format(next)}`;
     }
     const on = st.state === "on";
-    const state = on ? (when ? this._t("sch_on_until", { time: when }) : this._t("sch_on")) : when ? this._t("sch_off_until", { time: when }) : this._t("sch_off");
+    return { on, text: on ? (when ? this._t("sch_on_until", { time: when }) : this._t("sch_on")) : when ? this._t("sch_off_until", { time: when }) : this._t("sch_off") };
+  }
+
+  _scheduleSection(m) {
+    const z = m.z;
+    const st = this._st(z.schedule);
+    const loc = this._locale();
+    const now = new Date();
+    const { on, text: state } = this._scheduleState(z.schedule);
     const label = `${this._t("schedule")} · ${st.attributes.friendly_name || z.schedule}`;
     const closed = this._isCollapsed("schedule");
     let body = `<div class="sched-state" role="button" tabindex="0" data-entity="${esc(z.schedule)}"><span class="dot ${on ? "on" : "off"}"></span><b>${esc(state)}</b></div>`;
@@ -3728,13 +4702,16 @@ class HeatingCard extends HTMLElement {
     return mode ? this._call("climate", "set_hvac_mode", { entity_id: z.id, hvac_mode: mode }) : this._call("climate", "turn_on", { entity_id: z.id });
   }
 
-  _setPilot(z, id, mode) {
-    if (id.startsWith("switch.")) {
-      const on = (pilotMode(z.switch_on) || "comfort") === mode;
-      return this._call("switch", on ? "turn_on" : "turn_off", { entity_id: id });
-    }
+  // The service call that sets a pilot wire radiator to an order: [domain, service, data], or null when it has none.
+  _pilotCall(z, id, mode) {
+    if (id.startsWith("switch.")) return ["switch", (pilotMode(z.switch_on) || "comfort") === mode ? "turn_on" : "turn_off", { entity_id: id }];
     const option = (this._st(id)?.attributes.options || []).find((o) => pilotMode(o) === mode);
-    if (option != null) this._call("select", "select_option", { entity_id: id, option });
+    return option == null ? null : ["select", "select_option", { entity_id: id, option }];
+  }
+
+  _setPilot(z, id, mode) {
+    const call = this._pilotCall(z, id, mode);
+    if (call) return this._call(...call);
   }
 
   // Each tap moves the target by one step at once on screen; the service is called once the taps stop, and the new
@@ -3927,6 +4904,410 @@ class HeatingMiniCard extends HeatingCard {
   }
 }
 
+// ── Overview card ──────────────────────────────────────────────────────────────────────────────────────────────
+// The heating of the whole home at a glance (what the overview of ha-climate-air-card showed of the thermostats, with
+// the zones, pilot wire and schedules of this card): a summary (zones heating, average room temperature from the
+// coldest to the warmest zone, average target, open windows, low batteries, pilot wire radiators per order), quick
+// actions for every zone (comfort, eco, frost protection, away, off) confirmed at the top of the card, and the zones
+// floor by floor, one tile each. A tap on a zone unfolds the full card on it (or opens its more-info dialog), the
+// detail button at the top right switches to the full card and back, and a click elsewhere brings the overview back.
+const OV_ORDERS = ["comfort", "eco", "frost", "away", "off"];
+const OV_DEFAULT_ACTIONS = ["comfort", "eco", "frost", "away"];
+const OV_ICONS = { comfort: "comfort", eco: "eco", frost: "frost", away: "away", off: "power" };
+const OV_COLORS = { ...PILOT_COLORS, away: "var(--purple-color, #926bc7)" };
+// The presets a thermostat takes for each quick action, the first it offers wins ("none" is manual: back to its own
+// target), and the orders a pilot wire radiator takes.
+const OV_PRESETS = { comfort: ["comfort", "home", "none"], eco: ["eco"], frost: ["frost", "away"], away: ["away", "frost", "eco"] };
+const OV_PILOT = { comfort: ["comfort"], eco: ["eco"], frost: ["frost"], away: ["frost", "eco"], off: ["off"] };
+// Sorts of the zones within a floor; `area` keeps the order of the area registry.
+const OV_RANK = (m, alerts) => (alerts ? 0 : m.heating ? 1 : m.on ? 2 : m.online ? 3 : 4);
+const OV_SORTS = ["area", "name", "temperature", "state"];
+const OV_DETAILS = ["card", "more-info", "none"];
+// After the confirmation closes, clicks on the card are ignored for this long: the second click of a double click on
+// Confirm would otherwise land on the tile under it.
+const CONFIRM_GUARD = 400;
+const listOf = (v) => [].concat(v ?? []).filter((x) => x != null && x !== "");
+
+class HeatingOverviewCard extends HeatingMiniCard {
+  static getConfigElement() {
+    return document.createElement("heating-overview-card-editor");
+  }
+
+  constructor() {
+    super();
+    // A click elsewhere on the page closes the confirmation (as Cancel); Escape too.
+    this._onDismiss = (ev) => {
+      if (this._confirm && isOutside(this, ev)) this._closeConfirm();
+    };
+    this._onEscape = (ev) => {
+      if (ev.key !== "Escape" || !this._confirm) return;
+      ev.stopPropagation();
+      this._closeConfirm();
+    };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener("click", this._onDismiss, true);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener("click", this._onDismiss, true);
+    window.removeEventListener?.("keydown", this._onEscape);
+  }
+
+  getCardSize() {
+    if (this._zoomed) return super.getCardSize();
+    const n = this._zonesNow?.length || 1;
+    return 2 + (this._config?.show_summary === false ? 0 : 2) + Math.ceil(n / 2) * (this._config?.compact ? 1 : 2);
+  }
+
+  getGridOptions() {
+    return { columns: 12, min_columns: 6, rows: "auto" };
+  }
+
+  // ── Zones: found (or `zones`), less `exclude`, plus `include`, kept by area and floor ──
+  _zones() {
+    const h = this._hass;
+    const c = this._config;
+    const ex = new Set(listOf(c.exclude));
+    const floorOf = (area) => h.areas?.[area]?.floor_id ?? null;
+    let zones = zonesOf(h, c).map((z) => ({ ...z, area: z.area || areaIdOf(h, z.entity || z.pilot_wire[0]) }));
+    if (ex.size) {
+      zones = zones
+        .map((z) => {
+          const out = { ...z, pilot_wire: z.pilot_wire.filter((p) => !ex.has(p)) };
+          // A zone whose thermostat is left out keeps its pilot wire radiators, with the area's room sensors.
+          if (ex.has(z.entity)) {
+            delete out.entity;
+            if (z.area) {
+              out.temperature ??= areaSensor(h, z.area, "temperature");
+              out.humidity ??= areaSensor(h, z.area, "humidity");
+            }
+          }
+          return out;
+        })
+        .filter((z) => z.entity || z.pilot_wire.length);
+    }
+    for (const id of listOf(c.include)) {
+      if (!h.states[id] || ex.has(id) || zones.some((z) => z.entity === id || z.pilot_wire.includes(id))) continue;
+      const area = areaIdOf(h, id);
+      const home = area && zones.find((z) => z.area === area);
+      if (/^(select|switch)\./.test(id)) {
+        if (home) home.pilot_wire = [...home.pilot_wire, id];
+        else zones.push({ pilot_wire: [id], area, name: h.areas?.[area]?.name || nameOf(h, id), temperature: area ? areaSensor(h, area, "temperature") : undefined });
+      } else if (home && !home.entity) home.entity = id;
+      else zones.push({ entity: id, pilot_wire: [], area, ...(home ? { name: nameOf(h, id) } : {}) });
+    }
+    const areas = listOf(c.areas);
+    const floors = listOf(c.floors);
+    const exAreas = listOf(c.exclude_areas);
+    const exFloors = listOf(c.exclude_floors);
+    return zones
+      .filter((z) => (!areas.length || areas.includes(z.area)) && !exAreas.includes(z.area))
+      .filter((z) => (!floors.length || floors.includes(floorOf(z.area))) && !exFloors.includes(floorOf(z.area)))
+      .map((z, i) => this._resolve(z, i));
+  }
+
+  // What needs a look in a zone: an open window, a low battery, a device offline ([icon, text, entity, kind]).
+  _alertsOf(m) {
+    if (this._config.show_alerts === false) return [];
+    const e = m.z.ent;
+    const out = [];
+    if (this._st(e.window)?.state === "on") out.push(["window", this._t("window_open"), e.window, "window"]);
+    const battery = numOf(this._st(e.battery));
+    if (battery != null && battery <= BATTERY_LOW) out.push(["battery_low", `${this._t("battery_low")} · ${fmtNum(this._locale(), battery, 0)} %`, e.battery, "battery"]);
+    if (!m.online) out.push(["offline", this._t("offline"), m.z.id || m.z.pilots[0], "offline"]);
+    return out;
+  }
+
+  // What a quick action does: the service calls for every zone that takes it (its thermostat's preset, or off; the
+  // order of each pilot wire radiator), the zones already there, and the zones it cannot reach (a thermostat turned
+  // off or offline, without such a preset).
+  _plan(order, models) {
+    const zones = [];
+    const skipped = [];
+    for (const m of models) {
+      const z = m.z;
+      const calls = [];
+      let there = false;
+      if (z.id && m.online) {
+        const a = this._st(z.id).attributes;
+        const f = a.supported_features || 0;
+        if (order === "off") {
+          if (!m.on) there = true;
+          else if ((a.hvac_modes || []).includes("off")) calls.push(["climate", "set_hvac_mode", { entity_id: z.id, hvac_mode: "off" }]);
+          else if (f & CLIMATE_TURN_OFF) calls.push(["climate", "turn_off", { entity_id: z.id }]);
+        } else if (m.on && f & CLIMATE_PRESET) {
+          const presets = a.preset_modes || [];
+          const preset = OV_PRESETS[order].map((k) => presets.find((p) => (k === "none" ? p === "none" : presetKey(p) === k))).find((p) => p != null);
+          if (preset != null && preset === a.preset_mode) there = true;
+          else if (preset != null) calls.push(["climate", "set_preset_mode", { entity_id: z.id, preset_mode: preset }]);
+        }
+      }
+      for (const id of z.pilots) {
+        const cur = this._pilotState(z, id);
+        const want = cur && OV_PILOT[order].find((o) => this._pilotOptions(z, id).includes(o));
+        if (!want) continue;
+        if (want === cur) there = true;
+        else {
+          const call = this._pilotCall(z, id, want);
+          if (call) calls.push(call);
+        }
+      }
+      if (calls.length || there) zones.push({ m, calls });
+      else skipped.push(m);
+    }
+    return { zones, skipped, calls: zones.flatMap((x) => x.calls) };
+  }
+
+  // ── Render ──
+  _render(zones) {
+    if (this._zoomed || !zones.length) return HeatingCard.prototype._render.call(this, zones);
+    const c = this._config;
+    const models = zones.map((z) => this._model(z));
+    for (const m of models) m.alerts = this._alertsOf(m);
+    const summary = this._summary(models);
+    const parts = [this._header(c.title || c.name || this._t("title"), summary.sub, summary)];
+    if (c.show_summary !== false) parts.push(this._stats(models));
+    if (c.show_actions !== false) parts.push(this._actions(models));
+    parts.push(this._groups(models));
+    const confirm = this._confirm ? this._confirmHtml(models) : "";
+    return `${this._styles(summary.color, OVERVIEW_STYLE)}<ha-card class="overview${confirm ? " dialog-open" : ""}">${parts.join("")}${confirm}</ha-card>`;
+  }
+
+  _stat(icon, color, label, value, sub, cls = "", title = "") {
+    return (
+      `<div class="stat${cls ? ` ${cls}` : ""}" style="--sc:${color}"${title ? ` title="${esc(title)}"` : ""}><div class="si">${svgIcon(icon)}</div>` +
+      `<div class="sv"><small>${esc(label)}</small><b>${esc(value)}</b>${sub ? `<small>${esc(sub)}</small>` : ""}</div></div>`
+    );
+  }
+
+  _count(icon, text, n, cls, attrs = "") {
+    return `<span class="chip ${cls}"${attrs}>${svgIcon(icon)}<span>${esc(text)}</span><b>${n}</b></span>`;
+  }
+
+  _stats(models) {
+    const loc = this._locale();
+    const c = this._config;
+    const heating = models.filter((m) => m.heating);
+    const boost = heating.some((m) => m.boost);
+    const stats = [
+      this._stat("fire", heating.length ? (boost ? BOOST : HEAT) : IDLE, this._t("st_heating"), `${heating.length}/${models.length}`, heating.map((m) => m.z.name).join(", "), heating.length ? `heating${boost ? " boost" : ""}` : ""),
+    ];
+    const temps = models.filter((m) => m.cur != null);
+    if (temps.length) {
+      const avg = temps.reduce((s, m) => s + m.cur, 0) / temps.length;
+      const lo = temps.reduce((a, b) => (b.cur < a.cur ? b : a));
+      const hi = temps.reduce((a, b) => (b.cur > a.cur ? b : a));
+      const many = temps.length > 1;
+      const range = many ? `${fmtNum(loc, lo.cur)}–${fmtNum(loc, hi.cur)}°` : "";
+      const title = many ? `${this._t("ov_coldest", { name: `${lo.z.name} (${this._temp(lo.cur)})` })} · ${this._t("ov_warmest", { name: `${hi.z.name} (${this._temp(hi.cur)})` })}` : "";
+      stats.push(this._stat("thermometer", "var(--primary-color, #03a9f4)", this._t("ov_average"), this._temp(avg), range, "", title));
+    }
+    const targets = models.filter((m) => m.on && m.target != null);
+    if (targets.length) {
+      const avg = targets.reduce((s, m) => s + m.target, 0) / targets.length;
+      const lo = Math.min(...targets.map((m) => m.target));
+      const hi = Math.max(...targets.map((m) => m.target));
+      stats.push(this._stat("target", HEAT, this._t("target"), this._temp(avg), lo !== hi ? `${fmtNum(loc, lo)}–${fmtNum(loc, hi)}°` : ""));
+    }
+    // Counts: open windows, low batteries, devices offline, then the pilot wire radiators per order.
+    const counts = [];
+    for (const [kind, icon, key] of [
+      ["window", "window", "window_open"],
+      ["battery", "battery_low", "battery_low"],
+      ["offline", "offline", "offline"],
+    ]) {
+      const hits = models.filter((m) => m.alerts.some((a) => a[3] === kind));
+      if (!hits.length) continue;
+      const one = hits.length === 1 ? hits[0].alerts.find((a) => a[3] === kind)[2] : "";
+      const names = hits.map((m) => m.z.name).join(", ");
+      const attrs = ` title="${esc(`${this._t(key)}: ${names}`)}"${one ? ` data-entity="${esc(one)}" role="button" tabindex="0"` : ""}`;
+      counts.push(this._count(icon, this._t(key), hits.length, kind === "offline" ? "" : "warn", attrs));
+    }
+    if (c.show_pilot_wire !== false) {
+      const per = new Map();
+      for (const m of models) for (const id of m.z.pilots) {
+        const mode = this._pilotState(m.z, id);
+        if (mode) per.set(mode, (per.get(mode) || 0) + 1);
+      }
+      for (const mode of PILOT_ORDER.filter((o) => per.has(o))) {
+        const n = per.get(mode);
+        counts.push(this._count(PILOT_ICONS[mode], this._t(`p_${mode}`), n, "pw", ` style="--pc:${PILOT_COLORS[mode]}" title="${esc(`${this._t("pilot_wire")} · ${this._t(`p_${mode}`)}: ${n}`)}"`));
+      }
+    }
+    return `<div class="stats">${stats.join("")}</div>${counts.length ? `<div class="counts">${counts.join("")}</div>` : ""}`;
+  }
+
+  _actions(models) {
+    const orders = listOf(this._config.actions ?? OV_DEFAULT_ACTIONS).filter((o) => OV_ORDERS.includes(o));
+    if (!orders.length) return "";
+    const label = this._t("ov_actions");
+    const buttons = orders.map((o) => {
+      const plan = this._plan(o, models);
+      // Every zone it reaches already there: shown as the home's current order.
+      const done = plan.zones.length > 0 && !plan.calls.length;
+      const text = this._t(`p_${o}`);
+      return `<button class="act${done ? " on" : ""}" data-action="order" data-value="${o}" style="--ac:${OV_COLORS[o]}" title="${esc(`${label} · ${text}`)}" aria-pressed="${done}"${plan.calls.length ? "" : " disabled"}>${svgIcon(OV_ICONS[o])}<span class="al2">${esc(text)}</span></button>`;
+    });
+    return `<div class="actions" role="group" aria-label="${esc(label)}"><span class="al">${esc(label)}</span>${buttons.join("")}</div>`;
+  }
+
+  // The zones by floor (in the floor registry's level order, the areas without floor last), or all together.
+  _groups(models) {
+    const c = this._config;
+    const h = this._hass;
+    const sort = OV_SORTS.includes(c.sort) ? c.sort : "area";
+    const sorted = models.map((m, i) => ({ m, i }));
+    if (sort === "name") sorted.sort((a, b) => a.m.z.name.localeCompare(b.m.z.name, this._locale()));
+    else if (sort === "temperature") sorted.sort((a, b) => (a.m.cur ?? Number.POSITIVE_INFINITY) - (b.m.cur ?? Number.POSITIVE_INFINITY));
+    else if (sort === "state") sorted.sort((a, b) => OV_RANK(a.m, a.m.alerts.length) - OV_RANK(b.m, b.m.alerts.length));
+    const floors = h.floors || {};
+    const floorOf = (m) => {
+      const f = h.areas?.[m.z.area]?.floor_id;
+      return f && floors[f] ? f : null;
+    };
+    const byFloor = c.group_by !== "none" && sorted.some((x) => floorOf(x.m));
+    let groups = [[null, sorted]];
+    if (byFloor) {
+      const ids = [...new Set(sorted.map((x) => floorOf(x.m)))];
+      const level = (f) => (f == null ? Number.POSITIVE_INFINITY : Number(floors[f].level ?? 0));
+      ids.sort((a, b) => level(a) - level(b) || String(floors[a]?.name ?? "").localeCompare(String(floors[b]?.name ?? "")));
+      groups = ids.map((f) => [f, sorted.filter((x) => floorOf(x.m) === f)]);
+    }
+    const cols = Number(c.columns) > 0 ? Math.min(6, Math.round(Number(c.columns))) : 0;
+    const tilesCls = ["tiles", c.compact ? "compact" : "", cols ? "fixed" : ""].filter(Boolean).join(" ");
+    const html = groups
+      .map(([f, items]) => {
+        const title = byFloor ? this._groupTitle(f == null ? this._t("ov_other") : floors[f].name, items.map((x) => x.m)) : "";
+        return `<div class="group">${title}<div class="${tilesCls}"${cols ? ` style="--cols:${cols}"` : ""}>${items.map((x) => this._tile(x.m, x.i)).join("")}</div></div>`;
+      })
+      .join("");
+    return `<div class="groups">${html}</div>`;
+  }
+
+  // A floor's heading: its name, then how many of its zones heat and its average room temperature.
+  _groupTitle(name, models) {
+    const temps = models.filter((m) => m.cur != null);
+    const heating = models.filter((m) => m.heating).length;
+    const avg = temps.length ? this._temp(temps.reduce((s, m) => s + m.cur, 0) / temps.length) : "";
+    const meta = [heating ? `${svgIcon("fire")}<span>${heating}</span>` : "", avg ? `<span>${esc(avg)}</span>` : ""].filter(Boolean).join(" · ");
+    return `<div class="gtitle">${svgIcon("home")}<span>${esc(name)}</span>${meta ? `<span class="gmeta" style="--gc:${HEAT}">${meta}</span>` : ""}</div>`;
+  }
+
+  _tile(m, i) {
+    const z = m.z;
+    const c = this._config;
+    const loc = this._locale();
+    const comfort = !!(m.pilot && m.on && m.pilot.startsWith("comfort"));
+    const cls = [
+      "tile",
+      m.on ? "on" : "",
+      m.heating ? "heating" : "",
+      m.heating || comfort ? "active" : "",
+      m.heating && m.boost ? "boost" : "",
+      m.pilot ? `pw-${m.pilot}` : "",
+      m.online ? "" : "na",
+      m.alerts.length ? "alert" : "",
+    ].filter(Boolean);
+    const icon = m.heating ? "fire" : m.pilot ? PILOT_ICONS[m.pilot] : m.on ? "radiator" : "radiator_off";
+    const temp = m.cur != null ? `<b>${esc(this._temp(m.cur))}</b>` : "";
+    const target = this._showTarget(m) ? `<small>→ ${esc(m.range ? this._targetText(m) : `${fmtNum(loc, m.target)}°`)}</small>` : "";
+    const status = [m.status, m.presetText && !m.pilot ? m.presetText : ""].filter(Boolean).join(" · ");
+    const more = m.alerts.map(([ic, text, entity]) => this._chip(ic, text, "warn", entity));
+    // The pilot wire radiators of a zone, each in the color of its order (a zone's only radiator already sets its state).
+    if (c.show_pilot_wire !== false && z.pilots.length && (z.id || z.pilots.length > 1)) {
+      const icons = z.pilots.map((id) => {
+        const mode = this._pilotState(z, id);
+        const text = `${deviceName(this._hass, id) || this._label(id)}: ${mode ? this._t(`p_${mode}`) : this._t("st_unavailable")}`;
+        return `<span style="--pc:${mode ? PILOT_COLORS[mode] : IDLE}" title="${esc(text)}">${svgIcon(mode ? PILOT_ICONS[mode] : "radiator_off")}</span>`;
+      });
+      more.push(`<span class="tline">${svgIcon("pilot")}<span class="pws">${icons.join("")}</span></span>`);
+    }
+    if (c.show_schedule !== false && z.schedule) {
+      const s = this._scheduleState(z.schedule);
+      more.push(`<span class="tline" title="${esc(`${this._t("schedule")} · ${s.text}`)}">${svgIcon("calendar")}<span>${esc(s.text)}</span></span>`);
+    }
+    const heat = cls.includes("active") ? '<svg class="heat" viewBox="0 0 30 44" aria-hidden="true"><path d="M6 40q-2.5-3 0-6t0-6"/><path d="M15 40q-2.5-3 0-6t0-6"/><path d="M24 40q-2.5-3 0-6t0-6"/></svg>' : "";
+    const open = c.detail !== "none";
+    const label = `${z.name}: ${[m.cur != null ? this._temp(m.cur) : "", status, ...m.alerts.map((a) => a[1])].filter(Boolean).join(", ")}`;
+    return (
+      `<div class="${cls.join(" ")}" style="--zc:${m.color}"${open ? ` role="button" tabindex="0" data-action="open" data-zone="${i}"` : ""} aria-label="${esc(label)}">${heat}` +
+      `<div class="tbadge">${svgIcon(icon)}${c.compact && m.alerts.length ? '<span class="adot"></span>' : ""}</div>` +
+      `<div class="tname">${esc(z.name)}</div><div class="ttemp">${temp}${target}</div><div class="tsub">${esc(status)}</div>` +
+      `<div class="tmore">${more.join("")}</div></div>`
+    );
+  }
+
+  _confirmHtml(models) {
+    const o = this._confirm.order;
+    const plan = this._plan(o, models);
+    const text = this._t(`p_${o}`);
+    const names = plan.zones.map((x) => x.m.z.name).join(", ");
+    const skipped = plan.skipped.map((m) => m.z.name).join(", ");
+    return (
+      `<div class="backdrop" data-action="confirm_backdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="hc-ov-${this._uid}" style="--ac:${OV_COLORS[o]}">` +
+      `<div class="msg" id="hc-ov-${this._uid}">${svgIcon(OV_ICONS[o])}<span>${esc(this._t("ov_confirm", { mode: text }))}</span></div>` +
+      `<div class="mzones">${esc(names)}</div>${skipped ? `<div class="mskip">${esc(this._t("ov_skipped", { list: skipped }))}</div>` : ""}` +
+      `<div class="modal-actions"><button class="btn" data-action="confirm_cancel">${esc(this._t("ov_cancel"))}</button>` +
+      `<button class="btn primary" data-action="confirm_ok">${svgIcon(OV_ICONS[o])}<span>${esc(this._t("ov_apply"))}</span></button></div></div></div>`
+    );
+  }
+
+  // ── Actions ──
+  _onClick(ev) {
+    const path = ev.composedPath();
+    const el = path.find((n) => n.dataset && (n.dataset.action || n.dataset.entity));
+    if (!this._confirm && Date.now() - (this._confirmClosed || 0) < CONFIRM_GUARD) return ev.stopPropagation();
+    if (this._confirm) {
+      ev.stopPropagation();
+      const action = el?.dataset.action;
+      if (action === "confirm_ok") this._applyOrder(this._confirm.order);
+      if (action === "confirm_ok" || action === "confirm_cancel" || (action === "confirm_backdrop" && path[0] === el)) this._closeConfirm();
+      return;
+    }
+    if (el?.dataset.action === "order" && !el.disabled) {
+      ev.stopPropagation();
+      return this._openConfirm(el.dataset.value, ev.detail === 0);
+    }
+    if (el?.dataset.action === "open") {
+      ev.stopPropagation();
+      const z = this._zonesNow?.[Number(el.dataset.zone)];
+      if (!z) return;
+      if (this._config.detail === "more-info") {
+        const id = z.id || z.pilots[0] || z.ent.indoor_temp;
+        if (id) this.dispatchEvent(new CustomEvent("hass-more-info", { detail: { entityId: id }, bubbles: true, composed: true }));
+        return;
+      }
+      return this._selectZone(Number(el.dataset.zone));
+    }
+    return super._onClick(ev);
+  }
+
+  // Opened from the keyboard (Enter / Space: no click count), the focus goes to Confirm.
+  _openConfirm(order, keyboard) {
+    this._confirm = { order };
+    window.addEventListener?.("keydown", this._onEscape);
+    this._refresh();
+    if (keyboard) this.shadowRoot.querySelector('.modal [data-action="confirm_ok"]')?.focus({ preventScroll: true });
+  }
+
+  _closeConfirm() {
+    this._confirm = null;
+    this._confirmClosed = Date.now();
+    window.removeEventListener?.("keydown", this._onEscape);
+    this._refresh();
+  }
+
+  // Sends the calls of a quick action, with the states of the moment.
+  _applyOrder(order) {
+    const models = (this._zonesNow || []).map((z) => this._model(z));
+    for (const call of this._plan(order, models).calls) this._call(...call);
+  }
+}
+
 // ── Visual editors (ha-form) ─────────────────────────────────────────────────────────────────────────────────────
 // Every option of the card, and its zones as folded sections (one per zone, plus an empty one to add a zone).
 const LANGUAGES = [
@@ -3935,6 +5316,12 @@ const LANGUAGES = [
   ["sv", "Svenska"], ["bg", "Български"], ["ru", "Русский"], ["uk", "Українська"], ["hu", "Magyar"], ["sk", "Slovenčina"],
   ["cs", "Čeština"], ["sl", "Slovenščina"], ["lv", "Latviešu"], ["el", "Ελληνικά"],
 ];
+
+// The language option of the editors: automatic (Home Assistant's), or one of the card's languages.
+const languageField = (tr) => ({
+  name: "language",
+  selector: { select: { mode: "dropdown", options: [{ value: "", label: tr("ed_language_auto") }, ...LANGUAGES.map(([value, label]) => ({ value, label }))] } },
+});
 
 class HeatingCardEditor extends HTMLElement {
   static get mini() {
@@ -4003,7 +5390,7 @@ class HeatingCardEditor extends HTMLElement {
               selector: { select: { multiple: true, mode: "list", options: [["pilot_wire", "pilot_wire"], ["schedule", "schedule"]].map(([value, k]) => ({ value, label: tr(k) })) } },
             },
           ]),
-      { name: "language", selector: { select: { mode: "dropdown", options: [{ value: "", label: tr("ed_language_auto") }, ...LANGUAGES.map(([value, label]) => ({ value, label }))] } } },
+      languageField(tr),
     ];
   }
 
@@ -4071,6 +5458,89 @@ class HeatingMiniCardEditor extends HeatingCardEditor {
   }
 }
 
+// The overview's editor: which zones (areas, floors, entities to add or leave out), how they are grouped and sorted,
+// what a tap on a zone does, the parts shown and the quick actions offered.
+class HeatingOverviewCardEditor extends HeatingCardEditor {
+  _defaults() {
+    return {
+      show_title: true,
+      show_subtitle: true,
+      show_summary: true,
+      show_actions: true,
+      show_alerts: true,
+      show_pilot_wire: true,
+      show_schedule: true,
+      compact: false,
+      zoom: true,
+      group_by: "floor",
+      sort: "area",
+      detail: "card",
+      actions: OV_DEFAULT_ACTIONS,
+    };
+  }
+
+  _schema() {
+    const tr = (k) => t(this._hass, this._config, k);
+    const select = (name, values, label) => ({ name, selector: { select: { mode: "dropdown", options: values.map((value) => ({ value, label: tr(label(value)) })) } } });
+    const grid = (...schema) => ({ type: "grid", name: "", schema });
+    const toggles = Object.entries(this._defaults())
+      .filter(([, v]) => typeof v === "boolean")
+      .map(([name]) => ({ name, selector: { boolean: {} } }));
+    return [
+      { name: "title", selector: { text: {} } },
+      grid({ name: "areas", selector: { area: { multiple: true } } }, { name: "exclude_areas", selector: { area: { multiple: true } } }),
+      grid({ name: "floors", selector: { floor: { multiple: true } } }, { name: "exclude_floors", selector: { floor: { multiple: true } } }),
+      grid({ name: "include", selector: { entity: { multiple: true, domain: ["climate", "select", "switch"] } } }, { name: "exclude", selector: { entity: { multiple: true } } }),
+      grid(
+        select("group_by", ["floor", "none"], (v) => `ed_group_${v}`),
+        select("sort", OV_SORTS, (v) => `ed_sort_${v}`),
+      ),
+      grid(
+        select("detail", OV_DETAILS, (v) => `ed_detail_${v.replace("-", "_")}`),
+        { name: "columns", selector: { number: { min: 1, max: 6, mode: "box" } } },
+      ),
+      grid(...toggles),
+      { name: "actions", selector: { select: { multiple: true, mode: "list", options: OV_ORDERS.map((value) => ({ value, label: tr(`p_${value}`) })) } } },
+      languageField(tr),
+    ];
+  }
+
+  _data() {
+    return { ...this._defaults(), ...this._config };
+  }
+
+  _render() {
+    super._render();
+    if (!this._form) return;
+    const tr = (k) => t(this._hass, this._config, k);
+    this._form.computeHelper = (s) => {
+      const key = s.name === "zoom" ? "ed_ov_zoom_helper" : `ed_${s.name}_helper`;
+      const txt = tr(key);
+      return txt === key ? undefined : txt;
+    };
+  }
+
+  // The config from the form: options left at their default, and emptied ones, are left out (an empty list of quick
+  // actions is kept: no quick action).
+  _changed(ev) {
+    ev.stopPropagation();
+    const defaults = this._defaults();
+    const out = { ...this._config };
+    // An option the form no longer sends (a list emptied) is left out too.
+    const names = this._schema().flatMap((s) => (s.schema ? s.schema : [s]).map((x) => x.name));
+    for (const k of names) if (!(k in ev.detail.value)) delete out[k];
+    for (const [k, v] of Object.entries(ev.detail.value)) {
+      const empty = v === "" || v == null || (Array.isArray(v) && !v.length && k !== "actions");
+      if (empty || JSON.stringify(v) === JSON.stringify(defaults[k])) delete out[k];
+      else out[k] = v;
+    }
+    const relang = lang(this._hass, this._config) !== lang(this._hass, out);
+    this._config = out;
+    if (relang) this._render();
+    this.dispatchEvent(new CustomEvent("config-changed", { detail: { config: out }, bubbles: true, composed: true }));
+  }
+}
+
 // ── Registration ───────────────────────────────────────────────────────────────────────────────────────────────
 const define = (name, cls) => {
   if (!customElements.get(name)) customElements.define(name, cls);
@@ -4079,6 +5549,8 @@ define("heating-card", HeatingCard);
 define("heating-mini-card", HeatingMiniCard);
 define("heating-card-editor", HeatingCardEditor);
 define("heating-mini-card-editor", HeatingMiniCardEditor);
+define("heating-overview-card", HeatingOverviewCard);
+define("heating-overview-card-editor", HeatingOverviewCardEditor);
 
 window.customCards = window.customCards || [];
 for (const card of [
@@ -4088,6 +5560,11 @@ for (const card of [
     description: "Thermostats, pilot wire radiators and weekly schedules, zone by zone: target, presets, heating modes and animated radiators.",
   },
   { type: "heating-mini-card", name: "Heating Mini Card", description: "Overview of the heating zones, unfolding into the full Heating Card." },
+  {
+    type: "heating-overview-card",
+    name: "Heating Overview Card",
+    description: "The heating of the whole home: zones heating, temperatures, open windows, low batteries, pilot wire orders and quick actions, floor by floor.",
+  },
 ]) {
   if (!window.customCards.some((c) => c.type === card.type)) window.customCards.push({ ...card, preview: true, documentationURL: REPO });
 }
