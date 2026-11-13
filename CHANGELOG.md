@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0 - 2026-11-13
+
+### Features
+- **Heating Overview Card** (`custom:heating-overview-card`): the heating of the whole home at a glance, taking over the thermostats of ha-climate-air-card's overview (removed there in 2.0.0).
+  - The zones **floor by floor** (Home Assistant's floors, in the order of their levels, the areas without floor under *Other areas*), one tile each: state icon, room temperature and target, what it does and its preset, its pilot wire radiators in the color of their order, its schedule (*On until 22:00*), *Window open*, *Low battery* and *Device offline* alerts; each floor's heading counts its zones heating and gives its average temperature.
+  - A **summary**: zones heating (and which), average room temperature from the coldest to the warmest zone, average target, then the open windows, low batteries, devices offline and the pilot wire radiators per order, a count each.
+  - **Quick actions** for every zone: *Comfort*, *Eco*, *Frost protection*, *Away* and *Off* (`actions`), confirmed at the top of the card with the zones they set and those they cannot reach; each thermostat takes the closest preset it offers, each pilot wire radiator its own spelling of the order; a quick action every zone has already taken shows as pressed.
+  - **Animations**: a zone that heats glows from the bottom of its tile, its flame flickers and heat rises over it (twice as fast and in red on Boost); a pilot wire radiator on comfort glows too, on eco its tile breathes; an alert's icon pulses.
+  - A tap on a zone unfolds the full card on it (`detail: card`), or opens its more-info dialog (`more-info`); the detail button switches to the full card and back, and a click elsewhere brings the overview back.
+  - Filters by area and floor (`areas`, `exclude_areas`, `floors`, `exclude_floors`) and entity (`include`, `exclude`), `group_by`, `sort` (area order, name, coldest first, alerts and heating first), `columns`, `compact` tiles, `show_summary`, `show_actions`, `show_alerts`, `show_pilot_wire`, `show_schedule`, `zoom`, and a visual editor for all of them.
+  - Its new texts in the 22 languages of the cards.
+
 ## 1.0.0 - 2026-11-13
 
 ### Features

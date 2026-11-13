@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
-import { areas, devices, entities, NOW, states, weeks } from "./mock-states.mjs";
+import { areas, devices, entities, floors, NOW, states, weeks } from "./mock-states.mjs";
 import { unchanged } from "./pixels.mjs";
 import { gifs, shots } from "./screenshot-list.mjs";
 
@@ -77,7 +77,7 @@ async function openCard(browser, { file, type, config, theme, width, overrides }
   await page.addScriptTag({ content: HA_CARD });
   await page.addScriptTag({ content: cardJs });
   await page.evaluate(
-    ({ type, config, states, entities, devices, areas, weeks, overrides, theme }) => {
+    ({ type, config, states, entities, devices, areas, floors, weeks, overrides, theme }) => {
       for (const [id, o] of Object.entries(overrides || {})) {
         const { state, ...attrs } = o;
         states[id] = { ...states[id], ...(state != null ? { state } : {}), attributes: { ...states[id].attributes, ...attrs } };
@@ -85,13 +85,13 @@ async function openCard(browser, { file, type, config, theme, width, overrides }
       const el = document.createElement(type);
       el.setConfig({ type: `custom:${type}`, ...config });
       el.hass = {
-        states, entities, devices, areas, language: "en", locale: { language: "en" }, config: { unit_system: { temperature: "°C" } },
+        states, entities, devices, areas, floors, language: "en", locale: { language: "en" }, config: { unit_system: { temperature: "°C" } },
         themes: { darkMode: theme === "dark" }, callService: async () => {},
         callWS: async (msg) => ({ response: { [msg.target?.entity_id]: weeks[msg.target?.entity_id] } }),
       };
       document.getElementById("root").appendChild(el);
     },
-    { type, config, states, entities, devices, areas, weeks, overrides, theme },
+    { type, config, states, entities, devices, areas, floors, weeks, overrides, theme },
   );
   return page;
 }

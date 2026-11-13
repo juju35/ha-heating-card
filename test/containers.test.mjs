@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { areas, devices, entities, states, weeks } from "../scripts/mock-states.mjs";
+import { areas, devices, entities, floors, states, weeks } from "../scripts/mock-states.mjs";
 
 const source = readFileSync(new URL("../src/heating-card.js", import.meta.url), "utf8");
 
@@ -26,7 +26,10 @@ const CONTEXTS = [
   ["block 170", 170, "display:block", 1],
 ];
 
-for (const type of ["heating-card", "heating-mini-card"]) {
+// The width a card takes in a shrink-to-fit parent with room to spare.
+const NATURAL = { "heating-card": 360, "heating-mini-card": 300, "heating-overview-card": 400 };
+
+for (const type of Object.keys(NATURAL)) {
   test(`${type} keeps a width and stays inside its parent`, { skip: !browser && "no Chromium" }, async () => {
     const page = await browser.newPage({ viewport: { width: 1000, height: 800 } });
     try {
@@ -34,8 +37,8 @@ for (const type of ["heating-card", "heating-mini-card"]) {
       await page.addScriptTag({ content: HA_CARD });
       await page.addScriptTag({ content: source });
       const results = await page.evaluate(
-        async ({ type, CONTEXTS, states, entities, devices, areas, weeks }) => {
-          const hass = { states, entities, devices, areas, language: "en", callService: async () => {}, callWS: async (m) => ({ response: { [m.target?.entity_id]: weeks[m.target?.entity_id] } }) };
+        async ({ type, CONTEXTS, states, entities, devices, areas, floors, weeks }) => {
+          const hass = { states, entities, devices, areas, floors, language: "en", callService: async () => {}, callWS: async (m) => ({ response: { [m.target?.entity_id]: weeks[m.target?.entity_id] } }) };
           const runs = [];
           for (const [name, width, style, count] of CONTEXTS) {
             const outer = document.body.appendChild(document.createElement("div"));
@@ -68,7 +71,7 @@ for (const type of ["heating-card", "heating-mini-card"]) {
             }),
           }));
         },
-        { type, CONTEXTS, states, entities, devices, areas, weeks },
+        { type, CONTEXTS, states, entities, devices, areas, floors, weeks },
       );
       for (const { name, cards } of results) {
         for (const { width, overflow, inside, worst } of cards) {
@@ -76,7 +79,7 @@ for (const type of ["heating-card", "heating-mini-card"]) {
           assert.ok(width >= 100, `${name}: the card falls to ${width} px`);
           assert.ok(inside <= 0, `${name}: content ${inside} px outside the card (width ${width}, ${worst})`);
         }
-        if (name.endsWith(" 600")) assert.equal(cards[0].width, type === "heating-card" ? 360 : 300, name);
+        if (name.endsWith(" 600")) assert.equal(cards[0].width, NATURAL[type], name);
       }
     } finally {
       await page.close();
