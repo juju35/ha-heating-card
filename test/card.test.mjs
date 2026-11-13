@@ -253,6 +253,31 @@ test("the editor writes zones from their sections and leaves defaults out", () =
   assert.deepEqual(JSON.parse(JSON.stringify(events.at(-1).detail.config)), { type: "custom:heating-card", zones: [{ entity: "climate.chambre_vanne" }] });
 });
 
+test("the mini card editor offers the full card options its unfolded view uses, plus zoom", () => {
+  const names = (E, type) => {
+    const e = new E();
+    e.setConfig({ type });
+    e._hass = mockHass();
+    return e._schema().flatMap((x) => (x.schema && !x.type?.startsWith("expandable") ? x.schema : [x]).map((y) => y.name));
+  };
+  const full = names(hc.HeatingCardEditor, "custom:heating-card");
+  const mini = names(hc.HeatingMiniCardEditor, "custom:heating-mini-card");
+  for (const n of ["show_title", "show_subtitle", "show_controls", "show_sensors", "show_alerts", "show_pilot_wire", "show_schedule", "collapsed", "language"]) {
+    assert.ok(full.includes(n), `full: ${n}`);
+    assert.ok(mini.includes(n), `mini: ${n}`);
+  }
+  assert.ok(mini.includes("zoom"));
+  assert.ok(!full.includes("zoom"));
+  const e = new hc.HeatingMiniCardEditor();
+  const events = [];
+  e.dispatchEvent = (ev) => events.push(ev);
+  e.setConfig({ type: "custom:heating-mini-card" });
+  e._hass = mockHass();
+  assert.deepEqual(plain(e._data().collapsed), ["schedule"]);
+  e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), show_schedule: false, collapsed: [] } } });
+  assert.deepEqual(plain(events.at(-1).detail.config), { type: "custom:heating-mini-card", show_schedule: false, collapsed: [] });
+});
+
 test("power turns off with climate.turn_off a thermostat that has no off mode", () => {
   const hass = mockHass({ "climate.bureau_thermostat": { state: "heat", hvac_modes: ["heat", "auto"], supported_features: 385 } });
   const c = card({ entity: "climate.bureau_thermostat" }, hass);

@@ -104,7 +104,7 @@ Or manually:
 
 ### Visual editor
 
-Edit a dashboard, click **Add card** and search for **Heating Card**, **Heating Mini Card** or **Heating Overview Card**. Without zones, every heating thermostat and pilot wire radiator is found and grouped by area. Open **Add a zone** to set your own: name, thermostat, pilot wire radiators, room temperature and humidity sensors, schedule, window sensor, illustration and, for a relay, the orders it sends. The overview's editor sets the areas and floors to show or leave out, the entities to add or leave out, the grouping, the sort, what a tap on a zone does, the parts shown and the quick actions offered. The preview updates live, and options left at their default are kept out of the generated YAML.
+Edit a dashboard, click **Add card** and search for **Heating Card**, **Heating Mini Card** or **Heating Overview Card**. Without zones, every heating thermostat and pilot wire radiator is found and grouped by area. Open **Add a zone** to set your own: name, thermostat, pilot wire radiators, room temperature and humidity sensors, schedule, window sensor, illustration and, for a relay, the orders it sends. The overview's editor sets the areas and floors to show or leave out, the entities to add or leave out, the grouping, the sort, what a tap on a zone does, the parts shown (those of the full card a zone unfolds into too) and the quick actions offered; its zones (`zones`) are set in YAML. The preview updates live, and options left at their default are kept out of the generated YAML.
 
 ### Minimal
 
@@ -223,7 +223,7 @@ language: en
 
 | Option | Card | Default | Description |
 |---|---|---|---|
-| `zones` | All | Auto | The zones (see [Zone options](#zone-options)); a zone may also be a bare entity id: a thermostat, or a pilot wire `select` / `switch`. Without `zones`, `entity` or `pilot_wire`, every zone is found by area |
+| `zones` | All | Auto | The zones (see [Zone options](#zone-options)); a zone may also be a bare entity id: a thermostat, or a pilot wire `select` / `switch`. Without `zones`, `entity` or `pilot_wire`, every zone is found by area. In the visual editor of the full and mini cards, one section per zone; on the overview, YAML only (the visual editor keeps it) |
 | `entity`, `pilot_wire`, … | Full, Mini | — | One zone set at the top level: every [zone option](#zone-options) works there too |
 | `title` | All | *Heating*, or the zone name with one zone | Card title (`name` is accepted too) |
 | `show_title` | All | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
@@ -231,10 +231,10 @@ language: en
 | `show_controls` | All | `true` | Modes, power, target, presets and option toggles (the overview's full card) |
 | `show_sensors` | All | `true` | Valve, battery, humidity, outdoor temperature and power chips (the overview's full card) |
 | `show_alerts` | All | `true` | *Window open* and *Low battery* alerts (and *Device offline* on the overview) |
-| `show_pilot_wire` | Full, Overview | `true` | Pilot wire section; on the overview, the pilot wire orders of the summary and of the tiles |
-| `show_schedule` | Full, Overview | `true` | Weekly schedule section; on the overview, the schedule state of the tiles |
-| `collapsed` | Full | `[schedule]` | Sections folded at first: `pilot_wire`, `schedule` |
-| `zoom` | Mini, Overview | `true` | Detail button at the top right that unfolds the full card (a click elsewhere folds it back) |
+| `show_pilot_wire` | All | `true` | Pilot wire section; on the overview, the pilot wire orders of the summary and of the tiles |
+| `show_schedule` | All | `true` | Weekly schedule section; on the overview, the schedule state of the tiles |
+| `collapsed` | All | `[schedule]` | Sections folded at first: `pilot_wire`, `schedule` (the mini card and the overview once unfolded) |
+| `zoom` | Mini, Overview | `true` | Detail button at the top right that unfolds the full card (a click elsewhere folds it back). The full card's options (`show_controls`, `show_sensors`, `show_pilot_wire`, `show_schedule`, `collapsed`…) set the unfolded view, and can be set on the mini card and the overview too, in YAML or in their visual editor |
 | `language` | All | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings; `pt-BR` gets European Portuguese) |
 
 ### Overview options

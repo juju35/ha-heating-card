@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.2 - 2026-11-14
+
+### Fixes
+- Mini card visual editor: **Pilot wire**, **Schedule** and **Folded sections** (`show_pilot_wire`, `show_schedule`, `collapsed`) are now offered; they set the unfolded full card.
+- Overview visual editor: **Controls**, **Measurements** and **Folded sections** (`show_controls`, `show_sensors`, `collapsed`) are now offered, for the full card a zone unfolds into; an empty list of folded sections is kept (nothing folded).
+- README: on the overview, `zones` is marked YAML only (the visual editor keeps it).
+
 ## 1.1.1 - 2026-11-13
 
 ### Fixes
