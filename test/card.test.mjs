@@ -138,8 +138,52 @@ test("the schedule section folds back when clicking elsewhere on the page", () =
   assert.match(html(c), /data-section="schedule" aria-expanded="false"/);
   click(c, { action: "toggle_section", section: "schedule" });
   assert.match(html(c), /data-section="schedule" aria-expanded="true"/);
-  c._onOutside({ composedPath: () => [] });
+  c._outside.tap({ composedPath: () => [] });
   assert.match(html(c), /data-section="schedule" aria-expanded="false"/);
+});
+
+test("no rewrite under a press: an update is held until the click, which draws it at once, or the release", async () => {
+  const c = card({ entity: "climate.salon_thermostat", schedule: "schedule.salon_chauffage" });
+  const open = /data-section="schedule" aria-expanded="true"/;
+  // Pressed: an update (here the section's state changed from elsewhere) does not rewrite the card under the pointer.
+  c._onPress();
+  c._toggled = new Map([["schedule", false]]);
+  c._refresh();
+  assert.doesNotMatch(html(c), open, "held under the press");
+  // Released without a click: drawn right after.
+  c._onPressEnd();
+  await tick();
+  assert.match(html(c), open);
+  // The click itself draws at once.
+  c._onPress();
+  c._onPressClick({ detail: 1 });
+  click(c, { action: "toggle_section", section: "schedule" });
+  assert.doesNotMatch(html(c), open);
+  c._onPressEnd();
+  await tick();
+});
+
+test("folding: a tap elsewhere (pointer), not a drag that ends outside; leaving the page folds back too", () => {
+  const c = card({ entity: "climate.salon_thermostat", schedule: "schedule.salon_chauffage" });
+  c.connectedCallback();
+  const open = /data-section="schedule" aria-expanded="true"/;
+  click(c, { action: "toggle_section", section: "schedule" });
+  // A slider pressed in the card and released outside of it: nothing folds.
+  c._outside.tap({ composedPath: () => [c] });
+  assert.match(html(c), open);
+  // Left with the section open and back: folded.
+  c.disconnectedCallback();
+  c.connectedCallback();
+  assert.doesNotMatch(html(c), open);
+  c.disconnectedCallback();
+  const mini = card({}, mockHass(), hc.HeatingMiniCard);
+  mini.connectedCallback();
+  click(mini, { action: "zone", zone: "3" }, "DIV");
+  assert.match(html(mini), /role="tab" aria-selected="true"/);
+  mini.disconnectedCallback();
+  mini.connectedCallback();
+  assert.match(html(mini), /class="rows"/, "back compact");
+  mini.disconnectedCallback();
 });
 
 test("an unavailable thermostat shows it, without controls", () => {
@@ -161,7 +205,7 @@ test("the mini card lists the zones and unfolds the full card on the zone clicke
   assert.match(html(c), /Window open/);
   click(c, { action: "zone", zone: "3" }, "DIV");
   assert.match(html(c), /role="tab" aria-selected="true" data-action="zone" data-zone="3"/);
-  c._onUnzoom({ composedPath: () => [] });
+  c._unzoom.tap({ composedPath: () => [] });
   assert.match(html(c), /class="rows"/);
 });
 

@@ -3913,6 +3913,41 @@ const isOutside = (card, ev) => {
   const path = ev.composedPath();
   return !path.includes(card) && !path.some((n) => DIALOG_TAGS.has(n.tagName));
 };
+
+// "A click elsewhere" is caught on the pointer, not only on the click event: on iOS (Safari and the companion app) a
+// tap on something that is not clickable (the background, an empty spot, a card with no action) sends no click to the
+// page. It counts when the press and the release are both outside the card (a slider dragged out of the card does not
+// fold it), and a scroll does not count (the browser cancels the pointer). Keyboard clicks still go through the click
+// event. `tap(ev)` (a press and a release at the same spot) is for the tests.
+const watchOutside = (isOut, handler) => {
+  let downOutside = false;
+  const onDown = (ev) => {
+    downOutside = isOut(ev);
+  };
+  const onUp = (ev) => {
+    if (downOutside && isOut(ev)) handler(ev);
+    downOutside = false;
+  };
+  const onClick = (ev) => {
+    if (ev.detail === 0 && isOut(ev)) handler(ev);
+  };
+  return {
+    on() {
+      document.addEventListener("pointerdown", onDown, true);
+      document.addEventListener("pointerup", onUp, true);
+      document.addEventListener("click", onClick, true);
+    },
+    tap(ev) {
+      onDown(ev);
+      onUp(ev);
+    },
+    off() {
+      document.removeEventListener("pointerdown", onDown, true);
+      document.removeEventListener("pointerup", onUp, true);
+      document.removeEventListener("click", onClick, true);
+    },
+  };
+};
 // What identifies the focused control across a render (its tag and data attributes).
 const focusKey = (el) => {
   const data = [...(el?.attributes || [])].filter((a) => a.name.startsWith("data-")).map((a) => [a.name, a.value]);
@@ -3934,6 +3969,34 @@ class HeatingCard extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this._uid = ++UID;
     this._zone = 0;
+    // No rewrite of the card between a press and its click: Home Assistant updates the card several times a second,
+    // and a rewrite under the pointer replaces the element pressed, so that the click lands on the card itself and
+    // does nothing. The update held back is drawn once released: by the click (registered before the card's own
+    // handler, which renders at once), else right after the release.
+    this._onPress = () => {
+      this._byPointer = true;
+      this._pressing = true;
+      window.addEventListener("pointerup", this._onPressEnd, true);
+      window.addEventListener("pointercancel", this._onPressEnd, true);
+    };
+    this._onPressEnd = () => {
+      window.removeEventListener("pointerup", this._onPressEnd, true);
+      window.removeEventListener("pointercancel", this._onPressEnd, true);
+      setTimeout(() => {
+        this._pressing = false;
+        if (this._dirty) this._update();
+      }, 0);
+    };
+    this._onPressClick = (ev) => {
+      if (ev.detail === 0) this._byPointer = false;
+      this._pressing = false;
+    };
+    this.shadowRoot.addEventListener("pointerdown", this._onPress);
+    this.shadowRoot.addEventListener("click", this._onPressClick);
+    // From the keyboard, the focus is kept across rewrites (with the pointer it would draw the focus ring).
+    this.shadowRoot.addEventListener("keydown", () => {
+      this._byPointer = false;
+    });
     this.shadowRoot.addEventListener("click", (ev) => this._onClick(ev));
     this.shadowRoot.addEventListener("change", (ev) => this._onChange(ev));
     this.shadowRoot.addEventListener("keydown", (ev) => this._onKey(ev));
@@ -3942,16 +4005,21 @@ class HeatingCard extends HTMLElement {
     this.shadowRoot.addEventListener("focusout", (ev) => {
       if (ev.target?.tagName === "SELECT") setTimeout(() => this._update(), 0);
     });
-    // A click elsewhere on the page folds the sections back to their defaults (as in ha-carburants-france).
-    this._onOutside = (ev) => {
-      if (!this._toggled?.size || !isOutside(this, ev)) return;
-      this._toggled = new Map();
-      this._refresh();
-    };
+    // A tap elsewhere on the page folds the sections back to their defaults (as in ha-carburants-france).
+    this._outside = watchOutside(
+      (ev) => isOutside(this, ev),
+      () => {
+        if (!this._toggled?.size) return;
+        this._toggled = new Map();
+        this._refresh();
+      },
+    );
   }
 
   connectedCallback() {
-    document.addEventListener("click", this._onOutside, true);
+    this._outside.on();
+    // Back on the page after leaving it: rendered again in its default state.
+    if (this._hass && this._config) this._refresh();
     // The "now" line and the next change of the schedule move on their own: redrawn every minute while the card is on
     // the page and shows a schedule (no other card is rebuilt, nor its animations restarted, for nothing).
     clearInterval(this._tick);
@@ -3962,7 +4030,12 @@ class HeatingCard extends HTMLElement {
   }
 
   disconnectedCallback() {
-    document.removeEventListener("click", this._onOutside, true);
+    this._pressing = this._dirty = false;
+    window.removeEventListener("pointerup", this._onPressEnd, true);
+    window.removeEventListener("pointercancel", this._onPressEnd, true);
+    this._outside.off();
+    // Left (another dashboard view, a conditional card hidden): the sections fold back to their defaults.
+    this._toggled = new Map();
     clearInterval(this._tick);
     clearTimeout(this._tempTimer);
     clearTimeout(this._settleTimer);
@@ -4069,6 +4142,12 @@ class HeatingCard extends HTMLElement {
   // ── Render loop: only when something shown changed (Home Assistant replaces a state object when it changes) ──
   _update() {
     if (!this._hass || !this._config) return;
+    // Held back under a press (see the constructor): drawn once released.
+    if (this._pressing) {
+      this._dirty = true;
+      return;
+    }
+    this._dirty = false;
     const zones = this._zones();
     const h = this._hass;
     const ids = this._ids(zones);
@@ -4081,7 +4160,8 @@ class HeatingCard extends HTMLElement {
     // kept, so the update held back is drawn once the focus leaves it (focusout).
     if (active?.tagName === "SELECT") return;
     this._sig = sig;
-    const key = focusKey(active);
+    // Kept across the rewrite for the keyboard only (with the pointer it would draw the focus ring).
+    const key = this._byPointer ? null : focusKey(active);
     this.shadowRoot.innerHTML = this._render(zones);
     if (key) [...this.shadowRoot.querySelectorAll(key.tag)].find((n) => key.data.every(([k, v]) => n.getAttribute(k) === v))?.focus({ preventScroll: true });
   }
@@ -4789,19 +4869,24 @@ class HeatingMiniCard extends HeatingCard {
 
   constructor() {
     super();
-    this._onUnzoom = (ev) => {
-      if (this._zoomed && isOutside(this, ev)) this._setZoom(false);
-    };
+    this._unzoom = watchOutside(
+      (ev) => isOutside(this, ev),
+      () => {
+        if (this._zoomed) this._setZoom(false);
+      },
+    );
   }
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener("click", this._onUnzoom, true);
+    this._unzoom.on();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener("click", this._onUnzoom, true);
+    this._unzoom.off();
+    // Back to the compact view once off the screen (see the full card).
+    this._zoomed = false;
   }
 
   getCardSize() {
@@ -4935,10 +5020,13 @@ class HeatingOverviewCard extends HeatingMiniCard {
 
   constructor() {
     super();
-    // A click elsewhere on the page closes the confirmation (as Cancel); Escape too.
-    this._onDismiss = (ev) => {
-      if (this._confirm && isOutside(this, ev)) this._closeConfirm();
-    };
+    // A tap elsewhere on the page closes the confirmation (as Cancel); Escape too.
+    this._dismiss = watchOutside(
+      (ev) => isOutside(this, ev),
+      () => {
+        if (this._confirm) this._closeConfirm();
+      },
+    );
     this._onEscape = (ev) => {
       if (ev.key !== "Escape" || !this._confirm) return;
       ev.stopPropagation();
@@ -4948,13 +5036,15 @@ class HeatingOverviewCard extends HeatingMiniCard {
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener("click", this._onDismiss, true);
+    this._dismiss.on();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener("click", this._onDismiss, true);
+    this._dismiss.off();
     window.removeEventListener?.("keydown", this._onEscape);
+    // Left with the confirmation open: closed, as Cancel.
+    this._confirm = null;
   }
 
   getCardSize() {

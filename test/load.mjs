@@ -58,6 +58,8 @@ export const load = () => {
     },
     setTimeout,
     clearTimeout,
+    addEventListener() {},
+    removeEventListener() {},
     setInterval: () => 0,
     clearInterval() {},
   };
