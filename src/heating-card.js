@@ -5413,6 +5413,12 @@ const languageField = (tr) => ({
   selector: { select: { mode: "dropdown", options: [{ value: "", label: tr("ed_language_auto") }, ...LANGUAGES.map(([value, label]) => ({ value, label }))] } },
 });
 
+// The sections folded at first (`collapsed`), on every card: the mini card and the overview unfold into the full card.
+const collapsedField = (tr) => ({
+  name: "collapsed",
+  selector: { select: { multiple: true, mode: "list", options: [["pilot_wire", "pilot_wire"], ["schedule", "schedule"]].map(([value, k]) => ({ value, label: tr(k) })) } },
+});
+
 class HeatingCardEditor extends HTMLElement {
   static get mini() {
     return false;
@@ -5430,10 +5436,10 @@ class HeatingCardEditor extends HTMLElement {
     else this._render();
   }
 
+  // The unfolded mini card is the full card: its editor offers the full card's options too, plus the detail button.
   _defaults() {
-    const d = { show_title: true, show_subtitle: true, show_controls: true, show_sensors: true, show_alerts: true };
+    const d = { show_title: true, show_subtitle: true, show_controls: true, show_sensors: true, show_alerts: true, show_pilot_wire: true, show_schedule: true };
     if (this.constructor.mini) d.zoom = true;
-    else Object.assign(d, { show_pilot_wire: true, show_schedule: true });
     return d;
   }
 
@@ -5472,21 +5478,14 @@ class HeatingCardEditor extends HTMLElement {
         schema: zoneSchema,
       })),
       { type: "grid", name: "", schema: toggles },
-      ...(this.constructor.mini
-        ? []
-        : [
-            {
-              name: "collapsed",
-              selector: { select: { multiple: true, mode: "list", options: [["pilot_wire", "pilot_wire"], ["schedule", "schedule"]].map(([value, k]) => ({ value, label: tr(k) })) } },
-            },
-          ]),
+      collapsedField(tr),
       languageField(tr),
     ];
   }
 
   _data() {
     const data = { ...this._defaults(), ...this._config };
-    if (!this.constructor.mini && data.collapsed === undefined) data.collapsed = DEFAULT_COLLAPSED;
+    if (data.collapsed === undefined) data.collapsed = DEFAULT_COLLAPSED;
     const zones = this._zoneList();
     for (const k of ZONE_KEYS) delete data[k];
     delete data.zones;
@@ -5560,6 +5559,9 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
       show_alerts: true,
       show_pilot_wire: true,
       show_schedule: true,
+      // The full card a zone unfolds into.
+      show_controls: true,
+      show_sensors: true,
       compact: false,
       zoom: true,
       group_by: "floor",
@@ -5591,12 +5593,13 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
       ),
       grid(...toggles),
       { name: "actions", selector: { select: { multiple: true, mode: "list", options: OV_ORDERS.map((value) => ({ value, label: tr(`p_${value}`) })) } } },
+      collapsedField(tr),
       languageField(tr),
     ];
   }
 
   _data() {
-    return { ...this._defaults(), ...this._config };
+    return { ...this._defaults(), collapsed: DEFAULT_COLLAPSED, ...this._config };
   }
 
   _render() {
@@ -5611,7 +5614,7 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
   }
 
   // The config from the form: options left at their default, and emptied ones, are left out (an empty list of quick
-  // actions is kept: no quick action).
+  // actions is kept: no quick action; an empty list of folded sections too: nothing folded).
   _changed(ev) {
     ev.stopPropagation();
     const defaults = this._defaults();
@@ -5620,8 +5623,8 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
     const names = this._schema().flatMap((s) => (s.schema ? s.schema : [s]).map((x) => x.name));
     for (const k of names) if (!(k in ev.detail.value)) delete out[k];
     for (const [k, v] of Object.entries(ev.detail.value)) {
-      const empty = v === "" || v == null || (Array.isArray(v) && !v.length && k !== "actions");
-      if (empty || JSON.stringify(v) === JSON.stringify(defaults[k])) delete out[k];
+      const empty = v === "" || v == null || (Array.isArray(v) && !v.length && k !== "actions" && k !== "collapsed");
+      if (empty || JSON.stringify(v) === JSON.stringify(k === "collapsed" ? DEFAULT_COLLAPSED : defaults[k])) delete out[k];
       else out[k] = v;
     }
     const relang = lang(this._hass, this._config) !== lang(this._hass, out);

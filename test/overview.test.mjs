@@ -210,6 +210,9 @@ test("the overview editor leaves defaults out and keeps an empty list of quick a
   e.hass = mockHass();
   const names = e._schema().flatMap((s) => (s.schema ? s.schema : [s]).map((x) => x.name));
   for (const n of ["areas", "exclude_areas", "floors", "exclude_floors", "include", "exclude", "group_by", "sort", "detail", "columns", "compact", "zoom", "actions"]) assert.ok(names.includes(n), n);
+  // The full card a zone unfolds into: its options are offered too; `zones` stays YAML only.
+  for (const n of ["show_controls", "show_sensors", "show_pilot_wire", "show_schedule", "collapsed"]) assert.ok(names.includes(n), n);
+  assert.ok(!names.includes("zones"));
   let out;
   e.dispatchEvent = (ev) => (out = ev.detail.config);
   const value = { ...e._data(), sort: "temperature", areas: [], actions: [] };
@@ -217,6 +220,12 @@ test("the overview editor leaves defaults out and keeps an empty list of quick a
   assert.deepEqual(plain(out), { type: "custom:heating-overview-card", sort: "temperature", actions: [] });
   e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), actions: ["comfort", "eco", "frost", "away"] } } });
   assert.deepEqual(plain(out), { type: "custom:heating-overview-card", sort: "temperature" });
+  // Folded sections: the default left out, an empty list kept (nothing folded); zones set in YAML kept.
+  e.setConfig({ type: "custom:heating-overview-card", zones: ["climate.salon_thermostat"] });
+  e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), show_controls: false, collapsed: [] } } });
+  assert.deepEqual(plain(out), { type: "custom:heating-overview-card", zones: ["climate.salon_thermostat"], show_controls: false, collapsed: [] });
+  e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), collapsed: ["schedule"] } } });
+  assert.equal(out.collapsed, undefined);
 });
 
 test("the overview is registered with the other cards", () => {
