@@ -8,6 +8,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/juju35/ha-heating-card/blob/main/LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/julienstep9)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/netatmo.png" alt="Netatmo" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/tado.png" alt="tado°" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/zha.png" alt="ZHA" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/heatzy.png" alt="Heatzy" width="64">
+</p>
+
 Lovelace cards for the **heating** of your home in Home Assistant, zone by zone: **thermostats** (wall thermostats, electric radiators, radiator valves), **pilot wire radiators** (comfort, eco, frost protection, off, comfort −1 / −2) and their **weekly schedules**.
 
 The cards work on top of the integrations you already use: any `climate` entity that heats (Netatmo, tado°, Zigbee2MQTT and ZHA radiator valves, Generic Thermostat, Heatzy…), any `select` entity offering pilot wire orders (Nodon, Legrand and other pilot wire modules through Zigbee2MQTT or ZHA, Heatzy…) or a `switch` relay, and Home Assistant's own `schedule` helpers. Zones are **found automatically** and grouped by area: you don't pick the entities one by one. Air conditioners, fans and purifiers are left to [ha-climate-air-card](https://github.com/juju35/ha-climate-air-card): this card only shows heating.
@@ -44,8 +51,8 @@ The cards work on top of the integrations you already use: any `climate` entity 
 
 | Entities | Integrations (examples) | What the cards show |
 |---|---|---|
-| `climate` that heats and cannot cool, dry or only blow | [Netatmo](https://www.home-assistant.io/integrations/netatmo/), [tado°](https://www.home-assistant.io/integrations/tado/), [Zigbee2MQTT](https://www.zigbee2mqtt.io/) and [ZHA](https://www.home-assistant.io/integrations/zha/) radiator valves and thermostats, [Generic Thermostat](https://www.home-assistant.io/integrations/generic_thermostat/), [Heatzy](https://github.com/Cyr-ius/hass-heatzy) | Thermostat: target, modes, presets, `hvac_action`, and the valve, window and battery sensors of its device |
-| `select` offering pilot wire orders | [Zigbee2MQTT](https://www.zigbee2mqtt.io/) / [ZHA](https://www.home-assistant.io/integrations/zha/) pilot wire modules (Nodon SIN-4-FP-21, Legrand cable outlet…), any select whose options are pilot wire orders | Pilot wire orders, comfort / comfort −1 / comfort −2 / eco / frost protection / off |
+| `climate` that heats and cannot cool, dry or only blow | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/netatmo.png" alt="" width="16"> [Netatmo](https://www.home-assistant.io/integrations/netatmo/), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/tado.png" alt="" width="16"> [tado°](https://www.home-assistant.io/integrations/tado/), [Zigbee2MQTT](https://www.zigbee2mqtt.io/) and <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/zha.png" alt="" width="16"> [ZHA](https://www.home-assistant.io/integrations/zha/) radiator valves and thermostats, [Generic Thermostat](https://www.home-assistant.io/integrations/generic_thermostat/), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/heatzy.png" alt="" width="16"> [Heatzy](https://github.com/Cyr-ius/hass-heatzy) | Thermostat: target, modes, presets, `hvac_action`, and the valve, window and battery sensors of its device |
+| `select` offering pilot wire orders | [Zigbee2MQTT](https://www.zigbee2mqtt.io/) / <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/zha.png" alt="" width="16"> [ZHA](https://www.home-assistant.io/integrations/zha/) pilot wire modules (Nodon SIN-4-FP-21, Legrand cable outlet…), any select whose options are pilot wire orders | Pilot wire orders, comfort / comfort −1 / comfort −2 / eco / frost protection / off |
 | `switch` | A relay on the pilot wire (with or without a diode) | The two orders set with `switch_on` / `switch_off` |
 | `schedule` | Home Assistant's [Schedule](https://www.home-assistant.io/integrations/schedule/) helper | Weekly plan and current state |
 | `sensor` | Any temperature and humidity sensor | Room temperature and humidity of a zone without thermostat |
