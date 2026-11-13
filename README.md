@@ -8,6 +8,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/juju35/ha-heating-card/blob/main/LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/julienstep9)
 
+<p align="center"><img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/icon.svg" alt="Heating Card" width="120"></p>
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/netatmo.png" alt="Netatmo" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/tado.png" alt="tado°" width="64">&nbsp;&nbsp;
