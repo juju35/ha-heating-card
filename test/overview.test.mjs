@@ -129,7 +129,7 @@ test("Cancel, a click on the backdrop, Escape or a click elsewhere close the con
     () => click(c, { action: "confirm_cancel" }),
     () => c._onClick({ composedPath: () => [backdrop], stopPropagation() {}, detail: 1 }),
     () => c._onEscape({ key: "Escape", stopPropagation() {} }),
-    () => c._onDismiss({ composedPath: () => [] }),
+    () => c._dismiss.tap({ composedPath: () => [] }),
   ]) {
     c._confirmClosed = 0;
     click(c, { action: "order", value: "eco" });
