@@ -142,6 +142,27 @@ test("the schedule section folds back when clicking elsewhere on the page", () =
   assert.match(html(c), /data-section="schedule" aria-expanded="false"/);
 });
 
+test("no rewrite under a press: an update is held until the click, which draws it at once, or the release", async () => {
+  const c = card({ entity: "climate.salon_thermostat", schedule: "schedule.salon_chauffage" });
+  const open = /data-section="schedule" aria-expanded="true"/;
+  // Pressed: an update (here the section's state changed from elsewhere) does not rewrite the card under the pointer.
+  c._onPress();
+  c._toggled = new Map([["schedule", false]]);
+  c._refresh();
+  assert.doesNotMatch(html(c), open, "held under the press");
+  // Released without a click: drawn right after.
+  c._onPressEnd();
+  await tick();
+  assert.match(html(c), open);
+  // The click itself draws at once.
+  c._onPress();
+  c._onPressClick({ detail: 1 });
+  click(c, { action: "toggle_section", section: "schedule" });
+  assert.doesNotMatch(html(c), open);
+  c._onPressEnd();
+  await tick();
+});
+
 test("folding: a tap elsewhere (pointer), not a drag that ends outside; leaving the page folds back too", () => {
   const c = card({ entity: "climate.salon_thermostat", schedule: "schedule.salon_chauffage" });
   c.connectedCallback();
