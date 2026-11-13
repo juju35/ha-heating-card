@@ -1,0 +1,7 @@
+{
+  "name": "Heating Card",
+  "render_readme": true,
+  "content_in_root": false,
+  "filename": "heating-card.js",
+  "homeassistant": "2024.8.0"
+}

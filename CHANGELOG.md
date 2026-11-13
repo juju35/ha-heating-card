@@ -1,0 +1,17 @@
+# Changelog
+
+## 1.0.0 - 2026-11-13
+
+### Features
+- **Heating Card** (`custom:heating-card`): the heating of the home zone by zone, as text tabs under the header (the selected one underlined in its color, a flickering flame on a zone that heats).
+  - Thermostat part taken from the thermostat card of [ha-climate-air-card](https://github.com/juju35/ha-climate-air-card): animated illustration (round wall thermostat, column radiator or radiator valve, picked from the device model and name or set with `illustration`), room temperature and target, − / + sent once the taps stop (a low / high range gets both ends), heating modes, presets as segmented buttons, valve, battery, humidity, outdoor temperature and power chips, *Window open* and *Low battery* alerts, the device's other switches (child lock…) as option toggles.
+  - Target: a scale from the entity's minimum to its maximum under the stepper, with the room temperature as a tick; the value is a keyboard spin button (arrows, Page Up / Down, Home / End); the − / + buttons turn off at the limits; the pending target shows in the accent color until the entity reports it.
+  - `hvac_action`: *Heating*, *Preheating*, *Idle*, *Off*, *Defrosting*; the animations run only while it really heats (or, without `hvac_action`, while its valve is open); Boost doubles their speed, in red.
+  - Presets: a tap on the selected preset goes back to none (manual) when the entity offers it; frost protection and comfort −1 / −2 recognized with their own label and icon.
+  - Power button only when the thermostat can be turned off (`climate.turn_off` when it has no off mode); back on with the mode it had (`set_hvac_mode`, which every thermostat takes).
+  - Fan mode, swing mode and target humidity as dropdowns for the thermostats that have them, and every mode of a heat pump set by hand, as in the ha-climate-air-card thermostat card; its options keep their names (`entity`, `name`, `icon`, `illustration`, `entities`, `show_*`, `zoom`, `language`).
+  - **Pilot wire** radiators: `select` entities offering at least three pilot wire orders (comfort, comfort −1, comfort −2, eco, frost protection, off, whatever the integration spells them: Zigbee2MQTT, ZHA, Heatzy, French option names…), or a `switch` relay with `switch_on` / `switch_off`; one segmented row per radiator, each order in its color, the radiator glowing on comfort and breathing on eco.
+  - **Weekly schedule**: a `schedule` helper read with `schedule.get_schedule` (or the helpers' list created in the UI), drawn as seven rows of time slots with a pulsing "now" line on today, and its state (*On until 22:00*).
+  - Zones found automatically, grouped by area (thermostat, pilot wire radiators, schedule, room temperature and humidity sensors), or set with `zones`, `entity` or `pilot_wire`.
+- **Heating Mini Card** (`custom:heating-mini-card`): the overview of the zones, one row each (state, preset, alert, room temperature and target), a click unfolding the full card on that zone; on one zone, the compact thermostat with − / + and power. Detail button at the top right, back to the compact view on a click elsewhere.
+- Visual editor for both cards, the zones as folded sections; English, French, German, Spanish, Serbian (Cyrillic and Latin), Italian, Dutch, European Portuguese, Polish, Romanian, Danish, Swedish, Bulgarian, Russian, Ukrainian, Hungarian, Slovak, Czech, Slovenian, Latvian and Greek, each language but English loaded on demand.
