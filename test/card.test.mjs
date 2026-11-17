@@ -419,8 +419,11 @@ test("the illustrated header: theme, readout, ground strip and icon color follow
   assert.match(h, /class="bground g-off"/);
   assert.match(h, /class="badge" style="--hc-color:var\(--disabled-text-color/);
   assert.doesNotMatch(h, /class="brand"/, "no logo for a platform without one");
-  // The overview keeps its classic header.
-  assert.doesNotMatch(html(card({}, mockHass(), hc.HeatingOverviewCard)), /class="banner/);
+  // The overview has it too (the first zone that heats), and keeps the classic one with `illustration: false`.
+  h = html(card({}, mockHass(), hc.HeatingOverviewCard));
+  assert.match(h, /class="banner/);
+  assert.match(h, /class="bground g-/);
+  assert.doesNotMatch(html(card({ illustration: false }, mockHass(), hc.HeatingOverviewCard)), /class="banner/);
 });
 
 test("night follows sun.sun or the dark theme (even with the sun up), and illustration_theme forces it", () => {

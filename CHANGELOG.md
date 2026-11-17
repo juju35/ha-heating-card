@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1 - 2026-11-17
+
+### Fixes
+- **Heating Overview Card**: the illustrated header was missing (it kept the classic one). It now has it like the full and mini cards: the scene draws the first zone that heats (else the first one on, else the first), with its device, room temperature → target and theme; the subtitle counts the zones heating. `illustration: false` and `illustration_theme` apply to the overview itself as well as to the full card a zone unfolds into.
+
 ## 1.2.0 - 2026-11-17
 
 ### Features
