@@ -3742,7 +3742,7 @@ const BASE_STYLE = `${ART_STYLE}
      for the content, a natural width without a minimum (see ha-vacuum-card). */
   :host { display: block; height: 100%; min-width: 0; --hc-natural-width: 360px; }
   :host::before { content: ""; display: grid; grid-template-columns: minmax(0, var(--hc-natural-width)); height: 0; }
-  ha-card { height: 100%; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 10px; container-type: inline-size; overflow: hidden; }
+  ha-card { height: 100%; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 10px; container: hc-card / inline-size; overflow: hidden; }
   .icon { width: 18px; height: 18px; fill: currentColor; flex: none; }
   .empty { display: flex; align-items: center; gap: 10px; color: var(--secondary-text-color); }
   .header { display: flex; align-items: center; gap: 10px; margin-bottom: -2px; }
@@ -3825,7 +3825,7 @@ const BASE_STYLE = `${ART_STYLE}
   .toggle.on { background: color-mix(in srgb, var(--hc-color) 16%, transparent); color: var(--hc-text); }
   .toggle.on .icon { color: var(--hc-color); }
   /* Narrow card: the status pill keeps only its dot, its text clipped (still in the tooltip and for screen readers). */
-  @container (max-width: 230px) {
+  @container hc-card (max-width: 230px) {
     .header { gap: 6px; }
     .st { flex: none; padding: 4px; position: relative; }
     .st .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -3851,7 +3851,19 @@ const BANNER_STYLE = `
   .night .g-off { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.2) 0 1px, transparent 1px 12px), linear-gradient(90deg, #3a414b, #2b3139); box-shadow: inset 0 2px 0 #4a525d; }
   /* The title on the sky, up to the thermometer. */
   .htext { position: absolute; left: 12px; top: 0; bottom: 10px; right: calc(var(--hc-sw) + 4px); display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .htext .titles { flex: 1 1 auto; min-width: 0; align-self: center; padding-top: 0; }
+  .htext .titles { flex: 1 1 auto; min-width: 0; align-self: center; padding-top: 0; display: grid; grid-template-columns: minmax(0, 1fr);
+                   container: hc-titles / inline-size; }
+  /* The status pill on the title's row, in the icon's colour: the title ellipsises first (4 characters kept). */
+  .trow { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .trow .name { flex: 0 1 auto; min-width: 4.6ch; }
+  .banner .bst { flex: none; max-width: 51%; align-self: center; margin: 0; background: color-mix(in srgb, var(--hc-color) 18%, rgba(255,255,255,.78));
+                 color: color-mix(in srgb, var(--hc-color) 45%, #0d2a45); }
+  .banner.night .bst { background: color-mix(in srgb, var(--hc-color) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--hc-color) 35%, #ffffff); }
+  .banner .bst .dot { width: 7px; height: 7px; }
+  /* No room beside the title: the pill on a line of its own under the subtitle; on a very narrow card, its dot alone. */
+  @container hc-titles (max-width: 160px) { .trow { display: contents; } .banner .bst { grid-row: 3; justify-self: start; max-width: 100%; margin-top: 3px; } }
+  @container hc-card (min-width: 201px) { .banner .bst { flex: none; padding: 1px 8px; } .banner .bst .stt { position: static; width: auto; height: auto; clip-path: none; } }
+  @container hc-card (max-width: 200px) { .banner .bst { padding: 4px; } .banner .bst .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }
   .banner .name { color: inherit; }
   .banner .sub { color: #3b5b78; }
   .banner.night .sub { color: rgba(255,255,255,.78); }
@@ -3862,10 +3874,11 @@ const BANNER_STYLE = `
   .brand { position: absolute; right: -4px; bottom: -4px; width: 18px; height: 18px; border-radius: 5px; padding: 2px; box-sizing: border-box;
            display: grid; place-items: center; background: #fff; box-shadow: 0 0 0 1px rgba(13,42,69,.16), 0 1px 3px rgba(13,42,69,.18); }
   .brand img { width: 100%; height: 100%; object-fit: contain; }
-  .banner .zoom { position: absolute; top: 6px; right: 6px; margin: 0; color: #0d2a45; background: rgba(255,255,255,.55); }
-  .banner.night .zoom { color: #fff; background: rgba(10,20,40,.45); }
-  .banner .zoom:hover { background: rgba(255,255,255,.8); }
-  .banner.night .zoom:hover { background: rgba(10,20,40,.7); }
+  .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; color: #33506b; background: rgba(255,255,255,.55);
+                  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); backdrop-filter: blur(4px); }
+  .banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
+  .banner .zoom:hover { background: rgba(255,255,255,.75); }
+  .banner.night .zoom:hover { background: rgba(255,255,255,.22); }
   /* The scene: thermometer and readout in the theme's color, the zone's device drawn by \`art\`. */
   .btube { fill: #fff; stroke: #d3d9e0; }
   .night .btube { fill: #2a3446; stroke: #55617a; }
@@ -4692,7 +4705,9 @@ class HeatingCard extends HTMLElement {
     return (
       `<div class="banner${night ? " night" : ""}" style="${vars}">${scene.svg}<div class="bground g-${theme}"></div>` +
       `<div class="htext"><div class="badge${summary.heating ? " heating" : ""}" style="--hc-color:${color}" title="${esc(summary.status)}">${icon}${this._brand(z)}</div>` +
-      `<div class="titles"><div class="name">${esc(title)}</div>${sub ? `<div class="sub" role="status">${esc(sub)}</div>` : ""}</div></div>` +
+      `<div class="titles"><div class="trow"><div class="name">${esc(title)}</div>` +
+      `<span class="st bst${summary.heating ? " heating" : ""}" style="--hc-color:${color}" title="${esc(summary.status)}" role="status"><span class="dot"></span><span class="stt">${esc(summary.status)}</span></span></div>` +
+      `${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div></div>` +
       `${zoom}</div>`
     );
   }
@@ -4735,9 +4750,7 @@ class HeatingCard extends HTMLElement {
     const z0 = zones[0];
     const place = [z0.name, areaName(this._hass, z0.id || z0.pilots[0])].find((x) => x && x !== title) || "";
     const banner = this._illustrated();
-    // The illustrated header has no status pill: the status leads the subtitle.
-    const sub =
-      zones.length === 1 ? [c.title || c.name ? place : "", banner ? m.status : "", m.presetText].filter(Boolean).join(" · ") : summary.sub;
+    const sub = zones.length === 1 ? [c.title || c.name ? place : "", m.presetText].filter(Boolean).join(" · ") : summary.sub;
     return (
       `${this._styles(m.color, FULL_STYLE)}<ha-card>` +
       this._header(title, sub, summary, m) +
@@ -5310,7 +5323,7 @@ class HeatingMiniCard extends HeatingCard {
     }
     return (
       `${this._styles(m.color, MINI_STYLE)}<ha-card class="mini">` +
-      this._header(c.title || c.name || z.name, this._illustrated() ? [m.status, m.presetText].filter(Boolean).join(" · ") : "", summary, m) +
+      this._header(c.title || c.name || z.name, this._illustrated() ? m.presetText : "", summary, m) +
       `<div class="content">${this._illustrated() ? "" : this._picture(m)}<div class="info">${lines.join("")}${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}</div>` +
       `${btns.length ? `<div class="mcontrols">${btns.join("")}</div>` : ""}</div></ha-card>`
     );
