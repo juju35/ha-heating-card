@@ -39,7 +39,8 @@ The cards work on top of the integrations you already use: any `climate` entity 
 - **Pilot wire** radiators: one row of orders per radiator (`select` or `switch` relay), each order in its color (*−1* / *−2* stay on the icon-only buttons of comfort −1 / −2); the radiator glows on comfort and breathes on eco
 - **Weekly schedule**: the week of a `schedule` helper as seven rows of time slots, today highlighted with a pulsing "now" line, and its state (*On until 22:00*)
 - Valve opening, battery, humidity, outdoor temperature and power chips; *Window open* and *Low battery* (15 % or less) alerts; the thermostat's other switches (child lock, window detection…) as option toggles
-- The header icon and status pill follow the whole home: heating, idle, off or unavailable; the subtitle counts the zones heating
+- **Illustrated header** (full and mini cards, 90 px): a temperature scene on the right, with a thermometer, the room temperature → target and the zone's own device drawn big (wall thermostat, radiator or radiator valve), over a 10 px ground strip edge to edge. *Heating* is orange (the device glows, heat rises, the mercury breathes), *Eco* green with a swaying leaf, *Frost protection* blue with drifting snowflakes, *Off* grey. Night colors after sunset (`sun.sun`, else the dark theme), forced with `illustration_theme`; `illustration: false` keeps the classic header
+- The header icon says the status (heating in the heat or boost color, eco green, frost protection blue, idle or off grey, an open window or low battery amber, unavailable red), with the integration's logo (Netatmo, tado°, Heatzy, ZHA) in a badge; the subtitle counts the zones heating, or gives the zone's state and preset
 - Mini card: the overview of the zones, one row each, a click unfolding the full card on that zone; on one zone, the compact thermostat with − / + and power. Detail button at the top right; a click anywhere outside the card brings the compact view back
 - **Overview card**: the heating of the whole home at a glance, **floor by floor** (one tile per zone: state, room temperature and target, preset, pilot wire radiators, schedule, alerts), a **summary** (zones heating, average room temperature from the coldest to the warmest zone, average target, open windows, low batteries, devices offline, pilot wire radiators per order) and **quick actions** for every zone (*Comfort*, *Eco*, *Frost protection*, *Away*, *Off*) confirmed at the top of the card; a tap on a zone unfolds the full card on it. The zones that heat glow, their flame flickers and heat rises over them; filters by area, floor and entity, sorts, compact tiles
 - Collapsible sections (the schedule folded by default), folded back on a click elsewhere
@@ -178,6 +179,7 @@ show_pilot_wire: true
 show_schedule: true
 collapsed:
   - schedule
+illustration_theme: auto
 language: en
 ```
 
@@ -234,6 +236,8 @@ language: en
 | `show_pilot_wire` | All | `true` | Pilot wire section; on the overview, the pilot wire orders of the summary and of the tiles |
 | `show_schedule` | All | `true` | Weekly schedule section; on the overview, the schedule state of the tiles |
 | `collapsed` | All | `[schedule]` | Sections folded at first: `pilot_wire`, `schedule` (the mini card and the overview once unfolded) |
+| `illustration` | All | `true` | `false` keeps the classic header (round icon, title and status pill) instead of the illustrated one, the device then drawn next to the temperatures (the overview's full card). Any other value is the zone's illustration (see [Zone options](#zone-options)) |
+| `illustration_theme` | All | `auto` | Colors of the illustrated header: `auto` (night when `sun.sun` is below the horizon, else with Home Assistant's dark theme), `day` or `night` (the overview's full card) |
 | `zoom` | Mini, Overview | `true` | Detail button at the top right that unfolds the full card (a click elsewhere folds it back). The full card's options (`show_controls`, `show_sensors`, `show_pilot_wire`, `show_schedule`, `collapsed`…) set the unfolded view, and can be set on the mini card and the overview too, in YAML or in their visual editor |
 | `language` | All | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings; `pt-BR` gets European Portuguese) |
 

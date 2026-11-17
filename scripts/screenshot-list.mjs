@@ -43,7 +43,7 @@ export const shots = [
 //   heating-valve     — radiator valve open (45 %): its radiator glows, heat rises
 //   boost             — Boost preset: the flame and the heat go twice as fast, in red
 //   pilot-comfort     — pilot wire radiator on comfort: glowing and giving off heat
-//   pilot-eco         — pilot wire radiator on eco: a slow breathing glow
+//   pilot-eco         — pilot wire radiator on eco: a slow breathing glow, the header's green leaf sways
 //   overview          — the zones overview: the flame of each heating zone flickers, the header radiator's heat rises
 //   overview-card-heating — the overview card with two zones heating: their flames flicker, their tiles glow and heat
 //                       rises over them, the bathroom's tile on eco breathes, the open window's alert pulses

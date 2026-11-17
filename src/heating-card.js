@@ -113,6 +113,11 @@ const STRINGS = {
     ed_show_schedule: "Schedule",
     ed_zoom: "Detail button",
     ed_zoom_helper: "Button at the top right that switches the mini card to the full card and back",
+    ed_banner: "Illustrated header",
+    ed_illustration_theme: "Illustration theme",
+    theme_auto: "Automatic (sun)",
+    theme_day: "Day",
+    theme_night: "Night",
     ed_collapsed: "Folded sections",
     ed_language: "Language",
     ed_language_auto: "Automatic (Home Assistant)",
@@ -249,6 +254,11 @@ const STRINGS = {
     ed_show_schedule: "Planning",
     ed_zoom: "Bouton détail",
     ed_zoom_helper: "Bouton en haut à droite qui bascule la mini-carte vers la carte complète et inversement",
+    ed_banner: "En-tête illustré",
+    ed_illustration_theme: "Thème de l'illustration",
+    theme_auto: "Automatique (soleil)",
+    theme_day: "Jour",
+    theme_night: "Nuit",
     ed_collapsed: "Sections repliées",
     ed_language: "Langue",
     ed_language_auto: "Automatique (Home Assistant)",
@@ -385,6 +395,11 @@ const STRINGS = {
     ed_show_schedule: "Zeitplan",
     ed_zoom: "Detail-Schaltfläche",
     ed_zoom_helper: "Schaltfläche oben rechts, die die Mini-Karte zur ganzen Karte umschaltet und zurück",
+    ed_banner: "Illustrierte Kopfzeile",
+    ed_illustration_theme: "Thema der Illustration",
+    theme_auto: "Automatisch (Sonne)",
+    theme_day: "Tag",
+    theme_night: "Nacht",
     ed_collapsed: "Eingeklappte Abschnitte",
     ed_language: "Sprache",
     ed_language_auto: "Automatisch (Home Assistant)",
@@ -521,6 +536,11 @@ const STRINGS = {
     ed_show_schedule: "Programa",
     ed_zoom: "Botón de detalle",
     ed_zoom_helper: "Botón arriba a la derecha que cambia la mini tarjeta a la tarjeta completa y viceversa",
+    ed_banner: "Cabecera ilustrada",
+    ed_illustration_theme: "Tema de la ilustración",
+    theme_auto: "Automático (sol)",
+    theme_day: "Día",
+    theme_night: "Noche",
     ed_collapsed: "Secciones plegadas",
     ed_language: "Idioma",
     ed_language_auto: "Automático (Home Assistant)",
@@ -657,6 +677,11 @@ const STRINGS = {
     ed_show_schedule: "Распоред",
     ed_zoom: "Дугме за детаље",
     ed_zoom_helper: "Дугме горе десно које пребацује мини картицу на целу картицу и назад",
+    ed_banner: "Илустровано заглавље",
+    ed_illustration_theme: "Тема илустрације",
+    theme_auto: "Аутоматски (сунце)",
+    theme_day: "Дан",
+    theme_night: "Ноћ",
     ed_collapsed: "Скупљени одељци",
     ed_language: "Језик",
     ed_language_auto: "Аутоматски (Home Assistant)",
@@ -793,6 +818,11 @@ const STRINGS = {
     ed_show_schedule: "Raspored",
     ed_zoom: "Dugme za detalje",
     ed_zoom_helper: "Dugme gore desno koje prebacuje mini karticu na celu karticu i nazad",
+    ed_banner: "Ilustrovano zaglavlje",
+    ed_illustration_theme: "Tema ilustracije",
+    theme_auto: "Automatski (sunce)",
+    theme_day: "Dan",
+    theme_night: "Noć",
     ed_collapsed: "Skupljeni odeljci",
     ed_language: "Jezik",
     ed_language_auto: "Automatski (Home Assistant)",
@@ -929,6 +959,11 @@ const STRINGS = {
     ed_show_schedule: "Programma",
     ed_zoom: "Pulsante dettagli",
     ed_zoom_helper: "Pulsante in alto a destra che passa dalla mini scheda alla scheda completa e viceversa",
+    ed_banner: "Intestazione illustrata",
+    ed_illustration_theme: "Tema dell'illustrazione",
+    theme_auto: "Automatico (sole)",
+    theme_day: "Giorno",
+    theme_night: "Notte",
     ed_collapsed: "Sezioni chiuse",
     ed_language: "Lingua",
     ed_language_auto: "Automatica (Home Assistant)",
@@ -1065,6 +1100,11 @@ const STRINGS = {
     ed_show_schedule: "Schema",
     ed_zoom: "Detailknop",
     ed_zoom_helper: "Knop rechtsboven die de minikaart naar de volledige kaart wisselt en terug",
+    ed_banner: "Geïllustreerde koptekst",
+    ed_illustration_theme: "Thema van de illustratie",
+    theme_auto: "Automatisch (zon)",
+    theme_day: "Dag",
+    theme_night: "Nacht",
     ed_collapsed: "Ingeklapte secties",
     ed_language: "Taal",
     ed_language_auto: "Automatisch (Home Assistant)",
@@ -1201,6 +1241,11 @@ const STRINGS = {
     ed_show_schedule: "Horário",
     ed_zoom: "Botão de detalhe",
     ed_zoom_helper: "Botão no canto superior direito que alterna o mini cartão para o cartão completo e vice-versa",
+    ed_banner: "Cabeçalho ilustrado",
+    ed_illustration_theme: "Tema da ilustração",
+    theme_auto: "Automático (sol)",
+    theme_day: "Dia",
+    theme_night: "Noite",
     ed_collapsed: "Secções recolhidas",
     ed_language: "Idioma",
     ed_language_auto: "Automático (Home Assistant)",
@@ -1337,6 +1382,11 @@ const STRINGS = {
     ed_show_schedule: "Harmonogram",
     ed_zoom: "Przycisk szczegółów",
     ed_zoom_helper: "Przycisk w prawym górnym rogu przełączający mini kartę na pełną kartę i z powrotem",
+    ed_banner: "Ilustrowany nagłówek",
+    ed_illustration_theme: "Motyw ilustracji",
+    theme_auto: "Automatyczny (słońce)",
+    theme_day: "Dzień",
+    theme_night: "Noc",
     ed_collapsed: "Zwinięte sekcje",
     ed_language: "Język",
     ed_language_auto: "Automatyczny (Home Assistant)",
@@ -1473,6 +1523,11 @@ const STRINGS = {
     ed_show_schedule: "Program",
     ed_zoom: "Buton detalii",
     ed_zoom_helper: "Buton din dreapta sus care comută mini cardul la cardul complet și înapoi",
+    ed_banner: "Antet ilustrat",
+    ed_illustration_theme: "Tema ilustrației",
+    theme_auto: "Automată (soare)",
+    theme_day: "Zi",
+    theme_night: "Noapte",
     ed_collapsed: "Secțiuni pliate",
     ed_language: "Limbă",
     ed_language_auto: "Automată (Home Assistant)",
@@ -1609,6 +1664,11 @@ const STRINGS = {
     ed_show_schedule: "Tidsplan",
     ed_zoom: "Detaljeknap",
     ed_zoom_helper: "Knap øverst til højre, der skifter minikortet til hele kortet og tilbage",
+    ed_banner: "Illustreret overskrift",
+    ed_illustration_theme: "Illustrationstema",
+    theme_auto: "Automatisk (sol)",
+    theme_day: "Dag",
+    theme_night: "Nat",
     ed_collapsed: "Sammenfoldede sektioner",
     ed_language: "Sprog",
     ed_language_auto: "Automatisk (Home Assistant)",
@@ -1745,6 +1805,11 @@ const STRINGS = {
     ed_show_schedule: "Schema",
     ed_zoom: "Detaljknapp",
     ed_zoom_helper: "Knapp uppe till höger som växlar minikortet till hela kortet och tillbaka",
+    ed_banner: "Illustrerat sidhuvud",
+    ed_illustration_theme: "Illustrationstema",
+    theme_auto: "Automatiskt (sol)",
+    theme_day: "Dag",
+    theme_night: "Natt",
     ed_collapsed: "Hopfällda avsnitt",
     ed_language: "Språk",
     ed_language_auto: "Automatiskt (Home Assistant)",
@@ -1881,6 +1946,11 @@ const STRINGS = {
     ed_show_schedule: "График",
     ed_zoom: "Бутон за подробности",
     ed_zoom_helper: "Бутон горе вдясно, който превключва мини картата към цялата карта и обратно",
+    ed_banner: "Илюстрирана заглавка",
+    ed_illustration_theme: "Тема на илюстрацията",
+    theme_auto: "Автоматично (слънце)",
+    theme_day: "Ден",
+    theme_night: "Нощ",
     ed_collapsed: "Свити секции",
     ed_language: "Език",
     ed_language_auto: "Автоматично (Home Assistant)",
@@ -2017,6 +2087,11 @@ const STRINGS = {
     ed_show_schedule: "Расписание",
     ed_zoom: "Кнопка подробностей",
     ed_zoom_helper: "Кнопка вверху справа, переключающая мини-карточку на полную и обратно",
+    ed_banner: "Иллюстрированный заголовок",
+    ed_illustration_theme: "Тема иллюстрации",
+    theme_auto: "Автоматически (солнце)",
+    theme_day: "День",
+    theme_night: "Ночь",
     ed_collapsed: "Свёрнутые разделы",
     ed_language: "Язык",
     ed_language_auto: "Автоматически (Home Assistant)",
@@ -2153,6 +2228,11 @@ const STRINGS = {
     ed_show_schedule: "Розклад",
     ed_zoom: "Кнопка деталей",
     ed_zoom_helper: "Кнопка вгорі праворуч, що перемикає міні-картку на повну і назад",
+    ed_banner: "Ілюстрований заголовок",
+    ed_illustration_theme: "Тема ілюстрації",
+    theme_auto: "Автоматично (сонце)",
+    theme_day: "День",
+    theme_night: "Ніч",
     ed_collapsed: "Згорнуті розділи",
     ed_language: "Мова",
     ed_language_auto: "Автоматично (Home Assistant)",
@@ -2289,6 +2369,11 @@ const STRINGS = {
     ed_show_schedule: "Ütemezés",
     ed_zoom: "Részletek gomb",
     ed_zoom_helper: "Jobb felső gomb, amely a mini kártyát a teljes kártyára váltja és vissza",
+    ed_banner: "Illusztrált fejléc",
+    ed_illustration_theme: "Az illusztráció témája",
+    theme_auto: "Automatikus (nap)",
+    theme_day: "Nappal",
+    theme_night: "Éjszaka",
     ed_collapsed: "Összecsukott szakaszok",
     ed_language: "Nyelv",
     ed_language_auto: "Automatikus (Home Assistant)",
@@ -2425,6 +2510,11 @@ const STRINGS = {
     ed_show_schedule: "Rozvrh",
     ed_zoom: "Tlačidlo podrobností",
     ed_zoom_helper: "Tlačidlo vpravo hore, ktoré prepne mini kartu na celú kartu a späť",
+    ed_banner: "Ilustrovaná hlavička",
+    ed_illustration_theme: "Téma ilustrácie",
+    theme_auto: "Automaticky (slnko)",
+    theme_day: "Deň",
+    theme_night: "Noc",
     ed_collapsed: "Zbalené sekcie",
     ed_language: "Jazyk",
     ed_language_auto: "Automaticky (Home Assistant)",
@@ -2561,6 +2651,11 @@ const STRINGS = {
     ed_show_schedule: "Rozvrh",
     ed_zoom: "Tlačítko podrobností",
     ed_zoom_helper: "Tlačítko vpravo nahoře, které přepne mini kartu na celou kartu a zpět",
+    ed_banner: "Ilustrovaná hlavička",
+    ed_illustration_theme: "Motiv ilustrace",
+    theme_auto: "Automaticky (slunce)",
+    theme_day: "Den",
+    theme_night: "Noc",
     ed_collapsed: "Sbalené sekce",
     ed_language: "Jazyk",
     ed_language_auto: "Automaticky (Home Assistant)",
@@ -2697,6 +2792,11 @@ const STRINGS = {
     ed_show_schedule: "Urnik",
     ed_zoom: "Gumb za podrobnosti",
     ed_zoom_helper: "Gumb zgoraj desno, ki preklopi mini kartico na celotno kartico in nazaj",
+    ed_banner: "Ilustrirana glava",
+    ed_illustration_theme: "Tema ilustracije",
+    theme_auto: "Samodejno (sonce)",
+    theme_day: "Dan",
+    theme_night: "Noč",
     ed_collapsed: "Strnjeni razdelki",
     ed_language: "Jezik",
     ed_language_auto: "Samodejno (Home Assistant)",
@@ -2833,6 +2933,11 @@ const STRINGS = {
     ed_show_schedule: "Grafiks",
     ed_zoom: "Detaļu poga",
     ed_zoom_helper: "Poga augšā pa labi, kas pārslēdz mini karti uz pilno karti un atpakaļ",
+    ed_banner: "Ilustrēta galvene",
+    ed_illustration_theme: "Ilustrācijas tēma",
+    theme_auto: "Automātiski (saule)",
+    theme_day: "Diena",
+    theme_night: "Nakts",
     ed_collapsed: "Sakļautās sadaļas",
     ed_language: "Valoda",
     ed_language_auto: "Automātiski (Home Assistant)",
@@ -2969,6 +3074,11 @@ const STRINGS = {
     ed_show_schedule: "Πρόγραμμα",
     ed_zoom: "Κουμπί λεπτομερειών",
     ed_zoom_helper: "Κουμπί πάνω δεξιά που αλλάζει τη μίνι κάρτα στην πλήρη κάρτα και πίσω",
+    ed_banner: "Εικονογραφημένη κεφαλίδα",
+    ed_illustration_theme: "Θέμα εικονογράφησης",
+    theme_auto: "Αυτόματα (ήλιος)",
+    theme_day: "Ημέρα",
+    theme_night: "Νύχτα",
     ed_collapsed: "Συμπτυγμένες ενότητες",
     ed_language: "Γλώσσα",
     ed_language_auto: "Αυτόματα (Home Assistant)",
@@ -3509,37 +3619,108 @@ const variantOf = (hass, id, illustration) => {
   return guessVariant([dev?.model, dev?.name, dev?.name_by_user, id, hass.states[id]?.attributes.friendly_name].filter(Boolean).join(" "));
 };
 
+// ── Illustrated header ─────────────────────────────────────────────────────────────────────────────────────────
+// A 90 px banner: the title on the sky at the left, a temperature scene at the right (thermometer, current → target
+// temperature, the zone's own device drawn big by `art`) and a 10 px ground strip edge to edge, in the zone's theme:
+// heating (orange, heat rising and a halo while it heats), eco (green, a leaf), frost protection (blue, snowflakes)
+// or off (grey). Night colors after sunset (sun.sun, else the dark theme), forced by `illustration_theme`.
+
+// Brand logos, by integration (the entity's platform), embedded by the build from images/badges/<platform>.png.
+const BRAND_LOGOS = {} /* __BRAND_LOGOS__ */;
+
+// The theme's accent, then its tint of the sky behind the scene, by day and by night.
+const BANNER_TINTS = {
+  heat: ["#e8590c", "#ffe6d2", "#3a2a26"],
+  eco: ["#2e9d5a", "#e4f4e9", "#1f3328"],
+  frost: ["#2f80ed", "#dcecfb", "#1d2a3d"],
+  off: ["#8a94a0", "#eceff3", "#262c35"],
+};
+// The thermometer's level when no room temperature is known.
+const BANNER_LEVELS = { heat: 0.62, eco: 0.5, frost: 0.15, off: 0.08 };
+// Each device cropped from the art's 80 × 94 box, and its largest size in the 200 × 80 scene (floor at y 80).
+const BANNER_DEVICES = {
+  dial: { vb: [11, 23, 58, 58], w: 54, h: 54 },
+  radiator: { vb: [4, 26, 75, 63], w: 62, h: 62 },
+  valve: { vb: [0, 2, 78, 84], w: 76, h: 76 },
+};
+
+// The banner's theme from a zone's model: off, frost protection (its preset, order or a target of 10° or less), eco
+// (eco, away and sleep presets, eco order) or heating.
+const bannerTheme = (m) => {
+  if (!m.online || !m.on) return "off";
+  if (m.pilot) return m.pilot === "eco" ? "eco" : m.pilot === "frost" ? "frost" : "heat";
+  const k = presetKey(m.preset);
+  if (k === "frost" || (m.target != null && m.target <= 10)) return "frost";
+  if (k === "eco" || k === "away" || k === "sleep") return "eco";
+  return "heat";
+};
+
+const flake = (x, y, i) =>
+  `<g transform="translate(${x.toFixed(1)} ${y})"><g class="bflake f${i}"><path d="M0-3.2V3.2M-2.8-1.6L2.8 1.6M-2.8 1.6L2.8-1.6"/></g></g>`;
+
+// The scene (200 × 80, drawn 1:1). `dev` is the device's markup from `art` or "", `devW` / `devH` its size,
+// `right` the x of its right edge; `cur` / `tgt` the readout's texts. Returns the markup and where the thermometer
+// and the device start, for the title's room.
+const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, level, active }) => {
+  const [c, day, dark] = BANNER_TINTS[theme];
+  const devX = right - devW;
+  const textW = Math.max(cur.length * 7.6, tgt.length * 3.8);
+  const readX = textW ? devX - 6 - textW : devX;
+  const tx = readX - (textW ? 11 : 12);
+  const lvl = Math.max(0.06, Math.min(1, level));
+  const top = 80 - devH;
+  let fx = "";
+  if (theme === "heat" && active)
+    fx = `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="${(80 - devH / 2).toFixed(1)}" rx="${(devW * 0.62).toFixed(1)}" ry="${(devH * 0.52).toFixed(1)}" fill="#ff9a52"/>`;
+  else if (theme === "eco") {
+    const [lx, ly] = top >= 22 ? [devX + devW / 2, top - 9] : [devX - 6, 12];
+    fx = `<g transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)})"><path class="bleaf" d="M0 8q-10-5-5-16q11 0 10 12q-1 4-5 4z"/></g>`;
+  } else if (theme === "frost") fx = `<g class="bflakes">${flake(devX - 7, 10, 0) + flake(devX - 17, 25, 1) + flake(tx + 15, 8, 2)}</g>`;
+  const readout = textW
+    ? `<text class="bcur" x="${readX.toFixed(1)}" y="44">${esc(cur)}</text>${tgt ? `<text class="btgt" x="${readX.toFixed(1)}" y="56">${esc(tgt)}</text>` : ""}`
+    : "";
+  const svg =
+    `<svg class="bscene" viewBox="0 0 200 80" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false" style="--bc:${c}">` +
+    `<defs><linearGradient id="hcb-g-${uid}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${night ? dark : day}" stop-opacity="0"/>` +
+    `<stop offset=".45" stop-color="${night ? dark : day}"/><stop offset="1" stop-color="${night ? dark : day}"/></linearGradient></defs>` +
+    `<rect width="200" height="80" fill="url(#hcb-g-${uid})"/>${fx}` +
+    `<g class="bthermo"><g transform="translate(${tx.toFixed(1)} 14)"><rect class="btube" x="-4.5" y="0" width="9" height="48" rx="4.5"/>` +
+    `<rect class="bmerc${theme === "heat" && active ? " rise" : ""}" x="-2.2" y="${(3 + 42 * (1 - lvl)).toFixed(1)}" width="4.4" height="${(42 * lvl).toFixed(1)}" rx="2.2"/>` +
+    `<circle class="bbulb" cy="52" r="6.4"/></g>${readout}</g>${dev}</svg>`;
+  return { svg, tx, devX };
+};
+
 // ── Styles ─────────────────────────────────────────────────────────────────────────────────────────────────────
 // The look of ha-climate-air-card (header badge, pill, segments, steppers, chips), on --hc-color.
 const ART_STYLE = `
   .picture { position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 76px; height: 88px; }
   .picture svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 6px rgba(0,0,0,.18)); }
-  .picture .disp { font: 600 5.6px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: var(--hc-color); }
-  .picture .disp.big { font-size: 8.4px; }
-  .picture .arc { stroke: var(--hc-color); transition: stroke .4s; }
-  .picture .led { fill: #9aa5b1; }
-  .picture .c-stop { stop-color: var(--hc-color); }
-  .picture .floor, .picture .halo, .picture .glow { opacity: 0; transition: opacity .6s; }
-  .picture .flame { fill: var(--hc-color); opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }
-  .picture .heat { fill: none; stroke: var(--hc-color); stroke-width: 1.4; stroke-linecap: round; }
-  .picture .heat path { opacity: 0; transform-box: view-box; }
-  .picture.running .led { fill: var(--hc-color); }
-  .picture.running .floor { opacity: .45; }
-  .picture.running.active .floor, .picture.running.active .halo { opacity: 1; }
-  .picture.running.active .led { animation: hc-blink 2s ease-in-out infinite; }
-  .picture.running.active .glow { opacity: 1; animation: hc-glow 3.2s ease-in-out infinite; }
-  .picture.running.active .flame { opacity: 1; animation: hc-flame 1.3s ease-in-out infinite; }
-  .picture.running.active .heat path { animation: hc-rise 2.8s ease-in-out infinite; }
-  .picture.running.active .heat path:nth-child(2) { animation-delay: .9s; }
-  .picture.running.active .heat path:nth-child(3) { animation-delay: 1.8s; }
+  :is(.picture, .bdev) .disp { font: 600 5.6px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: var(--hc-color); }
+  :is(.picture, .bdev) .disp.big { font-size: 8.4px; }
+  :is(.picture, .bdev) .arc { stroke: var(--hc-color); transition: stroke .4s; }
+  :is(.picture, .bdev) .led { fill: #9aa5b1; }
+  :is(.picture, .bdev) .c-stop { stop-color: var(--hc-color); }
+  :is(.picture, .bdev) .floor, :is(.picture, .bdev) .halo, :is(.picture, .bdev) .glow { opacity: 0; transition: opacity .6s; }
+  :is(.picture, .bdev) .flame { fill: var(--hc-color); opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }
+  :is(.picture, .bdev) .heat { fill: none; stroke: var(--hc-color); stroke-width: 1.4; stroke-linecap: round; }
+  :is(.picture, .bdev) .heat path { opacity: 0; transform-box: view-box; }
+  :is(.picture, .bdev).running .led { fill: var(--hc-color); }
+  :is(.picture, .bdev).running .floor { opacity: .45; }
+  :is(.picture, .bdev).running.active .floor, :is(.picture, .bdev).running.active .halo { opacity: 1; }
+  :is(.picture, .bdev).running.active .led { animation: hc-blink 2s ease-in-out infinite; }
+  :is(.picture, .bdev).running.active .glow { opacity: 1; animation: hc-glow 3.2s ease-in-out infinite; }
+  :is(.picture, .bdev).running.active .flame { opacity: 1; animation: hc-flame 1.3s ease-in-out infinite; }
+  :is(.picture, .bdev).running.active .heat path { animation: hc-rise 2.8s ease-in-out infinite; }
+  :is(.picture, .bdev).running.active .heat path:nth-child(2) { animation-delay: .9s; }
+  :is(.picture, .bdev).running.active .heat path:nth-child(3) { animation-delay: 1.8s; }
   /* Boost: the flame and the heat go twice as fast. */
-  .picture.boost.active .flame { animation-duration: .65s; }
-  .picture.boost.active .heat path { animation-duration: 1.4s; }
-  .picture.boost.active .heat path:nth-child(2) { animation-delay: .45s; }
-  .picture.boost.active .heat path:nth-child(3) { animation-delay: .9s; }
+  :is(.picture, .bdev).boost.active .flame { animation-duration: .65s; }
+  :is(.picture, .bdev).boost.active .heat path { animation-duration: 1.4s; }
+  :is(.picture, .bdev).boost.active .heat path:nth-child(2) { animation-delay: .45s; }
+  :is(.picture, .bdev).boost.active .heat path:nth-child(3) { animation-delay: .9s; }
   /* A pilot wire radiator on eco breathes slowly, on frost protection it barely glows. */
-  .picture.pw-eco .glow { opacity: .7; animation: hc-breathe-glow 4s ease-in-out infinite; }
-  .picture.pw-frost .glow { opacity: .35; }
+  :is(.picture, .bdev).pw-eco .glow { opacity: .7; animation: hc-breathe-glow 4s ease-in-out infinite; }
+  :is(.picture, .bdev).pw-frost .glow { opacity: .35; }
   .iconart { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
              background: color-mix(in srgb, var(--hc-color) 15%, transparent); color: var(--hc-color); }
   .iconart ha-icon { --mdc-icon-size: 32px; }
@@ -3650,6 +3831,67 @@ const BASE_STYLE = `${ART_STYLE}
     .st .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+`;
+
+// The illustrated header (full and mini cards), edge to edge over the card's padding.
+const BANNER_STYLE = `
+  .banner { position: relative; overflow: hidden; flex: none; height: 90px; margin: -12px -12px 0; color: #0d2a45;
+            background: linear-gradient(90deg, #f1f8ff 0%, #e2f1fd 34%, #b9def8 70%, #9fd0f3 100%); }
+  .banner.night { color: #fff; background: linear-gradient(90deg, #1b2f52 0%, #15284a 36%, #0f1f3d 72%, #0a1830 100%); }
+  .bscene { position: absolute; right: 0; bottom: 10px; width: 200px; height: 80px;
+            -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }
+  .bground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; }
+  .g-heat { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 1px, transparent 1px 12px), linear-gradient(90deg, #ffb36b, #e8572e); box-shadow: inset 0 2px 0 #ffcf9a; }
+  .night .g-heat { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.25) 0 1px, transparent 1px 12px), linear-gradient(90deg, #7a3a1e, #5a2414); box-shadow: inset 0 2px 0 #8a4a2a; }
+  .g-eco { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.5) 0 1px, transparent 1px 12px), linear-gradient(90deg, #8fd47a, #43a047); box-shadow: inset 0 2px 0 #b5e3a5; }
+  .night .g-eco { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 1px, transparent 1px 12px), linear-gradient(90deg, #2a5a2c, #1c4220); box-shadow: inset 0 2px 0 #356a38; }
+  .g-frost { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.7) 0 1px, transparent 1px 12px), linear-gradient(90deg, #bfe4fb, #6fb6ea); box-shadow: inset 0 2px 0 #e6f5ff; }
+  .night .g-frost { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.25) 0 1px, transparent 1px 12px), linear-gradient(90deg, #2a4a6a, #1c3552); box-shadow: inset 0 2px 0 #3a5c80; }
+  .g-off { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 1px, transparent 1px 12px), linear-gradient(90deg, #d3d8de, #aab2bb); box-shadow: inset 0 2px 0 #e6e9ed; }
+  .night .g-off { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.2) 0 1px, transparent 1px 12px), linear-gradient(90deg, #3a414b, #2b3139); box-shadow: inset 0 2px 0 #4a525d; }
+  /* The title on the sky, up to the thermometer. */
+  .htext { position: absolute; left: 12px; top: 0; bottom: 10px; right: calc(var(--hc-sw) + 4px); display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .htext .titles { flex: 1 1 auto; min-width: 0; align-self: center; padding-top: 0; }
+  .banner .name { color: inherit; }
+  .banner .sub { color: #3b5b78; }
+  .banner.night .sub { color: rgba(255,255,255,.78); }
+  .banner .badge { background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px rgba(13,42,69,.1); }
+  .banner.night .badge { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  .badge ha-icon { --mdc-icon-size: 24px; }
+  /* The integration's logo on a white tile at the icon's bottom right. */
+  .brand { position: absolute; right: -4px; bottom: -4px; width: 18px; height: 18px; border-radius: 5px; padding: 2px; box-sizing: border-box;
+           display: grid; place-items: center; background: #fff; box-shadow: 0 0 0 1px rgba(13,42,69,.16), 0 1px 3px rgba(13,42,69,.18); }
+  .brand img { width: 100%; height: 100%; object-fit: contain; }
+  .banner .zoom { position: absolute; top: 6px; right: 6px; margin: 0; color: #0d2a45; background: rgba(255,255,255,.55); }
+  .banner.night .zoom { color: #fff; background: rgba(10,20,40,.45); }
+  .banner .zoom:hover { background: rgba(255,255,255,.8); }
+  .banner.night .zoom:hover { background: rgba(10,20,40,.7); }
+  /* The scene: thermometer and readout in the theme's color, the zone's device drawn by \`art\`. */
+  .btube { fill: #fff; stroke: #d3d9e0; }
+  .night .btube { fill: #2a3446; stroke: #55617a; }
+  .bmerc, .bbulb { fill: var(--bc); }
+  .bmerc { transform-box: fill-box; transform-origin: 50% 100%; }
+  .bmerc.rise { animation: hcb-rise 3.2s ease-in-out infinite; }
+  .bcur { font: 700 13px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: var(--bc); }
+  .btgt { font: 400 6.4px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #5c6470; }
+  .night .btgt { fill: #a0a6ae; }
+  .bhalo { opacity: .2; animation: hcb-glow 3.2s ease-in-out infinite; }
+  .night .bhalo { opacity: .16; }
+  .bleaf { fill: #43a047; opacity: .85; transform-box: fill-box; transform-origin: 30% 100%; animation: hcb-sway 4s ease-in-out infinite; }
+  .bflake path { fill: none; stroke: #9fd0f3; stroke-width: .9; stroke-linecap: round; }
+  .bflake { animation: hcb-fall 4.5s ease-in-out infinite; }
+  .bflake.f1 { animation-delay: -1.5s; }
+  .bflake.f2 { animation-delay: -3s; }
+  .bdev { cursor: pointer; filter: drop-shadow(0 2px 3px rgba(0,0,0,.18)); }
+  .night .bdev { filter: drop-shadow(0 0 4px rgba(255,255,255,.22)); }
+  .bdev:focus-visible { outline: none; }
+  @keyframes hcb-rise { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.06); } }
+  @keyframes hcb-glow { 0%, 100% { opacity: .12; } 50% { opacity: .26; } }
+  @keyframes hcb-sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+  @keyframes hcb-fall { 0% { opacity: 0; transform: translate(0, -3px); } 30%, 70% { opacity: 1; } 100% { opacity: 0; transform: translate(1px, 5px); } }
+  /* Narrow card: the device alone, then the sky alone. */
+  @container (max-width: 340px) { .bthermo { display: none; } .htext { right: calc(var(--hc-dw) + 4px); } }
+  @container (max-width: 190px) { .bscene { display: none; } .htext { right: var(--hc-zw, 8px); } }
 `;
 
 const FULL_STYLE = `
@@ -4151,7 +4393,7 @@ class HeatingCard extends HTMLElement {
     const zones = this._zones();
     const h = this._hass;
     const ids = this._ids(zones);
-    const sig = [lang(h, this._config), h.entities, h.areas, h.floors, h.themes?.darkMode, this._unit(), this._zoomed, this._zone, this._pending, this._toggled, this._weekVersion, ...ids.map((id) => h.states[id])];
+    const sig = [lang(h, this._config), h.entities, h.areas, h.floors, h.themes?.darkMode, h.states["sun.sun"], this._unit(), this._zoomed, this._zone, this._pending, this._toggled, this._weekVersion, ...ids.map((id) => h.states[id])];
     if (this._sig && sig.length === this._sig.length && sig.every((v, i) => v === this._sig[i])) return;
     this._zonesNow = zones;
     for (const z of zones) if (z.schedule) this._loadWeek(z.schedule);
@@ -4367,10 +4609,13 @@ class HeatingCard extends HTMLElement {
     else status = this._t(heating ? "st_heating" : any((m) => m.on) ? "st_idle" : "st_off");
     const n = models.filter((m) => m.heating).length;
     const sub = models.length > 1 ? (n ? this._t("zones_heating", { n, total: models.length }) : this._t("zones_none", { total: models.length })) : "";
-    return { color, heating, status, sub };
+    return { color, heating, status, sub, models };
   }
 
-  _header(title, sub, summary) {
+  // `focus` (the zone the banner draws) asks for the illustrated header; without it (the overview), or with
+  // `illustration: false`, the classic header.
+  _header(title, sub, summary, focus) {
+    if (focus && this._illustrated()) return this._banner(title, sub, summary, focus);
     return (
       `<div class="header" style="--hc-color:${summary.color}"><div class="badge${summary.heating ? " heating" : ""}">${svgIcon(summary.heating ? "radiator" : summary.color === IDLE ? "radiator_off" : "radiator")}</div>` +
       `<div class="titles"><div class="name">${esc(title)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div>` +
@@ -4379,12 +4624,85 @@ class HeatingCard extends HTMLElement {
     );
   }
 
+  _illustrated() {
+    return this._config.illustration !== false;
+  }
+
+  // Night picture: forced by illustration_theme, else the sun below the horizon, else Home Assistant's dark mode.
+  _isNight() {
+    const theme = this._config.illustration_theme;
+    if (theme === "night") return true;
+    if (theme === "day") return false;
+    const sun = this._hass?.states?.["sun.sun"];
+    if (sun && !unavailable(sun)) return sun.state === "below_horizon";
+    return !!this._hass?.themes?.darkMode;
+  }
+
+  // The icon's color says the status: unavailable red, an alert (open window, low battery) amber, heating in the heat
+  // (or boost) color, eco green and frost protection blue, idle or off grey.
+  _iconColor(models, focus) {
+    if (!models.some((m) => m.online)) return "var(--hc-crit)";
+    if (models.some((m) => m.alert)) return "var(--hc-warn)";
+    if (models.some((m) => m.heating)) return models.some((m) => m.heating && m.boost) ? BOOST : HEAT;
+    const theme = bannerTheme(focus);
+    if (theme === "heat" && focus.pilot?.startsWith("comfort")) return PILOT_COLORS[focus.pilot];
+    return theme === "eco" ? PILOT_COLORS.eco : theme === "frost" ? PILOT_COLORS.frost : IDLE;
+  }
+
+  // The logo of the focused zone's integration, when the bundle has it.
+  _brand(z) {
+    const id = z.id || z.pilots[0];
+    const platform = this._hass?.entities?.[id]?.platform;
+    const logo = platform && BRAND_LOGOS[platform];
+    return logo ? `<span class="brand"><img src="${esc(logo)}" alt=""></span>` : "";
+  }
+
+  _banner(title, sub, summary, m) {
+    const z = m.z;
+    const night = this._isNight();
+    const theme = bannerTheme(m);
+    const zoom = this._zoomButton();
+    const right = zoom ? 172 : 198;
+    let dev = "";
+    let devW = 0;
+    let devH = 0;
+    if (!z.icon && !z.missing) {
+      const variant = variantOf(this._hass, z.id, z.illustration);
+      const box = BANNER_DEVICES[variant] || BANNER_DEVICES.dial;
+      const [, , vw, vh] = box.vb;
+      const k = Math.min(box.w / vw, box.h / vh);
+      devW = vw * k;
+      devH = vh * k;
+      const cls = ["bdev", m.on ? "running" : "", m.heating ? "active" : "", m.boost ? "boost" : "", m.pilot ? `pw-${m.pilot}` : ""];
+      if (m.pilot && m.on && m.pilot.startsWith("comfort")) cls.push("active");
+      const svg = art(variant, m, `b${this._uid}`).replace(
+        '<svg viewBox="0 0 80 94" aria-hidden="true">',
+        `<svg x="${(right - devW).toFixed(1)}" y="${(80 - devH).toFixed(1)}" width="${devW.toFixed(1)}" height="${devH.toFixed(1)}" viewBox="${box.vb.join(" ")}" preserveAspectRatio="xMidYMax meet" overflow="visible">`,
+      );
+      dev = `<g class="${cls.filter(Boolean).join(" ")}" style="--hc-color:${m.color}" data-entity="${esc(z.id || z.pilots[0] || "")}">${svg}</g>`;
+    }
+    const loc = this._locale();
+    const cur = m.cur != null ? `${fmtNum(loc, m.cur)}°` : "";
+    const tgt = this._showTarget(m) ? `→ ${m.range ? `${fmtNum(loc, m.range.low)}–${fmtNum(loc, m.range.high)}` : fmtNum(loc, m.target)}°` : "";
+    const level = m.cur != null ? m.cur / 30 : BANNER_LEVELS[theme];
+    const scene = bannerScene({ theme, night, uid: this._uid, dev, devW, devH, right, cur, tgt, level, active: m.heating || (m.pilot?.startsWith("comfort") && m.on) });
+    const color = this._iconColor(summary.models || [m], m);
+    const icon = z.icon && this._zonesNow?.length === 1 ? `<ha-icon icon="${esc(z.icon)}"></ha-icon>` : svgIcon(m.online && m.on ? "fire" : "radiator_off");
+    const vars = `--hc-sw:${Math.ceil(200 - scene.tx + 8)}px;--hc-dw:${Math.ceil(200 - scene.devX + 4)}px;--hc-zw:${zoom ? 36 : 8}px`;
+    return (
+      `<div class="banner${night ? " night" : ""}" style="${vars}">${scene.svg}<div class="bground g-${theme}"></div>` +
+      `<div class="htext"><div class="badge${summary.heating ? " heating" : ""}" style="--hc-color:${color}" title="${esc(summary.status)}">${icon}${this._brand(z)}</div>` +
+      `<div class="titles"><div class="name">${esc(title)}</div>${sub ? `<div class="sub" role="status">${esc(sub)}</div>` : ""}</div></div>` +
+      `${zoom}</div>`
+    );
+  }
+
   _zoomButton() {
     return "";
   }
 
   _styles(color, own) {
-    return `<style>${BASE_STYLE}${own}</style><style>:host{--hc-color:${color};}</style>`;
+    return `<style>${BASE_STYLE}${BANNER_STYLE}${own}</style><style>:host{--hc-color:${color};}</style>`;
   }
 
   _empty() {
@@ -4416,10 +4734,13 @@ class HeatingCard extends HTMLElement {
     // A top-level `name` is the zone's name too: the area then stands under it, never the title again.
     const z0 = zones[0];
     const place = [z0.name, areaName(this._hass, z0.id || z0.pilots[0])].find((x) => x && x !== title) || "";
-    const sub = zones.length === 1 ? [c.title || c.name ? place : "", m.presetText].filter(Boolean).join(" · ") : summary.sub;
+    const banner = this._illustrated();
+    // The illustrated header has no status pill: the status leads the subtitle.
+    const sub =
+      zones.length === 1 ? [c.title || c.name ? place : "", banner ? m.status : "", m.presetText].filter(Boolean).join(" · ") : summary.sub;
     return (
       `${this._styles(m.color, FULL_STYLE)}<ha-card>` +
-      this._header(title, sub, summary) +
+      this._header(title, sub, summary, m) +
       (zones.length > 1 ? this._tabs(models) : "") +
       this._zoneBody(m) +
       "</ha-card>"
@@ -4440,7 +4761,9 @@ class HeatingCard extends HTMLElement {
     const z = m.z;
     if (z.missing) return `<div class="empty">${svgIcon("alert")}${esc(`${this._t("not_found")}: ${z.entity || z.pilot_wire.join(", ")}`)}</div>`;
     const c = this._config;
-    const parts = [`<div class="hero" style="--hc-color:${m.color}">${this._picture(m)}<div class="info">${this._heroInfo(m)}${m.chips.length ? `<div class="chips">${m.chips.join("")}</div>` : ""}</div></div>`];
+    // The illustrated header draws the zone's device: the hero keeps the temperatures.
+    const pic = this._illustrated() ? "" : this._picture(m);
+    const parts = [`<div class="hero" style="--hc-color:${m.color}">${pic}<div class="info">${this._heroInfo(m)}${m.chips.length ? `<div class="chips">${m.chips.join("")}</div>` : ""}</div></div>`];
     if (c.show_controls && m.online && z.id) parts.push(this._controls(m));
     if (c.show_pilot_wire && z.pilots.length) parts.push(this._pilotSection(m));
     if (c.show_schedule && z.schedule) parts.push(this._scheduleSection(m));
@@ -4931,9 +5254,14 @@ class HeatingMiniCard extends HeatingCard {
     if (zones.length === 1) return this._single(models[0], summary);
     return (
       `${this._styles(summary.color, MINI_STYLE)}<ha-card class="mini">` +
-      this._header(c.title || c.name || this._t("title"), summary.sub, summary) +
+      this._header(c.title || c.name || this._t("title"), summary.sub, summary, this._focus(models)) +
       `<div class="rows">${models.map((m, i) => this._row(m, i)).join("")}</div></ha-card>`
     );
+  }
+
+  // The zone the overview's banner draws: the first one heating, else the first one on, else the first.
+  _focus(models) {
+    return models.find((m) => m.heating) || models.find((m) => m.on) || models[0];
   }
 
   _row(m, i) {
@@ -4982,8 +5310,8 @@ class HeatingMiniCard extends HeatingCard {
     }
     return (
       `${this._styles(m.color, MINI_STYLE)}<ha-card class="mini">` +
-      this._header(c.title || c.name || z.name, "", summary) +
-      `<div class="content">${this._picture(m)}<div class="info">${lines.join("")}${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}</div>` +
+      this._header(c.title || c.name || z.name, this._illustrated() ? [m.status, m.presetText].filter(Boolean).join(" · ") : "", summary, m) +
+      `<div class="content">${this._illustrated() ? "" : this._picture(m)}<div class="info">${lines.join("")}${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}</div>` +
       `${btns.length ? `<div class="mcontrols">${btns.join("")}</div>` : ""}</div></ha-card>`
     );
   }
@@ -5419,6 +5747,27 @@ const collapsedField = (tr) => ({
   selector: { select: { multiple: true, mode: "list", options: [["pilot_wire", "pilot_wire"], ["schedule", "schedule"]].map(([value, k]) => ({ value, label: tr(k) })) } },
 });
 
+// The illustrated header (`illustration: false` in YAML for the classic one) and its day / night colors: the full card,
+// the mini card and the full card the overview unfolds into.
+const bannerFields = (tr) => ({
+  type: "grid",
+  name: "",
+  schema: [
+    { name: "banner", selector: { boolean: {} } },
+    { name: "illustration_theme", selector: { select: { mode: "dropdown", options: ["auto", "day", "night"].map((v) => ({ value: v, label: tr(`theme_${v}`) })) } } },
+  ],
+});
+const bannerData = (config) => ({ banner: config.illustration !== false, illustration_theme: config.illustration_theme || "auto" });
+// Writes the form's banner fields into `out` as YAML options (defaults left out) and takes them out of `value`.
+const bannerChanged = (value, out) => {
+  delete out.illustration;
+  delete out.illustration_theme;
+  if (value.banner === false) out.illustration = false;
+  if (value.illustration_theme && value.illustration_theme !== "auto") out.illustration_theme = value.illustration_theme;
+  delete value.banner;
+  delete value.illustration_theme;
+};
+
 class HeatingCardEditor extends HTMLElement {
   static get mini() {
     return false;
@@ -5478,6 +5827,7 @@ class HeatingCardEditor extends HTMLElement {
         schema: zoneSchema,
       })),
       { type: "grid", name: "", schema: toggles },
+      bannerFields(tr),
       collapsedField(tr),
       languageField(tr),
     ];
@@ -5488,6 +5838,7 @@ class HeatingCardEditor extends HTMLElement {
     if (data.collapsed === undefined) data.collapsed = DEFAULT_COLLAPSED;
     const zones = this._zoneList();
     for (const k of ZONE_KEYS) delete data[k];
+    Object.assign(data, bannerData(this._config));
     delete data.zones;
     [...zones, {}].forEach((z, i) => {
       data[`zone_${i}`] = { illustration: "auto", ...z };
@@ -5527,6 +5878,7 @@ class HeatingCardEditor extends HTMLElement {
     }
     const out = { ...this._config };
     for (const k of [...ZONE_KEYS, "zones"]) delete out[k];
+    bannerChanged(value, out);
     const defaults = this._defaults();
     for (const [k, v] of Object.entries(value)) {
       if (v === "" || v == null || v === defaults[k] || (k === "collapsed" && JSON.stringify(v) === JSON.stringify(DEFAULT_COLLAPSED))) delete out[k];
@@ -5592,6 +5944,7 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
         { name: "columns", selector: { number: { min: 1, max: 6, mode: "box" } } },
       ),
       grid(...toggles),
+      bannerFields(tr),
       { name: "actions", selector: { select: { multiple: true, mode: "list", options: OV_ORDERS.map((value) => ({ value, label: tr(`p_${value}`) })) } } },
       collapsedField(tr),
       languageField(tr),
@@ -5599,7 +5952,8 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
   }
 
   _data() {
-    return { ...this._defaults(), collapsed: DEFAULT_COLLAPSED, ...this._config };
+    const { illustration, ...config } = this._config;
+    return { ...this._defaults(), collapsed: DEFAULT_COLLAPSED, ...config, ...bannerData(this._config) };
   }
 
   _render() {
@@ -5619,10 +5973,12 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
     ev.stopPropagation();
     const defaults = this._defaults();
     const out = { ...this._config };
+    const value = { ...ev.detail.value };
     // An option the form no longer sends (a list emptied) is left out too.
     const names = this._schema().flatMap((s) => (s.schema ? s.schema : [s]).map((x) => x.name));
-    for (const k of names) if (!(k in ev.detail.value)) delete out[k];
-    for (const [k, v] of Object.entries(ev.detail.value)) {
+    for (const k of names) if (!(k in value)) delete out[k];
+    bannerChanged(value, out);
+    for (const [k, v] of Object.entries(value)) {
       const empty = v === "" || v == null || (Array.isArray(v) && !v.length && k !== "actions" && k !== "collapsed");
       if (empty || JSON.stringify(v) === JSON.stringify(k === "collapsed" ? DEFAULT_COLLAPSED : defaults[k])) delete out[k];
       else out[k] = v;

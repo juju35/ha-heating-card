@@ -68,7 +68,10 @@ test("the full card shows the home summary, the zone tabs and the selected zone"
   const h = html(c);
   assert.match(h, /1 of 4 zones heating/);
   assert.equal((h.match(/role="tab"/g) || []).length, 4);
-  assert.match(h, /class="picture running active"/);
+  // The illustrated header draws the zone's device; the classic header keeps it in the hero.
+  assert.match(h, /class="bdev running active"/);
+  assert.doesNotMatch(h, /class="picture /);
+  assert.match(html(card({ illustration: false })), /class="picture running active"/);
   assert.match(h, /aria-valuenow="21"/);
   assert.match(h, /Living room radiator/);
   click(c, { action: "zone", zone: "1" });
@@ -251,6 +254,18 @@ test("the editor writes zones from their sections and leaves defaults out", () =
     detail: { value: { show_title: true, zone_0: { entity: "climate.chambre_vanne", illustration: "auto", pilot_wire: [] }, zone_1: { illustration: "auto" }, collapsed: ["schedule"] } },
   });
   assert.deepEqual(JSON.parse(JSON.stringify(events.at(-1).detail.config)), { type: "custom:heating-card", zones: [{ entity: "climate.chambre_vanne" }] });
+  // The illustrated header's options: on and automatic left out, the classic header and a forced theme written.
+  e._changed({ stopPropagation() {}, detail: { value: { banner: false, illustration_theme: "night", zone_0: { entity: "climate.chambre_vanne" } } } });
+  assert.deepEqual(JSON.parse(JSON.stringify(events.at(-1).detail.config)), {
+    type: "custom:heating-card",
+    illustration: false,
+    illustration_theme: "night",
+    zones: [{ entity: "climate.chambre_vanne" }],
+  });
+  e.setConfig(events.at(-1).detail.config);
+  assert.equal(e._data().banner, false);
+  e._changed({ stopPropagation() {}, detail: { value: { banner: true, illustration_theme: "auto", zone_0: { entity: "climate.chambre_vanne" } } } });
+  assert.deepEqual(JSON.parse(JSON.stringify(events.at(-1).detail.config)), { type: "custom:heating-card", zones: [{ entity: "climate.chambre_vanne" }] });
 });
 
 test("the mini card editor offers the full card options its unfolded view uses, plus zoom", () => {
@@ -262,7 +277,7 @@ test("the mini card editor offers the full card options its unfolded view uses, 
   };
   const full = names(hc.HeatingCardEditor, "custom:heating-card");
   const mini = names(hc.HeatingMiniCardEditor, "custom:heating-mini-card");
-  for (const n of ["show_title", "show_subtitle", "show_controls", "show_sensors", "show_alerts", "show_pilot_wire", "show_schedule", "collapsed", "language"]) {
+  for (const n of ["show_title", "show_subtitle", "show_controls", "show_sensors", "show_alerts", "show_pilot_wire", "show_schedule", "collapsed", "language", "banner", "illustration_theme"]) {
     assert.ok(full.includes(n), `full: ${n}`);
     assert.ok(mini.includes(n), `mini: ${n}`);
   }
@@ -372,5 +387,54 @@ test("a thermostat without an area and a second thermostat of an area get zones 
 
 test("a top-level name titles the card and the area stands under it, not the name again", () => {
   const c = card({ entity: "climate.chambre_vanne", name: "Bedroom valve" });
-  assert.match(html(c), /<div class="name">Bedroom valve<\/div><div class="sub">Bedroom · Eco<\/div>/);
+  assert.match(html(c), /<div class="name">Bedroom valve<\/div><div class="sub" role="status">Bedroom · Idle · Eco<\/div>/);
+  const classic = card({ entity: "climate.chambre_vanne", name: "Bedroom valve", illustration: false });
+  assert.match(html(classic), /<div class="name">Bedroom valve<\/div><div class="sub">Bedroom · Eco<\/div>/);
+});
+
+test("the illustrated header: theme, readout, ground strip and icon color follow the zone", () => {
+  // Heating: orange, heat halo, readout current → target, the Netatmo badge on the fire icon (the build embeds the
+  // logos from images/badges/).
+  hc.BRAND_LOGOS.netatmo = "data:image/png;base64,AA==";
+  let h = html(card({ entity: "climate.salon_thermostat" }, mockHass(), hc.HeatingMiniCard));
+  assert.match(h, /class="banner"/);
+  assert.match(h, /class="bground g-heat"/);
+  assert.match(h, /class="bhalo"/);
+  assert.match(h, /class="bcur"[^>]*>19\.5°<\/text><text class="btgt"[^>]*>→ 21°</);
+  assert.match(h, /<span class="brand"><img src=/);
+  assert.match(h, /class="badge heating" style="--hc-color:var\(--state-climate-heat-color/);
+  // Eco preset: green with a leaf; an open window turns the icon amber.
+  h = html(card({ entity: "climate.chambre_vanne" }, mockHass(), hc.HeatingMiniCard));
+  assert.match(h, /class="bground g-eco"/);
+  assert.match(h, /class="bleaf"/);
+  assert.match(h, /class="badge" style="--hc-color:var\(--hc-warn\)"/);
+  // Frost protection (a target of 10° or less): blue snowflakes.
+  const frost = mockHass({ "climate.chambre_vanne": { preset_mode: "none", temperature: 7 }, "binary_sensor.chambre_vanne_fenetre_ouverte": { state: "off" } });
+  h = html(card({ entity: "climate.chambre_vanne" }, frost, hc.HeatingMiniCard));
+  assert.match(h, /class="bground g-frost"/);
+  assert.match(h, /class="bflake f0"/);
+  // Off: grey strip and icon, the radiator-off icon.
+  h = html(card({ entity: "climate.bureau_thermostat" }, mockHass(), hc.HeatingMiniCard));
+  assert.match(h, /class="bground g-off"/);
+  assert.match(h, /class="badge" style="--hc-color:var\(--disabled-text-color/);
+  assert.doesNotMatch(h, /class="brand"/, "no logo for a platform without one");
+  // The overview keeps its classic header.
+  assert.doesNotMatch(html(card({}, mockHass(), hc.HeatingOverviewCard)), /class="banner/);
+});
+
+test("night follows sun.sun, else the dark theme, and illustration_theme forces it", () => {
+  const sun = (state) => mockHass({}, { states: { ...mockHass().states, "sun.sun": { entity_id: "sun.sun", state, attributes: {} } } });
+  assert.match(html(card({}, sun("below_horizon"))), /class="banner night"/);
+  assert.match(html(card({}, sun("above_horizon"), hc.HeatingCard)), /class="banner"/);
+  assert.match(html(card({}, mockHass({}, { themes: { darkMode: true } }))), /class="banner night"/);
+  assert.match(html(card({ illustration_theme: "day" }, sun("below_horizon"))), /class="banner"/);
+  assert.match(html(card({ illustration_theme: "night" }, sun("above_horizon"))), /class="banner night"/);
+});
+
+test("several cards on a page keep their SVG ids apart", () => {
+  const a = html(card());
+  const b = html(card());
+  const ids = (h) => [...h.matchAll(/id="(hcb?-[\w-]+)"/g)].map((m) => m[1]);
+  assert.ok(ids(a).length);
+  assert.equal(ids(a).filter((id) => ids(b).includes(id)).length, 0);
 });

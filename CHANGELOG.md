@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 - 2026-11-17
+
+### Features
+- Illustrated header on the full and mini cards (90 px): the title on the sky at the left, a temperature scene at the right (thermometer, room temperature → target, the zone's own wall thermostat, radiator or radiator valve drawn big) and a 10 px ground strip edge to edge, themed by the zone: *Heating* orange (halo, heat rising, the mercury breathing), *Eco* green with a swaying leaf, *Frost protection* blue with drifting snowflakes, *Off* grey.
+- Night colors after sunset (`sun.sun`, else Home Assistant's dark theme), forced with `illustration_theme: day | night`; `illustration: false` keeps the classic header. Both are in the visual editor of every card (the overview's for the full card a zone unfolds into).
+- The header icon always says the status: heating in the heat (or boost) color, eco green, frost protection blue, idle or off grey, an open window or low battery amber, unavailable red; the integration's logo (Netatmo, tado°, Heatzy, ZHA) sits in a badge on it.
+- Animations stop with `prefers-reduced-motion`; each card keeps its own SVG ids, so several cards share a page.
+
 ## 1.1.2 - 2026-11-14
 
 ### Fixes
