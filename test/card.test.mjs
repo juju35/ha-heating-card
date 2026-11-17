@@ -423,8 +423,11 @@ test("the illustrated header: theme, readout, ground strip and icon color follow
   assert.doesNotMatch(html(card({}, mockHass(), hc.HeatingOverviewCard)), /class="banner/);
 });
 
-test("night follows sun.sun, else the dark theme, and illustration_theme forces it", () => {
-  const sun = (state) => mockHass({}, { states: { ...mockHass().states, "sun.sun": { entity_id: "sun.sun", state, attributes: {} } } });
+test("night follows sun.sun or the dark theme (even with the sun up), and illustration_theme forces it", () => {
+  const sun = (state, darkMode = false) =>
+    mockHass({}, { states: { ...mockHass().states, "sun.sun": { entity_id: "sun.sun", state, attributes: {} } }, themes: { darkMode } });
+  assert.match(html(card({}, sun("above_horizon", true))), /class="banner night"/);
+  assert.match(html(card({ illustration_theme: "day" }, sun("above_horizon", true))), /class="banner"/);
   assert.match(html(card({}, sun("below_horizon"))), /class="banner night"/);
   assert.match(html(card({}, sun("above_horizon"), hc.HeatingCard)), /class="banner"/);
   assert.match(html(card({}, mockHass({}, { themes: { darkMode: true } }))), /class="banner night"/);

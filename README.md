@@ -237,7 +237,7 @@ language: en
 | `show_schedule` | All | `true` | Weekly schedule section; on the overview, the schedule state of the tiles |
 | `collapsed` | All | `[schedule]` | Sections folded at first: `pilot_wire`, `schedule` (the mini card and the overview once unfolded) |
 | `illustration` | All | `true` | `false` keeps the classic header (round icon, title and status pill) instead of the illustrated one, the device then drawn next to the temperatures (the overview's full card). Any other value is the zone's illustration (see [Zone options](#zone-options)) |
-| `illustration_theme` | All | `auto` | Colors of the illustrated header: `auto` (night when `sun.sun` is below the horizon, else with Home Assistant's dark theme), `day` or `night` (the overview's full card) |
+| `illustration_theme` | All | `auto` | Colors of the illustrated header: `auto` (night when `sun.sun` is below the horizon or Home Assistant's theme is dark), `day` or `night` (the overview's full card) |
 | `zoom` | Mini, Overview | `true` | Detail button at the top right that unfolds the full card (a click elsewhere folds it back). The full card's options (`show_controls`, `show_sensors`, `show_pilot_wire`, `show_schedule`, `collapsed`…) set the unfolded view, and can be set on the mini card and the overview too, in YAML or in their visual editor |
 | `language` | All | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings; `pt-BR` gets European Portuguese) |
 

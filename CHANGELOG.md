@@ -4,10 +4,11 @@
 
 ### Features
 - Illustrated header on the full and mini cards (90 px): the title on the sky at the left, a temperature scene at the right (thermometer, room temperature → target, the zone's own wall thermostat, radiator or radiator valve drawn big) and a 10 px ground strip edge to edge, themed by the zone: *Heating* orange (halo, heat rising, the mercury breathing), *Eco* green with a swaying leaf, *Frost protection* blue with drifting snowflakes, *Off* grey.
-- Night colors after sunset (`sun.sun`, else Home Assistant's dark theme), forced with `illustration_theme: day | night`; `illustration: false` keeps the classic header. Both are in the visual editor of every card (the overview's for the full card a zone unfolds into).
+- Night colors after sunset (`sun.sun`) or with Home Assistant's dark theme, forced with `illustration_theme: day | night`; `illustration: false` keeps the classic header. Both are in the visual editor of every card (the overview's for the full card a zone unfolds into).
 - The header icon always says the status: heating in the heat (or boost) color, eco green, frost protection blue, idle or off grey, an open window or low battery amber, unavailable red; the integration's logo (Netatmo, tado°, Heatzy, ZHA) sits in a badge on it.
 - Animations stop with `prefers-reduced-motion`; each card keeps its own SVG ids, so several cards share a page.
 - The **status pill** is back on the illustrated header (full and mini cards), on the title's row in the header icon's colour, on frosted glass; it moves under the subtitle when the title has no room and keeps its dot alone on a very narrow card. The subtitle no longer repeats the status. The mini card's detail button sits in the banner's top-right corner on the same glass as the other cards.
+- Night picture with the dark theme even while the sun is up.
 
 ## 1.1.2 - 2026-11-14
 
