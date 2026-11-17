@@ -45,7 +45,7 @@ entity("climate.salon_thermostat", "thermo_salon", "heat", {
   preset_modes: PRESETS,
   preset_mode: "comfort",
   supported_features: 401,
-});
+}, { platform: "netatmo" });
 entity("sensor.salon_thermostat_batterie", "thermo_salon", "82", { device_class: "battery", unit_of_measurement: "%", friendly_name: "Living room thermostat Battery" });
 entity("switch.salon_thermostat_child_lock", "thermo_salon", "off", { friendly_name: "Living room thermostat Child lock" });
 device("fp_salon", "Living room radiator", "SIN-4-FP-21", "living_room");

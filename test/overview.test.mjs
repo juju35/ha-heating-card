@@ -211,7 +211,7 @@ test("the overview editor leaves defaults out and keeps an empty list of quick a
   const names = e._schema().flatMap((s) => (s.schema ? s.schema : [s]).map((x) => x.name));
   for (const n of ["areas", "exclude_areas", "floors", "exclude_floors", "include", "exclude", "group_by", "sort", "detail", "columns", "compact", "zoom", "actions"]) assert.ok(names.includes(n), n);
   // The full card a zone unfolds into: its options are offered too; `zones` stays YAML only.
-  for (const n of ["show_controls", "show_sensors", "show_pilot_wire", "show_schedule", "collapsed"]) assert.ok(names.includes(n), n);
+  for (const n of ["show_controls", "show_sensors", "show_pilot_wire", "show_schedule", "collapsed", "banner", "illustration_theme"]) assert.ok(names.includes(n), n);
   assert.ok(!names.includes("zones"));
   let out;
   e.dispatchEvent = (ev) => (out = ev.detail.config);
@@ -226,6 +226,14 @@ test("the overview editor leaves defaults out and keeps an empty list of quick a
   assert.deepEqual(plain(out), { type: "custom:heating-overview-card", zones: ["climate.salon_thermostat"], show_controls: false, collapsed: [] });
   e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), collapsed: ["schedule"] } } });
   assert.equal(out.collapsed, undefined);
+  // The unfolded full card's illustrated header: written as `illustration: false` and a forced theme.
+  e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), banner: false, illustration_theme: "day" } } });
+  assert.equal(out.illustration, false);
+  assert.equal(out.illustration_theme, "day");
+  e.setConfig(out);
+  e._changed({ stopPropagation() {}, detail: { value: { ...e._data(), banner: true, illustration_theme: "auto" } } });
+  assert.equal(out.illustration, undefined);
+  assert.equal(out.illustration_theme, undefined);
 });
 
 test("the overview is registered with the other cards", () => {

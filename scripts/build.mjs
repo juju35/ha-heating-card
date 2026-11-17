@@ -1,13 +1,21 @@
-// Bundles src/heating-card.js into the single Marketplace file dist/heating-card.js (the version stamped in), then moves
-// every translation but English to its own file next to it (scripts/i18n-split.mjs).
+// Bundles src/heating-card.js into the single Marketplace file dist/heating-card.js (the version and the brand logos
+// stamped in), then moves every translation but English to its own file next to it (scripts/i18n-split.mjs).
 // Usage: node scripts/build.mjs  (dist/ is not committed: CI and the release workflow build it)
-import { mkdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { splitDist } from "./i18n-split.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const pkg = JSON.parse(readFileSync(`${root}package.json`, "utf8"));
-const out = readFileSync(`${root}src/heating-card.js`, "utf8").replace("__VERSION__", pkg.version);
+// The integrations' logos for the header icon's badge, as data URIs (no network at run time): images/badges/<platform>.png.
+const badges = `${root}images/badges/`;
+const logos = Object.fromEntries(
+  (existsSync(badges) ? readdirSync(badges) : [])
+    .filter((f) => f.endsWith(".png"))
+    .sort()
+    .map((f) => [f.slice(0, -4), `data:image/png;base64,${readFileSync(badges + f).toString("base64")}`]),
+);
+const out = readFileSync(`${root}src/heating-card.js`, "utf8").replace("__VERSION__", pkg.version).replace("{} /* __BRAND_LOGOS__ */", JSON.stringify(logos));
 
 mkdirSync(`${root}dist`, { recursive: true });
 writeFileSync(`${root}dist/heating-card.js`, out);
