@@ -3842,7 +3842,7 @@ const BASE_STYLE = `${ART_STYLE}
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 `;
 
-// The illustrated header (full and mini cards), edge to edge over the card's padding.
+// The illustrated header (full, mini and overview cards), edge to edge over the card's padding.
 // The width of an element's whole text in its own font, in fractional pixels (scrollWidth is rounded).
 let textCtx;
 const textWidth = (el) => {
@@ -4690,8 +4690,8 @@ class HeatingCard extends HTMLElement {
     return { color, heating, status, sub, models };
   }
 
-  // `focus` (the zone the banner draws) asks for the illustrated header; without it (the overview), or with
-  // `illustration: false`, the classic header.
+  // `focus` (the zone the banner draws) asks for the illustrated header; without it, or with `illustration: false`,
+  // the classic header.
   _header(title, sub, summary, focus) {
     if (focus && this._illustrated()) return this._banner(title, sub, summary, focus);
     return (
@@ -5338,7 +5338,8 @@ class HeatingMiniCard extends HeatingCard {
     );
   }
 
-  // The zone the overview's banner draws: the first one heating, else the first one on, else the first.
+  // The zone the banner of a zone list (mini card, overview) draws: the first one heating, else the first one on,
+  // else the first.
   _focus(models) {
     return models.find((m) => m.heating) || models.find((m) => m.on) || models[0];
   }
@@ -5566,7 +5567,7 @@ class HeatingOverviewCard extends HeatingMiniCard {
     const models = zones.map((z) => this._model(z));
     for (const m of models) m.alerts = this._alertsOf(m);
     const summary = this._summary(models);
-    const parts = [this._header(c.title || c.name || this._t("title"), summary.sub, summary)];
+    const parts = [this._header(c.title || c.name || this._t("title"), summary.sub, summary, this._focus(models))];
     if (c.show_summary !== false) parts.push(this._stats(models));
     if (c.show_actions !== false) parts.push(this._actions(models));
     parts.push(this._groups(models));
@@ -5827,7 +5828,7 @@ const collapsedField = (tr) => ({
 });
 
 // The illustrated header (`illustration: false` in YAML for the classic one) and its day / night colors: the full card,
-// the mini card and the full card the overview unfolds into.
+// the mini card and the overview (and the full card they unfold into).
 const bannerFields = (tr) => ({
   type: "grid",
   name: "",
