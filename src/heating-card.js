@@ -3758,7 +3758,16 @@ const BASE_STYLE = `${ART_STYLE}
   :host([hide-title]) .titles > .name, :host([hide-subtitle]) .titles > .sub { display: none; }
   .name { font-size: 16px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sub { font-size: 12px; color: var(--secondary-text-color); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  /* The status pill sits on the title's line, at the right of the header. */
+  /* The status pill right after the title, when the whole title and the pill's whole label fit on that row (measured,
+     see _fitPill); otherwise on a line of its own under the subtitle, which keeps one line; else its dot alone. */
+  .header .titles { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .header .trow { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .header .trow > .name { flex: 0 1 auto; min-width: 0; }
+  .header .trow > .st { flex: none; max-width: none; align-self: center; margin-top: 0; }
+  .header .titles.below .trow { display: contents; }
+  .header .titles.below .trow > .st { grid-row: 3; justify-self: start; max-width: 100%; margin-top: 3px; }
+  .header .titles.dot-only .st { padding: 4px; }
+  .header .titles.dot-only .st .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .st { display: inline-flex; align-items: center; gap: 4px; flex: 0 1 auto; min-width: 0; max-width: 50%; overflow: hidden; box-sizing: border-box;
         padding: 1px 8px; border-radius: 12px; font-size: 11px; font-weight: 500; white-space: nowrap; align-self: flex-start; margin-top: 2px;
         background: color-mix(in srgb, var(--hc-color) 15%, transparent); color: var(--hc-text); }
@@ -3825,8 +3834,8 @@ const BASE_STYLE = `${ART_STYLE}
   .toggle.on { background: color-mix(in srgb, var(--hc-color) 16%, transparent); color: var(--hc-text); }
   .toggle.on .icon { color: var(--hc-color); }
   /* Narrow card: the status pill keeps only its dot, its text clipped (still in the tooltip and for screen readers). */
-  @container hc-card (max-width: 230px) {
-    .header { gap: 6px; }
+  @container hc-card (max-width: 230px) { .header { gap: 6px; } }
+  @container hc-card (max-width: 200px) {
     .st { flex: none; padding: 4px; position: relative; }
     .st .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   }
@@ -4309,9 +4318,9 @@ class HeatingCard extends HTMLElement {
   // the label does not fit its line, the pill shows its dot alone (.dot-only): beside the title when the whole title
   // leaves it room, else under the subtitle.
   _fitPill() {
-    for (const t of this.shadowRoot?.querySelectorAll?.(".htext .titles") || []) {
+    for (const t of this.shadowRoot?.querySelectorAll?.(".htext .titles, .header .titles") || []) {
       const row = t.querySelector(".trow");
-      const chips = row ? [...row.querySelectorAll(":scope > .bst")] : [];
+      const chips = row ? [...row.querySelectorAll(":scope > .st")] : [];
       if (!chips[0]?.getBoundingClientRect) continue;
       t.classList.remove("below", "dot-only");
       const name = row.querySelector(".name");
@@ -4687,8 +4696,9 @@ class HeatingCard extends HTMLElement {
     if (focus && this._illustrated()) return this._banner(title, sub, summary, focus);
     return (
       `<div class="header" style="--hc-color:${summary.color}"><div class="badge${summary.heating ? " heating" : ""}">${svgIcon(summary.heating ? "radiator" : summary.color === IDLE ? "radiator_off" : "radiator")}</div>` +
-      `<div class="titles"><div class="name">${esc(title)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div>` +
-      `<span class="st${summary.heating ? " heating" : ""}" title="${esc(summary.status)}" role="status"><span class="dot"></span><span class="stt">${esc(summary.status)}</span></span>` +
+      `<div class="titles"><div class="trow"><div class="name">${esc(title)}</div>` +
+      `<span class="st${summary.heating ? " heating" : ""}" title="${esc(summary.status)}" role="status"><span class="dot"></span><span class="stt">${esc(summary.status)}</span></span></div>` +
+      `${sub ? `<div class="sub" title="${esc(sub)}">${esc(sub)}</div>` : ""}</div>` +
       `${this._zoomButton()}</div>`
     );
   }

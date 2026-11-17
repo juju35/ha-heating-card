@@ -390,7 +390,7 @@ test("a top-level name titles the card and the area stands under it, not the nam
   // The status is in the pill on the title's row, no longer repeated in the subtitle.
   assert.match(html(c), /<div class="name">Bedroom valve<\/div><span class="st bst"[^>]*title="Idle"[^>]*>.*?<\/span><\/div><div class="sub" title="Bedroom · Eco">Bedroom · Eco<\/div>/);
   const classic = card({ entity: "climate.chambre_vanne", name: "Bedroom valve", illustration: false });
-  assert.match(html(classic), /<div class="name">Bedroom valve<\/div><div class="sub">Bedroom · Eco<\/div>/);
+  assert.match(html(classic), /<div class="name">Bedroom valve<\/div><span class="st"[^>]*title="Idle"[^>]*>.*?<\/span><\/div><div class="sub" title="Bedroom · Eco">Bedroom · Eco<\/div>/);
 });
 
 test("the illustrated header: theme, readout, ground strip and icon color follow the zone", () => {
