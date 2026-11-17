@@ -3834,6 +3834,17 @@ const BASE_STYLE = `${ART_STYLE}
 `;
 
 // The illustrated header (full and mini cards), edge to edge over the card's padding.
+// The width of an element's whole text in its own font, in fractional pixels (scrollWidth is rounded).
+let textCtx;
+const textWidth = (el) => {
+  const cs = getComputedStyle(el);
+  textCtx ??= document.createElement("canvas").getContext?.("2d");
+  if (!textCtx) return el.scrollWidth;
+  textCtx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+  const pad = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+  return Math.max(el.scrollWidth, textCtx.measureText(el.textContent.trim()).width + pad);
+};
+
 const BANNER_STYLE = `
   .banner { position: relative; overflow: hidden; flex: none; height: 90px; margin: -12px -12px 0; color: #0d2a45;
             background: linear-gradient(90deg, #f1f8ff 0%, #e2f1fd 34%, #b9def8 70%, #9fd0f3 100%); }
@@ -3851,19 +3862,23 @@ const BANNER_STYLE = `
   .night .g-off { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.2) 0 1px, transparent 1px 12px), linear-gradient(90deg, #3a414b, #2b3139); box-shadow: inset 0 2px 0 #4a525d; }
   /* The title on the sky, up to the thermometer. */
   .htext { position: absolute; left: 12px; top: 0; bottom: 10px; right: calc(var(--hc-sw) + 4px); display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .htext .titles { flex: 1 1 auto; min-width: 0; align-self: center; padding-top: 0; display: grid; grid-template-columns: minmax(0, 1fr);
-                   container: hc-titles / inline-size; }
-  /* The status pill on the title's row, in the icon's colour: the title ellipsises first (4 characters kept). */
+  .htext .titles { flex: 1 1 auto; min-width: 0; align-self: center; padding-top: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+  /* The status pill on the title's row, in the icon's colour, when the whole title and the pill's whole label fit
+     there (measured, see _fitPill). */
   .trow { display: flex; align-items: center; gap: 8px; min-width: 0; }
-  .trow .name { flex: 0 1 auto; min-width: 4.6ch; }
-  .banner .bst { flex: none; max-width: 51%; align-self: center; margin: 0; background: color-mix(in srgb, var(--hc-color) 18%, rgba(255,255,255,.78));
+  .trow .name { flex: 0 1 auto; min-width: 0; }
+  .banner .bst { flex: none; align-self: center; margin: 0; background: color-mix(in srgb, var(--hc-color) 18%, rgba(255,255,255,.78));
                  color: color-mix(in srgb, var(--hc-color) 45%, #0d2a45); }
   .banner.night .bst { background: color-mix(in srgb, var(--hc-color) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--hc-color) 35%, #ffffff); }
   .banner .bst .dot { width: 7px; height: 7px; }
-  /* No room beside the title: the pill on a line of its own under the subtitle; on a very narrow card, its dot alone. */
-  @container hc-titles (max-width: 160px) { .trow { display: contents; } .banner .bst { grid-row: 3; justify-self: start; max-width: 100%; margin-top: 3px; } }
+  /* Otherwise the pill on a line of its own under the subtitle, which keeps one line; when that does not fit above the
+     ground strip, or on a card of 200 px or less, its dot alone (its label kept for screen readers and in its title). */
+  .titles.below .trow { display: contents; } .banner .titles.below .bst { grid-row: 3; justify-self: start; max-width: 100%; margin-top: 3px; }
+  .banner .titles.below .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   @container hc-card (min-width: 201px) { .banner .bst { flex: none; padding: 1px 8px; } .banner .bst .stt { position: static; width: auto; height: auto; clip-path: none; } }
   @container hc-card (max-width: 200px) { .banner .bst { padding: 4px; } .banner .bst .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }
+  .banner .titles.dot-only .bst { padding: 4px; }
+  .banner .titles.dot-only .bst .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .banner .name { color: inherit; }
   .banner .sub { color: #3b5b78; }
   .banner.night .sub { color: rgba(255,255,255,.78); }
@@ -4275,6 +4290,9 @@ class HeatingCard extends HTMLElement {
     this._outside.on();
     // Back on the page after leaving it: rendered again in its default state.
     if (this._hass && this._config) this._refresh();
+    if (!this._fitObserver && typeof ResizeObserver === "function") this._fitObserver = new ResizeObserver(() => this._fitPill());
+    this._fitObserver?.observe(this);
+    document.fonts?.ready?.then(() => this._fitPill());
     // The "now" line and the next change of the schedule move on their own: redrawn every minute while the card is on
     // the page and shows a schedule (no other card is rebuilt, nor its animations restarted, for nothing).
     clearInterval(this._tick);
@@ -4284,7 +4302,44 @@ class HeatingCard extends HTMLElement {
     }, 60000);
   }
 
+  // The banner's status pill, measured after each render and on a new width (in every language): it sits on the
+  // title's row, right after the title, only when the whole title and the pill's whole label fit there; otherwise it
+  // takes a line of its own under the subtitle (.below), the title whole on its row (cut only when it does not fit
+  // alone) and the subtitle on one line. When the three lines do not fit in the banner above the ground strip, or
+  // the label does not fit its line, the pill shows its dot alone (.dot-only): beside the title when the whole title
+  // leaves it room, else under the subtitle.
+  _fitPill() {
+    for (const t of this.shadowRoot?.querySelectorAll?.(".htext .titles") || []) {
+      const row = t.querySelector(".trow");
+      const chips = row ? [...row.querySelectorAll(":scope > .bst")] : [];
+      if (!chips[0]?.getBoundingClientRect) continue;
+      t.classList.remove("below", "dot-only");
+      const name = row.querySelector(".name");
+      const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
+      const outer = (c) => c.getBoundingClientRect().width + (parseFloat(getComputedStyle(c).marginLeft) || 0) + (parseFloat(getComputedStyle(c).marginRight) || 0);
+      const others = [...row.children].filter((c) => c !== name && !chips.includes(c) && c.getClientRects().length);
+      const room = row.getBoundingClientRect().width - others.reduce((w, c) => w + outer(c) + gap, 0);
+      const title = name && getComputedStyle(name).display !== "none" ? textWidth(name) + gap : 0;
+      const pills = () => chips.reduce((w, c) => w + c.getBoundingClientRect().width, gap * (chips.length - 1));
+      if (title + pills() <= room) continue;
+      t.classList.add("below");
+      const banner = t.closest(".banner") || t;
+      const ground = banner.querySelector(".bground");
+      const floor = ground ? ground.getBoundingClientRect().top : banner.getBoundingClientRect().bottom;
+      const box = t.getBoundingClientRect();
+      // Whole: the label not cut and the pill not past the title block (into the picture).
+      const whole = chips.every((c) => {
+        const tx = c.querySelector(".stt");
+        return (!tx || tx.scrollWidth <= tx.clientWidth + 0.5) && c.getBoundingClientRect().right <= box.right + 0.5;
+      });
+      if (whole && box.bottom <= floor + 0.5 && box.top >= banner.getBoundingClientRect().top - 0.5) continue;
+      t.classList.add("dot-only");
+      if (title + pills() <= room) t.classList.remove("below");
+    }
+  }
+
   disconnectedCallback() {
+    this._fitObserver?.disconnect();
     this._pressing = this._dirty = false;
     window.removeEventListener("pointerup", this._onPressEnd, true);
     window.removeEventListener("pointercancel", this._onPressEnd, true);
@@ -4418,6 +4473,7 @@ class HeatingCard extends HTMLElement {
     // Kept across the rewrite for the keyboard only (with the pointer it would draw the focus ring).
     const key = this._byPointer ? null : focusKey(active);
     this.shadowRoot.innerHTML = this._render(zones);
+    this._fitPill();
     if (key) [...this.shadowRoot.querySelectorAll(key.tag)].find((n) => key.data.every(([k, v]) => n.getAttribute(k) === v))?.focus({ preventScroll: true });
   }
 
@@ -4707,7 +4763,7 @@ class HeatingCard extends HTMLElement {
       `<div class="htext"><div class="badge${summary.heating ? " heating" : ""}" style="--hc-color:${color}" title="${esc(summary.status)}">${icon}${this._brand(z)}</div>` +
       `<div class="titles"><div class="trow"><div class="name">${esc(title)}</div>` +
       `<span class="st bst${summary.heating ? " heating" : ""}" style="--hc-color:${color}" title="${esc(summary.status)}" role="status"><span class="dot"></span><span class="stt">${esc(summary.status)}</span></span></div>` +
-      `${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div></div>` +
+      `${sub ? `<div class="sub" title="${esc(sub)}">${esc(sub)}</div>` : ""}</div></div>` +
       `${zoom}</div>`
     );
   }

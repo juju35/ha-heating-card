@@ -388,7 +388,7 @@ test("a thermostat without an area and a second thermostat of an area get zones 
 test("a top-level name titles the card and the area stands under it, not the name again", () => {
   const c = card({ entity: "climate.chambre_vanne", name: "Bedroom valve" });
   // The status is in the pill on the title's row, no longer repeated in the subtitle.
-  assert.match(html(c), /<div class="name">Bedroom valve<\/div><span class="st bst"[^>]*title="Idle"[^>]*>.*?<\/span><\/div><div class="sub">Bedroom · Eco<\/div>/);
+  assert.match(html(c), /<div class="name">Bedroom valve<\/div><span class="st bst"[^>]*title="Idle"[^>]*>.*?<\/span><\/div><div class="sub" title="Bedroom · Eco">Bedroom · Eco<\/div>/);
   const classic = card({ entity: "climate.chambre_vanne", name: "Bedroom valve", illustration: false });
   assert.match(html(classic), /<div class="name">Bedroom valve<\/div><div class="sub">Bedroom · Eco<\/div>/);
 });
