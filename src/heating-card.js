@@ -4114,6 +4114,14 @@ const OVERVIEW_STYLE = `
   .tbadge .icon { width: 18px; height: 18px; }
   .tile.heating .tbadge .icon { animation: hc-flame 1.3s ease-in-out infinite; transform-origin: 50% 100%; }
   .tile.boost .tbadge .icon { animation-duration: .65s; }
+  .tbadge ha-icon { --mdc-icon-size: 18px; display: flex; }
+  /* The zone's device drawn instead of the round icon (as the climate-air overview), over the rows of its text. */
+  .tile:has(.tpic) { grid-template-columns: 40px minmax(0, 1fr); padding-left: 6px; }
+  .tbadge.tpic { width: 40px; height: 46px; border-radius: 0; background: none; align-self: center; }
+  .tpic .picture { width: 40px; height: 46px; transition: transform .2s; }
+  .tpic .picture svg { filter: drop-shadow(0 1.5px 3px rgba(0,0,0,.2)); }
+  .tile:not(.on) .tpic .picture { opacity: .8; }
+  .tile[role="button"]:hover .tpic .picture { transform: scale(1.06); }
   .tbadge .adot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--hc-warn);
                   box-shadow: 0 0 0 2px var(--card-background-color, #fff); animation: hc-pulse 2s ease-in-out infinite; }
   .tname { grid-area: name; font-size: 13px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -4145,6 +4153,8 @@ const OVERVIEW_STYLE = `
   .compact .tile { grid-template-columns: 28px minmax(0, 1fr) auto; grid-template-areas: "ic name temp"; padding: 6px 8px 6px 6px; }
   .compact .tbadge { width: 28px; height: 28px; align-self: center; }
   .compact .tbadge .icon { width: 16px; height: 16px; }
+  .compact .tile:has(.tpic) { grid-template-columns: 30px minmax(0, 1fr) auto; padding: 4px 8px 4px 4px; }
+  .compact .tbadge.tpic, .compact .tpic .picture { width: 30px; height: 35px; }
   .compact .ttemp b { font-size: 14px; }
   .compact .ttemp small, .compact .tsub, .compact .tmore, .compact .heat { display: none; }
   /* Confirmation of a quick action, at the top of the card. */
@@ -4182,6 +4192,8 @@ const OVERVIEW_STYLE = `
     .tile { grid-template-columns: 26px minmax(0, 1fr); column-gap: 6px; padding: 6px; }
     .tbadge { width: 26px; height: 26px; }
     .tbadge .icon { width: 15px; height: 15px; }
+    .tile:has(.tpic) { grid-template-columns: 34px minmax(0, 1fr); padding-left: 4px; }
+    .tbadge.tpic, .tpic .picture { width: 34px; height: 39px; }
   }
 `;
 
@@ -5733,10 +5745,21 @@ class HeatingOverviewCard extends HeatingMiniCard {
     const label = `${z.name}: ${[m.cur != null ? this._temp(m.cur) : "", status, ...m.alerts.map((a) => a[1])].filter(Boolean).join(", ")}`;
     return (
       `<div class="${cls.join(" ")}" style="--zc:${m.color}"${open ? ` role="button" tabindex="0" data-action="open" data-zone="${i}"` : ""} aria-label="${esc(label)}">${heat}` +
-      `<div class="tbadge">${svgIcon(icon)}${c.compact && m.alerts.length ? '<span class="adot"></span>' : ""}</div>` +
+      `${this._tileLook(m, icon)}${c.compact && m.alerts.length ? '<span class="adot"></span>' : ""}</div>` +
       `<div class="tname">${esc(z.name)}</div><div class="ttemp">${temp}${target}</div><div class="tsub">${esc(status)}</div>` +
       `<div class="tmore">${more.join("")}</div></div>`
     );
+  }
+
+  // The zone's own device drawn small (wall thermostat, radiator or valve, with its animations), as the tiles of the
+  // climate-air overview; a zone with its own `icon`, or not found, keeps the round state icon.
+  _tileLook(m, icon) {
+    const z = m.z;
+    if (z.icon || z.missing || !(z.id || z.pilots.length)) return `<div class="tbadge">${z.icon ? `<ha-icon icon="${esc(z.icon)}"></ha-icon>` : svgIcon(icon)}`;
+    const cls = ["picture", m.on ? "running" : "", m.heating ? "active" : "", m.boost ? "boost" : "", m.pilot ? `pw-${m.pilot}` : ""];
+    if (m.pilot && m.on && m.pilot.startsWith("comfort")) cls.push("active");
+    const variant = variantOf(this._hass, z.id, z.illustration);
+    return `<div class="tbadge tpic"><div class="${cls.filter(Boolean).join(" ")}" style="--hc-color:${m.color}">${art(variant, m, `${this._uid}-t${z.index}`)}</div>`;
   }
 
   _confirmHtml(models) {

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-11-18
+
+### Features
+- **Heating Overview Card**: each tile draws its zone's own device (wall thermostat, radiator or radiator valve, from its `illustration` or found from the device), as the tiles of the climate-air overview, instead of the round state icon — with the device's animations (glow and heat while it heats, pilot wire colors). Compact and narrow tiles draw it smaller; a zone with its own `icon` keeps it.
+
 ## 1.2.1 - 2026-11-17
 
 ### Fixes

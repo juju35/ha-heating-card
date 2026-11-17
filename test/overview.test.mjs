@@ -240,3 +240,8 @@ test("the overview is registered with the other cards", () => {
   assert.ok(hc.window.customCards.some((x) => x.type === "heating-overview-card" && x.preview));
   assert.equal(hc.HeatingOverviewCard.getConfigElement().constructor, hc.HeatingOverviewCardEditor);
 });
+
+test("overview tiles draw the zone's device, a zone's own icon kept", () => {
+  assert.match(html(card()), /class="tbadge tpic"><div class="picture/);
+  assert.match(html(card({ zones: [{ entity: "climate.salon_thermostat", icon: "mdi:sofa" }] })), /class="tbadge"><ha-icon icon="mdi:sofa"/);
+});
