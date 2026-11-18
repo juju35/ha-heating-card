@@ -4312,16 +4312,21 @@ ARTS.stove = (s) =>
   `<rect x="28" y="74" width="24" height="8" rx="2" fill="#1d2632"/><text class="disp" x="40" y="80.2" text-anchor="middle">${esc(s.display || "")}</text>` +
   '<circle class="led" cx="57" cy="78" r="1.3"/>' +
   '<rect x="18" y="88" width="6" height="3" fill="#3a434e"/><rect x="56" y="88" width="6" height="3" fill="#3a434e"/>';
-// Underfloor heating: the floor's tiles over its screed, the water loop in it glowing while it heats, and the heat
-// rising from the whole floor.
+// Underfloor heating: a sofa on the floor, and under it the floor's cross-section, its water loop glowing while it heats
+// and the heat rising from the floor around the sofa.
+const FLOOR_PATH = "M9 66h62a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h62a3 3 0 0 1 0 6H9";
 ARTS.floor = () =>
-  '<ellipse class="halo" cx="40" cy="58" rx="40" ry="16" fill="url(#hc-th)"/>' +
-  waves([16, 30, 44, 58], 52) +
-  '<rect x="2" y="64" width="76" height="22" rx="3" fill="#cfd5dc"/>' +
-  '<path d="M6 70h68a3 3 0 0 1 0 6H6a3 3 0 0 0 0 6h68" fill="none" stroke="#aab3bd" stroke-width="2.4" stroke-linecap="round"/>' +
-  '<path class="glow pipe" d="M6 70h68a3 3 0 0 1 0 6H6a3 3 0 0 0 0 6h68" fill="none" stroke-width="2.4" stroke-linecap="round"/>' +
-  '<rect x="2" y="59" width="76" height="6" rx="2" fill="url(#hc-tb)" stroke="#c3cad2" stroke-width=".6"/>' +
-  '<path d="M21 59v6M40 59v6M59 59v6" stroke="#c3cad2" stroke-width=".8"/>';
+  '<rect class="glow" x="6" y="52" width="68" height="10" rx="3" fill="url(#hc-tg)"/>' +
+  waves([10, 70], 56) +
+  waves([28, 52], 33) +
+  '<rect x="4" y="62" width="72" height="24" rx="3" fill="#d6cfc6"/><rect x="4" y="62" width="72" height="24" rx="3" fill="#000" opacity=".04"/>' +
+  `<path d="${FLOOR_PATH}" fill="none" stroke="#b9b1a6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>` +
+  `<path class="glow pipe" d="${FLOOR_PATH}" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>` +
+  '<rect x="4" y="57" width="72" height="6" rx="2" fill="#c8a07a"/><path d="M16 57v6M30 57v6M44 57v6M58 57v6" stroke="#b08660" stroke-width=".8"/>' +
+  '<rect x="18" y="38" width="44" height="12" rx="4" fill="#5c7cfa"/><rect x="14" y="44" width="52" height="10" rx="4" fill="#4c6ef5"/>' +
+  '<rect x="11" y="40" width="9" height="15" rx="4" fill="#4263eb"/><rect x="60" y="40" width="9" height="15" rx="4" fill="#4263eb"/>' +
+  '<rect x="21" y="40" width="18" height="6" rx="3" fill="#91a7ff"/><rect x="41" y="40" width="18" height="6" rx="3" fill="#91a7ff"/>' +
+  '<path d="M16 54v3M64 54v3" stroke="#364fc7" stroke-width="2.4" stroke-linecap="round"/>';
 // A towel rail: its ladder of bars glowing from the bottom up, a towel over it and its controller at the foot.
 ARTS.towel = () =>
   '<ellipse class="floor" cx="40" cy="89" rx="28" ry="3.6" fill="url(#hc-af)"/>' +
@@ -4334,6 +4339,7 @@ ARTS.towel = () =>
     return `<rect x="17" y="${y}" width="46" height="3.2" rx="1.6" fill="url(#hc-tc)" stroke="#c3cad2" stroke-width=".5"/><rect class="glow" x="17" y="${y}" width="46" height="3.2" rx="1.6" fill="url(#hc-tg)"/>`;
   }).join("") +
   '<path class="towel" d="M27 22h26v38c-4 5-22 5-26 0z"/><path class="towel fold" d="M27 22h26v5H27z"/>' +
+  '<path class="towel stripe" d="M33 29v28M40 29v30M47 29v28"/>' +
   '<rect x="57" y="79" width="12" height="8" rx="2" fill="#3a434e"/><circle class="led" cx="63" cy="83" r="1.3"/>';
 // A pellet boiler: its flue, the fire behind its door (as a stove), its display and the hopper beside it, filled to the
 // pellets left.
@@ -4452,7 +4458,7 @@ const BANNER_DEVICES = {
   radiator: { vb: [4, 26, 75, 63], w: 62, h: 62 },
   valve: { vb: [0, 2, 78, 84], w: 76, h: 76 },
   stove: { vb: [8, 0, 64, 92], w: 56, h: 78 },
-  floor: { vb: [0, 30, 80, 58], w: 92, h: 66 },
+  floor: { vb: [0, 28, 84, 60], w: 84, h: 62 },
   towel: { vb: [8, 2, 64, 90], w: 46, h: 64 },
   pellet_boiler: { vb: [2, 0, 78, 92], w: 60, h: 70 },
   gas_boiler: { vb: [10, 0, 60, 90], w: 48, h: 70 },
@@ -4476,7 +4482,7 @@ const flake = (x, y, i) =>
 // The scene (200 × 80, drawn 1:1). `dev` is the device's markup from `art` or "", `devW` / `devH` its size,
 // `right` the x of its right edge; `cur` / `tgt` the readout's texts. Returns the markup and where the thermometer
 // and the device start, for the title's room.
-const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, level, active }) => {
+const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, level, active, flat }) => {
   const [c, day, dark] = BANNER_TINTS[theme];
   const devX = right - devW;
   const textW = Math.max(cur.length * 7.6, tgt.length * 3.8);
@@ -4486,7 +4492,10 @@ const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, leve
   const top = 80 - devH;
   let fx = "";
   if (theme === "heat" && active)
-    fx = `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="${(80 - devH / 2).toFixed(1)}" rx="${(devW * 0.62).toFixed(1)}" ry="${(devH * 0.52).toFixed(1)}" fill="#ff9a52"/>`;
+    // A heated floor glows along the floor, not as a ball around the room.
+    fx = flat
+      ? `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="72" rx="${(devW * 0.56).toFixed(1)}" ry="9" fill="#ff9a52"/>`
+      : `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="${(80 - devH / 2).toFixed(1)}" rx="${(devW * 0.62).toFixed(1)}" ry="${(devH * 0.52).toFixed(1)}" fill="#ff9a52"/>`;
   else if (theme === "eco") {
     const [lx, ly] = top >= 22 ? [devX + devW / 2, top - 9] : [devX - 6, 12];
     fx = `<g transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)})"><path class="bleaf" d="M0 8q-10-5-5-16q11 0 10 12q-1 4-5 4z"/></g>`;
@@ -4528,11 +4537,12 @@ const ART_STYLE = `
   :is(.picture, .bdev).running.active .heat path { animation: hc-rise 2.8s ease-in-out infinite; }
   :is(.picture, .bdev).running.active .heat path:nth-child(2) { animation-delay: .9s; }
   :is(.picture, .bdev).running.active .flame.f2 { animation-delay: .45s; animation-duration: 1.05s; }
-  /* A gas burner's flame is blue; a heated floor's loop and a towel take the zone's color. */
+  /* A gas burner's flame is blue; a heated floor's loop takes the zone's color, a towel stays a warm orange towel. */
   :is(.picture, .bdev) .flame.gas { fill: #4dabf7; }
   :is(.picture, .bdev) .pipe { stroke: var(--hc-color); }
-  :is(.picture, .bdev) .towel { fill: color-mix(in srgb, var(--hc-color) 45%, #f1f3f5); }
-  :is(.picture, .bdev) .towel.fold { fill: color-mix(in srgb, var(--hc-color) 65%, #868e96); }
+  :is(.picture, .bdev) .towel { fill: #ff922b; }
+  :is(.picture, .bdev) .towel.fold { fill: #e8590c; }
+  :is(.picture, .bdev) .towel.stripe { fill: none; stroke: #fff; stroke-width: .8; opacity: .4; }
   /* A stove on but not burning (standby, cooling down): its embers still glow a little. */
   :is(.picture, .bdev).running:not(.active) .ember { opacity: .35; }
   :is(.picture, .bdev).running.active .heat path:nth-child(3) { animation-delay: 1.8s; }
@@ -5729,8 +5739,10 @@ class HeatingCard extends HTMLElement {
     let dev = "";
     let devW = 0;
     let devH = 0;
+    let flat = false;
     if (!z.icon && !z.missing) {
       const variant = variantOf(this._hass, z.id, z.illustration);
+      flat = variant === "floor";
       const box = BANNER_DEVICES[variant] || BANNER_DEVICES.dial;
       const [, , vw, vh] = box.vb;
       const k = Math.min(box.w / vw, box.h / vh);
@@ -5748,7 +5760,7 @@ class HeatingCard extends HTMLElement {
     const cur = m.cur != null ? `${fmtNum(loc, m.cur)}°` : "";
     const tgt = this._showTarget(m) ? `→ ${m.range ? `${fmtNum(loc, m.range.low)}–${fmtNum(loc, m.range.high)}` : fmtNum(loc, m.target)}°` : "";
     const level = m.cur != null ? m.cur / 30 : BANNER_LEVELS[theme];
-    const scene = bannerScene({ theme, night, uid: this._uid, dev, devW, devH, right, cur, tgt, level, active: m.heating || (m.pilot?.startsWith("comfort") && m.on) });
+    const scene = bannerScene({ theme, night, uid: this._uid, dev, devW, devH, right, cur, tgt, level, active: m.heating || (m.pilot?.startsWith("comfort") && m.on), flat });
     const color = this._iconColor(summary.models || [m], m);
     const icon = z.icon && this._zonesNow?.length === 1 ? `<ha-icon icon="${esc(z.icon)}"></ha-icon>` : svgIcon(m.online && m.on ? "fire" : "radiator_off");
     const vars = `--hc-sw:${Math.ceil(200 - scene.tx + 8)}px;--hc-dw:${Math.ceil(200 - scene.devX + 4)}px;--hc-zw:${zoom ? 36 : 8}px`;
