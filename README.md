@@ -14,7 +14,13 @@
   <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/netatmo.png" alt="Netatmo" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/tado.png" alt="tado°" width="64">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/zha.png" alt="ZHA" width="64">&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/heatzy.png" alt="Heatzy" width="64">
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/heatzy.png" alt="Heatzy" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/palazzetti.png" alt="Palazzetti" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/fumis.png" alt="Fumis" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/edilkamin.png" alt="Edilkamin" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/maestro_mcz.png" alt="MCZ Maestro" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/rika_firenet.png" alt="Rika Firenet" width="64">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/duepi_evo.png" alt="Duepi EVO" width="64">
 </p>
 
 Lovelace cards for the **heating** of your home in Home Assistant, zone by zone: **thermostats** (wall thermostats, electric radiators, radiator valves), **pilot wire radiators** (comfort, eco, frost protection, off, comfort −1 / −2) and their **weekly schedules**.
@@ -31,15 +37,16 @@ The cards work on top of the integrations you already use: any `climate` entity 
 
 - Three cards: a full **Heating Card** (`custom:heating-card`), a compact **Heating Mini Card** (`custom:heating-mini-card`) and a **Heating Overview Card** (`custom:heating-overview-card`) for the whole home
 - Several **zones**, as text tabs under the header (the selected one underlined in its color, a flickering flame on a zone that heats); found automatically by area or set with `zones`
-- **Thermostat** (from the thermostat card of [ha-climate-air-card](https://github.com/juju35/ha-climate-air-card)): animated illustration (round wall thermostat, column radiator or radiator valve, picked from the device model and name), room temperature and target, heating modes (*Heat*, *Auto*) and a power button
+- **Thermostat** (from the thermostat card of [ha-climate-air-card](https://github.com/juju35/ha-climate-air-card)): animated illustration (round wall thermostat, column radiator, radiator valve or stove, picked from the device model and name), room temperature and target, heating modes (*Heat*, *Auto*) and a power button
 - **Target**: − / + buttons sent once the taps stop, a scale from the entity's minimum to its maximum with the room temperature as a tick, keyboard spin button (arrows, Page Up / Down, Home / End), buttons off at the limits, a low / high range for thermostats that set one
 - **What it does** from `hvac_action` (*Heating*, *Preheating*, *Idle*, *Off*, *Defrosting*): the flame flickers and warm air rises only while it really heats; **Boost** doubles the animation speed, in red
 - **Presets** as segmented buttons (*Comfort*, *Eco*, *Away*, *Boost*, *Frost protection*, *Comfort −1 / −2*…), a dropdown when there are more than seven; a tap on the selected one goes back to manual
 - The fan mode, swing mode and target humidity of the thermostats that have them, as dropdowns
 - **Pilot wire** radiators: one row of orders per radiator (`select` or `switch` relay), each order in its color (*−1* / *−2* stay on the icon-only buttons of comfort −1 / −2); the radiator glows on comfort and breathes on eco
+- **Stove** (pellet or wood stove, insert): drawn with its fire behind the glass (flames while it burns, embers glowing on standby), its **phase** on a line (*Off → Ignition → Burning → Cooling down*, *Standby*, or the alarm in red), its **power level** as numbered buttons (a `number` of its device), the **pellets** left as a bar (*Low pellets* alert at 10 % or below, or from its reserve sensor), and its flue gas, fan and ignitions as tiles; an alarm of the stove is an alert chip. Found from the integration and the device (Palazzetti, Fumis, Edilkamin, MCZ Maestro, Rika Firenet, Duepi EVO…) or its name, or set `illustration: stove`
 - **Weekly schedule**: the week of a `schedule` helper as seven rows of time slots, today highlighted with a pulsing "now" line, and its state (*On until 22:00*)
 - Valve opening, battery, humidity, outdoor temperature and power chips; *Window open* and *Low battery* (15 % or less) alerts; the thermostat's other switches (child lock, window detection…) as option toggles
-- **Illustrated header** (full, mini and overview cards, 90 px): a temperature scene on the right, with a thermometer, the room temperature → target and the zone's own device drawn big (wall thermostat, radiator or radiator valve), over a 10 px ground strip edge to edge. *Heating* is orange (the device glows, heat rises, the mercury breathes), *Eco* green with a swaying leaf, *Frost protection* blue with drifting snowflakes, *Off* grey. Night colors with a dark Home Assistant theme, forced with `illustration_theme`; `illustration: false` keeps the classic header
+- **Illustrated header** (full, mini and overview cards, 90 px): a temperature scene on the right, with a thermometer, the room temperature → target and the zone's own device drawn big (wall thermostat, radiator, radiator valve or stove), over a 10 px ground strip edge to edge. *Heating* is orange (the device glows, heat rises, the mercury breathes), *Eco* green with a swaying leaf, *Frost protection* blue with drifting snowflakes, *Off* grey. Night colors with a dark Home Assistant theme, forced with `illustration_theme`; `illustration: false` keeps the classic header
 - The header icon says the status (heating in the heat or boost color, eco green, frost protection blue, idle or off grey, an open window or low battery amber, unavailable red), with the integration's logo (Netatmo, tado°, Heatzy, ZHA) in a badge; the subtitle counts the zones heating, or gives the zone's state and preset
 - Mini card: the overview of the zones, one row each, a click unfolding the full card on that zone; on one zone, the compact thermostat with − / + and power. Detail button at the top right; a click anywhere outside the card brings the compact view back
 - **Overview card**: the heating of the whole home at a glance, **floor by floor** (one tile per zone: the zone's own device drawn small — wall thermostat, radiator or radiator valve, as on the climate-air overview —, state, room temperature and target, preset, pilot wire radiators, schedule, alerts), a **summary** (zones heating, average room temperature from the coldest to the warmest zone, average target, open windows, low batteries, devices offline, pilot wire radiators per order) and **quick actions** for every zone (*Comfort*, *Eco*, *Frost protection*, *Away*, *Off*) confirmed at the top of the card; a tap on a zone unfolds the full card on it. The zones that heat glow, their device heats as on the full card and heat rises over them; filters by area, floor and entity, sorts, compact tiles
@@ -54,6 +61,7 @@ The cards work on top of the integrations you already use: any `climate` entity 
 
 | Entities | Integrations (examples) | What the cards show |
 |---|---|---|
+| `climate` of a pellet or wood stove | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/palazzetti.png" alt="" width="16"> [Palazzetti](https://www.home-assistant.io/integrations/palazzetti/), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/fumis.png" alt="" width="16"> [Fumis](https://www.home-assistant.io/integrations/fumis/), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/edilkamin.png" alt="" width="16"> [Edilkamin](https://github.com/nghaye/ha-edilkamin), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/maestro_mcz.png" alt="" width="16"> [MCZ Maestro](https://github.com/Robbe-B/maestro_mcz), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/rika_firenet.png" alt="" width="16"> [Rika Firenet](https://github.com/antibill51/rika-firenet-custom-component), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/duepi_evo.png" alt="" width="16"> [Duepi EVO](https://github.com/aceindy/Duepi_EVO) | Stove: target, power, phase (its status sensor or `burner_status`), power level (`number`), pellets, flue gas, fan, ignitions and alarm of its device |
 | `climate` that heats and cannot cool, dry or only blow | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/netatmo.png" alt="" width="16"> [Netatmo](https://www.home-assistant.io/integrations/netatmo/), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/tado.png" alt="" width="16"> [tado°](https://www.home-assistant.io/integrations/tado/), [Zigbee2MQTT](https://www.zigbee2mqtt.io/) and <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/zha.png" alt="" width="16"> [ZHA](https://www.home-assistant.io/integrations/zha/) radiator valves and thermostats, [Generic Thermostat](https://www.home-assistant.io/integrations/generic_thermostat/), <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/heatzy.png" alt="" width="16"> [Heatzy](https://github.com/Cyr-ius/hass-heatzy) | Thermostat: target, modes, presets, `hvac_action`, and the valve, window and battery sensors of its device |
 | `select` offering pilot wire orders | [Zigbee2MQTT](https://www.zigbee2mqtt.io/) / <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/images/zha.png" alt="" width="16"> [ZHA](https://www.home-assistant.io/integrations/zha/) pilot wire modules (Nodon SIN-4-FP-21, Legrand cable outlet…), any select whose options are pilot wire orders | Pilot wire orders, comfort / comfort −1 / comfort −2 / eco / frost protection / off |
 | `switch` | A relay on the pilot wire (with or without a diode) | The two orders set with `switch_on` / `switch_off` |
@@ -272,7 +280,7 @@ The `zones` option works on the overview too: its zones are then the ones shown,
 | `temperature` / `humidity` | The thermostat's, or the area's sensors (automatic zones) | Room temperature and humidity sensors |
 | `schedule` | The area's schedule helper (automatic zones) | A `schedule` helper drawn as the zone's week |
 | `window` | The device's open-window sensor | `binary_sensor` raising the *Window open* alert |
-| `illustration` | `auto` | `dial` (round wall thermostat), `radiator` or `valve` (radiator valve); `auto` picks one from the device model and name, `radiator` for a pilot wire zone |
+| `illustration` | `auto` | `dial` (round wall thermostat), `radiator`, `valve` (radiator valve) or `stove` (pellet or wood stove); `auto` picks one from the integration, the device model and name, `radiator` for a pilot wire zone |
 | `icon` | — | An `mdi:` icon instead of the illustration |
 | `switch_on` / `switch_off` | `comfort` / `off` | The orders a `switch` relay sends when on and off: `comfort`, `comfort_1`, `comfort_2`, `eco`, `frost`, `off` (e.g. `eco` / `comfort` for a relay with a diode) |
 | `entities` | Auto | Override the sensors found on the thermostat's device: `indoor_temp`, `outdoor_temp`, `humidity`, `power`, `valve`, `window`, `battery` |
@@ -300,6 +308,12 @@ A radiator valve open at 45 %: its radiator glows and heat rises.
 | Light | Dark |
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/heating-valve.gif" alt="radiator valve heating" width="380"> | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/heating-valve-dark.gif" alt="radiator valve heating, dark theme" width="380"> |
+
+A pellet stove burning: the flames flicker behind its glass, its embers glow and its halo breathes.
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/heating-stove.gif" alt="pellet stove burning" width="380"> | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/heating-stove-dark.gif" alt="pellet stove burning, dark theme" width="380"> |
 
 Boost: the flame and the heat go twice as fast, in red.
 
@@ -356,6 +370,12 @@ The bedroom's radiator valve: idle, window open, battery and valve chips; with h
 | Light | Dark |
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/card-valve.png" alt="radiator valve" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/card-valve-dark.png" alt="radiator valve, dark theme" width="400"> |
+
+A pellet stove as a zone: burning at power 3 of 5 (numbered buttons), its phases, the pellets left, the flue gas, the fan and the ignitions.
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/card-stove.png" alt="pellet stove" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-heating-card/main/screenshots/card-stove-dark.png" alt="pellet stove, dark theme" width="400"> |
 
 The bathroom's towel radiator on pilot wire, with the room's temperature and humidity.
 
@@ -423,6 +443,10 @@ Without `zones`, the cards take every heating thermostat (a `climate` entity wit
 ### Thermostats
 
 The sensors of a thermostat's device are found through the entity registry, by translation key, entity id (English, French, German and Spanish) or device class: room and outdoor temperature, humidity, power, valve opening, open-window detection and battery. A thermostat heats when its `hvac_action` says so (`heating`, `preheating`), or, without `hvac_action`, while its valve is open. The power button turns the thermostat off with `climate.set_hvac_mode` (`climate.turn_off` when it has no off mode) and back on with `set_hvac_mode` in the mode it had before the card turned it off (else *Heat*, *Auto*, then *Heat/Cool*), which every thermostat takes, unlike `climate.turn_on`. A target change is shown at once, sent 0.9 s after the last tap, and kept on screen until the entity reports it (10 s at most); a target still waiting when the card is removed is sent right away.
+
+### Stoves
+
+A thermostat is drawn as a stove when its integration, device or name says so (Palazzetti, Fumis, Edilkamin, MCZ Maestro, Rika Firenet, Duepi EVO, Ecoforest, Extraflame, Micronova; *stove*, *poêle*, *pellet*, *Ofen*, *estufa*, *stufa*…), or with `illustration: stove`. On its device the card reads: its status (a text sensor, else the entity's `burner_status`), mapped in any language to *Off*, *Ignition*, *Burning*, *Cooling down*, *Standby* or *Alarm*; its power level (a `number`, set with `number.set_value`; else the `power_level` attribute, shown only); the pellets (a sensor in %, or in kg shown as a tile; a reserve `binary_sensor`); the flue gas temperature (else the `flu_gas_temp` attribute); the room fan; an alarm sensor (any state but *none*); the ignitions counted. A stove heats when its `hvac_action` says so, else while it burns or ignites. Ecoforest stoves have no `climate` entity: give the zone its sensors with `temperature` and `entities`. The section is folded with `collapsed: [stove]`.
 
 ### Pilot wire
 

@@ -20,6 +20,8 @@ export const shots = [
   ...twins("card-valve", { type: "heating-card", width: 460, config: {}, clicks: zone(1) }),
   // The bathroom's towel radiator on pilot wire, with the room's temperature and humidity.
   ...twins("card-pilot-wire", { type: "heating-card", width: 460, config: {}, clicks: zone(3) }),
+  // A pellet stove as a zone: burning at power 3 of 5, its phases, pellets, flue gas, fan and ignitions.
+  ...twins("card-stove", { type: "heating-card", width: 460, config: { entity: "climate.poele_granules" } }),
   // The overview of the zones, and one zone as a mini card.
   ...twins("mini-card", { type: "heating-mini-card", width: 380, config: {} }),
   ...twins("mini-card-thermostat", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat" } }),
@@ -41,6 +43,7 @@ export const shots = [
 //   heating-dial      — wall thermostat heating: flame flickers, warm air rises, halo, blinking LED
 //   heating-radiator  — the same thermostat drawn as a column radiator: columns glow from the bottom up, heat rises
 //   heating-valve     — radiator valve open (45 %): its radiator glows, heat rises
+//   heating-stove     — a pellet stove burning: flames flicker behind the glass, embers glow, halo
 //   boost             — Boost preset: the flame and the heat go twice as fast, in red
 //   pilot-comfort     — pilot wire radiator on comfort: glowing and giving off heat
 //   pilot-eco         — pilot wire radiator on eco: a slow breathing glow, the header's green leaf sways
@@ -53,6 +56,7 @@ export const gifs = [
   ...twins("heating-dial", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat" } }),
   ...twins("heating-radiator", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat", illustration: "radiator" } }),
   ...twins("heating-valve", { type: "heating-mini-card", width: 380, config: { entity: "climate.chambre_vanne" }, overrides: valveHeating }),
+  ...twins("heating-stove", { type: "heating-mini-card", width: 380, config: { entity: "climate.poele_granules" } }),
   ...twins("boost", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat" }, overrides: boost }),
   ...twins("pilot-comfort", { type: "heating-mini-card", width: 380, config: BATHROOM, overrides: pilotComfort }),
   ...twins("pilot-eco", { type: "heating-mini-card", width: 380, config: BATHROOM, overrides: pilotEco }),

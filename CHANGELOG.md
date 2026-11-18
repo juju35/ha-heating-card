@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0 - 2026-11-18
+
+### Features
+- **Stove**: a pellet or wood stove is one more device of a zone, drawn with its fire behind the glass (flames while it burns, embers on standby), in the card, the illustrated header and the overview tiles. Its **phase** (*Off → Ignition → Burning → Cooling down*, *Standby*, or its alarm), its **power level** as numbered buttons, the **pellets** left as a bar with a *Low pellets* alert, and its flue gas, fan and ignitions as tiles, read from its device or its entity's attributes. Found from the integration, the device or the name (Palazzetti, Fumis, Edilkamin, MCZ Maestro, Rika Firenet, Duepi EVO…; *stove*, *poêle*, *pellet*… in every language), or `illustration: stove`; `collapsed: [stove]` folds its section.
+- **Stove on the mini card**: its power level and the pellets left on one line (*Power 3/5 · Pellets 35 %*), next to its phase in the pill.
+
 ## 1.3.1 - 2026-11-18
 
 ### Fixes
