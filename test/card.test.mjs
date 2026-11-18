@@ -470,6 +470,11 @@ test("a stove zone shows its phases, power levels, pellets, flue gas, fan and ig
   assert.deepEqual(plain(c.calls.at(-1)), ["number", "set_value", { entity_id: "number.poele_granules_puissance", value: 5 }]);
 });
 
+test("a stove's mini card shows its power level and pellets left", () => {
+  const h = html(card({ entity: "climate.poele_granules" }, mockHass(), hc.HeatingMiniCard));
+  assert.match(h, /Power 3\/5 · Pellets 35 %/);
+});
+
 test("a stove in alarm or low on pellets raises an alert", () => {
   const hass = mockHass({ "sensor.poele_granules_status": { state: "Alarm" }, "sensor.poele_granules_pellet_level": { state: "6" } });
   const h = html(card({ entity: "climate.poele_granules" }, hass));

@@ -5891,6 +5891,16 @@ class HeatingMiniCard extends HeatingCard {
     } else lines.push(`<div class="line">${svgIcon(m.pilot ? PILOT_ICONS[m.pilot] : "radiator")}<span><b>${esc(m.status)}</b></span></div>`);
     if (m.presetText) lines.push(this._line(presetIcon(m.preset), m.presetText));
     if (c.show_sensors && m.valve != null) lines.push(this._line("valve", `${this._t("valve")} ${fmtNum(this._locale(), m.valve, 0)} %`));
+    // A stove: its power level and the pellets left on one line (its phase is the pill, a low stock an alert chip).
+    const sv = m.online ? m.stove : null;
+    if (sv) {
+      const loc = this._locale();
+      const parts = [];
+      if (sv.power?.value != null) parts.push(`${this._t("stove_power")} ${fmtNum(loc, sv.power.value)}${sv.power.max ? `/${fmtNum(loc, sv.power.max)}` : ""}`);
+      if (sv.pellets != null) parts.push(`${this._t("pellets")} ${fmtNum(loc, sv.pellets, 0)} %`);
+      else if (sv.pelletsText) parts.push(`${this._t("pellets")} ${sv.pelletsText}`);
+      if (parts.length) lines.push(this._line("pellets", parts.join(" · ")));
+    }
     const chips = m.chips.filter((x) => x.includes("chip warn") || !m.online);
     const btns = [];
     if (m.online && c.show_controls && z.id) {
