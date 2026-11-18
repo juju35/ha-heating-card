@@ -17,6 +17,7 @@ const area = (area_id, name, floor_id = null) => (areas[area_id] = { area_id, na
 const device = (id, name, model, area_id) => (devices[id] = { id, name, model, area_id, name_by_user: null });
 const entity = (entity_id, device_id, state, attributes = {}, extra = {}) => {
   entities[entity_id] = { entity_id, device_id, platform: extra.platform || "mqtt", translation_key: extra.translation_key || null, area_id: extra.area_id || null };
+  if (extra.hidden) entities[entity_id].hidden = true;
   states[entity_id] = { entity_id, state: String(state), attributes, last_changed: NOW, last_updated: NOW };
 };
 
@@ -73,6 +74,29 @@ entity("climate.chambre_vanne", "vanne_chambre", "heat", {
 entity("sensor.chambre_vanne_position", "vanne_chambre", "0", { unit_of_measurement: "%", friendly_name: "Bedroom radiator valve Valve position" }, { translation_key: "valve_position" });
 entity("binary_sensor.chambre_vanne_fenetre_ouverte", "vanne_chambre", "on", { device_class: "window", friendly_name: "Bedroom radiator valve Window open" }, { translation_key: "window_open" });
 entity("sensor.chambre_vanne_batterie", "vanne_chambre", "64", { device_class: "battery", unit_of_measurement: "%", friendly_name: "Bedroom radiator valve Battery" });
+
+// Lounge: a pellet stove burning at power 3 (Palazzetti-style climate entity, its device's status, power level,
+// pellets, flue gas and fan). Hidden from discovery, so that the other captures keep their four zones: the stove's
+// captures name it.
+area("lounge", "Lounge", "ground_floor");
+device("poele_salon", "Pellet stove", "Connection Box", "lounge");
+entity("climate.poele_granules", "poele_salon", "heat", {
+  friendly_name: "Pellet stove",
+  hvac_modes: ["off", "heat"],
+  hvac_action: "heating",
+  current_temperature: 19.5,
+  temperature: 21,
+  min_temp: 13,
+  max_temp: 30,
+  target_temp_step: 1,
+  supported_features: 393,
+}, { platform: "palazzetti", hidden: true });
+entity("sensor.poele_granules_status", "poele_salon", "burning", { friendly_name: "Pellet stove Status" }, { platform: "palazzetti", translation_key: "status" });
+entity("number.poele_granules_puissance", "poele_salon", "3", { min: 1, max: 5, step: 1, friendly_name: "Pellet stove Combustion power" }, { platform: "palazzetti", translation_key: "combustion_power" });
+entity("sensor.poele_granules_pellet_level", "poele_salon", "35", { unit_of_measurement: "%", friendly_name: "Pellet stove Pellet level" }, { platform: "palazzetti", translation_key: "pellet_level" });
+entity("sensor.poele_granules_flue_gas_temperature", "poele_salon", "168", { device_class: "temperature", unit_of_measurement: "°C", friendly_name: "Pellet stove Flue gas temperature" }, { platform: "palazzetti" });
+entity("number.poele_granules_fan_speed", "poele_salon", "3", { min: 1, max: 5, step: 1, friendly_name: "Pellet stove Fan speed" }, { platform: "palazzetti" });
+entity("sensor.poele_granules_ignitions", "poele_salon", "2", { friendly_name: "Pellet stove Ignitions", state_class: "total_increasing" }, { platform: "palazzetti" });
 
 // Office: a thermostat turned off.
 device("thermo_bureau", "Office thermostat", "Smart thermostat", "office");

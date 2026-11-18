@@ -445,3 +445,34 @@ test("several cards on a page keep their SVG ids apart", () => {
   assert.ok(ids(a).length);
   assert.equal(ids(a).filter((id) => ids(b).includes(id)).length, 0);
 });
+
+test("a stove: found from its integration or name, its phase read in any language", () => {
+  assert.equal(hc.guessVariant("palazzetti Connection Box Pellet stove"), "stove");
+  assert.equal(hc.guessVariant("Poêle à granulés"), "stove");
+  assert.equal(hc.guessVariant("Zigbee radiator valve"), "valve");
+  for (const [text, phase] of [["burning", "burning"], ["Accensione", "ignition"], ["Cooling", "cooling"], ["Standby", "standby"], ["off", "off"], ["Alarm: pellet end", "alarm"], ["modulation", "burning"], ["", null], ["unknown", null]])
+    assert.equal(hc.stovePhase(text), phase, text);
+  // The stove is hidden from discovery: the zones found stay four.
+  assert.equal(hc.discoverZones(mockHass()).length, 4);
+});
+
+test("a stove zone shows its phases, power levels, pellets, flue gas, fan and ignitions, and sets its power", () => {
+  const c = card({ entity: "climate.poele_granules" });
+  const h = html(c);
+  assert.match(h, /Burning/);
+  assert.match(h, /class="phase on" aria-current="step">Burning/);
+  assert.match(h, /class="segments levels"/);
+  assert.match(h, /data-action="stove_power" data-value="3"[^>]*aria-pressed="true"/);
+  assert.match(h, /Pellets[\s\S]*35 %/);
+  assert.match(h, /Flue gas[\s\S]*168 °C/);
+  assert.match(h, /Ignitions[\s\S]*>2</);
+  click(c, { action: "stove_power", value: "5", entity: "number.poele_granules_puissance", zone: "0" });
+  assert.deepEqual(plain(c.calls.at(-1)), ["number", "set_value", { entity_id: "number.poele_granules_puissance", value: 5 }]);
+});
+
+test("a stove in alarm or low on pellets raises an alert", () => {
+  const hass = mockHass({ "sensor.poele_granules_status": { state: "Alarm" }, "sensor.poele_granules_pellet_level": { state: "6" } });
+  const h = html(card({ entity: "climate.poele_granules" }, hass));
+  assert.match(h, /class="phases alarm"/);
+  assert.match(h, /chip warn[^>]*>[\s\S]*Low pellets/);
+});
