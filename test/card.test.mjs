@@ -481,3 +481,68 @@ test("a stove in alarm or low on pellets raises an alert", () => {
   assert.match(h, /class="phases alarm"/);
   assert.match(h, /chip warn[^>]*>[\s\S]*Low pellets/);
 });
+
+test("underfloor heating, towel rails and boilers: found from their integration, brand or name", () => {
+  for (const [text, v] of [
+    ["oekofen Pellematic", "pellet_boiler"],
+    ["Chaudière à granulés", "pellet_boiler"],
+    ["Hargassner Nano-PK", "pellet_boiler"],
+    ["opentherm_gw OpenTherm Gateway", "gas_boiler"],
+    ["vicare Vitodens 200", "gas_boiler"],
+    ["Chaudière gaz", "gas_boiler"],
+    ["Oil boiler", "oil_boiler"],
+    ["Chaudière fioul", "oil_boiler"],
+    ["esphome Diesel heater", "oil_boiler"],
+    ["Plancher chauffant", "floor"],
+    ["Danfoss Icon room thermostat", "floor"],
+    ["Fußbodenheizung", "floor"],
+    ["Sèche-serviettes", "towel"],
+    ["Towel radiator", "towel"],
+    ["Palazzetti pellet stove", "stove"],
+    ["Zigbee radiator valve", "valve"],
+    ["heatzy Pilote", "radiator"],
+  ])
+    assert.equal(hc.guessVariant(text), v, text);
+  // Each is hidden from discovery: the zones found stay four.
+  assert.equal(hc.discoverZones(mockHass()).length, 4);
+});
+
+test("underfloor heating shows its floor temperature", () => {
+  const h = html(card({ entity: "climate.plancher_sejour" }));
+  assert.match(h, /Floor 26\.5 °C/);
+  assert.match(h, /class="glow pipe"/);
+});
+
+test("a towel rail on Boost says its time left", () => {
+  const h = html(card({ entity: "climate.seche_serviettes" }));
+  assert.match(h, /Heating · 30 min left/);
+  assert.match(h, /class="towel"/);
+});
+
+test("a pellet boiler burns as a stove: phases, pellets, flow and return in a Boiler section", () => {
+  const h = html(card({ entity: "climate.chaudiere_granules" }));
+  assert.match(h, /class="phase on" aria-current="step">Burning/);
+  assert.match(h, />Boiler</);
+  assert.match(h, /Pellets[\s\S]*52 %/);
+  assert.match(h, /Flow[\s\S]*68 °C/);
+  assert.match(h, /Return[\s\S]*52 °C/);
+});
+
+test("a gas boiler: flow, return, burner modulation and pressure; low pressure is an alert", () => {
+  const h = html(card({ entity: "climate.chaudiere_gaz" }));
+  assert.match(h, /class="flame gas"/);
+  for (const re of [/Flow[\s\S]*55 °C/, /Return[\s\S]*42 °C/, /Burner[\s\S]*42 %/, /Pressure[\s\S]*1\.6 bar/]) assert.match(h, re);
+  assert.doesNotMatch(h, /Low pressure/);
+  const low = html(card({ entity: "climate.chaudiere_gaz" }, mockHass({ "sensor.chaudiere_gaz_pressure": { state: "0.5" } })));
+  assert.match(low, /chip warn[^>]*>[\s\S]*Low pressure · 0\.5 bar/);
+  // The mini card: its flow and burner on one line.
+  assert.match(html(card({ entity: "climate.chaudiere_gaz" }, mockHass(), hc.HeatingMiniCard)), /Flow 55 °C · Burner 42 %/);
+});
+
+test("an oil boiler: its tank as a bar and a low fuel alert; the burner off means not heating", () => {
+  const h = html(card({ entity: "climate.chaudiere_fioul" }));
+  assert.match(h, /class="pellets fuel"[\s\S]*Fuel[\s\S]*48 %/);
+  const low = html(card({ entity: "climate.chaudiere_fioul" }, mockHass({ "sensor.chaudiere_fioul_fuel_level": { state: "9" }, "climate.chaudiere_fioul": { hvac_action: null }, "binary_sensor.chaudiere_fioul_burner": { state: "off" } })));
+  assert.match(low, /chip warn[^>]*>[\s\S]*Low fuel/);
+  assert.match(low, /Idle/);
+});

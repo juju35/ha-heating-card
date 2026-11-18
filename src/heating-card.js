@@ -102,6 +102,21 @@ const STRINGS = {
     stove_fan: "Fan",
     ignitions: "Ignitions",
     ill_stove: "Stove",
+    ill_floor: "Underfloor heating",
+    ill_towel: "Towel rail",
+    ill_pellet_boiler: "Pellet boiler",
+    ill_gas_boiler: "Gas boiler",
+    ill_oil_boiler: "Oil boiler",
+    sec_boiler: "Boiler",
+    flow_temp: "Flow",
+    return_temp: "Return",
+    modulation: "Burner",
+    pressure: "Pressure",
+    pressure_low: "Low pressure",
+    fuel: "Fuel",
+    fuel_low: "Low fuel",
+    floor_temp: "Floor",
+    boost_left: "{time} left",
     ed_title: "Title",
     ed_zone: "Zone {n}",
     ed_add_zone: "Add a zone",
@@ -257,6 +272,21 @@ const STRINGS = {
     stove_fan: "Ventilation",
     ignitions: "Allumages",
     ill_stove: "Poêle",
+    ill_floor: "Plancher chauffant",
+    ill_towel: "Sèche-serviettes",
+    ill_pellet_boiler: "Chaudière à granulés",
+    ill_gas_boiler: "Chaudière gaz",
+    ill_oil_boiler: "Chaudière fioul",
+    sec_boiler: "Chaudière",
+    flow_temp: "Départ",
+    return_temp: "Retour",
+    modulation: "Brûleur",
+    pressure: "Pression",
+    pressure_low: "Pression basse",
+    fuel: "Fioul",
+    fuel_low: "Fioul bas",
+    floor_temp: "Sol",
+    boost_left: "encore {time}",
     ed_title: "Titre",
     ed_zone: "Zone {n}",
     ed_add_zone: "Ajouter une zone",
@@ -412,6 +442,21 @@ const STRINGS = {
     stove_fan: "Gebläse",
     ignitions: "Zündungen",
     ill_stove: "Ofen",
+    ill_floor: "Fußbodenheizung",
+    ill_towel: "Handtuchheizkörper",
+    ill_pellet_boiler: "Pelletkessel",
+    ill_gas_boiler: "Gaskessel",
+    ill_oil_boiler: "Ölkessel",
+    sec_boiler: "Kessel",
+    flow_temp: "Vorlauf",
+    return_temp: "Rücklauf",
+    modulation: "Brenner",
+    pressure: "Druck",
+    pressure_low: "Druck niedrig",
+    fuel: "Heizöl",
+    fuel_low: "Heizöl niedrig",
+    floor_temp: "Boden",
+    boost_left: "noch {time}",
     ed_title: "Titel",
     ed_zone: "Zone {n}",
     ed_add_zone: "Zone hinzufügen",
@@ -567,6 +612,21 @@ const STRINGS = {
     stove_fan: "Ventilador",
     ignitions: "Encendidos",
     ill_stove: "Estufa",
+    ill_floor: "Suelo radiante",
+    ill_towel: "Toallero",
+    ill_pellet_boiler: "Caldera de pellets",
+    ill_gas_boiler: "Caldera de gas",
+    ill_oil_boiler: "Caldera de gasóleo",
+    sec_boiler: "Caldera",
+    flow_temp: "Impulsión",
+    return_temp: "Retorno",
+    modulation: "Quemador",
+    pressure: "Presión",
+    pressure_low: "Presión baja",
+    fuel: "Gasóleo",
+    fuel_low: "Gasóleo bajo",
+    floor_temp: "Suelo",
+    boost_left: "quedan {time}",
     ed_title: "Título",
     ed_zone: "Zona {n}",
     ed_add_zone: "Añadir una zona",
@@ -722,6 +782,21 @@ const STRINGS = {
     stove_fan: "Вентилатор",
     ignitions: "Паљења",
     ill_stove: "Пећ",
+    ill_floor: "Подно грејање",
+    ill_towel: "Сушач пешкира",
+    ill_pellet_boiler: "Котао на пелет",
+    ill_gas_boiler: "Гасни котао",
+    ill_oil_boiler: "Котао на лож-уље",
+    sec_boiler: "Котао",
+    flow_temp: "Полаз",
+    return_temp: "Повратак",
+    modulation: "Горионик",
+    pressure: "Притисак",
+    pressure_low: "Низак притисак",
+    fuel: "Гориво",
+    fuel_low: "Мало горива",
+    floor_temp: "Под",
+    boost_left: "још {time}",
     ed_title: "Наслов",
     ed_zone: "Зона {n}",
     ed_add_zone: "Додај зону",
@@ -877,6 +952,21 @@ const STRINGS = {
     stove_fan: "Ventilator",
     ignitions: "Paljenja",
     ill_stove: "Peć",
+    ill_floor: "Podno grejanje",
+    ill_towel: "Sušač peškira",
+    ill_pellet_boiler: "Kotao na pelet",
+    ill_gas_boiler: "Gasni kotao",
+    ill_oil_boiler: "Kotao na lož-ulje",
+    sec_boiler: "Kotao",
+    flow_temp: "Polaz",
+    return_temp: "Povratak",
+    modulation: "Gorionik",
+    pressure: "Pritisak",
+    pressure_low: "Nizak pritisak",
+    fuel: "Gorivo",
+    fuel_low: "Malo goriva",
+    floor_temp: "Pod",
+    boost_left: "još {time}",
     ed_title: "Naslov",
     ed_zone: "Zona {n}",
     ed_add_zone: "Dodaj zonu",
@@ -1032,6 +1122,21 @@ const STRINGS = {
     stove_fan: "Ventola",
     ignitions: "Accensioni",
     ill_stove: "Stufa",
+    ill_floor: "Riscaldamento a pavimento",
+    ill_towel: "Scaldasalviette",
+    ill_pellet_boiler: "Caldaia a pellet",
+    ill_gas_boiler: "Caldaia a gas",
+    ill_oil_boiler: "Caldaia a gasolio",
+    sec_boiler: "Caldaia",
+    flow_temp: "Mandata",
+    return_temp: "Ritorno",
+    modulation: "Bruciatore",
+    pressure: "Pressione",
+    pressure_low: "Pressione bassa",
+    fuel: "Gasolio",
+    fuel_low: "Gasolio basso",
+    floor_temp: "Pavimento",
+    boost_left: "ancora {time}",
     ed_title: "Titolo",
     ed_zone: "Zona {n}",
     ed_add_zone: "Aggiungi una zona",
@@ -1187,6 +1292,21 @@ const STRINGS = {
     stove_fan: "Ventilator",
     ignitions: "Ontstekingen",
     ill_stove: "Kachel",
+    ill_floor: "Vloerverwarming",
+    ill_towel: "Handdoekradiator",
+    ill_pellet_boiler: "Pelletketel",
+    ill_gas_boiler: "Gasketel",
+    ill_oil_boiler: "Oliegestookte ketel",
+    sec_boiler: "Ketel",
+    flow_temp: "Aanvoer",
+    return_temp: "Retour",
+    modulation: "Brander",
+    pressure: "Druk",
+    pressure_low: "Lage druk",
+    fuel: "Stookolie",
+    fuel_low: "Weinig stookolie",
+    floor_temp: "Vloer",
+    boost_left: "nog {time}",
     ed_title: "Titel",
     ed_zone: "Zone {n}",
     ed_add_zone: "Zone toevoegen",
@@ -1342,6 +1462,21 @@ const STRINGS = {
     stove_fan: "Ventilador",
     ignitions: "Ignições",
     ill_stove: "Salamandra",
+    ill_floor: "Piso radiante",
+    ill_towel: "Toalheiro",
+    ill_pellet_boiler: "Caldeira a pellets",
+    ill_gas_boiler: "Caldeira a gás",
+    ill_oil_boiler: "Caldeira a gasóleo",
+    sec_boiler: "Caldeira",
+    flow_temp: "Ida",
+    return_temp: "Retorno",
+    modulation: "Queimador",
+    pressure: "Pressão",
+    pressure_low: "Pressão baixa",
+    fuel: "Gasóleo",
+    fuel_low: "Gasóleo baixo",
+    floor_temp: "Piso",
+    boost_left: "faltam {time}",
     ed_title: "Título",
     ed_zone: "Zona {n}",
     ed_add_zone: "Adicionar uma zona",
@@ -1497,6 +1632,21 @@ const STRINGS = {
     stove_fan: "Wentylator",
     ignitions: "Rozpalenia",
     ill_stove: "Piecyk",
+    ill_floor: "Ogrzewanie podłogowe",
+    ill_towel: "Grzejnik łazienkowy",
+    ill_pellet_boiler: "Kocioł na pellet",
+    ill_gas_boiler: "Kocioł gazowy",
+    ill_oil_boiler: "Kocioł olejowy",
+    sec_boiler: "Kocioł",
+    flow_temp: "Zasilanie",
+    return_temp: "Powrót",
+    modulation: "Palnik",
+    pressure: "Ciśnienie",
+    pressure_low: "Niskie ciśnienie",
+    fuel: "Olej opałowy",
+    fuel_low: "Mało oleju",
+    floor_temp: "Podłoga",
+    boost_left: "jeszcze {time}",
     ed_title: "Tytuł",
     ed_zone: "Strefa {n}",
     ed_add_zone: "Dodaj strefę",
@@ -1652,6 +1802,21 @@ const STRINGS = {
     stove_fan: "Ventilator",
     ignitions: "Aprinderi",
     ill_stove: "Sobă",
+    ill_floor: "Încălzire în pardoseală",
+    ill_towel: "Port-prosop",
+    ill_pellet_boiler: "Centrală pe peleți",
+    ill_gas_boiler: "Centrală pe gaz",
+    ill_oil_boiler: "Centrală pe motorină",
+    sec_boiler: "Centrală",
+    flow_temp: "Tur",
+    return_temp: "Retur",
+    modulation: "Arzător",
+    pressure: "Presiune",
+    pressure_low: "Presiune scăzută",
+    fuel: "Combustibil",
+    fuel_low: "Combustibil scăzut",
+    floor_temp: "Pardoseală",
+    boost_left: "încă {time}",
     ed_title: "Titlu",
     ed_zone: "Zona {n}",
     ed_add_zone: "Adaugă o zonă",
@@ -1807,6 +1972,21 @@ const STRINGS = {
     stove_fan: "Blæser",
     ignitions: "Tændinger",
     ill_stove: "Ovn",
+    ill_floor: "Gulvvarme",
+    ill_towel: "Håndklædetørrer",
+    ill_pellet_boiler: "Pillefyr",
+    ill_gas_boiler: "Gasfyr",
+    ill_oil_boiler: "Oliefyr",
+    sec_boiler: "Fyr",
+    flow_temp: "Fremløb",
+    return_temp: "Retur",
+    modulation: "Brænder",
+    pressure: "Tryk",
+    pressure_low: "Lavt tryk",
+    fuel: "Fyringsolie",
+    fuel_low: "Lidt fyringsolie",
+    floor_temp: "Gulv",
+    boost_left: "{time} tilbage",
     ed_title: "Titel",
     ed_zone: "Zone {n}",
     ed_add_zone: "Tilføj en zone",
@@ -1962,6 +2142,21 @@ const STRINGS = {
     stove_fan: "Fläkt",
     ignitions: "Tändningar",
     ill_stove: "Kamin",
+    ill_floor: "Golvvärme",
+    ill_towel: "Handdukstork",
+    ill_pellet_boiler: "Pelletspanna",
+    ill_gas_boiler: "Gaspanna",
+    ill_oil_boiler: "Oljepanna",
+    sec_boiler: "Panna",
+    flow_temp: "Framledning",
+    return_temp: "Retur",
+    modulation: "Brännare",
+    pressure: "Tryck",
+    pressure_low: "Lågt tryck",
+    fuel: "Eldningsolja",
+    fuel_low: "Lite eldningsolja",
+    floor_temp: "Golv",
+    boost_left: "{time} kvar",
     ed_title: "Titel",
     ed_zone: "Zon {n}",
     ed_add_zone: "Lägg till en zon",
@@ -2117,6 +2312,21 @@ const STRINGS = {
     stove_fan: "Вентилатор",
     ignitions: "Запалвания",
     ill_stove: "Камина",
+    ill_floor: "Подово отопление",
+    ill_towel: "Лира за кърпи",
+    ill_pellet_boiler: "Котел на пелети",
+    ill_gas_boiler: "Газов котел",
+    ill_oil_boiler: "Котел на нафта",
+    sec_boiler: "Котел",
+    flow_temp: "Подаване",
+    return_temp: "Връщане",
+    modulation: "Горелка",
+    pressure: "Налягане",
+    pressure_low: "Ниско налягане",
+    fuel: "Гориво",
+    fuel_low: "Малко гориво",
+    floor_temp: "Под",
+    boost_left: "още {time}",
     ed_title: "Заглавие",
     ed_zone: "Зона {n}",
     ed_add_zone: "Добави зона",
@@ -2272,6 +2482,21 @@ const STRINGS = {
     stove_fan: "Вентилятор",
     ignitions: "Розжиги",
     ill_stove: "Печь",
+    ill_floor: "Тёплый пол",
+    ill_towel: "Полотенцесушитель",
+    ill_pellet_boiler: "Пеллетный котёл",
+    ill_gas_boiler: "Газовый котёл",
+    ill_oil_boiler: "Дизельный котёл",
+    sec_boiler: "Котёл",
+    flow_temp: "Подача",
+    return_temp: "Обратка",
+    modulation: "Горелка",
+    pressure: "Давление",
+    pressure_low: "Низкое давление",
+    fuel: "Топливо",
+    fuel_low: "Мало топлива",
+    floor_temp: "Пол",
+    boost_left: "ещё {time}",
     ed_title: "Заголовок",
     ed_zone: "Зона {n}",
     ed_add_zone: "Добавить зону",
@@ -2427,6 +2652,21 @@ const STRINGS = {
     stove_fan: "Вентилятор",
     ignitions: "Запалювання",
     ill_stove: "Піч",
+    ill_floor: "Тепла підлога",
+    ill_towel: "Рушникосушарка",
+    ill_pellet_boiler: "Пелетний котел",
+    ill_gas_boiler: "Газовий котел",
+    ill_oil_boiler: "Дизельний котел",
+    sec_boiler: "Котел",
+    flow_temp: "Подача",
+    return_temp: "Зворотка",
+    modulation: "Пальник",
+    pressure: "Тиск",
+    pressure_low: "Низький тиск",
+    fuel: "Паливо",
+    fuel_low: "Мало палива",
+    floor_temp: "Підлога",
+    boost_left: "ще {time}",
     ed_title: "Заголовок",
     ed_zone: "Зона {n}",
     ed_add_zone: "Додати зону",
@@ -2582,6 +2822,21 @@ const STRINGS = {
     stove_fan: "Ventilátor",
     ignitions: "Begyújtások",
     ill_stove: "Kályha",
+    ill_floor: "Padlófűtés",
+    ill_towel: "Törölközőszárító",
+    ill_pellet_boiler: "Pelletkazán",
+    ill_gas_boiler: "Gázkazán",
+    ill_oil_boiler: "Olajkazán",
+    sec_boiler: "Kazán",
+    flow_temp: "Előremenő",
+    return_temp: "Visszatérő",
+    modulation: "Égő",
+    pressure: "Nyomás",
+    pressure_low: "Alacsony nyomás",
+    fuel: "Fűtőolaj",
+    fuel_low: "Kevés fűtőolaj",
+    floor_temp: "Padló",
+    boost_left: "még {time}",
     ed_title: "Cím",
     ed_zone: "{n}. zóna",
     ed_add_zone: "Zóna hozzáadása",
@@ -2737,6 +2992,21 @@ const STRINGS = {
     stove_fan: "Ventilátor",
     ignitions: "Zapálenia",
     ill_stove: "Pec",
+    ill_floor: "Podlahové kúrenie",
+    ill_towel: "Sušiak na uteráky",
+    ill_pellet_boiler: "Kotol na pelety",
+    ill_gas_boiler: "Plynový kotol",
+    ill_oil_boiler: "Olejový kotol",
+    sec_boiler: "Kotol",
+    flow_temp: "Prívod",
+    return_temp: "Spiatočka",
+    modulation: "Horák",
+    pressure: "Tlak",
+    pressure_low: "Nízky tlak",
+    fuel: "Palivo",
+    fuel_low: "Málo paliva",
+    floor_temp: "Podlaha",
+    boost_left: "ešte {time}",
     ed_title: "Názov",
     ed_zone: "Zóna {n}",
     ed_add_zone: "Pridať zónu",
@@ -2892,6 +3162,21 @@ const STRINGS = {
     stove_fan: "Ventilátor",
     ignitions: "Zapálení",
     ill_stove: "Kamna",
+    ill_floor: "Podlahové topení",
+    ill_towel: "Sušák na ručníky",
+    ill_pellet_boiler: "Kotel na pelety",
+    ill_gas_boiler: "Plynový kotel",
+    ill_oil_boiler: "Olejový kotel",
+    sec_boiler: "Kotel",
+    flow_temp: "Výstup",
+    return_temp: "Zpátečka",
+    modulation: "Hořák",
+    pressure: "Tlak",
+    pressure_low: "Nízký tlak",
+    fuel: "Palivo",
+    fuel_low: "Málo paliva",
+    floor_temp: "Podlaha",
+    boost_left: "ještě {time}",
     ed_title: "Název",
     ed_zone: "Zóna {n}",
     ed_add_zone: "Přidat zónu",
@@ -3047,6 +3332,21 @@ const STRINGS = {
     stove_fan: "Ventilator",
     ignitions: "Vžigi",
     ill_stove: "Peč",
+    ill_floor: "Talno ogrevanje",
+    ill_towel: "Sušilnik za brisače",
+    ill_pellet_boiler: "Kotel na pelete",
+    ill_gas_boiler: "Plinski kotel",
+    ill_oil_boiler: "Oljni kotel",
+    sec_boiler: "Kotel",
+    flow_temp: "Dvižni vod",
+    return_temp: "Povratni vod",
+    modulation: "Gorilnik",
+    pressure: "Tlak",
+    pressure_low: "Nizek tlak",
+    fuel: "Kurilno olje",
+    fuel_low: "Malo kurilnega olja",
+    floor_temp: "Tla",
+    boost_left: "še {time}",
     ed_title: "Naslov",
     ed_zone: "Cona {n}",
     ed_add_zone: "Dodaj cono",
@@ -3202,6 +3502,21 @@ const STRINGS = {
     stove_fan: "Ventilators",
     ignitions: "Aizdedzes",
     ill_stove: "Krāsns",
+    ill_floor: "Grīdas apsilde",
+    ill_towel: "Dvieļu žāvētājs",
+    ill_pellet_boiler: "Granulu katls",
+    ill_gas_boiler: "Gāzes katls",
+    ill_oil_boiler: "Šķidrā kurināmā katls",
+    sec_boiler: "Katls",
+    flow_temp: "Turpgaita",
+    return_temp: "Atgaita",
+    modulation: "Deglis",
+    pressure: "Spiediens",
+    pressure_low: "Zems spiediens",
+    fuel: "Degviela",
+    fuel_low: "Maz degvielas",
+    floor_temp: "Grīda",
+    boost_left: "vēl {time}",
     ed_title: "Virsraksts",
     ed_zone: "Zona {n}",
     ed_add_zone: "Pievienot zonu",
@@ -3357,6 +3672,21 @@ const STRINGS = {
     stove_fan: "Ανεμιστήρας",
     ignitions: "Ανάμματα",
     ill_stove: "Σόμπα",
+    ill_floor: "Ενδοδαπέδια θέρμανση",
+    ill_towel: "Πετσετοκρεμάστρα",
+    ill_pellet_boiler: "Λέβητας pellet",
+    ill_gas_boiler: "Λέβητας αερίου",
+    ill_oil_boiler: "Λέβητας πετρελαίου",
+    sec_boiler: "Λέβητας",
+    flow_temp: "Προσαγωγή",
+    return_temp: "Επιστροφή",
+    modulation: "Καυστήρας",
+    pressure: "Πίεση",
+    pressure_low: "Χαμηλή πίεση",
+    fuel: "Καύσιμο",
+    fuel_low: "Λίγο καύσιμο",
+    floor_temp: "Δάπεδο",
+    boost_left: "ακόμα {time}",
     ed_title: "Τίτλος",
     ed_zone: "Ζώνη {n}",
     ed_add_zone: "Προσθήκη ζώνης",
@@ -3468,6 +3798,9 @@ const ICONS = {
   radiator_off: "M3.28,2L2,3.27L4.77,6.04L5.64,7.39L4.22,9.6L5.95,10.5L7.23,8.5L10.73,12H4A2,2 0 0,0 2,14V22H4V20H18.73L20,21.27V22H22V20.73L22,20.72V20.72L3.28,2M7,17A1,1 0 0,1 6,18A1,1 0 0,1 5,17V15A1,1 0 0,1 6,14A1,1 0 0,1 7,15V17M11,17A1,1 0 0,1 10,18A1,1 0 0,1 9,17V15A1,1 0 0,1 10,14A1,1 0 0,1 11,15V17M15,17A1,1 0 0,1 14,18A1,1 0 0,1 13,17V15C13,14.79 13.08,14.61 13.18,14.45L15,16.27V17M16.25,9.5L17.67,7.3L16.25,5.1L18.25,2L20,2.89L18.56,5.1L20,7.3V7.31L18,10.4L16.25,9.5M22,14V18.18L19,15.18V15A1,1 0 0,0 18,14C17.95,14 17.9,14 17.85,14.03L15.82,12H20C21.11,12 22,12.9 22,14M11.64,7.3L10.22,5.1L12.22,2L13.95,2.89L12.53,5.1L13.95,7.3L13.94,7.31L12.84,9L11.44,7.62L11.64,7.3M7.5,3.69L6.1,2.28L6.22,2.09L7.95,3L7.5,3.69Z",
   fire: "M17.66 11.2C17.43 10.9 17.15 10.64 16.89 10.38C16.22 9.78 15.46 9.35 14.82 8.72C13.33 7.26 13 4.85 13.95 3C13 3.23 12.17 3.75 11.46 4.32C8.87 6.4 7.85 10.07 9.07 13.22C9.11 13.32 9.15 13.42 9.15 13.55C9.15 13.77 9 13.97 8.8 14.05C8.57 14.15 8.33 14.09 8.14 13.93C8.08 13.88 8.04 13.83 8 13.76C6.87 12.33 6.69 10.28 7.45 8.64C5.78 10 4.87 12.3 5 14.47C5.06 14.97 5.12 15.47 5.29 15.97C5.43 16.57 5.7 17.17 6 17.7C7.08 19.43 8.95 20.67 10.96 20.92C13.1 21.19 15.39 20.8 17.03 19.32C18.86 17.66 19.5 15 18.56 12.72L18.43 12.46C18.22 12 17.66 11.2 17.66 11.2M14.5 17.5C14.22 17.74 13.76 18 13.4 18.1C12.28 18.5 11.16 17.94 10.5 17.28C11.69 17 12.4 16.12 12.61 15.23C12.78 14.43 12.46 13.77 12.33 13C12.21 12.26 12.23 11.63 12.5 10.94C12.69 11.32 12.89 11.7 13.13 12C13.9 13 15.11 13.44 15.37 14.8C15.41 14.94 15.43 15.08 15.43 15.23C15.46 16.05 15.1 16.95 14.5 17.5H14.5Z",
   stove: "M4 2H20V6H4ZM5 7H19V20H17V22H15V20H9V22H7V20H5ZM8 10V17H16V10Z",
+  boiler: "M9.5 2A1.5 1.5 0 0 0 8 3.5V4H6.5A2.5 2.5 0 0 0 4 6.5V19.5A2.5 2.5 0 0 0 6.5 22H17.5A2.5 2.5 0 0 0 20 19.5V6.5A2.5 2.5 0 0 0 17.5 4H16V3.5A1.5 1.5 0 0 0 14.5 2ZM6 7H18V11H6ZM12 13A3.5 3.5 0 0 1 15.5 16.5A3.5 3.5 0 0 1 12 20A3.5 3.5 0 0 1 8.5 16.5A3.5 3.5 0 0 1 12 13Z",
+  gauge: "M12 16A3 3 0 0 1 9 13C9 11.88 9.61 10.9 10.5 10.39L20.21 4.77L14.68 14.35C14.18 15.33 13.17 16 12 16M12 3C13.81 3 15.5 3.5 16.97 4.32L14.87 5.53C14 5.19 13 5 12 5A8 8 0 0 0 4 13C4 15.21 4.89 17.21 6.34 18.65A1 1 0 0 1 4.93 20.07A10 10 0 0 1 12 3M22 13C22 15.76 20.88 18.26 19.07 20.07A1 1 0 0 1 17.66 18.65C19.11 17.2 20 15.21 20 13C20 12 19.81 11 19.46 10.1L20.67 8C21.5 9.5 22 11.18 22 13Z",
+  fuel: "M3 2H6L8.79 4.38L9.59 3.59C10 3.2 10.5 3 11 3H17C17.5 3 18 3.2 18.41 3.59L19.41 4.59C19.8 5 20 5.5 20 6V19A2 2 0 0 1 18 21H8A2 2 0 0 1 6 19V8C6 7.5 6.2 7 6.59 6.59L7.38 5.79L5.59 4H3ZM11 5V7H17V5ZM12 10V12H10V14H12V16H14V14H16V12H14V10Z",
   pellets: "M7 4H11A3 3 0 0 1 11 10H7A3 3 0 0 1 7 4ZM13 14H17A3 3 0 0 1 17 20H13A3 3 0 0 1 13 14ZM4 14H6A3 3 0 0 1 6 20H4A3 3 0 0 1 4 14Z",
   fan: "M12,11A1,1 0 0,0 11,12A1,1 0 0,0 12,13A1,1 0 0,0 13,12A1,1 0 0,0 12,11M12.5,2C17,2 17.11,5.57 14.75,6.75C13.76,7.24 13.32,8.29 13.13,9.22C13.61,9.42 14.03,9.73 14.35,10.13C18.05,8.13 22.03,8.92 22.03,12.5C22.03,17 18.46,17.1 17.28,14.73C16.78,13.74 15.72,13.3 14.79,13.11C14.59,13.59 14.28,14 13.88,14.34C15.87,18.03 15.08,22 11.5,22C7,22 6.91,18.42 9.27,17.24C10.25,16.75 10.69,15.71 10.89,14.79C10.4,14.59 9.97,14.27 9.65,13.87C5.96,15.85 2,15.07 2,11.5C2,7 5.56,6.89 6.74,9.26C7.24,10.25 8.29,10.68 9.22,10.87C9.41,10.39 9.73,9.97 10.14,9.65C8.15,5.96 8.94,2 12.5,2Z",
   thermometer: "M15 13V5A3 3 0 0 0 9 5V13A5 5 0 1 0 15 13M12 4A1 1 0 0 1 13 5V8H11V5A1 1 0 0 1 12 4Z",
@@ -3642,9 +3975,38 @@ const ROLES = {
   stove_fan: { domain: ["number", "fan", "select"], id: /(fan|ventil|ventola|ventilador|soufflerie|geblaese)/ },
   stove_alarm: { domain: ["sensor", "binary_sensor"], keys: ["alarm", "error", "last_alarm"], id: /(alarm|error|fault|erreur|fehler|stoerung|allarme|averia)/ },
   ignitions: { domain: "sensor", id: /(ignition|allumage|zuendung|encendido|accensioni)/ },
+  // A boiler's device (OpenTherm Gateway, ebusd, ViCare, myVAILLANT, EMS-ESP, ÖkoFEN…): its flow and return water
+  // temperatures, the burner's modulation and flame, the water pressure and an oil tank's level. Read for a boiler only.
+  flow_temp: {
+    domain: "sensor",
+    keys: ["flow_temperature", "supply_temperature", "boiler_water_temperature", "boiler_temperature", "ch_water_temperature"],
+    id: /(flow|supply|vorlauf|depart|impulsion|mandata|aanvoer|boiler|ch_water)_?(water_)?temp/,
+  },
+  return_temp: { domain: "sensor", keys: ["return_temperature", "return_water_temperature"], id: /(return|r[uü]+cklauf|ruecklauf|retour|retorno|ritorno)_?(water_)?temp/ },
+  modulation: { domain: "sensor", keys: ["relative_modulation_level", "modulation", "burner_modulation"], id: /(modulation|burner_(power|load|level))/ },
+  pressure: { domain: "sensor", keys: ["water_pressure", "ch_water_pressure", "system_pressure"], id: /(pressure|pression|druck|presion|pressione)/, test: dc("pressure") },
+  burner: { domain: "binary_sensor", keys: ["flame", "flame_on", "flame_status", "burner_active", "burner"], id: /(flame|burner|bruleur|brenner|quemador|bruciatore)/ },
+  fuel: { domain: "sensor", keys: ["fuel_level", "tank_level", "oil_level"], id: /(fuel|fioul|heiz_?oel|heating_oil|oil_level|gasoil|gasoleo|gasolio|diesel|cuve|oil_tank)/ },
+  // An underfloor heating thermostat's floor probe (Danfoss Icon, Heatmiser, Zigbee floor thermostats…).
+  floor_temp: { domain: "sensor", keys: ["floor_temperature", "external_floor_temperature"], id: /(floor|plancher|sol|fussboden|boden|suelo|pavimento)_?temp/ },
 };
-// The roles read only for a stove.
+// The roles read only for a stove (and a pellet boiler, which burns the same way), for a boiler, for a heated floor.
 const STOVE_ROLES = new Set(["stove_status", "stove_power", "pellets", "pellets_low", "flue_gas", "stove_fan", "stove_alarm", "ignitions"]);
+const BOILER_ROLES = new Set(["flow_temp", "return_temp", "modulation", "pressure", "burner", "fuel"]);
+// The devices that burn pellets (phases, hopper) and the boilers (flow, burner, pressure, tank).
+const FIRES = new Set(["stove", "pellet_boiler"]);
+const BOILERS = new Set(["pellet_boiler", "gas_boiler", "oil_boiler"]);
+// Whether a device role is looked for on a device drawn as `variant`: its own roles only on the devices that have them
+// (a boiler's alarm is the stove's alarm role).
+const roleFor = (role, variant) => {
+  if (STOVE_ROLES.has(role)) return FIRES.has(variant) || (role === "stove_alarm" && BOILERS.has(variant));
+  if (BOILER_ROLES.has(role)) return BOILERS.has(variant);
+  if (role === "floor_temp") return variant === "floor";
+  return true;
+};
+// A boiler's water pressure under this (bar) is flagged, as is an oil tank at or under this level (%).
+const PRESSURE_LOW = 0.8;
+const FUEL_LOW = 15;
 
 // A stove's phase from its status text (any language and integration): alarm, ignition, cooling down, standby or off,
 // burning; null when the text says nothing known.
@@ -3876,7 +4238,7 @@ async function fetchWeek(hass, id) {
 // and max. Three shapes: a round wall thermostat, a column radiator and a radiator valve on the corner of its
 // radiator; `illustration: auto` picks one from the device model and name. A pilot wire radiator is the column
 // radiator, glowing in the color of its order.
-const waves = (xs, y) => `<g class="heat">${xs.map((x) => `<path d="M${x} ${y}q-2-2.5 0-5t0-5"/>`).join("")}</g>`;
+const waves = (xs, y, cls = "") => `<g class="heat${cls}">${xs.map((x) => `<path d="M${x} ${y}q-2-2.5 0-5t0-5"/>`).join("")}</g>`;
 
 const columns = (x, n, w, step, y1, y2) =>
   Array.from({ length: n }, (_, i) => {
@@ -3950,6 +4312,93 @@ ARTS.stove = (s) =>
   `<rect x="28" y="74" width="24" height="8" rx="2" fill="#1d2632"/><text class="disp" x="40" y="80.2" text-anchor="middle">${esc(s.display || "")}</text>` +
   '<circle class="led" cx="57" cy="78" r="1.3"/>' +
   '<rect x="18" y="88" width="6" height="3" fill="#3a434e"/><rect x="56" y="88" width="6" height="3" fill="#3a434e"/>';
+// Underfloor heating: a sofa on the floor, and under it the floor's cross-section, its water loop glowing while it heats
+// and the heat rising from the floor around the sofa.
+const FLOOR_PATH = "M9 66h62a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h62a3 3 0 0 1 0 6H9";
+ARTS.floor = () =>
+  '<rect class="glow" x="6" y="52" width="68" height="10" rx="3" fill="url(#hc-tg)"/>' +
+  waves([9, 75], 56, " floorheat") +
+  waves([30, 50], 35, " floorheat") +
+  '<rect x="4" y="62" width="72" height="24" rx="3" fill="#d6cfc6"/><rect x="4" y="62" width="72" height="24" rx="3" fill="#000" opacity=".04"/>' +
+  `<path d="${FLOOR_PATH}" fill="none" stroke="#b9b1a6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>` +
+  `<path class="glow pipe" d="${FLOOR_PATH}" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>` +
+  '<rect x="4" y="57" width="72" height="6" rx="2" fill="#c8a07a"/><path d="M16 57v6M30 57v6M44 57v6M58 57v6" stroke="#b08660" stroke-width=".8"/>' +
+  '<rect x="18" y="38" width="44" height="12" rx="4" fill="#5c7cfa"/><rect x="14" y="44" width="52" height="10" rx="4" fill="#4c6ef5"/>' +
+  '<rect x="11" y="40" width="9" height="15" rx="4" fill="#4263eb"/><rect x="60" y="40" width="9" height="15" rx="4" fill="#4263eb"/>' +
+  '<rect x="21" y="40" width="18" height="6" rx="3" fill="#91a7ff"/><rect x="41" y="40" width="18" height="6" rx="3" fill="#91a7ff"/>' +
+  '<path d="M16 54v3M64 54v3" stroke="#364fc7" stroke-width="2.4" stroke-linecap="round"/>';
+// A towel rail: its ladder of bars glowing from the bottom up, a towel over it and its controller at the foot.
+ARTS.towel = () =>
+  '<ellipse class="floor" cx="40" cy="89" rx="28" ry="3.6" fill="url(#hc-af)"/>' +
+  '<circle class="halo" cx="40" cy="46" r="34" fill="url(#hc-th)"/>' +
+  waves([10, 70], 40) +
+  '<rect x="14" y="6" width="5" height="80" rx="2.5" fill="url(#hc-tc)" stroke="#c3cad2" stroke-width=".6"/>' +
+  '<rect x="61" y="6" width="5" height="80" rx="2.5" fill="url(#hc-tc)" stroke="#c3cad2" stroke-width=".6"/>' +
+  Array.from({ length: 11 }, (_, i) => {
+    const y = 10 + i * 7;
+    return `<rect x="17" y="${y}" width="46" height="3.2" rx="1.6" fill="url(#hc-tc)" stroke="#c3cad2" stroke-width=".5"/><rect class="glow" x="17" y="${y}" width="46" height="3.2" rx="1.6" fill="url(#hc-tg)"/>`;
+  }).join("") +
+  '<path class="towel" d="M27 22h26v38c-4 5-22 5-26 0z"/><path class="towel fold" d="M27 22h26v5H27z"/>' +
+  '<path class="towel stripe" d="M33 29v28M40 29v30M47 29v28"/>' +
+  '<rect x="57" y="79" width="12" height="8" rx="2" fill="#3a434e"/><circle class="led" cx="63" cy="83" r="1.3"/>';
+// A pellet boiler: its flue, the fire behind its door (as a stove), its display and the hopper beside it, filled to the
+// pellets left.
+ARTS.pellet_boiler = (s) => {
+  const lvl = Math.max(0, Math.min(100, s.stove?.pellets ?? 60)) / 100;
+  const h = 44 * lvl;
+  return (
+    '<ellipse class="floor" cx="40" cy="89" rx="36" ry="4" fill="url(#hc-af)"/>' +
+    '<circle class="halo" cx="25" cy="54" r="32" fill="url(#hc-th)"/>' +
+    '<rect x="20" y="0" width="8" height="18" fill="#8f9aa6"/><rect x="18" y="14" width="12" height="3" rx="1" fill="#5d6874"/>' +
+    '<rect x="4" y="16" width="42" height="72" rx="6" fill="url(#hc-tb)" stroke="#c3cad2" stroke-width="1"/>' +
+    `<rect x="10" y="22" width="30" height="9" rx="2" fill="#1d2632"/><text class="disp" x="25" y="28.6" text-anchor="middle">${esc(s.display || "")}</text>` +
+    '<rect x="12" y="38" width="26" height="24" rx="4" fill="#141a22"/>' +
+    '<rect class="glow ember" x="14" y="50" width="22" height="10" rx="3" fill="url(#hc-tg)"/>' +
+    '<path class="flame" d="M17 61c-1-6 3-8 2-13c3 3 5 6 4 9c2-2 2-5 1-7c4 3 6 7 5 11z"/>' +
+    '<path class="flame f2" d="M28 61c0-5 2-6 2-10c3 3 4 6 3 10z"/>' +
+    '<rect x="12" y="38" width="26" height="24" rx="4" fill="none" stroke="#8f9aa6" stroke-width="1.6"/>' +
+    '<rect x="10" y="70" width="30" height="3" rx="1.5" fill="#cfd5dc"/><circle class="led" cx="38" cy="80" r="1.3"/>' +
+    '<rect x="46" y="70" width="5" height="4" fill="#8f9aa6"/>' +
+    '<rect x="50" y="12" width="26" height="76" rx="4" fill="url(#hc-tc)" stroke="#c3cad2" stroke-width="1"/>' +
+    '<rect x="48" y="9" width="30" height="5" rx="2" fill="#dfe4ea" stroke="#c3cad2" stroke-width=".6"/>' +
+    '<rect x="54" y="34" width="18" height="48" rx="2" fill="#ffffff" opacity=".55"/>' +
+    `<rect x="55" y="${(81 - h).toFixed(1)}" width="16" height="${h.toFixed(1)}" rx="1.5" fill="#c08a4a"/>` +
+    '<path d="M57 79h12M57 76h12" stroke="#a0703a" stroke-width=".8" stroke-dasharray="1.5 1.5"/>'
+  );
+};
+// A wall-hung gas boiler: its display, the blue flame of its burner while it fires, its knobs and the pipes under it.
+ARTS.gas_boiler = (s) =>
+  '<circle class="halo" cx="40" cy="38" r="34" fill="url(#hc-th)"/>' +
+  '<rect x="36" y="0" width="8" height="8" fill="#aab3bd"/>' +
+  ["#e03131", "#1c7ed6", "#f59f00", "#e03131", "#1c7ed6"].map((c, i) => `<rect x="${(21.5 + i * 8.6).toFixed(1)}" y="56" width="3.4" height="34" fill="${c}"/>`).join("") +
+  '<rect x="14" y="6" width="52" height="52" rx="8" fill="url(#hc-tb)" stroke="#c3cad2" stroke-width="1"/>' +
+  '<rect x="18" y="54" width="44" height="3" rx="1.5" fill="#cfd5dc"/>' +
+  `<rect x="24" y="15" width="32" height="12" rx="3" fill="#1d2632"/><text class="disp big" x="40" y="23.8" text-anchor="middle">${esc(s.display || "")}</text>` +
+  '<path class="flame gas" d="M40 50c-3.4 0-5-2.4-5-5c0-2.2 1.4-3.4 2.4-4.6c.2 1.3.8 2 1.6 2.2c-.3-2.6.8-4.8 3-6.6c-.5 2.6 1 4 2 5.6c.8 1.2 1 2.2 1 3.4c0 2.6-2 5-5 5z"/>' +
+  '<circle cx="23" cy="46" r="3.2" fill="#dfe4ea" stroke="#aab3bd" stroke-width=".6"/><circle cx="57" cy="46" r="3.2" fill="#dfe4ea" stroke="#aab3bd" stroke-width=".6"/>' +
+  '<circle class="led" cx="40" cy="32" r="1.3"/>';
+// An oil boiler (or a diesel heater): its dark cabinet, the burner's flame behind its round window, and the fuel tank
+// beside it with its gauge at the fuel left.
+ARTS.oil_boiler = (s) => {
+  const lvl = Math.max(0, Math.min(100, s.boiler?.fuel ?? 60)) / 100;
+  const h = 34 * lvl;
+  return (
+    '<ellipse class="floor" cx="40" cy="89" rx="38" ry="4" fill="url(#hc-af)"/>' +
+    '<circle class="halo" cx="22" cy="56" r="30" fill="url(#hc-th)"/>' +
+    '<rect x="16" y="0" width="9" height="24" fill="#5d6874"/>' +
+    '<rect x="2" y="22" width="40" height="66" rx="5" fill="#3a434e"/><rect x="2" y="22" width="40" height="6" rx="3" fill="#4d5764"/>' +
+    `<rect x="8" y="31" width="28" height="8" rx="2" fill="#141a22"/><text class="disp" x="22" y="36.8" text-anchor="middle">${esc(s.display || "")}</text>` +
+    '<rect x="9" y="46" width="26" height="22" rx="11" fill="#141a22"/>' +
+    '<rect class="glow ember" x="11" y="56" width="22" height="10" rx="5" fill="url(#hc-tg)"/>' +
+    '<path class="flame" d="M15 67c-1-6 4-8 3-13c3 3 5 5 4 8c2-2 2-4 1-7c4 3 6 7 5 12z"/>' +
+    '<rect x="9" y="46" width="26" height="22" rx="11" fill="none" stroke="#6b7682" stroke-width="1.6"/>' +
+    '<circle class="led" cx="36" cy="80" r="1.3"/><rect x="42" y="80" width="5" height="3" fill="#8f9aa6"/>' +
+    '<rect x="46" y="38" width="32" height="50" rx="10" fill="url(#hc-tc)" stroke="#aab3bd" stroke-width="1"/>' +
+    '<rect x="52" y="44" width="8" height="38" rx="3" fill="#1d2632"/>' +
+    `<rect x="53.5" y="${(81 - h).toFixed(1)}" width="5" height="${h.toFixed(1)}" rx="2" fill="#f59f00"/>` +
+    '<path d="M64 52h9M64 60h9M64 68h9M64 76h9" stroke="#aab3bd" stroke-width="1"/>'
+  );
+};
 const ILLUSTRATIONS = Object.keys(ARTS);
 
 const art = (variant, s, uid) =>
@@ -3968,9 +4417,14 @@ const art = (variant, s, uid) =>
 // The shape that looks most like the device, from its model and name: a valve first (a "radiator valve" is one).
 const guessVariant = (text) => {
   const s = String(text).toLowerCase();
+  if (/(pellet|granul).{0,24}(boiler|kessel|chaudi|caldaia|caldera|heizung)|(boiler|kessel|chaudi|caldaia|caldera).{0,24}(pellet|granul)|[oö]kofen|oekofen|hargassner|fr[oö]ling|froeling|\bkwb\b|windhager|\beta\b|guntamatic|solarfocus/.test(s)) return "pellet_boiler";
   if (/stove|po[eê]le|pellet|granul|kaminofen|pelletofen|estufa|stufa|kachelofen|chemin[ée]e|fireplace|insert|palazzetti|edilkamin|maestro|rika|ecoforest|fumis|duepi|extraflame|micronova|piazzetta|j[oø]tul|invicta|godin/.test(s)) return "stove";
   if (/valve|vanne|trv|t[eê]te.?thermo|thermostatic|thermostatique|heizk[oö]rperthermostat|ventil|spirit|eurotronic|danfoss.?ally|e1.?thermostat/.test(s)) return "valve";
-  if (/radiat|convect|heater|chauffage|panel|panneau|towel|s[eè]che|heizk[oö]rper|radiador|heatzy/.test(s)) return "radiator";
+  if (/\boil\b|fioul|fuel|heiz[oö]l|[oö]lkessel|oelkessel|gasoil|gas[oó]leo|gasolio|diesel|mazout|webasto|eberspa|afterburner/.test(s)) return "oil_boiler";
+  if (/opentherm|otgw|ebusd|ems.?esp|vicare|viessmann|vaillant|my.?pyllant|buderus|nefit|easycontrol|saunier|atag|remeha|baxi|de.?dietrich|chappee|frisquet|immergas|ariston|junkers|boiler|chaudi[eè]re|kessel|therme|caldera|caldaia|ketel/.test(s)) return "gas_boiler";
+  if (/under.?floor|floor.?heat|heated.?floor|plancher|sol.?chauffant|fu[sß]boden|fussboden|suelo.?radiante|pavimento|vloerverwarming|\bufh\b|danfoss.?icon|uponor|heatmiser|thermosmart|warmup|devireg|nea.?smart/.test(s)) return "floor";
+  if (/towel|s[eè]che.?serviette|handtuch|toallero|scaldasalviette|toalheiro|badheizk[oö]rper/.test(s)) return "towel";
+  if (/radiat|convect|heater|chauffage|panel|panneau|heizk[oö]rper|radiador|heatzy/.test(s)) return "radiator";
   return "dial";
 };
 const variantOf = (hass, id, illustration) => {
@@ -4004,6 +4458,11 @@ const BANNER_DEVICES = {
   radiator: { vb: [4, 26, 75, 63], w: 62, h: 62 },
   valve: { vb: [0, 2, 78, 84], w: 76, h: 76 },
   stove: { vb: [8, 0, 64, 92], w: 56, h: 78 },
+  floor: { vb: [0, 28, 84, 60], w: 84, h: 62 },
+  towel: { vb: [8, 2, 64, 90], w: 46, h: 64 },
+  pellet_boiler: { vb: [2, 0, 78, 92], w: 60, h: 70 },
+  gas_boiler: { vb: [10, 0, 60, 90], w: 48, h: 70 },
+  oil_boiler: { vb: [0, 0, 80, 92], w: 62, h: 72 },
 };
 
 // The banner's theme from a zone's model: off, frost protection (its preset, order or a target of 10° or less), eco
@@ -4023,7 +4482,7 @@ const flake = (x, y, i) =>
 // The scene (200 × 80, drawn 1:1). `dev` is the device's markup from `art` or "", `devW` / `devH` its size,
 // `right` the x of its right edge; `cur` / `tgt` the readout's texts. Returns the markup and where the thermometer
 // and the device start, for the title's room.
-const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, level, active }) => {
+const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, level, active, flat }) => {
   const [c, day, dark] = BANNER_TINTS[theme];
   const devX = right - devW;
   const textW = Math.max(cur.length * 7.6, tgt.length * 3.8);
@@ -4033,7 +4492,10 @@ const bannerScene = ({ theme, night, uid, dev, devW, devH, right, cur, tgt, leve
   const top = 80 - devH;
   let fx = "";
   if (theme === "heat" && active)
-    fx = `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="${(80 - devH / 2).toFixed(1)}" rx="${(devW * 0.62).toFixed(1)}" ry="${(devH * 0.52).toFixed(1)}" fill="#ff9a52"/>`;
+    // A heated floor glows along the floor, not as a ball around the room.
+    fx = flat
+      ? `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="72" rx="${(devW * 0.56).toFixed(1)}" ry="9" fill="#ff9a52"/>`
+      : `<ellipse class="bhalo" cx="${(devX + devW / 2).toFixed(1)}" cy="${(80 - devH / 2).toFixed(1)}" rx="${(devW * 0.62).toFixed(1)}" ry="${(devH * 0.52).toFixed(1)}" fill="#ff9a52"/>`;
   else if (theme === "eco") {
     const [lx, ly] = top >= 22 ? [devX + devW / 2, top - 9] : [devX - 6, 12];
     fx = `<g transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)})"><path class="bleaf" d="M0 8q-10-5-5-16q11 0 10 12q-1 4-5 4z"/></g>`;
@@ -4073,8 +4535,17 @@ const ART_STYLE = `
   :is(.picture, .bdev).running.active .glow { opacity: 1; animation: hc-glow 3.2s ease-in-out infinite; }
   :is(.picture, .bdev).running.active .flame { opacity: 1; animation: hc-flame 1.3s ease-in-out infinite; }
   :is(.picture, .bdev).running.active .heat path { animation: hc-rise 2.8s ease-in-out infinite; }
+  /* A heated floor's heat stays seen even on a still picture (screenshots), then rises with the animation. */
+  :is(.picture, .bdev).running.active .heat.floorheat path { opacity: .7; stroke-width: 1.8; }
+  :is(.picture, .bdev).running.active .heat.floorheat path:nth-child(2) { animation-delay: 1.4s; }
   :is(.picture, .bdev).running.active .heat path:nth-child(2) { animation-delay: .9s; }
   :is(.picture, .bdev).running.active .flame.f2 { animation-delay: .45s; animation-duration: 1.05s; }
+  /* A gas burner's flame is blue; a heated floor's loop takes the zone's color, a towel stays a warm orange towel. */
+  :is(.picture, .bdev) .flame.gas { fill: #4dabf7; }
+  :is(.picture, .bdev) .pipe { stroke: var(--hc-color); }
+  :is(.picture, .bdev) .towel { fill: #ff922b; }
+  :is(.picture, .bdev) .towel.fold { fill: #e8590c; }
+  :is(.picture, .bdev) .towel.stripe { fill: none; stroke: #fff; stroke-width: .8; opacity: .4; }
   /* A stove on but not burning (standby, cooling down): its embers still glow a little. */
   :is(.picture, .bdev).running:not(.active) .ember { opacity: .35; }
   :is(.picture, .bdev).running.active .heat path:nth-child(3) { animation-delay: 1.8s; }
@@ -4175,6 +4646,7 @@ const BASE_STYLE = `${ART_STYLE}
   .pellets .pl .icon { width: 14px; height: 14px; }
   .pellets .ptrack { height: 8px; border-radius: 4px; background: var(--divider-color, rgba(127,127,127,.2)); overflow: hidden; }
   .pellets .ptrack i { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #b07a3e, #d9a066); }
+  .pellets.fuel .ptrack i { background: linear-gradient(90deg, #e67700, #fab005); }
   .pellets.low .ptrack i { background: var(--hc-warn); }
   .stiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 6px; }
   .stile { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-radius: 12px; cursor: pointer;
@@ -4844,10 +5316,10 @@ class HeatingCard extends HTMLElement {
     const id = z.entity && hass.states[z.entity] ? z.entity : null;
     const ent = { main: id };
     const over = z.entities || {};
-    // A stove's own roles are looked for only on a stove.
-    const stove = !!id && variantOf(hass, id, z.illustration) === "stove";
+    // A stove's, a boiler's or a heated floor's own roles are looked for only on that device.
+    const variant = id ? variantOf(hass, id, z.illustration) : null;
     for (const role of Object.keys(ROLES)) {
-      if (STOVE_ROLES.has(role) && !stove) ent[role] = over[role];
+      if (!roleFor(role, variant)) ent[role] = over[role];
       else ent[role] = over[role] || (id ? roleOf(hass, id, role) : undefined);
     }
     if (z.temperature) ent.indoor_temp = z.temperature;
@@ -4970,7 +5442,10 @@ class HeatingCard extends HTMLElement {
       m.valve = num(z.ent.valve);
       const action = a.hvac_action;
       m.action = action;
-      if (variantOf(this._hass, z.id, z.illustration) === "stove") m.stove = this._stoveModel(z, a, fmt);
+      const variant = variantOf(this._hass, z.id, z.illustration);
+      if (FIRES.has(variant)) m.stove = this._stoveModel(z, a, fmt);
+      if (BOILERS.has(variant)) m.boiler = this._boilerModel(z, a, fmt);
+      if (variant === "floor") m.floorTemp = fmt(z.ent.floor_temp) || (a.floor_temperature != null ? this._temp(Number(a.floor_temperature)) : null);
       const phase = m.stove?.phase;
       // Whether it heats right now: what the entity says it does, else a stove's phase, else whether its valve is open.
       m.heating =
@@ -4979,12 +5454,17 @@ class HeatingCard extends HTMLElement {
           ? ["heating", "preheating"].includes(action)
           : phase
             ? phase === "burning" || phase === "ignition"
-            : m.valve != null
+            : m.boiler?.burner != null
+              ? m.boiler.burner
+              : m.valve != null
               ? m.valve > 0
               : m.mode === "heat");
       if (m.stove && !phase) m.stove.phase = !m.on ? "off" : m.heating ? "burning" : "standby";
       m.preset = m.on && a.preset_mode && a.preset_mode !== "none" ? a.preset_mode : "";
       m.boost = presetKey(m.preset) === "boost";
+      // A boost's time left, when the integration says it (towel rails, Heatzy, Atlantic, Netatmo…), in minutes.
+      const left = m.boost ? Number(a.boost_remaining_time ?? a.boost_remaining ?? a.boost_time_left ?? a.remaining_boost_time ?? Number.NaN) : Number.NaN;
+      m.boostLeft = Number.isFinite(left) && left > 0 ? left : null;
       m.color = !m.online || !m.on ? IDLE : m.boost && m.heating ? BOOST : m.heating ? HEAT : MODE_COLORS[m.mode] || HEAT;
       m.status = !m.online
         ? this._t("st_unavailable")
@@ -5003,6 +5483,7 @@ class HeatingCard extends HTMLElement {
       m.presetText = m.preset ? this._presetLabel(z.id, m.preset) : "";
       // A stove says its phase (ignition, burning, cooling down…) rather than heating or idle.
       if (m.stove && m.online && phase) m.status = this._t(`ph_${phase}`);
+      if (m.boostLeft != null && m.online && m.on) m.status = `${m.status} · ${this._t("boost_left", { time: this._minutes(m.boostLeft) })}`;
     } else {
       // A pilot wire zone: its first radiator's order sets the color and the state.
       const first = z.pilots[0];
@@ -5029,6 +5510,12 @@ class HeatingCard extends HTMLElement {
       if (out) m.chips.push(this._chip("outdoor", `${this._t("outdoor")} ${out}`, "", e.outdoor_temp));
       const power = fmt(e.power);
       if (power && m.on) m.chips.push(this._chip("flash", power, "", e.power));
+    }
+    if (c.show_sensors && m.floorTemp) m.chips.push(this._chip("thermometer", `${this._t("floor_temp")} ${m.floorTemp}`, "", e.floor_temp || z.id));
+    if (m.boiler && c.show_alerts) {
+      if (m.boiler.pressureLow) m.chips.push(this._chip("gauge", `${this._t("pressure_low")} · ${m.boiler.pressure}`, "warn", e.pressure));
+      if (m.boiler.fuelLow) m.chips.push(this._chip("fuel", this._t("fuel_low"), "warn", e.fuel));
+      if (!m.stove && m.boiler.alarm) m.chips.push(this._chip("alert", m.boiler.alarm, "warn", e.stove_alarm || z.id));
     }
     if (m.stove && c.show_alerts) {
       if (m.stove.alarm) m.chips.push(this._chip("alert", m.stove.alarm, "warn", e.stove_alarm || z.id));
@@ -5063,12 +5550,7 @@ class HeatingCard extends HTMLElement {
       const dom = e.stove_fan.split(".")[0];
       fan = dom === "fan" ? (fs.state === "off" ? this._t("st_off") : fs.attributes.percentage != null ? `${fs.attributes.percentage} %` : this._fmtState(e.stove_fan)) : dom === "number" ? fmt(e.stove_fan) : this._fmtState(e.stove_fan);
     }
-    const as = st(e.stove_alarm);
-    let alarm = null;
-    if (as && !unavailable(as)) {
-      if (e.stove_alarm.startsWith("binary_sensor.")) alarm = as.state === "on" ? this._t("ph_alarm") : null;
-      else if (!/^(none|ok|0|no_?alarm|no alarm|aucune?|keine?|ninguna?|nessun[oa]?|-|)$/i.test(String(as.state).trim())) alarm = `${this._t("ph_alarm")} · ${this._fmtState(e.stove_alarm)}`;
-    }
+    let alarm = this._alarm(e.stove_alarm);
     if (!alarm && phase === "alarm") alarm = statusText ? `${this._t("ph_alarm")} · ${statusText}` : this._t("ph_alarm");
     return {
       phase,
@@ -5081,6 +5563,53 @@ class HeatingCard extends HTMLElement {
       alarm,
       ignitions: numOf(st(e.ignitions)),
     };
+  }
+
+  // A boiler's own readings, from its device's entities, else from its climate entity's attributes (OpenTherm Gateway
+  // and others keep some there): flow and return water temperatures, the burner's modulation and flame, the water
+  // pressure (flagged under PRESSURE_LOW bar), the fuel left in an oil tank (flagged at FUEL_LOW %) and an alarm.
+  _boilerModel(z, a, fmt) {
+    const e = z.ent;
+    const st = (id) => (id ? this._st(id) : null);
+    const temp = (id, attr) => fmt(id) || (a[attr] != null && Number.isFinite(Number(a[attr])) ? this._temp(Number(a[attr]), 0) : null);
+    const mod = numOf(st(e.modulation)) ?? (a.relative_modulation_level != null ? Number(a.relative_modulation_level) : null);
+    const bs = st(e.burner);
+    const burner = bs && !unavailable(bs) ? bs.state === "on" : mod != null ? mod > 0 : null;
+    const ps = st(e.pressure);
+    const pv = numOf(ps);
+    const unit = ps?.attributes.unit_of_measurement || "bar";
+    const fuel = numOf(st(e.fuel));
+    const fuelPct = fuel != null && (st(e.fuel)?.attributes.unit_of_measurement || "%") === "%";
+    const alarm = this._alarm(e.stove_alarm);
+    return {
+      flow: temp(e.flow_temp, "flow_temperature"),
+      ret: temp(e.return_temp, "return_temperature"),
+      modulation: mod != null ? `${fmtNum(this._locale(), mod, 0)} %` : null,
+      burner,
+      pressure: pv != null ? `${fmtNum(this._locale(), pv, 1)} ${unit}` : null,
+      pressureLow: pv != null && unit === "bar" && pv < PRESSURE_LOW,
+      fuel: fuelPct ? Math.max(0, Math.min(100, fuel)) : null,
+      fuelText: fuel != null && !fuelPct ? fmt(e.fuel) : null,
+      fuelLow: fuelPct && fuel <= FUEL_LOW,
+      alarm,
+    };
+  }
+
+  // An alarm entity's text: a binary sensor on, or a sensor saying something else than "none" / "ok"; null otherwise.
+  _alarm(id) {
+    const as = id ? this._st(id) : null;
+    if (!as || unavailable(as)) return null;
+    if (id.startsWith("binary_sensor.")) return as.state === "on" ? this._t("ph_alarm") : null;
+    return /^(none|ok|0|no_?alarm|no alarm|aucune?|keine?|ninguna?|nessun[oa]?|-|)$/i.test(String(as.state).trim()) ? null : `${this._t("ph_alarm")} · ${this._fmtState(id)}`;
+  }
+
+  // Minutes as a duration: *30 min*, *1 h 30 min*.
+  _minutes(n) {
+    const loc = this._locale();
+    const unit = (u, v) => new Intl.NumberFormat(loc, { style: "unit", unit: u, unitDisplay: "short" }).format(v);
+    const h = Math.floor(n / 60);
+    const mn = Math.round(n % 60);
+    return h ? (mn ? `${unit("hour", h)} ${unit("minute", mn)}` : unit("hour", h)) : unit("minute", mn);
   }
 
   // The pilot wire order of a radiator: the select's option, or the switch's state through switch_on / switch_off.
@@ -5213,8 +5742,10 @@ class HeatingCard extends HTMLElement {
     let dev = "";
     let devW = 0;
     let devH = 0;
+    let flat = false;
     if (!z.icon && !z.missing) {
       const variant = variantOf(this._hass, z.id, z.illustration);
+      flat = variant === "floor";
       const box = BANNER_DEVICES[variant] || BANNER_DEVICES.dial;
       const [, , vw, vh] = box.vb;
       const k = Math.min(box.w / vw, box.h / vh);
@@ -5232,7 +5763,7 @@ class HeatingCard extends HTMLElement {
     const cur = m.cur != null ? `${fmtNum(loc, m.cur)}°` : "";
     const tgt = this._showTarget(m) ? `→ ${m.range ? `${fmtNum(loc, m.range.low)}–${fmtNum(loc, m.range.high)}` : fmtNum(loc, m.target)}°` : "";
     const level = m.cur != null ? m.cur / 30 : BANNER_LEVELS[theme];
-    const scene = bannerScene({ theme, night, uid: this._uid, dev, devW, devH, right, cur, tgt, level, active: m.heating || (m.pilot?.startsWith("comfort") && m.on) });
+    const scene = bannerScene({ theme, night, uid: this._uid, dev, devW, devH, right, cur, tgt, level, active: m.heating || (m.pilot?.startsWith("comfort") && m.on), flat });
     const color = this._iconColor(summary.models || [m], m);
     const icon = z.icon && this._zonesNow?.length === 1 ? `<ha-icon icon="${esc(z.icon)}"></ha-icon>` : svgIcon(m.online && m.on ? "fire" : "radiator_off");
     const vars = `--hc-sw:${Math.ceil(200 - scene.tx + 8)}px;--hc-dw:${Math.ceil(200 - scene.devX + 4)}px;--hc-zw:${zoom ? 36 : 8}px`;
@@ -5313,6 +5844,7 @@ class HeatingCard extends HTMLElement {
     const parts = [`<div class="hero" style="--hc-color:${m.color}">${pic}<div class="info">${this._heroInfo(m)}${m.chips.length ? `<div class="chips">${m.chips.join("")}</div>` : ""}</div></div>`];
     if (c.show_controls && m.online && z.id) parts.push(this._controls(m));
     if (m.stove && m.online) parts.push(this._stoveSection(m));
+    else if (m.boiler && m.online) parts.push(this._boilerSection(m));
     if (c.show_pilot_wire && z.pilots.length) parts.push(this._pilotSection(m));
     if (c.show_schedule && z.schedule) parts.push(this._scheduleSection(m));
     if (c.show_controls && m.online && z.switches.length) parts.push(this._options(z));
@@ -5518,21 +6050,57 @@ class HeatingCard extends HTMLElement {
               .join("")}</div>`
           : `<div class="line">${svgIcon("flash")}<span>${esc(`${this._t("stove_power")} ${fmtNum(this._locale(), p.value)}`)}</span></div>`;
       } else if (p?.value != null) power = `<div class="line">${svgIcon("flash")}<span>${esc(`${this._t("stove_power")} ${fmtNum(this._locale(), p.value)}`)}</span></div>`;
-      const pel =
-        sv.pellets != null
-          ? `<div class="pellets${sv.pelletsLow ? " low" : ""}" data-entity="${esc(z.ent.pellets)}" role="button" tabindex="0"><div class="pl"><span>${svgIcon("pellets")}${esc(this._t("pellets"))}</span><span>${esc(fmtNum(this._locale(), sv.pellets, 0))} %</span></div><div class="ptrack"><i style="width:${sv.pellets}%"></i></div></div>`
-          : "";
-      const tile = (icon, label, value, ent) =>
-        value == null || value === "" ? "" : `<div class="stile"${ent ? ` data-entity="${esc(ent)}" role="button" tabindex="0"` : ""}><span class="sl">${svgIcon(icon)}${esc(label)}</span><span class="sv">${esc(value)}</span></div>`;
+      const pel = this._bar("pellets", z.ent.pellets, "pellets", this._t("pellets"), sv.pellets, sv.pelletsLow);
       const tiles = [
-        tile("thermometer", this._t("flue_gas"), sv.flue, z.ent.flue_gas),
-        tile("fan", this._t("stove_fan"), sv.fan, z.ent.stove_fan),
-        tile("pellets", this._t("pellets"), sv.pelletsText, z.ent.pellets),
-        tile("fire", this._t("ignitions"), sv.ignitions != null ? fmtNum(this._locale(), sv.ignitions, 0) : null, z.ent.ignitions),
+        ...this._boilerTiles(m),
+        this._tile("thermometer", this._t("flue_gas"), sv.flue, z.ent.flue_gas),
+        this._tile("fan", this._t("stove_fan"), sv.fan, z.ent.stove_fan),
+        this._tile("pellets", this._t("pellets"), sv.pelletsText, z.ent.pellets),
+        this._tile("fire", this._t("ignitions"), sv.ignitions != null ? fmtNum(this._locale(), sv.ignitions, 0) : null, z.ent.ignitions),
       ].join("");
       body = `${phases}${power}${pel}${tiles ? `<div class="stiles">${tiles}</div>` : ""}`;
     }
-    return `<div class="section stove" style="--hc-color:${m.color}">${this._sectionTitle("stove", "stove", this._t("sec_stove"))}${body}</div>`;
+    // A pellet boiler burns as a stove does: the same section, titled as a boiler, with its water readings.
+    const boiler = !!m.boiler;
+    return `<div class="section stove" style="--hc-color:${m.color}">${this._sectionTitle("stove", boiler ? "boiler" : "stove", this._t(boiler ? "sec_boiler" : "sec_stove"))}${body}</div>`;
+  }
+
+  // A level as a bar (a stove's pellets, an oil tank's fuel), in the warning color when low; "" without a level.
+  _bar(cls, ent, icon, label, pct, low) {
+    if (pct == null) return "";
+    return `<div class="pellets ${cls}${low ? " low" : ""}" data-entity="${esc(ent || "")}" role="button" tabindex="0"><div class="pl"><span>${svgIcon(icon)}${esc(label)}</span><span>${esc(fmtNum(this._locale(), pct, 0))} %</span></div><div class="ptrack"><i style="width:${pct}%"></i></div></div>`;
+  }
+
+  // A reading as a tile, opening its entity; "" without a value.
+  _tile(icon, label, value, ent) {
+    return value == null || value === "" ? "" : `<div class="stile"${ent ? ` data-entity="${esc(ent)}" role="button" tabindex="0"` : ""}><span class="sl">${svgIcon(icon)}${esc(label)}</span><span class="sv">${esc(value)}</span></div>`;
+  }
+
+  // A boiler's water readings as tiles: flow, return, the burner's modulation and the pressure.
+  _boilerTiles(m) {
+    const b = m.boiler;
+    if (!b) return [];
+    const e = m.z.ent;
+    return [
+      this._tile("thermometer", this._t("flow_temp"), b.flow, e.flow_temp),
+      this._tile("thermometer", this._t("return_temp"), b.ret, e.return_temp),
+      this._tile("fire", this._t("modulation"), b.modulation, e.modulation || e.burner),
+      this._tile("gauge", this._t("pressure"), b.pressure, e.pressure),
+    ];
+  }
+
+  // A gas or oil boiler: its fuel tank as a bar, its water readings as tiles, its tank's level when not a %.
+  _boilerSection(m) {
+    const z = m.z;
+    const b = m.boiler;
+    const closed = this._isCollapsed("boiler");
+    let body = "";
+    if (!closed) {
+      const tiles = [...this._boilerTiles(m), this._tile("fuel", this._t("fuel"), b.fuelText, z.ent.fuel)].join("");
+      body = `${this._bar("fuel", z.ent.fuel, "fuel", this._t("fuel"), b.fuel, b.fuelLow)}${tiles ? `<div class="stiles">${tiles}</div>` : ""}`;
+    }
+    if (!body && !closed) return "";
+    return `<div class="section boiler" style="--hc-color:${m.color}">${this._sectionTitle("boiler", "boiler", this._t("sec_boiler"))}${body}</div>`;
   }
 
   // A schedule's state: on or off, until its next change (*On until 22:00*, a weekday when it is not today).
@@ -5900,6 +6468,15 @@ class HeatingMiniCard extends HeatingCard {
       if (sv.pellets != null) parts.push(`${this._t("pellets")} ${fmtNum(loc, sv.pellets, 0)} %`);
       else if (sv.pelletsText) parts.push(`${this._t("pellets")} ${sv.pelletsText}`);
       if (parts.length) lines.push(this._line("pellets", parts.join(" · ")));
+    }
+    // A boiler: its flow temperature and burner, or the fuel left in its tank (a low pressure or stock is a chip).
+    const bo = m.online ? m.boiler : null;
+    if (bo) {
+      const parts = [];
+      if (bo.flow) parts.push(`${this._t("flow_temp")} ${bo.flow}`);
+      if (bo.modulation) parts.push(`${this._t("modulation")} ${bo.modulation}`);
+      if (bo.fuel != null) parts.push(`${this._t("fuel")} ${fmtNum(this._locale(), bo.fuel, 0)} %`);
+      if (parts.length) lines.push(this._line("boiler", parts.join(" · ")));
     }
     const chips = m.chips.filter((x) => x.includes("chip warn") || !m.online);
     const btns = [];
@@ -6363,7 +6940,7 @@ const languageField = (tr) => ({
 // The sections folded at first (`collapsed`), on every card: the mini card and the overview unfold into the full card.
 const collapsedField = (tr) => ({
   name: "collapsed",
-  selector: { select: { multiple: true, mode: "list", options: [["stove", "sec_stove"], ["pilot_wire", "pilot_wire"], ["schedule", "schedule"]].map(([value, k]) => ({ value, label: tr(k) })) } },
+  selector: { select: { multiple: true, mode: "list", options: [["stove", "sec_stove"], ["boiler", "sec_boiler"], ["pilot_wire", "pilot_wire"], ["schedule", "schedule"]].map(([value, k]) => ({ value, label: tr(k) })) } },
 });
 
 // The illustrated header (`illustration: false` in YAML for the classic one) and its day / night colors: the full card,
