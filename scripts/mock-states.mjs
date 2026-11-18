@@ -24,6 +24,7 @@ const entity = (entity_id, device_id, state, attributes = {}, extra = {}) => {
 // Two floors: the living room and the office downstairs, the bedroom and the bathroom upstairs.
 floor("ground_floor", "Ground floor", 0);
 floor("first_floor", "First floor", 1);
+floor("basement", "Basement", -1);
 area("living_room", "Living room", "ground_floor");
 area("bedroom", "Bedroom", "first_floor");
 area("office", "Office", "ground_floor");
@@ -97,6 +98,45 @@ entity("sensor.poele_granules_pellet_level", "poele_salon", "35", { unit_of_meas
 entity("sensor.poele_granules_flue_gas_temperature", "poele_salon", "168", { device_class: "temperature", unit_of_measurement: "°C", friendly_name: "Pellet stove Flue gas temperature" }, { platform: "palazzetti" });
 entity("number.poele_granules_fan_speed", "poele_salon", "3", { min: 1, max: 5, step: 1, friendly_name: "Pellet stove Fan speed" }, { platform: "palazzetti" });
 entity("sensor.poele_granules_ignitions", "poele_salon", "2", { friendly_name: "Pellet stove Ignitions", state_class: "total_increasing" }, { platform: "palazzetti" });
+
+// The other heat sources, each in a room of its own and hidden from discovery like the stove (their captures name
+// them). Dining room: underfloor heating (a Danfoss Icon room thermostat and its floor probe).
+const climate = (id, dev, name, cur, tgt, extra, reg) =>
+  entity(id, dev, "heat", { friendly_name: name, hvac_modes: ["off", "heat"], hvac_action: "heating", current_temperature: cur, temperature: tgt, min_temp: 5, max_temp: 30, target_temp_step: 0.5, supported_features: 401, ...extra }, { hidden: true, ...reg });
+const sensor = (id, dev, state, unit, name, reg, attrs = {}) => entity(id, dev, state, { unit_of_measurement: unit, friendly_name: name, ...attrs }, reg);
+area("dining_room", "Dining room", "ground_floor");
+device("plancher_sejour", "Floor heating", "Danfoss Icon room thermostat", "dining_room");
+climate("climate.plancher_sejour", "plancher_sejour", "Floor heating", 20.5, 21, {}, { platform: "zha" });
+sensor("sensor.plancher_sejour_floor_temperature", "plancher_sejour", "26.5", "°C", "Floor heating Floor temperature", { platform: "zha", translation_key: "floor_temperature" }, { device_class: "temperature" });
+// Upstairs bathroom: an electric towel rail on Boost, 30 min left.
+area("bathroom_2", "Upstairs bathroom", "first_floor");
+device("seche_serviettes", "Towel rail", "Electric towel rail", "bathroom_2");
+climate("climate.seche_serviettes", "seche_serviettes", "Towel rail", 23, 24, { preset_modes: ["comfort", "eco", "boost"], preset_mode: "boost", boost_remaining_time: 30 }, { platform: "cozytouch" });
+// Boiler room: a pellet boiler burning (ÖkoFEN-style: phase, hopper, flow and return, flue gas).
+area("boiler_room", "Boiler room", "basement");
+device("chaudiere_granules", "Pellet boiler", "Pellematic", "boiler_room");
+climate("climate.chaudiere_granules", "chaudiere_granules", "Pellet boiler", 20.5, 21, {}, { platform: "oekofen" });
+sensor("sensor.chaudiere_granules_status", "chaudiere_granules", "burning", undefined, "Pellet boiler Status", { platform: "oekofen", translation_key: "status" });
+sensor("sensor.chaudiere_granules_pellet_level", "chaudiere_granules", "52", "%", "Pellet boiler Pellet level", { platform: "oekofen", translation_key: "pellet_level" });
+sensor("sensor.chaudiere_granules_flow_temperature", "chaudiere_granules", "68", "°C", "Pellet boiler Flow temperature", { platform: "oekofen", translation_key: "flow_temperature" }, { device_class: "temperature" });
+sensor("sensor.chaudiere_granules_return_temperature", "chaudiere_granules", "52", "°C", "Pellet boiler Return temperature", { platform: "oekofen", translation_key: "return_temperature" }, { device_class: "temperature" });
+sensor("sensor.chaudiere_granules_flue_gas_temperature", "chaudiere_granules", "145", "°C", "Pellet boiler Flue gas temperature", { platform: "oekofen" }, { device_class: "temperature" });
+// Kitchen: a gas boiler on OpenTherm, its burner firing at 42 %, flow and return, water pressure.
+area("kitchen", "Kitchen", "ground_floor");
+device("chaudiere_gaz", "Gas boiler", "OpenTherm Gateway", "kitchen");
+climate("climate.chaudiere_gaz", "chaudiere_gaz", "Gas boiler", 20, 20.5, {}, { platform: "opentherm_gw" });
+sensor("sensor.chaudiere_gaz_flow_temperature", "chaudiere_gaz", "55", "°C", "Gas boiler Flow water temperature", { platform: "opentherm_gw", translation_key: "flow_temperature" }, { device_class: "temperature" });
+sensor("sensor.chaudiere_gaz_return_temperature", "chaudiere_gaz", "42", "°C", "Gas boiler Return water temperature", { platform: "opentherm_gw", translation_key: "return_temperature" }, { device_class: "temperature" });
+sensor("sensor.chaudiere_gaz_modulation", "chaudiere_gaz", "42", "%", "Gas boiler Relative modulation level", { platform: "opentherm_gw", translation_key: "relative_modulation_level" });
+sensor("sensor.chaudiere_gaz_pressure", "chaudiere_gaz", "1.6", "bar", "Gas boiler Water pressure", { platform: "opentherm_gw", translation_key: "water_pressure" }, { device_class: "pressure" });
+entity("binary_sensor.chaudiere_gaz_flame", "chaudiere_gaz", "on", { friendly_name: "Gas boiler Flame" }, { platform: "opentherm_gw", translation_key: "flame" });
+// Cellar: an oil boiler burning, its tank at 48 %.
+area("cellar", "Cellar", "basement");
+device("chaudiere_fioul", "Oil boiler", "Oil condensing boiler", "cellar");
+climate("climate.chaudiere_fioul", "chaudiere_fioul", "Oil boiler", 19, 20, {}, { platform: "ems_esp" });
+sensor("sensor.chaudiere_fioul_flow_temperature", "chaudiere_fioul", "62", "°C", "Oil boiler Flow temperature", { platform: "ems_esp", translation_key: "flow_temperature" }, { device_class: "temperature" });
+sensor("sensor.chaudiere_fioul_fuel_level", "chaudiere_fioul", "48", "%", "Oil boiler Tank level", { platform: "ems_esp", translation_key: "fuel_level" });
+entity("binary_sensor.chaudiere_fioul_burner", "chaudiere_fioul", "on", { friendly_name: "Oil boiler Burner" }, { platform: "ems_esp", translation_key: "burner_active" });
 
 // Office: a thermostat turned off.
 device("thermo_bureau", "Office thermostat", "Smart thermostat", "office");

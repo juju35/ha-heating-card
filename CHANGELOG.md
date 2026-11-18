@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.0 - 2026-11-18
+
+### Features
+- **Boilers**: a **gas boiler** (the blue flame of its burner while it fires), an **oil boiler** or diesel heater (its flame and the gauge of its tank) and a **pellet boiler** (its fire and its hopper, its phases and pellets as a stove's) are zone devices, in the card, the illustrated header and the overview tiles. A *Boiler* section shows the flow and return temperatures, the burner's modulation, the water pressure and the fuel left, with *Low pressure* and *Low fuel* alerts; the mini card shows the flow and burner (or the fuel) on one line. Found from the integration, the brand or the name (OpenTherm Gateway, ebusd, EMS-ESP, ViCare, myVAILLANT, ÖkoFEN, Hargassner, Fröling…), or `illustration: gas_boiler | oil_boiler | pellet_boiler`; `collapsed: [boiler]` folds the section.
+- **Underfloor heating**: the water loop glows in the floor and heat rises from it; the floor probe is a chip. Found from its name or brand (Danfoss Icon, Heatmiser, Uponor…), or `illustration: floor`.
+- **Towel rail**: its own ladder with a towel (it was drawn as a radiator), its bars glowing while it heats; on *Boost*, the time left follows its state. Found from its name (*towel*, *sèche-serviettes*, *Handtuch*…), or `illustration: towel`.
+
+### Maintenance
+- The screenshot script renders the new devices (full cards and one animation each); the screenshot test flags only orphan files, so a capture just listed no longer fails before the Screenshots workflow renders it.
+
 ## 1.4.0 - 2026-11-18
 
 ### Features

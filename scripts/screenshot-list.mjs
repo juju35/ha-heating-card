@@ -22,6 +22,14 @@ export const shots = [
   ...twins("card-pilot-wire", { type: "heating-card", width: 460, config: {}, clicks: zone(3) }),
   // A pellet stove as a zone: burning at power 3 of 5, its phases, pellets, flue gas, fan and ignitions.
   ...twins("card-stove", { type: "heating-card", width: 460, config: { entity: "climate.poele_granules" } }),
+  // The other heat sources as zones: underfloor heating (floor temperature), a towel rail on Boost, a pellet boiler
+  // burning (phases, hopper, flow and return), a gas boiler firing (flow, return, modulation, pressure) and an oil
+  // boiler with its tank.
+  ...twins("card-floor", { type: "heating-card", width: 460, config: { entity: "climate.plancher_sejour" } }),
+  ...twins("card-towel", { type: "heating-card", width: 460, config: { entity: "climate.seche_serviettes" } }),
+  ...twins("card-pellet-boiler", { type: "heating-card", width: 460, config: { entity: "climate.chaudiere_granules" } }),
+  ...twins("card-gas-boiler", { type: "heating-card", width: 460, config: { entity: "climate.chaudiere_gaz" } }),
+  ...twins("card-oil-boiler", { type: "heating-card", width: 460, config: { entity: "climate.chaudiere_fioul" } }),
   // The overview of the zones, and one zone as a mini card.
   ...twins("mini-card", { type: "heating-mini-card", width: 380, config: {} }),
   ...twins("mini-card-thermostat", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat" } }),
@@ -44,6 +52,11 @@ export const shots = [
 //   heating-radiator  — the same thermostat drawn as a column radiator: columns glow from the bottom up, heat rises
 //   heating-valve     — radiator valve open (45 %): its radiator glows, heat rises
 //   heating-stove     — a pellet stove burning: flames flicker behind the glass, embers glow, halo
+//   heating-floor     — underfloor heating: the water loop in the floor glows, heat rises from the whole floor
+//   heating-towel     — a towel rail on Boost: its bars glow from the bottom up, heat rises twice as fast
+//   heating-pellet-boiler — a pellet boiler burning: flames behind its door, embers, the hopper beside it
+//   heating-gas-boiler    — a gas boiler firing: the blue flame of its burner flickers, halo
+//   heating-oil-boiler    — an oil boiler burning: the flame behind its round window, its tank's gauge
 //   boost             — Boost preset: the flame and the heat go twice as fast, in red
 //   pilot-comfort     — pilot wire radiator on comfort: glowing and giving off heat
 //   pilot-eco         — pilot wire radiator on eco: a slow breathing glow, the header's green leaf sways
@@ -57,6 +70,11 @@ export const gifs = [
   ...twins("heating-radiator", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat", illustration: "radiator" } }),
   ...twins("heating-valve", { type: "heating-mini-card", width: 380, config: { entity: "climate.chambre_vanne" }, overrides: valveHeating }),
   ...twins("heating-stove", { type: "heating-mini-card", width: 380, config: { entity: "climate.poele_granules" } }),
+  ...twins("heating-floor", { type: "heating-mini-card", width: 380, config: { entity: "climate.plancher_sejour" } }),
+  ...twins("heating-towel", { type: "heating-mini-card", width: 380, config: { entity: "climate.seche_serviettes" } }),
+  ...twins("heating-pellet-boiler", { type: "heating-mini-card", width: 380, config: { entity: "climate.chaudiere_granules" } }),
+  ...twins("heating-gas-boiler", { type: "heating-mini-card", width: 380, config: { entity: "climate.chaudiere_gaz" } }),
+  ...twins("heating-oil-boiler", { type: "heating-mini-card", width: 380, config: { entity: "climate.chaudiere_fioul" } }),
   ...twins("boost", { type: "heating-mini-card", width: 380, config: { entity: "climate.salon_thermostat" }, overrides: boost }),
   ...twins("pilot-comfort", { type: "heating-mini-card", width: 380, config: BATHROOM, overrides: pilotComfort }),
   ...twins("pilot-eco", { type: "heating-mini-card", width: 380, config: BATHROOM, overrides: pilotEco }),
