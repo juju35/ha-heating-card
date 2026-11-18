@@ -4238,7 +4238,7 @@ async function fetchWeek(hass, id) {
 // and max. Three shapes: a round wall thermostat, a column radiator and a radiator valve on the corner of its
 // radiator; `illustration: auto` picks one from the device model and name. A pilot wire radiator is the column
 // radiator, glowing in the color of its order.
-const waves = (xs, y) => `<g class="heat">${xs.map((x) => `<path d="M${x} ${y}q-2-2.5 0-5t0-5"/>`).join("")}</g>`;
+const waves = (xs, y, cls = "") => `<g class="heat${cls}">${xs.map((x) => `<path d="M${x} ${y}q-2-2.5 0-5t0-5"/>`).join("")}</g>`;
 
 const columns = (x, n, w, step, y1, y2) =>
   Array.from({ length: n }, (_, i) => {
@@ -4317,8 +4317,8 @@ ARTS.stove = (s) =>
 const FLOOR_PATH = "M9 66h62a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h62a3 3 0 0 1 0 6H9";
 ARTS.floor = () =>
   '<rect class="glow" x="6" y="52" width="68" height="10" rx="3" fill="url(#hc-tg)"/>' +
-  waves([10, 70], 56) +
-  waves([28, 52], 33) +
+  waves([9, 75], 56, " floorheat") +
+  waves([30, 50], 35, " floorheat") +
   '<rect x="4" y="62" width="72" height="24" rx="3" fill="#d6cfc6"/><rect x="4" y="62" width="72" height="24" rx="3" fill="#000" opacity=".04"/>' +
   `<path d="${FLOOR_PATH}" fill="none" stroke="#b9b1a6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>` +
   `<path class="glow pipe" d="${FLOOR_PATH}" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>` +
@@ -4535,6 +4535,9 @@ const ART_STYLE = `
   :is(.picture, .bdev).running.active .glow { opacity: 1; animation: hc-glow 3.2s ease-in-out infinite; }
   :is(.picture, .bdev).running.active .flame { opacity: 1; animation: hc-flame 1.3s ease-in-out infinite; }
   :is(.picture, .bdev).running.active .heat path { animation: hc-rise 2.8s ease-in-out infinite; }
+  /* A heated floor's heat stays seen even on a still picture (screenshots), then rises with the animation. */
+  :is(.picture, .bdev).running.active .heat.floorheat path { opacity: .7; stroke-width: 1.8; }
+  :is(.picture, .bdev).running.active .heat.floorheat path:nth-child(2) { animation-delay: 1.4s; }
   :is(.picture, .bdev).running.active .heat path:nth-child(2) { animation-delay: .9s; }
   :is(.picture, .bdev).running.active .flame.f2 { animation-delay: .45s; animation-duration: 1.05s; }
   /* A gas burner's flame is blue; a heated floor's loop takes the zone's color, a towel stays a warm orange towel. */
