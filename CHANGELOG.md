@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.1 - 2026-11-20
+
+### Fixes
+- The frosted status pill gets the `-webkit-backdrop-filter` prefix for older Safari and the iOS companion app.
+
+### Performance
+- The registry lookups count the states once per update instead of on every lookup (each role of each zone): less work on every state change of a large home.
+
 ## 1.5.0 - 2026-11-18
 
 ### Features
