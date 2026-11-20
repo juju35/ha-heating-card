@@ -8,6 +8,7 @@
 
 ### Performance
 - The registry lookups count the states once per update instead of on every lookup (each role of each zone): less work on every state change of a large home.
+- The card resolves its zones (thermostat roles, pilot wire radiators, sensors) again only when its configuration, the registries, the language or the number of entities change, instead of on every state push before comparing what it shows.
 
 ## 1.5.0 - 2026-11-18
 
