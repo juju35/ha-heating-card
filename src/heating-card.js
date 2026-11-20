@@ -5111,6 +5111,64 @@ const watchOutside = (isOut, handler) => {
     },
   };
 };
+// A state update patches the card in place instead of rewriting its shadow root. A rewrite replaced <ha-card> and
+// every <ha-icon>, whose own shadow DOM Home Assistant renders a microtask later: the status pill's measurement
+// forced a layout in between, with the card collapsed to its border, which shortened the page and moved its scroll
+// position (the dashboard jumped on every sensor change); it also restarted the illustration's animations.
+// `morph(root, html)` turns `root`'s children into `html`, keeping every node that is still there (same tag at the
+// same place, or the same `data-key` among its siblings) and updating its attributes and text.
+const patchAttrs = (cur, next) => {
+  // A custom element may style its own host (an inline style the markup never gives): that one stays.
+  const own = cur.localName.includes("-") ? "style" : "";
+  for (const { name } of [...cur.attributes]) if (!next.hasAttribute(name) && name !== own) cur.removeAttribute(name);
+  for (const { name, value } of next.attributes) if (cur.getAttribute(name) !== value) cur.setAttribute(name, value);
+};
+const keyOf = (n) => (n.nodeType === 1 ? n.getAttribute("data-key") : null);
+const patchChildren = (cur, next) => {
+  const old = [...cur.childNodes];
+  const fresh = [...next.childNodes];
+  const byKey = new Map();
+  for (const o of old) {
+    const k = keyOf(o);
+    if (k !== null && !byKey.has(k)) byKey.set(k, o);
+  }
+  const used = new Set();
+  fresh.forEach((n, i) => {
+    const k = keyOf(n);
+    let o = k !== null ? byKey.get(k) : old[i];
+    if (!o || o.nodeType !== n.nodeType || o.nodeName !== n.nodeName || used.has(o) || (k === null && keyOf(o) !== null)) o = null;
+    const ref = cur.childNodes[i] ?? null;
+    if (!o) {
+      cur.insertBefore(n, ref);
+      return;
+    }
+    used.add(o);
+    if (o !== ref) cur.insertBefore(o, ref);
+    if (n.nodeType !== 1) {
+      if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue;
+      return;
+    }
+    patchAttrs(o, n);
+    // A custom element given no children (<ha-icon>) keeps those it draws itself.
+    if (n.firstChild || !o.localName.includes("-")) patchChildren(o, n);
+    // A dropdown the user changed no longer follows its options' attributes: selected as a fresh one would be.
+    if (o.localName === "select") {
+      const at = [...o.options].findIndex((x) => x.hasAttribute("selected"));
+      o.selectedIndex = at < 0 ? 0 : at;
+    }
+  });
+  while (cur.childNodes.length > fresh.length) cur.removeChild(cur.lastChild);
+};
+const morph = (root, html) => {
+  // No DOM to patch (the unit tests' stand-ins): written at once.
+  if (!root.childNodes) {
+    root.innerHTML = html;
+    return;
+  }
+  const tpl = document.createElement("template");
+  tpl.innerHTML = html;
+  patchChildren(root, tpl.content);
+};
 // What identifies the focused control across a render (its tag and data attributes).
 const focusKey = (el) => {
   const data = [...(el?.attributes || [])].filter((a) => a.name.startsWith("data-")).map((a) => [a.name, a.value]);
@@ -5370,9 +5428,16 @@ class HeatingCard extends HTMLElement {
     this._sig = sig;
     // Kept across the rewrite for the keyboard only (with the pointer it would draw the focus ring).
     const key = this._byPointer ? null : focusKey(active);
-    this.shadowRoot.innerHTML = this._render(zones);
+    morph(this.shadowRoot, this._render(zones));
     this._fitPill();
-    if (key) [...this.shadowRoot.querySelectorAll(key.tag)].find((n) => key.data.every(([k, v]) => n.getAttribute(k) === v))?.focus({ preventScroll: true });
+    // A new <ha-card> (first render) shows its content once Home Assistant has rendered it, a microtask later: the
+    // pill measured before (on an empty card) is measured again then, before the frame is painted.
+    const card = this.shadowRoot.querySelector("ha-card");
+    if (card && card !== this._fitCard) {
+      this._fitCard = card;
+      card.updateComplete?.then?.(() => this._fitPill());
+    }
+    if (key && !this.shadowRoot.activeElement) [...this.shadowRoot.querySelectorAll(key.tag)].find((n) => key.data.every(([k, v]) => n.getAttribute(k) === v))?.focus({ preventScroll: true });
   }
 
   _refresh() {

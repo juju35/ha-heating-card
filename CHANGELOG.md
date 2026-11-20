@@ -4,6 +4,7 @@
 
 ### Fixes
 - The frosted status pill gets the `-webkit-backdrop-filter` prefix for older Safari and the iOS companion app.
+- The page no longer jumps on state updates: the cards patch their content in place instead of rewriting it. The rewrite replaced `<ha-card>` and the icons, which Home Assistant draws a moment later: the status pill was measured with the card collapsed to its border, the page got shorter and its scroll position moved. The illustration's animations no longer restart on each update, and a new card measures its pill again once `<ha-card>` has rendered.
 
 ### Performance
 - The registry lookups count the states once per update instead of on every lookup (each role of each zone): less work on every state change of a large home.
