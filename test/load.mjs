@@ -67,7 +67,7 @@ export const load = () => {
   vm.createContext(sandbox);
   return vm.runInContext(
     `${source}
-    ({ STRINGS, ICONS, pilotMode, presetKey, presetIcon, isThermostat, isPilotSelect, discoverZones, zonesOf, weekOf, fetchWeek, guessVariant, stovePhase, lang, intlLocale,
+    ({ STRINGS, ICONS, stateCount, pilotMode, presetKey, presetIcon, isThermostat, isPilotSelect, discoverZones, zonesOf, weekOf, fetchWeek, guessVariant, stovePhase, lang, intlLocale,
        HeatingCard: customElements.get("heating-card"), HeatingMiniCard: customElements.get("heating-mini-card"),
        HeatingCardEditor: customElements.get("heating-card-editor"), HeatingMiniCardEditor: customElements.get("heating-mini-card-editor"),
        HeatingOverviewCard: customElements.get("heating-overview-card"), HeatingOverviewCardEditor: customElements.get("heating-overview-card-editor"), window, SCHEDULES, BRAND_LOGOS })`,

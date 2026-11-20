@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.1 - 2026-11-20
+
+### Fixes
+- The frosted status pill gets the `-webkit-backdrop-filter` prefix for older Safari and the iOS companion app.
+- The page no longer jumps on state updates: the cards patch their content in place instead of rewriting it. The rewrite replaced `<ha-card>` and the icons, which Home Assistant draws a moment later: the status pill was measured with the card collapsed to its border, the page got shorter and its scroll position moved. The illustration's animations no longer restart on each update, and a new card measures its pill again once `<ha-card>` has rendered.
+
+### Performance
+- The registry lookups count the states once per update instead of on every lookup (each role of each zone): less work on every state change of a large home.
+- The card resolves its zones (thermostat roles, pilot wire radiators, sensors) again only when its configuration, the registries, the language or the number of entities change, instead of on every state push before comparing what it shows.
+
 ## 1.5.0 - 2026-11-18
 
 ### Features

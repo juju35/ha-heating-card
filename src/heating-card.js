@@ -4042,10 +4042,19 @@ const switchInfo = (id) => SWITCHES.find(([re]) => re.test(id.split(".")[1] || i
 // changes with the registry) and started over when the number of states changes (states still arriving at start-up)
 // or the area or device registry changes (an area renamed, a device moved to another area).
 const MEMO = new WeakMap();
+// The number of states, counted once per `hass.states` object (a new one comes with each state change): memo() runs
+// for every role of every zone on each update, and counting thousands of states each time cost more than the lookup.
+const COUNTS = new WeakMap();
+const stateCount = (states) => {
+  if (!states) return 0;
+  let n = COUNTS.get(states);
+  if (n === undefined) COUNTS.set(states, (n = Object.keys(states).length));
+  return n;
+};
 const memo = (hass, key, compute) => {
   const reg = hass?.entities;
   if (!reg) return compute();
-  const count = Object.keys(hass.states || {}).length;
+  const count = stateCount(hass.states);
   let m = MEMO.get(reg);
   if (!m || m.count !== count || m.areas !== hass.areas || m.devices !== hass.devices) {
     MEMO.set(reg, (m = { count, areas: hass.areas, devices: hass.devices, map: new Map() }));
@@ -4762,7 +4771,7 @@ const BANNER_STYLE = `
            display: grid; place-items: center; background: #fff; box-shadow: 0 0 0 1px rgba(13,42,69,.16), 0 1px 3px rgba(13,42,69,.18); }
   .brand img { width: 100%; height: 100%; object-fit: contain; }
   .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; color: #33506b; background: rgba(255,255,255,.55);
-                  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); backdrop-filter: blur(4px); }
+                  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
   .banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
   .banner .zoom:hover { background: rgba(255,255,255,.75); }
   .banner.night .zoom:hover { background: rgba(255,255,255,.22); }
@@ -5102,6 +5111,64 @@ const watchOutside = (isOut, handler) => {
     },
   };
 };
+// A state update patches the card in place instead of rewriting its shadow root. A rewrite replaced <ha-card> and
+// every <ha-icon>, whose own shadow DOM Home Assistant renders a microtask later: the status pill's measurement
+// forced a layout in between, with the card collapsed to its border, which shortened the page and moved its scroll
+// position (the dashboard jumped on every sensor change); it also restarted the illustration's animations.
+// `morph(root, html)` turns `root`'s children into `html`, keeping every node that is still there (same tag at the
+// same place, or the same `data-key` among its siblings) and updating its attributes and text.
+const patchAttrs = (cur, next) => {
+  // A custom element may style its own host (an inline style the markup never gives): that one stays.
+  const own = cur.localName.includes("-") ? "style" : "";
+  for (const { name } of [...cur.attributes]) if (!next.hasAttribute(name) && name !== own) cur.removeAttribute(name);
+  for (const { name, value } of next.attributes) if (cur.getAttribute(name) !== value) cur.setAttribute(name, value);
+};
+const keyOf = (n) => (n.nodeType === 1 ? n.getAttribute("data-key") : null);
+const patchChildren = (cur, next) => {
+  const old = [...cur.childNodes];
+  const fresh = [...next.childNodes];
+  const byKey = new Map();
+  for (const o of old) {
+    const k = keyOf(o);
+    if (k !== null && !byKey.has(k)) byKey.set(k, o);
+  }
+  const used = new Set();
+  fresh.forEach((n, i) => {
+    const k = keyOf(n);
+    let o = k !== null ? byKey.get(k) : old[i];
+    if (!o || o.nodeType !== n.nodeType || o.nodeName !== n.nodeName || used.has(o) || (k === null && keyOf(o) !== null)) o = null;
+    const ref = cur.childNodes[i] ?? null;
+    if (!o) {
+      cur.insertBefore(n, ref);
+      return;
+    }
+    used.add(o);
+    if (o !== ref) cur.insertBefore(o, ref);
+    if (n.nodeType !== 1) {
+      if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue;
+      return;
+    }
+    patchAttrs(o, n);
+    // A custom element given no children (<ha-icon>) keeps those it draws itself.
+    if (n.firstChild || !o.localName.includes("-")) patchChildren(o, n);
+    // A dropdown the user changed no longer follows its options' attributes: selected as a fresh one would be.
+    if (o.localName === "select") {
+      const at = [...o.options].findIndex((x) => x.hasAttribute("selected"));
+      o.selectedIndex = at < 0 ? 0 : at;
+    }
+  });
+  while (cur.childNodes.length > fresh.length) cur.removeChild(cur.lastChild);
+};
+const morph = (root, html) => {
+  // No DOM to patch (the unit tests' stand-ins): written at once.
+  if (!root.childNodes) {
+    root.innerHTML = html;
+    return;
+  }
+  const tpl = document.createElement("template");
+  tpl.innerHTML = html;
+  patchChildren(root, tpl.content);
+};
 // What identifies the focused control across a render (its tag and data attributes).
 const focusKey = (el) => {
   const data = [...(el?.attributes || [])].filter((a) => a.name.startsWith("data-")).map((a) => [a.name, a.value]);
@@ -5305,8 +5372,22 @@ class HeatingCard extends HTMLElement {
   }
 
   // ── Zones ──
+  // Resolved again only when the configuration, the registries, the language or the number of entities change (what
+  // the resolution reads, as `memo`); a state push otherwise reuses them. The name, which can follow an entity's
+  // friendly_name, is worked out again each time (cheap).
   _zones() {
-    return zonesOf(this._hass, this._config).map((z, i) => this._resolve(z, i));
+    const h = this._hass;
+    const key = [this._config, h.entities, h.devices, h.areas, h.floors, stateCount(h.states), lang(h, this._config)];
+    let c = this._zoneCache;
+    if (!c || key.some((v, i) => v !== c.key[i])) {
+      c = this._zoneCache = { key, zones: zonesOf(h, this._config).map((z, i) => [z, this._resolve(z, i)]) };
+    }
+    return c.zones.map(([z, r]) => ({ ...r, name: this._zoneName(z, r.id, r.pilots) }));
+  }
+
+  _zoneName(z, id, pilots) {
+    const hass = this._hass;
+    return z.name || (id ? areaName(hass, id) || nameOf(hass, id) : pilots[0] ? areaName(hass, pilots[0]) || nameOf(hass, pilots[0]) : "") || this._t("zone");
   }
 
   // A zone with its entities found: the thermostat's device roles (overridable with `entities`), the zone's own
@@ -5329,7 +5410,7 @@ class HeatingCard extends HTMLElement {
     const missing = (z.entity && !id) || (!z.entity && z.pilot_wire.length && !pilots.length);
     const used = new Set(Object.values(ent).filter(Boolean));
     const switches = id ? deviceEntities(hass, deviceOf(hass, id)).map((e) => e.entity_id).filter((s) => s.startsWith("switch.") && !used.has(s) && !pilots.includes(s)) : [];
-    const name = z.name || (id ? areaName(hass, id) || nameOf(hass, id) : pilots[0] ? areaName(hass, pilots[0]) || nameOf(hass, pilots[0]) : "") || this._t("zone");
+    const name = this._zoneName(z, id, pilots);
     return { ...z, index, id, ent, pilots, switches, name, missing, schedule: z.schedule && hass.states[z.schedule] ? z.schedule : null };
   }
 
@@ -5361,9 +5442,16 @@ class HeatingCard extends HTMLElement {
     this._sig = sig;
     // Kept across the rewrite for the keyboard only (with the pointer it would draw the focus ring).
     const key = this._byPointer ? null : focusKey(active);
-    this.shadowRoot.innerHTML = this._render(zones);
+    morph(this.shadowRoot, this._render(zones));
     this._fitPill();
-    if (key) [...this.shadowRoot.querySelectorAll(key.tag)].find((n) => key.data.every(([k, v]) => n.getAttribute(k) === v))?.focus({ preventScroll: true });
+    // A new <ha-card> (first render) shows its content once Home Assistant has rendered it, a microtask later: the
+    // pill measured before (on an empty card) is measured again then, before the frame is painted.
+    const card = this.shadowRoot.querySelector("ha-card");
+    if (card && card !== this._fitCard) {
+      this._fitCard = card;
+      card.updateComplete?.then?.(() => this._fitPill());
+    }
+    if (key && !this.shadowRoot.activeElement) [...this.shadowRoot.querySelectorAll(key.tag)].find((n) => key.data.every(([k, v]) => n.getAttribute(k) === v))?.focus({ preventScroll: true });
   }
 
   _refresh() {
