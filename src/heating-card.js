@@ -4042,10 +4042,19 @@ const switchInfo = (id) => SWITCHES.find(([re]) => re.test(id.split(".")[1] || i
 // changes with the registry) and started over when the number of states changes (states still arriving at start-up)
 // or the area or device registry changes (an area renamed, a device moved to another area).
 const MEMO = new WeakMap();
+// The number of states, counted once per `hass.states` object (a new one comes with each state change): memo() runs
+// for every role of every zone on each update, and counting thousands of states each time cost more than the lookup.
+const COUNTS = new WeakMap();
+const stateCount = (states) => {
+  if (!states) return 0;
+  let n = COUNTS.get(states);
+  if (n === undefined) COUNTS.set(states, (n = Object.keys(states).length));
+  return n;
+};
 const memo = (hass, key, compute) => {
   const reg = hass?.entities;
   if (!reg) return compute();
-  const count = Object.keys(hass.states || {}).length;
+  const count = stateCount(hass.states);
   let m = MEMO.get(reg);
   if (!m || m.count !== count || m.areas !== hass.areas || m.devices !== hass.devices) {
     MEMO.set(reg, (m = { count, areas: hass.areas, devices: hass.devices, map: new Map() }));
@@ -4762,7 +4771,7 @@ const BANNER_STYLE = `
            display: grid; place-items: center; background: #fff; box-shadow: 0 0 0 1px rgba(13,42,69,.16), 0 1px 3px rgba(13,42,69,.18); }
   .brand img { width: 100%; height: 100%; object-fit: contain; }
   .banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; color: #33506b; background: rgba(255,255,255,.55);
-                  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); backdrop-filter: blur(4px); }
+                  box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
   .banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
   .banner .zoom:hover { background: rgba(255,255,255,.75); }
   .banner.night .zoom:hover { background: rgba(255,255,255,.22); }

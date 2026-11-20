@@ -546,3 +546,14 @@ test("an oil boiler: its tank as a bar and a low fuel alert; the burner off mean
   assert.match(low, /chip warn[^>]*>[\s\S]*Low fuel/);
   assert.match(low, /Idle/);
 });
+
+test("the states are counted once per states object, not on every registry lookup", () => {
+  const { stateCount } = load();
+  const states = { "climate.a": {}, "climate.b": {} };
+  assert.equal(stateCount(states), 2);
+  // Counted already: the same object answers from the cache (Home Assistant replaces it on every change).
+  states["climate.c"] = {};
+  assert.equal(stateCount(states), 2);
+  assert.equal(stateCount({ ...states }), 3);
+  assert.equal(stateCount(undefined), 0);
+});
