@@ -557,3 +557,21 @@ test("the states are counted once per states object, not on every registry looku
   assert.equal(stateCount({ ...states }), 3);
   assert.equal(stateCount(undefined), 0);
 });
+
+test("a state push resolves the zones again only when the registries or the entity list change", () => {
+  const hass = mockHass();
+  const c = card({}, hass);
+  let resolved = 0;
+  const original = c._resolve.bind(c);
+  c._resolve = (...a) => {
+    resolved += 1;
+    return original(...a);
+  };
+  const id = "climate.salon_thermostat";
+  const st = hass.states[id];
+  c.hass = { ...hass, states: { ...hass.states, [id]: { ...st, attributes: { ...st.attributes, current_temperature: 17.4 } } } };
+  assert.equal(resolved, 0);
+  assert.match(html(c), /17[.,]4/);
+  c.hass = { ...hass, entities: { ...hass.entities } };
+  assert.ok(resolved > 0);
+});

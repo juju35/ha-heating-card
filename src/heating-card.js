@@ -5372,8 +5372,22 @@ class HeatingCard extends HTMLElement {
   }
 
   // ── Zones ──
+  // Resolved again only when the configuration, the registries, the language or the number of entities change (what
+  // the resolution reads, as `memo`); a state push otherwise reuses them. The name, which can follow an entity's
+  // friendly_name, is worked out again each time (cheap).
   _zones() {
-    return zonesOf(this._hass, this._config).map((z, i) => this._resolve(z, i));
+    const h = this._hass;
+    const key = [this._config, h.entities, h.devices, h.areas, h.floors, stateCount(h.states), lang(h, this._config)];
+    let c = this._zoneCache;
+    if (!c || key.some((v, i) => v !== c.key[i])) {
+      c = this._zoneCache = { key, zones: zonesOf(h, this._config).map((z, i) => [z, this._resolve(z, i)]) };
+    }
+    return c.zones.map(([z, r]) => ({ ...r, name: this._zoneName(z, r.id, r.pilots) }));
+  }
+
+  _zoneName(z, id, pilots) {
+    const hass = this._hass;
+    return z.name || (id ? areaName(hass, id) || nameOf(hass, id) : pilots[0] ? areaName(hass, pilots[0]) || nameOf(hass, pilots[0]) : "") || this._t("zone");
   }
 
   // A zone with its entities found: the thermostat's device roles (overridable with `entities`), the zone's own
@@ -5396,7 +5410,7 @@ class HeatingCard extends HTMLElement {
     const missing = (z.entity && !id) || (!z.entity && z.pilot_wire.length && !pilots.length);
     const used = new Set(Object.values(ent).filter(Boolean));
     const switches = id ? deviceEntities(hass, deviceOf(hass, id)).map((e) => e.entity_id).filter((s) => s.startsWith("switch.") && !used.has(s) && !pilots.includes(s)) : [];
-    const name = z.name || (id ? areaName(hass, id) || nameOf(hass, id) : pilots[0] ? areaName(hass, pilots[0]) || nameOf(hass, pilots[0]) : "") || this._t("zone");
+    const name = this._zoneName(z, id, pilots);
     return { ...z, index, id, ent, pilots, switches, name, missing, schedule: z.schedule && hass.states[z.schedule] ? z.schedule : null };
   }
 
