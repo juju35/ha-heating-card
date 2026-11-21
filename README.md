@@ -247,10 +247,15 @@ language: en
 | `show_title` | All | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
 | `show_subtitle` | All | `true` | Show the subtitle (zones heating, or the zone and its preset) |
 | `show_controls` | All | `true` | Modes, power, target, presets and option toggles (the overview's full card) |
+| `show_presets` | All | `true` | The preset buttons (*Away*, *Home*, *Eco*…) of the full card and of the full card the mini card and the overview unfold into; `false` hides them and keeps the modes, target and power |
+| `presets` | All | All | YAML only. The presets offered, e.g. `[eco, comfort]` (the preset ids of the thermostat); an empty list `[]` hides the row |
+| `show_options` | All | `true` | The *Options* section (the thermostat's other switches: child lock, window detection…); `false` hides it and keeps the other controls |
+| `exclude` | All | — | Full and mini cards: option toggles left out of *Options* (switch entity ids), e.g. `[switch.living_room_child_lock]`. On the overview, it also leaves out zones and radiators (see [Overview options](#overview-options)) |
 | `show_sensors` | All | `true` | Valve, battery, humidity, outdoor temperature and power chips (the overview's full card) |
 | `show_alerts` | All | `true` | *Window open* and *Low battery* alerts (and *Device offline* on the overview) |
 | `show_pilot_wire` | All | `true` | Pilot wire section; on the overview, the pilot wire orders of the summary and of the tiles |
 | `show_schedule` | All | `true` | Weekly schedule section; on the overview, the schedule state of the tiles |
+| `power_threshold` | All | `5` | YAML only. Power (W) above which a pilot wire radiator with a `power` sensor counts as heating |
 | `collapsed` | All | `[schedule]` | Sections folded at first: `stove`, `boiler`, `pilot_wire`, `schedule` (the mini card and the overview once unfolded) |
 | `illustration` | All | `true` | `false` keeps the classic header (round icon, title and status pill) instead of the illustrated one, the device then drawn next to the temperatures. Any other value is the zone's illustration (see [Zone options](#zone-options)) |
 | `illustration_theme` | All | `auto` | Colors of the illustrated header: `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
@@ -266,7 +271,7 @@ language: en
 | `floors` | Every floor | Only the zones of these floors (floor ids) |
 | `exclude_floors` | — | Floors left out |
 | `include` | — | Thermostats (`climate`) or pilot wire radiators (`select` / `switch`) not found on their own (a hidden entity, say): added to their area's zone, else as a zone of their own |
-| `exclude` | — | Entities left out: a thermostat (its zone goes too, unless it has pilot wire radiators, which then show with the area's room temperature) or a pilot wire radiator |
+| `exclude` | — | Entities left out: a thermostat (its zone goes too, unless it has pilot wire radiators, which then show with the area's room temperature), a pilot wire radiator, or an option toggle of the unfolded full card |
 | `group_by` | `floor` | `floor`: the zones under their floor's name (in the order of the floor levels, the areas without floor last, under *Other areas*); `none`: all together. Without floors in Home Assistant, the zones are not grouped |
 | `sort` | `area` | Order of the zones within a floor: `area` (the area registry's), `name`, `temperature` (coldest first) or `state` (alerts, then heating, on, off, offline) |
 | `columns` | Auto | Number of tile columns (1 to 6); by default as many as fit, 150 px each at least |
@@ -284,7 +289,7 @@ The `zones` option works on the overview too: its zones are then the ones shown,
 |---|---|---|
 | `name` | Area or device name | Zone name (tab and row) |
 | `entity` | — | The thermostat (`climate`) |
-| `pilot_wire` | — | Pilot wire radiators: one entity or a list (`select` or `switch`) |
+| `pilot_wire` | — | Pilot wire radiators: one entity or a list (`select` or `switch`). An entry may also be `{ entity, power }`, with the power sensor of the radiator's relay (YAML only, see below) |
 | `temperature` / `humidity` | The thermostat's, or the area's sensors (automatic zones) | Room temperature and humidity sensors |
 | `schedule` | The area's schedule helper (automatic zones) | A `schedule` helper drawn as the zone's week |
 | `window` | The device's open-window sensor | `binary_sensor` raising the *Window open* alert |
@@ -292,6 +297,20 @@ The `zones` option works on the overview too: its zones are then the ones shown,
 | `icon` | — | An `mdi:` icon instead of the illustration |
 | `switch_on` / `switch_off` | `comfort` / `off` | The orders a `switch` relay sends when on and off: `comfort`, `comfort_1`, `comfort_2`, `eco`, `frost`, `off` (e.g. `eco` / `comfort` for a relay with a diode) |
 | `entities` | Auto | Override the sensors found on the thermostat's device: `indoor_temp`, `outdoor_temp`, `humidity`, `power`, `valve`, `window`, `battery` |
+
+A pilot wire radiator switched by a relay with power metering (a Shelly relay, say) can take its power sensor:
+
+```yaml
+zones:
+  - entity: climate.bathroom
+    pilot_wire:
+      - entity: switch.bathroom_radiator
+        power: sensor.bathroom_radiator_power
+    switch_on: comfort
+    switch_off: "off"
+```
+
+The draw shows as *… W* next to the radiator's name in the *Pilot wire* section (a tap opens the sensor), in the tooltip of the overview tile, and in the status of a zone made of radiators only. The radiator glows while it draws more than `power_threshold` (5 W by default) rather than whenever its order is comfort, so a radiator whose own thermostat has cut the element stays dark. `entities.power` remains the thermostat's power chip.
 
 ## Screenshots
 

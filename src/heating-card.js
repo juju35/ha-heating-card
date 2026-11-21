@@ -136,6 +136,8 @@ const STRINGS = {
     ed_show_title: "Title",
     ed_show_subtitle: "Subtitle",
     ed_show_controls: "Controls",
+    ed_show_presets: "Presets",
+    ed_show_options: "Options",
     ed_show_sensors: "Measurements",
     ed_show_alerts: "Alerts",
     ed_show_pilot_wire: "Pilot wire",
@@ -306,6 +308,8 @@ const STRINGS = {
     ed_show_title: "Titre",
     ed_show_subtitle: "Sous-titre",
     ed_show_controls: "Commandes",
+    ed_show_presets: "Préréglages",
+    ed_show_options: "Options",
     ed_show_sensors: "Mesures",
     ed_show_alerts: "Alertes",
     ed_show_pilot_wire: "Fil pilote",
@@ -476,6 +480,8 @@ const STRINGS = {
     ed_show_title: "Titel",
     ed_show_subtitle: "Untertitel",
     ed_show_controls: "Bedienelemente",
+    ed_show_presets: "Voreinstellungen",
+    ed_show_options: "Optionen",
     ed_show_sensors: "Messwerte",
     ed_show_alerts: "Warnungen",
     ed_show_pilot_wire: "Steuerdraht",
@@ -646,6 +652,8 @@ const STRINGS = {
     ed_show_title: "Título",
     ed_show_subtitle: "Subtítulo",
     ed_show_controls: "Controles",
+    ed_show_presets: "Preajustes",
+    ed_show_options: "Opciones",
     ed_show_sensors: "Mediciones",
     ed_show_alerts: "Alertas",
     ed_show_pilot_wire: "Hilo piloto",
@@ -816,6 +824,8 @@ const STRINGS = {
     ed_show_title: "Наслов",
     ed_show_subtitle: "Поднаслов",
     ed_show_controls: "Команде",
+    ed_show_presets: "Унапред подешени режими",
+    ed_show_options: "Опције",
     ed_show_sensors: "Мерења",
     ed_show_alerts: "Упозорења",
     ed_show_pilot_wire: "Пилот жица",
@@ -986,6 +996,8 @@ const STRINGS = {
     ed_show_title: "Naslov",
     ed_show_subtitle: "Podnaslov",
     ed_show_controls: "Komande",
+    ed_show_presets: "Unapred podešeni režimi",
+    ed_show_options: "Opcije",
     ed_show_sensors: "Merenja",
     ed_show_alerts: "Upozorenja",
     ed_show_pilot_wire: "Pilot žica",
@@ -1156,6 +1168,8 @@ const STRINGS = {
     ed_show_title: "Titolo",
     ed_show_subtitle: "Sottotitolo",
     ed_show_controls: "Comandi",
+    ed_show_presets: "Preimpostazioni",
+    ed_show_options: "Opzioni",
     ed_show_sensors: "Misure",
     ed_show_alerts: "Avvisi",
     ed_show_pilot_wire: "Filo pilota",
@@ -1326,6 +1340,8 @@ const STRINGS = {
     ed_show_title: "Titel",
     ed_show_subtitle: "Ondertitel",
     ed_show_controls: "Bediening",
+    ed_show_presets: "Voorinstellingen",
+    ed_show_options: "Opties",
     ed_show_sensors: "Metingen",
     ed_show_alerts: "Meldingen",
     ed_show_pilot_wire: "Stuurdraad",
@@ -1496,6 +1512,8 @@ const STRINGS = {
     ed_show_title: "Título",
     ed_show_subtitle: "Subtítulo",
     ed_show_controls: "Controlos",
+    ed_show_presets: "Predefinições",
+    ed_show_options: "Opções",
     ed_show_sensors: "Medições",
     ed_show_alerts: "Alertas",
     ed_show_pilot_wire: "Fio piloto",
@@ -1666,6 +1684,8 @@ const STRINGS = {
     ed_show_title: "Tytuł",
     ed_show_subtitle: "Podtytuł",
     ed_show_controls: "Sterowanie",
+    ed_show_presets: "Ustawienia wstępne",
+    ed_show_options: "Opcje",
     ed_show_sensors: "Pomiary",
     ed_show_alerts: "Alerty",
     ed_show_pilot_wire: "Przewód sterujący",
@@ -1836,6 +1856,8 @@ const STRINGS = {
     ed_show_title: "Titlu",
     ed_show_subtitle: "Subtitlu",
     ed_show_controls: "Comenzi",
+    ed_show_presets: "Presetări",
+    ed_show_options: "Opțiuni",
     ed_show_sensors: "Măsurători",
     ed_show_alerts: "Alerte",
     ed_show_pilot_wire: "Fir pilot",
@@ -2006,6 +2028,8 @@ const STRINGS = {
     ed_show_title: "Titel",
     ed_show_subtitle: "Undertitel",
     ed_show_controls: "Betjening",
+    ed_show_presets: "Forudindstillinger",
+    ed_show_options: "Indstillinger",
     ed_show_sensors: "Målinger",
     ed_show_alerts: "Advarsler",
     ed_show_pilot_wire: "Styreledning",
@@ -2176,6 +2200,8 @@ const STRINGS = {
     ed_show_title: "Titel",
     ed_show_subtitle: "Undertitel",
     ed_show_controls: "Reglage",
+    ed_show_presets: "Förinställningar",
+    ed_show_options: "Alternativ",
     ed_show_sensors: "Mätvärden",
     ed_show_alerts: "Varningar",
     ed_show_pilot_wire: "Styrtråd",
@@ -2346,6 +2372,8 @@ const STRINGS = {
     ed_show_title: "Заглавие",
     ed_show_subtitle: "Подзаглавие",
     ed_show_controls: "Управление",
+    ed_show_presets: "Предварителни настройки",
+    ed_show_options: "Опции",
     ed_show_sensors: "Измервания",
     ed_show_alerts: "Предупреждения",
     ed_show_pilot_wire: "Пилотен проводник",
@@ -2516,6 +2544,8 @@ const STRINGS = {
     ed_show_title: "Заголовок",
     ed_show_subtitle: "Подзаголовок",
     ed_show_controls: "Управление",
+    ed_show_presets: "Предустановки",
+    ed_show_options: "Параметры",
     ed_show_sensors: "Измерения",
     ed_show_alerts: "Предупреждения",
     ed_show_pilot_wire: "Пилотный провод",
@@ -2686,6 +2716,8 @@ const STRINGS = {
     ed_show_title: "Заголовок",
     ed_show_subtitle: "Підзаголовок",
     ed_show_controls: "Керування",
+    ed_show_presets: "Передустановки",
+    ed_show_options: "Параметри",
     ed_show_sensors: "Вимірювання",
     ed_show_alerts: "Попередження",
     ed_show_pilot_wire: "Пілотний провід",
@@ -2856,6 +2888,8 @@ const STRINGS = {
     ed_show_title: "Cím",
     ed_show_subtitle: "Alcím",
     ed_show_controls: "Vezérlők",
+    ed_show_presets: "Előbeállítások",
+    ed_show_options: "Beállítások",
     ed_show_sensors: "Mérések",
     ed_show_alerts: "Riasztások",
     ed_show_pilot_wire: "Vezérlővezeték",
@@ -3026,6 +3060,8 @@ const STRINGS = {
     ed_show_title: "Názov",
     ed_show_subtitle: "Podnázov",
     ed_show_controls: "Ovládanie",
+    ed_show_presets: "Predvoľby",
+    ed_show_options: "Možnosti",
     ed_show_sensors: "Merania",
     ed_show_alerts: "Upozornenia",
     ed_show_pilot_wire: "Pilotný vodič",
@@ -3196,6 +3232,8 @@ const STRINGS = {
     ed_show_title: "Název",
     ed_show_subtitle: "Podnázev",
     ed_show_controls: "Ovládání",
+    ed_show_presets: "Předvolby",
+    ed_show_options: "Možnosti",
     ed_show_sensors: "Měření",
     ed_show_alerts: "Upozornění",
     ed_show_pilot_wire: "Pilotní vodič",
@@ -3366,6 +3404,8 @@ const STRINGS = {
     ed_show_title: "Naslov",
     ed_show_subtitle: "Podnaslov",
     ed_show_controls: "Upravljanje",
+    ed_show_presets: "Prednastavitve",
+    ed_show_options: "Možnosti",
     ed_show_sensors: "Meritve",
     ed_show_alerts: "Opozorila",
     ed_show_pilot_wire: "Pilotna žica",
@@ -3536,6 +3576,8 @@ const STRINGS = {
     ed_show_title: "Virsraksts",
     ed_show_subtitle: "Apakšvirsraksts",
     ed_show_controls: "Vadība",
+    ed_show_presets: "Iestatījumi",
+    ed_show_options: "Opcijas",
     ed_show_sensors: "Mērījumi",
     ed_show_alerts: "Brīdinājumi",
     ed_show_pilot_wire: "Vadības vads",
@@ -3706,6 +3748,8 @@ const STRINGS = {
     ed_show_title: "Τίτλος",
     ed_show_subtitle: "Υπότιτλος",
     ed_show_controls: "Χειριστήρια",
+    ed_show_presets: "Προεπιλογές",
+    ed_show_options: "Επιλογές",
     ed_show_sensors: "Μετρήσεις",
     ed_show_alerts: "Ειδοποιήσεις",
     ed_show_pilot_wire: "Πιλοτικό καλώδιο",
@@ -4178,13 +4222,21 @@ const discoverZones = (hass) =>
 // The zones of a card: `zones`, else the top-level `entity` / `pilot_wire` (one zone), else every zone found.
 // A zone given as a bare entity id is a thermostat, or a pilot wire radiator for a select or a switch.
 const ZONE_KEYS = ["entity", "name", "icon", "illustration", "pilot_wire", "temperature", "humidity", "schedule", "window", "entities", "switch_on", "switch_off"];
+// A pilot wire radiator is an entity id, or `{ entity, power }` with the power sensor of its relay: the ids stay in
+// `pilot_wire`, the sensors go to `pilot_power` (radiator → sensor).
 const normZone = (z) => {
   const zone = typeof z === "string" ? { entity: z } : { ...z };
   if (zone.entity && /^(select|switch)\./.test(zone.entity)) {
     zone.pilot_wire = [zone.entity, ...[].concat(zone.pilot_wire || [])];
     delete zone.entity;
   }
-  zone.pilot_wire = [].concat(zone.pilot_wire || []).filter(Boolean);
+  const power = { ...(zone.pilot_power || {}) };
+  zone.pilot_wire = [].concat(zone.pilot_wire || []).filter(Boolean).map((p) => {
+    if (typeof p !== "object") return p;
+    if (p.entity && p.power) power[p.entity] = p.power;
+    return p.entity;
+  }).filter(Boolean);
+  zone.pilot_power = power;
   return zone;
 };
 const zonesOf = (hass, config) => {
@@ -4850,6 +4902,9 @@ const FULL_STYLE = `
   .pilot-name { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--primary-text-color); min-width: 0; }
   .pilot-name span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .pilot-name .icon { width: 16px; height: 16px; color: var(--pc, var(--secondary-text-color)); }
+  .pilot-name .pw-power { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: auto; font-weight: 500; font-size: 12px; color: var(--secondary-text-color); cursor: pointer; white-space: nowrap; }
+  .pilot-name .pw-power .icon { width: 14px; height: 14px; }
+  .pilot-name .pw-power.on { color: var(--pc); }
   /* Weekly schedule: one row per day, its time slots in the accent color, today highlighted with a "now" line. */
   .week { display: grid; grid-template-columns: auto 1fr; gap: 3px 8px; align-items: center; font-size: 11px; }
   .week .day { color: var(--secondary-text-color); text-transform: capitalize; font-variant-numeric: tabular-nums; }
@@ -5312,6 +5367,8 @@ class HeatingCard extends HTMLElement {
       show_title: true,
       show_subtitle: true,
       show_controls: true,
+      show_presets: true,
+      show_options: true,
       show_sensors: true,
       show_alerts: true,
       show_pilot_wire: true,
@@ -5409,14 +5466,16 @@ class HeatingCard extends HTMLElement {
     const pilots = z.pilot_wire.filter((p) => hass.states[p]);
     const missing = (z.entity && !id) || (!z.entity && z.pilot_wire.length && !pilots.length);
     const used = new Set(Object.values(ent).filter(Boolean));
-    const switches = id ? deviceEntities(hass, deviceOf(hass, id)).map((e) => e.entity_id).filter((s) => s.startsWith("switch.") && !used.has(s) && !pilots.includes(s)) : [];
+    // The option toggles: the thermostat's other switches, but those listed in `exclude`.
+    const hidden = new Set(listOf(this._config.exclude));
+    const switches = id ? deviceEntities(hass, deviceOf(hass, id)).map((e) => e.entity_id).filter((s) => s.startsWith("switch.") && !used.has(s) && !pilots.includes(s) && !hidden.has(s)) : [];
     const name = this._zoneName(z, id, pilots);
     return { ...z, index, id, ent, pilots, switches, name, missing, schedule: z.schedule && hass.states[z.schedule] ? z.schedule : null };
   }
 
   // Every entity the card shows, for the render signature.
   _ids(zones) {
-    return zones.flatMap((z) => [z.id, ...Object.values(z.ent), ...z.pilots, ...z.switches, z.schedule]).filter(Boolean);
+    return zones.flatMap((z) => [z.id, ...Object.values(z.ent), ...z.pilots, ...z.pilots.map((p) => z.pilot_power?.[p]), ...z.switches, z.schedule]).filter(Boolean);
   }
 
   // ── Render loop: only when something shown changed (Home Assistant replaces a state object when it changes) ──
@@ -5583,6 +5642,10 @@ class HeatingCard extends HTMLElement {
       m.cur = num(z.ent.indoor_temp);
       m.color = m.online && mode ? PILOT_COLORS[mode] : IDLE;
       m.status = !m.online ? this._t("st_unavailable") : mode ? this._t(`p_${mode}`) : this._fmtState(first);
+      // It glows while it heats: on comfort, or, with the power sensor of its relay, while it draws power.
+      m.pilotHeat = !!(m.on && first && this._pilotHeats(z, first, mode));
+      const watts = first && !z.id ? this._pilotPower(z, first) : "";
+      if (watts) m.status = `${m.status} · ${watts}`;
     }
     // Chips: an open window, a low battery, the valve, humidity, outdoor temperature and power (as in
     // ha-climate-air-card), each only if found.
@@ -5706,6 +5769,24 @@ class HeatingCard extends HTMLElement {
     if (unavailable(st)) return null;
     if (id.startsWith("switch.")) return st.state === "on" ? pilotMode(z.switch_on) || "comfort" : pilotMode(z.switch_off) || "off";
     return pilotMode(st.state);
+  }
+
+  // The power drawn by a radiator's relay (its `power` sensor), formatted, or "" without one.
+  _pilotPower(z, id) {
+    const sensor = z.pilot_power?.[id];
+    return sensor && !unavailable(this._st(sensor)) ? this._fmtState(sensor) : "";
+  }
+
+  // Whether a radiator heats: with a power sensor, while it draws more than `power_threshold` (5 W by default);
+  // without one, while its order is a comfort one.
+  _pilotHeats(z, id, mode) {
+    const sensor = z.pilot_power?.[id];
+    const st = sensor ? this._st(sensor) : null;
+    if (st && !unavailable(st)) {
+      const w = Number(st.state) * (/^kw$/i.test(st.attributes?.unit_of_measurement || "") ? 1000 : 1);
+      if (Number.isFinite(w)) return w > Number(this._config.power_threshold ?? 5);
+    }
+    return !!mode?.startsWith("comfort");
   }
 
   _pilotOptions(z, id) {
@@ -5840,7 +5921,7 @@ class HeatingCard extends HTMLElement {
       devW = vw * k;
       devH = vh * k;
       const cls = ["bdev", m.on ? "running" : "", m.heating ? "active" : "", m.boost ? "boost" : "", m.pilot ? `pw-${m.pilot}` : ""];
-      if (m.pilot && m.on && m.pilot.startsWith("comfort")) cls.push("active");
+      if (m.pilotHeat) cls.push("active");
       const svg = art(variant, m, `b${this._uid}`).replace(
         '<svg viewBox="0 0 80 94" aria-hidden="true">',
         `<svg x="${(right - devW).toFixed(1)}" y="${(80 - devH).toFixed(1)}" width="${devW.toFixed(1)}" height="${devH.toFixed(1)}" viewBox="${box.vb.join(" ")}" preserveAspectRatio="xMidYMax meet" overflow="visible">`,
@@ -5883,7 +5964,7 @@ class HeatingCard extends HTMLElement {
     const z = m.z;
     const cls = ["picture", m.on ? "running" : "", m.heating ? "active" : "", m.boost ? "boost" : "", m.pilot ? `pw-${m.pilot}` : ""];
     // A pilot wire radiator on comfort glows and gives off heat like a thermostat that heats.
-    if (m.pilot && m.on && m.pilot.startsWith("comfort")) cls.push("active");
+    if (m.pilotHeat) cls.push("active");
     if (z.icon) return `<div class="${cls.filter(Boolean).join(" ")}"><div class="iconart"><ha-icon icon="${esc(z.icon)}"></ha-icon></div></div>`;
     const variant = variantOf(this._hass, z.id, z.illustration);
     return `<div class="${cls.filter(Boolean).join(" ")}" data-entity="${esc(z.id || z.pilots[0] || "")}" role="button" tabindex="0" aria-label="${esc(z.name)}">${art(variant, m, `${this._uid}-${z.index}`)}</div>`;
@@ -5935,7 +6016,7 @@ class HeatingCard extends HTMLElement {
     else if (m.boiler && m.online) parts.push(this._boilerSection(m));
     if (c.show_pilot_wire && z.pilots.length) parts.push(this._pilotSection(m));
     if (c.show_schedule && z.schedule) parts.push(this._scheduleSection(m));
-    if (c.show_controls && m.online && z.switches.length) parts.push(this._options(z));
+    if (c.show_controls && c.show_options !== false && m.online && z.switches.length) parts.push(this._options(z));
     return parts.join("");
   }
 
@@ -5964,7 +6045,8 @@ class HeatingCard extends HTMLElement {
   // Segmented buttons, one per option; `action` gets the option in data-value. Many options: only the selected one
   // keeps its label, the others show their icon (with their label as tooltip and for screen readers).
   _segments(action, options, current, label, icon, extra = "", color) {
-    if (!options || options.length < 2) return "";
+    // A single preset kept by a `presets` list still gets its button (a tap on it goes back to none).
+    if (!options || options.length < (action === "preset" ? 1 : 2)) return "";
     const many = options.length > 4;
     return `<div class="segments" role="group">${options
       .map((o) => {
@@ -5982,6 +6064,7 @@ class HeatingCard extends HTMLElement {
 
   _controls(m) {
     const z = m.z;
+    const c = this._config;
     const st = this._st(z.id);
     const a = st.attributes;
     const f = a.supported_features || 0;
@@ -6004,13 +6087,15 @@ class HeatingCard extends HTMLElement {
     } else if (f & CLIMATE_TARGET && this._showTarget(m)) stepper = this._stepper(m, "temp", m.target, this._t("target")) + this._scale(m);
     // The presets (comfort, eco, away, boost, frost protection…) as segmented buttons; a tap on the selected one goes
     // back to none when the entity offers it.
-    const presets = a.preset_modes || [];
+    // `show_presets: false` hides them, a `presets` list keeps only those (an empty list hides the row too).
+    const keep = Array.isArray(c.presets) ? new Set(c.presets.map(String)) : null;
+    const presets = (a.preset_modes || []).filter((p) => !keep || keep.has(p) || p === "none");
     let presetHtml = "";
-    if (m.on && f & CLIMATE_PRESET && presets.length >= 2) {
+    if (c.show_presets !== false && m.on && f & CLIMATE_PRESET && presets.filter((p) => p !== "none").length >= (keep ? 1 : 2)) {
       const shown = presets.filter((p) => p !== "none");
       presetHtml =
         shown.length <= 7
-          ? this._segments("preset", shown.length >= 2 ? shown : presets, a.preset_mode, (o) => this._presetLabel(z.id, o), presetIcon, ` data-zone="${z.index}"`)
+          ? this._segments("preset", shown.length >= 2 || keep ? shown : presets, a.preset_mode, (o) => this._presetLabel(z.id, o), presetIcon, ` data-zone="${z.index}"`)
           : `<label class="field"><span>${esc(this._t("preset"))}</span><select data-action="preset" data-zone="${z.index}">${presets
               .map((p) => `<option value="${esc(p)}"${p === a.preset_mode ? " selected" : ""}>${esc(this._presetLabel(z.id, p))}</option>`)
               .join("")}</select></label>`;
@@ -6102,7 +6187,9 @@ class HeatingCard extends HTMLElement {
             const segs = off
               ? `<div class="muted">${esc(this._t("st_unavailable"))}</div>`
               : this._segments("pilot", opts, mode, (o) => this._t(`p_${o}`), (o) => PILOT_ICONS[o], ` data-entity="${esc(id)}" data-zone="${z.index}"`, (o) => PILOT_COLORS[o]);
-            return `<div class="pilot"><div class="pilot-name" style="--pc:${mode ? PILOT_COLORS[mode] : IDLE}">${svgIcon(mode ? PILOT_ICONS[mode] : "radiator")}<span>${esc(name)}</span></div>${segs || `<div class="muted">${esc(mode ? this._t(`p_${mode}`) : this._fmtState(id))}</div>`}</div>`;
+            const watts = this._pilotPower(z, id);
+            const draw = watts ? `<span class="pw-power${this._pilotHeats(z, id, mode) && mode && mode !== "off" ? " on" : ""}" data-entity="${esc(z.pilot_power[id])}">${svgIcon("flash")}${esc(watts)}</span>` : "";
+            return `<div class="pilot"><div class="pilot-name" style="--pc:${mode ? PILOT_COLORS[mode] : IDLE}">${svgIcon(mode ? PILOT_ICONS[mode] : "radiator")}<span>${esc(name)}</span>${draw}</div>${segs || `<div class="muted">${esc(mode ? this._t(`p_${mode}`) : this._fmtState(id))}</div>`}</div>`;
           })
           .join("");
     return `<div class="section">${this._sectionTitle("pilot_wire", "pilot", this._t("pilot_wire"))}${body}</div>`;
@@ -6892,7 +6979,7 @@ class HeatingOverviewCard extends HeatingMiniCard {
     const z = m.z;
     const c = this._config;
     const loc = this._locale();
-    const comfort = !!(m.pilot && m.on && m.pilot.startsWith("comfort"));
+    const comfort = !!m.pilotHeat;
     const cls = [
       "tile",
       m.on ? "on" : "",
@@ -6912,7 +6999,8 @@ class HeatingOverviewCard extends HeatingMiniCard {
     if (c.show_pilot_wire !== false && z.pilots.length && (z.id || z.pilots.length > 1)) {
       const icons = z.pilots.map((id) => {
         const mode = this._pilotState(z, id);
-        const text = `${deviceName(this._hass, id) || this._label(id)}: ${mode ? this._t(`p_${mode}`) : this._t("st_unavailable")}`;
+        const watts = this._pilotPower(z, id);
+        const text = `${deviceName(this._hass, id) || this._label(id)}: ${mode ? this._t(`p_${mode}`) : this._t("st_unavailable")}${watts ? ` · ${watts}` : ""}`;
         return `<span style="--pc:${mode ? PILOT_COLORS[mode] : IDLE}" title="${esc(text)}">${svgIcon(mode ? PILOT_ICONS[mode] : "radiator_off")}</span>`;
       });
       more.push(`<span class="tline">${svgIcon("pilot")}<span class="pws">${icons.join("")}</span></span>`);
@@ -6938,7 +7026,7 @@ class HeatingOverviewCard extends HeatingMiniCard {
     const z = m.z;
     if (z.icon || z.missing || !(z.id || z.pilots.length)) return `<div class="tbadge">${z.icon ? `<ha-icon icon="${esc(z.icon)}"></ha-icon>` : svgIcon(icon)}`;
     const cls = ["picture", m.on ? "running" : "", m.heating ? "active" : "", m.boost ? "boost" : "", m.pilot ? `pw-${m.pilot}` : ""];
-    if (m.pilot && m.on && m.pilot.startsWith("comfort")) cls.push("active");
+    if (m.pilotHeat) cls.push("active");
     const variant = variantOf(this._hass, z.id, z.illustration);
     return `<div class="tbadge tpic"><div class="${cls.filter(Boolean).join(" ")}" style="--hc-color:${m.color}">${art(variant, m, `${this._uid}-t${z.index}`)}</div>`;
   }
@@ -7071,7 +7159,7 @@ class HeatingCardEditor extends HTMLElement {
 
   // The unfolded mini card is the full card: its editor offers the full card's options too, plus the detail button.
   _defaults() {
-    const d = { show_title: true, show_subtitle: true, show_controls: true, show_sensors: true, show_alerts: true, show_pilot_wire: true, show_schedule: true };
+    const d = { show_title: true, show_subtitle: true, show_controls: true, show_presets: true, show_options: true, show_sensors: true, show_alerts: true, show_pilot_wire: true, show_schedule: true };
     if (this.constructor.mini) d.zoom = true;
     return d;
   }
@@ -7125,7 +7213,8 @@ class HeatingCardEditor extends HTMLElement {
     Object.assign(data, bannerData(this._config));
     delete data.zones;
     [...zones, {}].forEach((z, i) => {
-      data[`zone_${i}`] = { illustration: "auto", ...z };
+      const { pilot_power, ...rest } = z;
+      data[`zone_${i}`] = { illustration: "auto", ...rest };
     });
     return data;
   }
@@ -7155,9 +7244,14 @@ class HeatingCardEditor extends HTMLElement {
     ev.stopPropagation();
     const value = { ...ev.detail.value };
     const zones = [];
+    const before = this._zoneList();
     for (const k of Object.keys(value).filter((k) => /^zone_\d+$/.test(k)).sort((a, b) => a.slice(5) - b.slice(5))) {
       const z = Object.fromEntries(Object.entries(value[k] || {}).filter(([kk, v]) => v !== "" && v != null && !(Array.isArray(v) && !v.length) && !(kk === "illustration" && v === "auto")));
       delete value[k];
+      delete z.pilot_power;
+      // The power sensors of the radiators (YAML only) stay with their radiator: `{ entity, power }`.
+      const power = before[Number(k.slice(5))]?.pilot_power || {};
+      if (z.pilot_wire) z.pilot_wire = z.pilot_wire.map((p) => (power[p] ? { entity: p, power: power[p] } : p));
       if (z.entity || z.pilot_wire?.length || z.temperature) zones.push(z);
     }
     const out = { ...this._config };
@@ -7197,6 +7291,8 @@ class HeatingOverviewCardEditor extends HeatingCardEditor {
       show_schedule: true,
       // The full card a zone unfolds into.
       show_controls: true,
+      show_presets: true,
+      show_options: true,
       show_sensors: true,
       compact: false,
       zoom: true,
