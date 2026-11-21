@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.0 - 2026-11-21
+
+### Features
+- **`show_presets`**: `false` hides the preset buttons (*Away*, *Home*, *Auto*…) while keeping the target − / +, the modes and the power button, on the full card and the full card the mini card and the overview unfold into; a `presets` list keeps only the presets you name, an empty list hides the row (#27).
+- **`show_options`**: `false` hides the *Options* section (child lock, window detection…) while keeping the other controls; `exclude` leaves single option toggles out (#28).
+- **Power sensor per pilot wire radiator**: a `pilot_wire` entry may be `{ entity, power }`. The draw shows as *… W* next to the radiator's name, in the overview tile's tooltip and in the status of a radiator-only zone, and the radiator glows while it draws more than `power_threshold` (5 W by default) instead of whenever its order is comfort (#29).
+
 ## 1.5.1 - 2026-11-20
 
 ### Fixes
