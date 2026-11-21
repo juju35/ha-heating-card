@@ -5179,8 +5179,22 @@ const patchAttrs = (cur, next) => {
   for (const { name, value } of next.attributes) if (cur.getAttribute(name) !== value) cur.setAttribute(name, value);
 };
 const keyOf = (n) => (n.nodeType === 1 ? n.getAttribute("data-key") : null);
+// Nodes the card does not render itself stay where they are, untouched: card-mod's <card-mod> element (its styles),
+// inserted into the shadow root after the card has drawn (#107). Neither matched to the card's markup nor trimmed.
+const FOREIGN_TAGS = new Set(["card-mod"]);
+const foreignNode = (n) => n.nodeType === 1 && FOREIGN_TAGS.has(n.localName);
 const patchChildren = (cur, next) => {
-  const old = [...cur.childNodes];
+  const all = [...cur.childNodes];
+  const old = all.filter((n) => !foreignNode(n));
+  // With a foreign node among them, positions count the card's own nodes only, and a node added at the end goes
+  // before the foreign ones, which keep the last place (card-mod's styles after the card's own).
+  const at =
+    old.length === all.length
+      ? (i) => cur.childNodes[i] ?? null
+      : (i) => {
+          const own = [...cur.childNodes].filter((n) => !foreignNode(n));
+          return own[i] ?? (own.length ? own[own.length - 1].nextSibling : cur.firstChild);
+        };
   const fresh = [...next.childNodes];
   const byKey = new Map();
   for (const o of old) {
@@ -5192,7 +5206,7 @@ const patchChildren = (cur, next) => {
     const k = keyOf(n);
     let o = k !== null ? byKey.get(k) : old[i];
     if (!o || o.nodeType !== n.nodeType || o.nodeName !== n.nodeName || used.has(o) || (k === null && keyOf(o) !== null)) o = null;
-    const ref = cur.childNodes[i] ?? null;
+    const ref = at(i);
     if (!o) {
       cur.insertBefore(n, ref);
       return;
@@ -5212,7 +5226,8 @@ const patchChildren = (cur, next) => {
       o.selectedIndex = at < 0 ? 0 : at;
     }
   });
-  while (cur.childNodes.length > fresh.length) cur.removeChild(cur.lastChild);
+  let kept = 0;
+  for (const n of [...cur.childNodes]) if (!foreignNode(n) && ++kept > fresh.length) cur.removeChild(n);
 };
 const morph = (root, html) => {
   // No DOM to patch (the unit tests' stand-ins): written at once.
