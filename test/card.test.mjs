@@ -575,3 +575,51 @@ test("a state push resolves the zones again only when the registries or the enti
   c.hass = { ...hass, entities: { ...hass.entities } };
   assert.ok(resolved > 0);
 });
+
+test("show_presets: false and a presets list hide or narrow the preset row, keeping target, modes and power", () => {
+  const base = html(card({ entity: "climate.salon_thermostat" }));
+  assert.match(base, /data-action="preset"/);
+  const hidden = html(card({ entity: "climate.salon_thermostat", show_presets: false }));
+  assert.doesNotMatch(hidden, /data-action="preset"/);
+  assert.match(hidden, /data-action="temp"/);
+  assert.match(hidden, /data-action="power"/);
+  const some = html(card({ entity: "climate.salon_thermostat", presets: ["eco"] }));
+  assert.equal((some.match(/data-action="preset"/g) || []).length, 1);
+  assert.match(some, /data-value="eco"/);
+  assert.doesNotMatch(html(card({ entity: "climate.salon_thermostat", presets: [] })), /data-action="preset"/);
+});
+
+test("show_options: false hides the option toggles, and exclude leaves single ones out", () => {
+  assert.match(html(card({ entity: "climate.salon_thermostat" })), /data-entity="switch.salon_thermostat_child_lock"/);
+  const hidden = html(card({ entity: "climate.salon_thermostat", show_options: false }));
+  assert.doesNotMatch(hidden, /data-action="toggle"/);
+  assert.match(hidden, /data-action="power"/);
+  assert.doesNotMatch(html(card({ entity: "climate.salon_thermostat", exclude: ["switch.salon_thermostat_child_lock"] })), /switch.salon_thermostat_child_lock/);
+});
+
+test("a pilot wire radiator with a power sensor shows its draw and glows only while it draws power", () => {
+  const hass = mockHass();
+  hass.states["switch.sdb_radiateur"] = { entity_id: "switch.sdb_radiateur", state: "on", attributes: { friendly_name: "Bathroom radiator" } };
+  hass.states["sensor.sdb_radiateur_power"] = { entity_id: "sensor.sdb_radiateur_power", state: "0.4", attributes: { unit_of_measurement: "W", device_class: "power" } };
+  const config = { zones: [{ name: "Bathroom", pilot_wire: [{ entity: "switch.sdb_radiateur", power: "sensor.sdb_radiateur_power" }] }] };
+  const [z] = hc.zonesOf(null, config);
+  assert.deepEqual([...z.pilot_wire], ["switch.sdb_radiateur"]);
+  assert.equal(z.pilot_power["switch.sdb_radiateur"], "sensor.sdb_radiateur_power");
+  const c = card(config, hass);
+  assert.match(html(c), /class="pw-power" data-entity="sensor.sdb_radiateur_power"/);
+  assert.doesNotMatch(html(c), /class="picture[^"]*active/);
+  hass.states["sensor.sdb_radiateur_power"] = { ...hass.states["sensor.sdb_radiateur_power"], state: "1450" };
+  const on = card(config, hass);
+  assert.match(html(on), /class="pw-power on"/);
+  assert.equal(on._model(on._zones()[0]).pilotHeat, true);
+});
+
+test("the editor keeps the power sensors of the pilot wire radiators", () => {
+  const ed = new hc.HeatingCardEditor();
+  let out;
+  ed.dispatchEvent = (e) => (out = e.detail.config);
+  ed.setConfig({ zones: [{ name: "Bathroom", pilot_wire: [{ entity: "switch.r", power: "sensor.r_power" }] }] });
+  ed._hass = mockHass();
+  ed._changed({ stopPropagation() {}, detail: { value: { zone_0: { name: "Bath", pilot_wire: ["switch.r"] }, zone_1: {} } } });
+  assert.deepEqual(plain(out.zones), [{ name: "Bath", pilot_wire: [{ entity: "switch.r", power: "sensor.r_power" }] }]);
+});
