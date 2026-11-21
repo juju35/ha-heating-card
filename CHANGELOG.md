@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.1 - 2026-11-21
+
+### Fixes
+- **card-mod styles stay** (juju35/ha-climate-air-card#107): the in-place patch of the cards' shadow root, since they stopped rewriting it, removed the `<card-mod>` element card-mod inserts there once the card has drawn, so its styles were gone at the next state update (or, on the heating card, at the next fold of a section). Nodes the card does not render itself are now left in place, after the card's own nodes, and neither matched to its markup nor trimmed.
+
 ## 1.6.0 - 2026-11-21
 
 ### Features

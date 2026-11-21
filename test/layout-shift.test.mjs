@@ -122,3 +122,42 @@ test("state updates patch the cards in place: no DOM change for other entities, 
     await page.close();
   }
 });
+
+// card-mod (#107 of ha-climate-air-card) inserts a <card-mod> element into the card's shadow root once the card has
+// drawn: folding a section and the state updates patch the card around it, never removing it.
+test("card-mod's element in the shadow root survives a section fold and the state updates", { timeout: 60000 }, async (t) => {
+  if (skip) return t.skip(skip);
+  const page = await browser.newPage({ viewport: { width: 900, height: 700 } });
+  await page.setContent("<!doctype html><body><div id='root' style='width:400px'></div></body>");
+  await page.addScriptTag({ content: STAND_INS });
+  await page.addScriptTag({ content: src });
+  const r = await page.evaluate(
+    async ({ hass, weeks }) => {
+      const frame = () => new Promise((res) => requestAnimationFrame(res));
+      const el = document.createElement("heating-card");
+      el.setConfig({ type: "custom:heating-card", entity: "climate.salon_thermostat", pilot_wire: "select.salon_radiateur_fil_pilote" });
+      let h = { ...hass, callService: async () => {}, callWS: async (m) => ({ response: { [m.target?.entity_id]: weeks[m.target?.entity_id] } }) };
+      el.hass = h;
+      document.getElementById("root").appendChild(el);
+      for (let i = 0; i < 5; i++) await frame();
+      const mod = document.createElement("card-mod");
+      mod.innerHTML = "<style>.name{color:rgb(255,0,0)}</style>";
+      el.shadowRoot.appendChild(mod);
+      el.shadowRoot.querySelector('[data-section="pilot_wire"]')?.click();
+      await frame();
+      const id = "climate.salon_thermostat";
+      for (let i = 0; i < 6; i++) {
+        const st = h.states[id];
+        h = { ...h, states: { ...h.states, [id]: { ...st, state: i % 2 ? "off" : "heat", attributes: { ...st.attributes, current_temperature: 19 + i / 10 } } } };
+        el.hass = h;
+        await frame();
+      }
+      return { connected: mod.isConnected, last: el.shadowRoot.lastChild === mod, cards: el.shadowRoot.querySelectorAll("ha-card").length };
+    },
+    { hass, weeks },
+  );
+  assert.ok(r.connected, "the <card-mod> element is still in the shadow root");
+  assert.ok(r.last, "it stays after the card's own nodes");
+  assert.equal(r.cards, 1, "the card is not drawn twice around it");
+  await page.close();
+});
