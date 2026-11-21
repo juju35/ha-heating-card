@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.0 - 2026-11-21
+
+### Features
+- **A zone with a thermostat heats while a radiator draws power** (#32): in a zone with a thermostat and pilot wire radiators, the zone counts as heating when the thermostat heats **or** one of its radiators draws more than `power_threshold` (radiators with a `power` sensor only). Its status reads *Heating · Radiator* with the thermostat's own state kept in the subtitle, the overview counts it in *x of N zones heating*, and its tile and header illustration glow as for any zone heating.
+
 ## 1.6.1 - 2026-11-21
 
 ### Fixes

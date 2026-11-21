@@ -5646,6 +5646,17 @@ class HeatingCard extends HTMLElement {
       // A stove says its phase (ignition, burning, cooling down…) rather than heating or idle.
       if (m.stove && m.online && phase) m.status = this._t(`ph_${phase}`);
       if (m.boostLeft != null && m.online && m.on) m.status = `${m.status} · ${this._t("boost_left", { time: this._minutes(m.boostLeft) })}`;
+      // A zone with a thermostat and pilot wire radiators also heats while one of its radiators draws more than
+      // `power_threshold` (a radiator without a power sensor never says it heats): *Heating · Radiator*, the
+      // thermostat's own state kept apart for the subtitle.
+      if (m.online && !m.heating && z.pilots.some((id) => this._pilotDraws(z, id))) {
+        m.heating = true;
+        m.radiatorHeat = true;
+        m.pilotHeat = true;
+        m.thermoStatus = m.status;
+        m.color = HEAT;
+        m.status = `${this._t("st_heating")} · ${this._t("ill_radiator")}`;
+      }
     } else {
       // A pilot wire zone: its first radiator's order sets the color and the state.
       const first = z.pilots[0];
@@ -5795,13 +5806,17 @@ class HeatingCard extends HTMLElement {
   // Whether a radiator heats: with a power sensor, while it draws more than `power_threshold` (5 W by default);
   // without one, while its order is a comfort one.
   _pilotHeats(z, id, mode) {
+    return this._pilotDraws(z, id) ?? !!mode?.startsWith("comfort");
+  }
+
+  // Whether a radiator's relay draws more than `power_threshold` (W, a kW sensor converted), or null without a
+  // readable power sensor.
+  _pilotDraws(z, id) {
     const sensor = z.pilot_power?.[id];
     const st = sensor ? this._st(sensor) : null;
-    if (st && !unavailable(st)) {
-      const w = Number(st.state) * (/^kw$/i.test(st.attributes?.unit_of_measurement || "") ? 1000 : 1);
-      if (Number.isFinite(w)) return w > Number(this._config.power_threshold ?? 5);
-    }
-    return !!mode?.startsWith("comfort");
+    if (!st || unavailable(st)) return null;
+    const w = Number(st.state) * (/^kw$/i.test(st.attributes?.unit_of_measurement || "") ? 1000 : 1);
+    return Number.isFinite(w) ? w > Number(this._config.power_threshold ?? 5) : null;
   }
 
   _pilotOptions(z, id) {
@@ -5999,7 +6014,7 @@ class HeatingCard extends HTMLElement {
     const z0 = zones[0];
     const place = [z0.name, areaName(this._hass, z0.id || z0.pilots[0])].find((x) => x && x !== title) || "";
     const banner = this._illustrated();
-    const sub = zones.length === 1 ? [c.title || c.name ? place : "", m.presetText].filter(Boolean).join(" · ") : summary.sub;
+    const sub = zones.length === 1 ? [c.title || c.name ? place : "", m.radiatorHeat ? m.thermoStatus : "", m.presetText].filter(Boolean).join(" · ") : summary.sub;
     return (
       `${this._styles(m.color, FULL_STYLE)}<ha-card>` +
       this._header(title, sub, summary, m) +

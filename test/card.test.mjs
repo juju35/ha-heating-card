@@ -614,6 +614,36 @@ test("a pilot wire radiator with a power sensor shows its draw and glows only wh
   assert.equal(on._model(on._zones()[0]).pilotHeat, true);
 });
 
+test("a zone with a thermostat heats while one of its pilot wire radiators draws power (#32)", () => {
+  const hass = mockHass();
+  hass.states["climate.salon_thermostat"] = { ...hass.states["climate.salon_thermostat"], attributes: { ...hass.states["climate.salon_thermostat"].attributes, hvac_action: "idle" } };
+  hass.states["switch.sdb_radiateur"] = { entity_id: "switch.sdb_radiateur", state: "on", attributes: { friendly_name: "Bathroom radiator" } };
+  hass.states["sensor.sdb_radiateur_power"] = { entity_id: "sensor.sdb_radiateur_power", state: "0", attributes: { unit_of_measurement: "W", device_class: "power" } };
+  const config = { zones: [{ entity: "climate.salon_thermostat", name: "Bathroom", pilot_wire: [{ entity: "switch.sdb_radiateur", power: "sensor.sdb_radiateur_power" }] }] };
+  const idle = card(config, hass);
+  const mi = idle._model(idle._zones()[0]);
+  assert.equal(mi.heating, false);
+  assert.equal(mi.status, "Idle");
+  hass.states["sensor.sdb_radiateur_power"] = { ...hass.states["sensor.sdb_radiateur_power"], state: "833" };
+  const on = card(config, hass);
+  const m = on._model(on._zones()[0]);
+  assert.equal(m.heating, true);
+  assert.equal(m.radiatorHeat, true);
+  assert.equal(m.status, "Heating · Radiator");
+  assert.equal(m.thermoStatus, "Idle");
+  // The status pill says it heats, the thermostat's own state stays in the subtitle.
+  assert.match(html(on), /class="st bst heating"[^>]*title="Heating · Radiator"/);
+  assert.match(html(on), /<div class="sub" title="[^"]*Idle/);
+  // Counted as heating by the overview, its tile glowing.
+  const ov = new hc.HeatingOverviewCard();
+  ov.setConfig(config);
+  ov.hass = hass;
+  assert.match(ov.shadowRoot.innerHTML, /class="tile on heating active/);
+  // A radiator without a power sensor on comfort leaves the thermostat's word.
+  const noSensor = card({ zones: [{ entity: "climate.salon_thermostat", pilot_wire: ["switch.sdb_radiateur"] }] }, hass);
+  assert.equal(noSensor._model(noSensor._zones()[0]).heating, false);
+});
+
 test("the editor keeps the power sensors of the pilot wire radiators", () => {
   const ed = new hc.HeatingCardEditor();
   let out;

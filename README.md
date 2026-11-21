@@ -310,7 +310,7 @@ zones:
     switch_off: "off"
 ```
 
-The draw shows as *… W* next to the radiator's name in the *Pilot wire* section (a tap opens the sensor), in the tooltip of the overview tile, and in the status of a zone made of radiators only. The radiator glows while it draws more than `power_threshold` (5 W by default) rather than whenever its order is comfort, so a radiator whose own thermostat has cut the element stays dark. `entities.power` remains the thermostat's power chip.
+The draw shows as *… W* next to the radiator's name in the *Pilot wire* section (a tap opens the sensor), in the tooltip of the overview tile, and in the status of a zone made of radiators only. The radiator glows while it draws more than `power_threshold` (5 W by default) rather than whenever its order is comfort, so a radiator whose own thermostat has cut the element stays dark. In a zone with a thermostat **and** pilot wire radiators, the zone also counts as heating while one of its radiators draws more than `power_threshold`, even when the thermostat is idle: its status reads *Heating · Radiator* (the thermostat's own state stays in the subtitle), the overview counts it among the zones heating and its tile and header glow. A radiator without a `power` sensor never makes such a zone heat. `entities.power` remains the thermostat's power chip.
 
 ## Screenshots
 
