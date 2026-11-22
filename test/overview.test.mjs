@@ -237,7 +237,7 @@ test("the overview editor leaves defaults out and keeps an empty list of quick a
 });
 
 test("the overview is registered with the other cards", () => {
-  assert.ok(hc.window.customCards.some((x) => x.type === "heating-overview-card" && x.preview === false));
+  assert.ok(hc.window.customCards.some((x) => x.type === "heating-overview-card" && x.preview));
   assert.equal(hc.HeatingOverviewCard.getConfigElement().constructor, hc.HeatingOverviewCardEditor);
 });
 
