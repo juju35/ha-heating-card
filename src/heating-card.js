@@ -7425,7 +7425,7 @@ for (const card of [
     description: "The heating of the whole home: zones heating, temperatures, open windows, low batteries, pilot wire orders and quick actions, floor by floor.",
   },
 ]) {
-  if (!window.customCards.some((c) => c.type === card.type)) window.customCards.push({ ...card, preview: true, documentationURL: REPO });
+  if (!window.customCards.some((c) => c.type === card.type)) window.customCards.push({ ...card, preview: false, documentationURL: REPO });
 }
 
 console.info(`%c HEATING-CARD %c v${VERSION} `, "color: white; background: #ff8100; font-weight: 700;", "color: #ff8100; background: white; font-weight: 700;");
