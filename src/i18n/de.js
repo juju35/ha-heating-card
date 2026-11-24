@@ -6,6 +6,7 @@ export default {
   st_preheating: "Vorheizen",
   st_idle: "Leerlauf",
   st_off: "Aus",
+  st_paused: "Pausiert",
   st_unavailable: "Nicht verfügbar",
   st_defrosting: "Abtauen",
   zones_heating: "{n} von {total} Zonen heizen",

@@ -6,6 +6,7 @@ export default {
   st_preheating: "Попереднє нагрівання",
   st_idle: "Очікування",
   st_off: "Вимкнено",
+  st_paused: "Пауза",
   st_unavailable: "Недоступно",
   st_defrosting: "Розморожування",
   zones_heating: "Гріють {n} з {total} зон",

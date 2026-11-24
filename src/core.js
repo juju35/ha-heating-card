@@ -44,6 +44,13 @@ export const t = (hass, config, key, vars = {}) =>
   String(STRINGS[lang(hass, config)]?.[key] ?? STRINGS.en[key] ?? key).replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
 
 export const unavailable = (st) => !st || st.state === "unavailable" || st.state === "unknown";
+// Versatile Thermostat's auto start/stop pause: the entity is `off` because the target is reached and restarts on its
+// own. Newer releases say it in `specific_states.hvac_off_reason` / `auto_start_stop_manager`, older ones at the root.
+export const autoStopped = (a) =>
+  !!a &&
+  ((a.specific_states?.hvac_off_reason ?? a.hvac_off_reason) === "hvac_off_auto_start_stop" ||
+    a.auto_start_stop_manager?.is_auto_stop_detected === true ||
+    a.is_auto_stop_detected === true);
 export const numOf = (st) => (unavailable(st) ? null : Number.isFinite(Number.parseFloat(st.state)) ? Number.parseFloat(st.state) : null);
 export const fmtNum = (locale, v, digits = 1) => (v == null || !Number.isFinite(v) ? "—" : v.toLocaleString(locale, { maximumFractionDigits: digits }));
 export const humanize = (v) => {

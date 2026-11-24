@@ -483,7 +483,10 @@ export class HeatingCard extends HTMLElement {
       const a = st.attributes;
       m.online = !unavailable(st);
       m.mode = st.state;
-      m.on = m.online && st.state !== "off";
+      // A Versatile Thermostat paused by its auto start/stop (#40) reports `off` but stays in service: it restarts on
+      // its own, so the zone keeps its target and preset and reads *Paused*, as an idle zone, not *Off*.
+      m.paused = m.online && st.state === "off" && autoStopped(a);
+      m.on = m.online && (st.state !== "off" || m.paused);
       m.range = this._range(st);
       m.target = m.range ? null : this._target(st);
       m.cur = a.current_temperature != null ? Number(a.current_temperature) : num(z.ent.indoor_temp);
@@ -514,12 +517,14 @@ export class HeatingCard extends HTMLElement {
       // A boost's time left, when the integration says it (towel rails, Heatzy, Atlantic, Netatmo…), in minutes.
       const left = m.boost ? Number(a.boost_remaining_time ?? a.boost_remaining ?? a.boost_time_left ?? a.remaining_boost_time ?? Number.NaN) : Number.NaN;
       m.boostLeft = Number.isFinite(left) && left > 0 ? left : null;
-      m.color = !m.online || !m.on ? IDLE : m.boost && m.heating ? BOOST : m.heating ? HEAT : MODE_COLORS[m.mode] || HEAT;
+      m.color = !m.online || !m.on ? IDLE : m.boost && m.heating ? BOOST : m.heating ? HEAT : MODE_COLORS[m.paused ? "heat" : m.mode] || HEAT;
       m.status = !m.online
         ? this._t("st_unavailable")
         : !m.on
           ? this._t("st_off")
-          : action
+          : m.paused
+            ? this._t("st_paused")
+            : action
             ? this._actionLabel(z.id, action)
             : this._t(m.heating ? "st_heating" : "st_idle");
       const min = Number(a.min_temp ?? 7);
@@ -1353,6 +1358,8 @@ export class HeatingCard extends HTMLElement {
   _power(z) {
     const st = this._st(z.id);
     const modes = st.attributes.hvac_modes || [];
+    // A zone paused by Versatile Thermostat's auto start/stop is turned off for good: its mode set to off.
+    if (st.state === "off" && autoStopped(st.attributes)) return this._call("climate", "set_hvac_mode", { entity_id: z.id, hvac_mode: "off" });
     if (st.state !== "off") {
       this._lastMode = { ...this._lastMode, [z.id]: st.state };
       if (!modes.includes("off")) return this._call("climate", "turn_off", { entity_id: z.id });

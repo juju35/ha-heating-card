@@ -6,6 +6,7 @@ export default {
   st_preheating: "Pré-aquecimento",
   st_idle: "Em espera",
   st_off: "Desligado",
+  st_paused: "Em pausa",
   st_unavailable: "Indisponível",
   st_defrosting: "A descongelar",
   zones_heating: "{n} de {total} zonas a aquecer",

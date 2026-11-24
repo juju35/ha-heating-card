@@ -6,6 +6,7 @@ export default {
   st_preheating: "Priekšsildīšana",
   st_idle: "Dīkstāvē",
   st_off: "Izslēgts",
+  st_paused: "Pauzēts",
   st_unavailable: "Nav pieejams",
   st_defrosting: "Atkausēšana",
   zones_heating: "Silda {n} no {total} zonām",

@@ -245,3 +245,24 @@ test("overview tiles draw the zone's device, a zone's own icon kept", () => {
   assert.match(html(card()), /class="tbadge tpic"><div class="picture/);
   assert.match(html(card({ zones: [{ entity: "climate.salon_thermostat", icon: "mdi:sofa" }] })), /class="tbadge"><ha-icon icon="mdi:sofa"/);
 });
+
+test("a Versatile Thermostat paused by auto start/stop reads Paused, keeps its target, and off turns it off for good (#40)", () => {
+  const hass = mockHass();
+  const st = hass.states["climate.bureau_thermostat"];
+  hass.states["climate.bureau_thermostat"] = {
+    ...st,
+    attributes: { ...st.attributes, preset_mode: "comfort", preset_modes: ["comfort", "eco"], specific_states: { hvac_off_reason: "hvac_off_auto_start_stop" } },
+  };
+  const c = card({ actions: ["off"] }, hass);
+  const h = html(c);
+  assert.match(h, /<div class="tname">Office<\/div><div class="ttemp"><b>17.2 °C<\/b><small>→ 19°<\/small><\/div><div class="tsub">Paused · Comfort<\/div>/);
+  const plan = c._plan("off", c._zonesNow.map((z) => c._model(z)));
+  assert.ok(plain(plan.calls).some((x) => x[1] === "set_hvac_mode" && x[2].entity_id === "climate.bureau_thermostat" && x[2].hvac_mode === "off"));
+  // Older releases say it at the root; a real off (another reason) stays Off.
+  hass.states["climate.bureau_thermostat"] = { ...st, attributes: { ...st.attributes, is_auto_stop_detected: true } };
+  c.hass = { ...hass };
+  assert.match(html(c), /<div class="tsub">Paused<\/div>/);
+  hass.states["climate.bureau_thermostat"] = { ...st, attributes: { ...st.attributes, specific_states: { hvac_off_reason: "hvac_off_manual" } } };
+  c.hass = { ...hass };
+  assert.match(html(c), /<div class="tname">Office<\/div><div class="ttemp"><b>17.2 °C<\/b><\/div><div class="tsub">Off<\/div>/);
+});

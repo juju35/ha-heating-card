@@ -6,6 +6,7 @@ export default {
   st_preheating: "Voorverwarmen",
   st_idle: "Inactief",
   st_off: "Uit",
+  st_paused: "Gepauzeerd",
   st_unavailable: "Niet beschikbaar",
   st_defrosting: "Ontdooien",
   zones_heating: "{n} van {total} zones verwarmen",
