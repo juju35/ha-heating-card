@@ -8,10 +8,10 @@
 // Skipped when Playwright or Chromium is not installed.
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import { readFileSync } from "node:fs";
 import { mockHass, weeks } from "../scripts/mock-states.mjs";
+import { source } from "./source.mjs";
 
-const src = readFileSync(new URL("../src/heating-card.js", import.meta.url), "utf8");
+const src = source;
 const STAND_INS = `
 customElements.define("ha-card", class extends HTMLElement {
   connectedCallback() {

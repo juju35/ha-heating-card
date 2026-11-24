@@ -2,11 +2,10 @@
 // a Sections view: they neither fall to their borders in a shrink-to-fit parent nor let their content leave the card.
 // Rendered in Chromium when Playwright and a browser are installed (CHROMIUM_PATH picks one); skipped otherwise.
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { areas, devices, entities, floors, states, weeks } from "../scripts/mock-states.mjs";
+import { source } from "./source.mjs";
 
-const source = readFileSync(new URL("../src/heating-card.js", import.meta.url), "utf8");
 
 let chromium;
 try {
