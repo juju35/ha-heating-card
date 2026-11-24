@@ -6,6 +6,7 @@ export default {
   st_preheating: "Predgrevanje",
   st_idle: "Mirovanje",
   st_off: "Isključeno",
+  st_paused: "Pauzirano",
   st_unavailable: "Nedostupno",
   st_defrosting: "Odmrzavanje",
   zones_heating: "{n} od {total} zona greje",

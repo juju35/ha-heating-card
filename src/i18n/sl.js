@@ -6,6 +6,7 @@ export default {
   st_preheating: "Predgrevanje",
   st_idle: "Nedejaven",
   st_off: "Izklopljeno",
+  st_paused: "Začasno ustavljeno",
   st_unavailable: "Ni na voljo",
   st_defrosting: "Odtajevanje",
   zones_heating: "Greje {n} od {total} con",

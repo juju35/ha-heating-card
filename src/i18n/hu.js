@@ -6,6 +6,7 @@ export default {
   st_preheating: "Előfűtés",
   st_idle: "Tétlen",
   st_off: "Ki",
+  st_paused: "Szüneteltetve",
   st_unavailable: "Nem elérhető",
   st_defrosting: "Leolvasztás",
   zones_heating: "{total} zónából {n} fűt",

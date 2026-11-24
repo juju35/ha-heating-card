@@ -6,6 +6,7 @@ export default {
   st_preheating: "Predhrievanie",
   st_idle: "Nečinný",
   st_off: "Vypnuté",
+  st_paused: "Pozastavené",
   st_unavailable: "Nedostupné",
   st_defrosting: "Odmrazovanie",
   zones_heating: "Kúri {n} z {total} zón",

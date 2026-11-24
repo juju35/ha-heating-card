@@ -6,6 +6,7 @@ export default {
   st_preheating: "Wstępne grzanie",
   st_idle: "Bezczynny",
   st_off: "Wyłączony",
+  st_paused: "Wstrzymany",
   st_unavailable: "Niedostępny",
   st_defrosting: "Odszranianie",
   zones_heating: "Grzeje {n} z {total} stref",

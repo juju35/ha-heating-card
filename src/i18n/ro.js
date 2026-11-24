@@ -6,6 +6,7 @@ export default {
   st_preheating: "Preîncălzire",
   st_idle: "Inactiv",
   st_off: "Oprit",
+  st_paused: "În pauză",
   st_unavailable: "Indisponibil",
   st_defrosting: "Dezghețare",
   zones_heating: "{n} din {total} zone încălzesc",

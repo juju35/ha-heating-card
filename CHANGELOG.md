@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.0 - 2026-11-24
+
+### Features
+- **Versatile Thermostat auto start/stop shows as paused** (#40): a VTherm (`over_climate`) that its auto start/stop has switched off because the target is reached (`specific_states.hvac_off_reason: hvac_off_auto_start_stop`, or `auto_start_stop_manager.is_auto_stop_detected`; older releases at the root) no longer reads *Off*. The zone stays in service: its tile and card read *Paused* (*Paused · Comfort* with its preset), keep the target, count as on in the overview, and are colored as an idle zone. The power button and the overview's *Off* action set it to `off` for good. A real off (another reason) still reads *Off*.
+
 ## 1.7.3 - 2026-11-24
 
 ### Maintenance

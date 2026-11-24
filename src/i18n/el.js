@@ -6,6 +6,7 @@ export default {
   st_preheating: "Προθέρμανση",
   st_idle: "Αδρανές",
   st_off: "Απενεργοποιημένο",
+  st_paused: "Σε παύση",
   st_unavailable: "Μη διαθέσιμο",
   st_defrosting: "Απόψυξη",
   zones_heating: "Θερμαίνουν {n} από {total} ζώνες",

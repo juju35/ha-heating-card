@@ -6,6 +6,7 @@ export default {
   st_preheating: "Förvärmer",
   st_idle: "Inaktiv",
   st_off: "Av",
+  st_paused: "Pausad",
   st_unavailable: "Inte tillgänglig",
   st_defrosting: "Avfrostar",
   zones_heating: "{n} av {total} zoner värmer",
